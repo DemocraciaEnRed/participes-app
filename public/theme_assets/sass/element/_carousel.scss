@@ -1,0 +1,72 @@
+// testimonial carousel
+.testimonial-wrapper{
+  margin-top: remy(-10px);
+}
+.testimonial-carousel{
+  position: relative;
+  .carousel-single{
+    text-align: center;
+    .author-thumb{
+      display: inline-block;
+      margin-bottom: remy(9px);
+    }
+    .author-info{
+      span{
+        font-size: remy(14px);
+        color: $text-grey2;
+        display: block;
+        margin-top: 5px;
+      }
+    }
+    .author-comment{
+      width: remy(700px);
+      margin: remy(25px) auto 0;
+      font-size: remy(17px);
+      line-height: remy(29px);
+      color: $text-grey2;
+    }
+  }
+  .owl-nav{
+    button{
+      width: remy(50px);
+      height: remy(50px);
+      background: #fff;
+      box-shadow: 0 5px remy(15px) rgba($light-gray, .15);
+      border-radius: remy(300px);
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      transition: $transition-base;
+      outline: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      span{
+        font-size: remy(18px);
+      }
+      &:hover{
+        @extend .color-primary;
+      }
+      &.owl-prev{
+        left:remy(15px);
+      }
+      &.owl-next{
+        right: remy(15px);
+      }
+    }
+  }
+}
+
+//logo carousel
+.logo-carousel{
+  .owl-stage{
+    display: flex;
+    align-items: center;
+  }
+  .carousel-single{
+    img{
+      width: 100%;
+    }
+  }
+}

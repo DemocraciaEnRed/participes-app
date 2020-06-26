@@ -1,0 +1,392 @@
+/* Responsive CSS */
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+
+}
+@media (min-width: 1199px) and(max-width: 1480px){
+  .search-wrapper{
+    min-width: auto;
+    margin-right: 0;
+    flex: 1;
+  }
+  .author-area{
+    flex: 2;
+  }
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .menu-area .top-menu-area .logo-wrapper{
+    width: 15%;
+    .logo-top{
+      a{
+        padding-left:0;
+        padding-right:0;
+      }
+    }
+  }
+  .menu-area .menu-fullwidth .menu-container{
+    width: 75%;
+  }
+  .menu-right{
+    width: 10%;
+    .search-wrapper, .author-area{
+      display: none;
+    }
+  }
+  .offcanvas-menu{
+    display: block !important;
+  }
+  .category-place-single{
+    width: 49%;
+  }
+  .category-place-single:nth-child(2n+1){
+    margin-right: auto;
+  }
+  .about-intro img{
+    width: 100%;
+  }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (max-width: 991.98px) {
+  html{
+    font-size: 14px;
+  }
+
+  /* navbar menu */
+  .top-menu-area .menu-fullwidth{
+    padding: remy(15px) 0;
+    position: relative;
+    .menu-container{
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 100%;
+      transform: translateY(-50%);
+      .d_menu{
+        padding-right: remy(30px);
+      }
+    }
+    .menu-right{
+      flex: none;
+      margin-left: auto;
+      .search-wrapper, .author-area{
+        display: none;
+      }
+    }
+    .logo-wrapper{
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 0 none;
+      z-index: 1;
+    }
+  }
+  .offcanvas-menu{
+    display: block !important;
+  }
+  .mainmenu__menu{
+    .navbar-collapse{
+      transition: $transition-base;
+      position: absolute;
+      min-width: 100%;
+      max-height: 400px;
+      top: 48px;
+      overflow-y: scroll;
+      box-shadow: 0 0 remy(20px) rgba($dark, 0.2);
+      background: #fff;
+    }
+    .navbar-collapse.show{
+      background: #fff;
+      transition: $transition-base;
+      .navbar-nav li a{
+        color: $text-grey1;
+      }
+    }
+    .navbar-nav{
+      padding: remy(20px) 0;
+      & > li{
+        margin-right: 0;
+        padding: 0 remy(30px);
+        &.has_dropdown{
+          .dropdown-toggle{
+            display: block;
+            &:after{
+              position: absolute;
+              right: remy(30px);
+            }
+          }
+          .dropdown-menu{
+            display: none !important;
+          }
+          &.show{
+            .dropdown-menu{
+              display: block !important;
+              box-shadow: none;
+              padding: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+  .menu-area .mainmenu__menu .navbar-nav > li.has_dropdown .dropdown-menu .dropdown-menu--inner > ul{
+    visibility: visible;
+    opacity: 1;
+    left: remy(20px);
+    top: remy(30px);
+    box-shadow: none;
+  }
+  .directory_content_area{
+    height: 100%;
+  }
+
+  .intro-wrapper{
+    height: auto;
+    .directory_content_area{
+      padding: remy(80px) 0;
+    }
+  }
+
+  .category-place-single{
+    width: 49%;
+  }
+  .category-place-single:nth-child(2n+1){
+    margin-right: auto;
+  }
+  .section-title p{
+    width: remy(600px);
+  }
+  .place-list-wrapper ul li{
+    width: 33.3333%;
+  }
+  .subscribe-form{
+    width: 100%;
+  }
+
+  .section-padding-strict{
+    padding: remy(70px) 0;
+  }
+  .section-padding{
+    padding: remy(61px) 0 remy(70px);
+  }
+  .section-padding-two{
+    padding: remy(61px) 0 remy(40px);
+  }
+  .section-padding--bottom{
+    padding-bottom: remy(70px);
+  }
+  .subscribe-wrapper{
+    padding: remy(70px) 0;
+  }
+  .about-intro img,
+  .contents-wrapper .contents img{
+    width: 100%;
+  }
+  .post-bottom .social-share,
+  .post-bottom .tags{
+    margin: remy(10px) 0;
+  }
+  .post-author{
+    padding: remy(30px);
+  }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (max-width: 767.98px) {
+  .container {
+    max-width: 680px;
+  }
+  .section-title p{
+    width: 100%;
+  }
+  .directory_content_area .search_form .atbd_seach_fields_wrapper{
+    flex-wrap: wrap;
+    .single_search_field, .atbd_submit_btn{
+      flex: auto;
+      width: 45%;
+      margin: 5px;
+    }
+  }
+  .atbd_listing_bottom_content{
+    flex-wrap: wrap;
+  }
+
+  .testimonial-carousel .carousel-single .author-comment{
+    width: 95%;
+    margin: 0 auto;
+  }
+  .about-wrapper .about-intro{
+    text-align: center;
+  }
+  .about-wrapper:after{
+    bottom: -2px;
+  }
+  .about-intro img{
+    margin-top: remy(60px);
+  }
+  .contents-wrapper .contents{
+    margin-bottom: remy(50px);
+    padding-bottom: remy(50px);
+  }
+  .atbdp_faqs_wrapper .form-group{
+    margin-bottom: 15px !important;
+  }
+  .atbd_auhor_profile_area {
+    padding: remy(25px);
+    display: block;
+    .atbd_author_avatar img{
+      width: remy(100px);
+      height: remy(100px);
+    }
+    .atbd_author_meta{
+      margin-top: remy(20px);
+      .atbd_listing_meta{
+        padding-right: 0;
+        border: 0 none;
+      }
+    }
+  }
+  .listing-info .atbd_listing_action_area{
+    margin-top: remy(25px);
+  }
+  .clients-logo-wrapper{
+    padding-top: remy(70px);
+  }
+}
+
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 575.98px) {
+  html{
+    font-size: 13px;
+  }
+  .container {
+    max-width: 500px;
+  }
+  .top-menu-area .menu-fullwidth .menu-container .d_menu{
+    padding-right: 0;
+    padding-left: 0;
+  }
+  .offcanvas-menu .offcanvas-menu__user{
+    margin-right: 0;
+  }
+
+  .directory_content_area .search_form .atbd_seach_fields_wrapper .single_search_field,
+  .directory_content_area .search_form .atbd_seach_fields_wrapper .atbd_submit_btn{
+    width: 100%;
+  }
+  .category--img figure{
+    img{
+      width: 100%;
+    }
+  }
+  .category-place-single{
+    width: 100%;
+  }
+  .place-list-wrapper ul li{
+    width: 100%;
+  }
+  .footer-three .footer-bottom .footer-bottom--content{
+    display: block;
+    text-align: center;
+    .copy-text{
+      padding-top: remy(15px);
+    }
+    .lng-list{
+      text-align: center;
+      margin-top: remy(15px);
+    }
+  }
+  .testimonial-carousel .owl-nav{
+    text-align: center;
+    button{
+      position: static;
+      display: inline-block;
+      margin: 0 7px;
+    }
+  }
+  .counters-wrapper .counter-items li{
+    width: 100%;
+    margin-bottom: remy(30px);
+    &:last-child{
+      margin-bottom: 0;
+    }
+  }
+  .about-wrapper{
+    padding-bottom: remy(100px);
+  }
+  .atbdp_social_field_wrapper .form-group{
+    margin-bottom: remy(15px) !important;
+  }
+  .atbd_listing_list .atbd_single_listing_wrapper{
+    display: block;
+  }
+  .atbd_auhor_profile_area{
+    display: block;
+    text-align: center;
+    .atbd_author_avatar{
+      display: block;
+      text-align: center;
+      width: 100%;
+      .atbd_auth_nd{
+        margin-top: remy(15px);
+        margin-left: 0;
+      }
+    }
+    .atbd_author_meta{
+      justify-content: center;
+      margin-top: remy(20px);
+      width: 100%;
+      display: flex;
+    }
+  }
+  .checkout-table .table tbody td p{
+    width: remy(350px);
+  }
+  .atbd_contact_information_module .atbd_contact_info ul .atbd_info_title{
+    min-width: remy(170px);
+  }
+  .atbd_saved_items_wrapper .atbdb_content_module_contents .table tr td:first-child a{
+    display: block;
+    min-width: remy(200px);
+  }
+}
+
+@media (max-width: 400px) {
+  .all-listing-wrapper .atbd_generic_header{
+    display: block;
+    .btn-toolbar{
+      margin-top: remy(15px);
+    }
+  }
+  .atbd_contact_information_module .atbd_contact_info ul{
+    li{
+      display: block;
+      margin-bottom: remy(20px);
+    }
+    .atbd_info_title span{
+      position: relative;
+      top: 5px;
+    }
+    .atbd_info{
+      margin: remy(5px) 0 0 remy(44px);
+    }
+  }
+  .atbd_review_module #client_review_list .atbd_single_review .media-depth2,
+  .atbd_review_module #client_review_list .atbd_single_review .review_reply_form{
+    margin-left: remy(20px);
+  }
+  .dashboard-nav .dashboard-nav-area{
+    display: block;
+    .nav{
+      display: block;
+      margin-top: 10px;
+      .nav-link{
+        padding: 10px 0;
+      }
+    }
+  }
+}
+

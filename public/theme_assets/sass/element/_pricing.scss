@@ -1,0 +1,104 @@
+/* pricing styles */
+.pricing{
+  background: #fff;
+  box-shadow: 0 5px remy(15px) rgba($dark, 0.07);
+  position: relative;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: remy(30px);
+  &.atbd_pricing_special{
+    .atbd_popular_badge{
+      @extend .bg-gradient-pw;
+      line-height: remy(45px);
+      text-align: center;
+      font-size: remy(16px);
+      color: #fff;
+      display: block;
+    }
+  }
+  .pricing__title{
+    border-bottom: 1px solid $border-color;
+    h4{
+      padding: remy(17px) remy(15px);
+      text-align: center;
+      .atbd_plan-active{
+        @extend .bg-success;
+        display: inline-block;
+        line-height: remy(20px);
+        padding: 0 remy(6px);
+        border-radius: 3px;
+        font-size: remy(13px);
+        margin-left: remy(10px);
+        color: #fff;
+      }
+    }
+  }
+  .pricing__price{
+    padding: remy(15px) 0 remy(20px);
+    border-bottom: 1px solid $border-color;
+    .pricing_value{
+      font-size: remy(40px);
+      margin-bottom: 0;
+      line-height: initial;
+      color: #272b41;
+      font-weight: 500;
+      text-align: center;
+      sup{
+        font-size: remy(20px);
+        top: remy(-13px);
+        color: #9299b8;
+      }
+      small{
+        font-size: remy(13px);
+        color: #9299b8;
+        font-weight: 400;
+      }
+    }
+    .pricing_subtitle{
+      margin: 0;
+      color: #7a82a6;
+      font-size: remy(14px);
+      text-align: center;
+    }
+    .pricing_description{
+      margin: remy(10px) 0 0 0;
+      padding: 0 remy(25px);
+      line-height: remy(24px);
+      color: #7a82a6;
+      font-size: remy(14px);
+      text-align: center;
+    }
+  }
+  .pricing__features{
+    padding: remy(20px) remy(20px) remy(30px);
+    ul{
+      li{
+        line-height: normal;
+        list-style-type: none;
+        margin-bottom: remy(15px);
+        font-size: remy(14px);
+        position: relative;
+        padding-left: remy(20px);
+        margin-left: 0;
+        & > span:first-child{
+          position: absolute;
+          left: 0;
+          top: 4px;
+          margin-right: 4px;
+          width: remy(17px);
+          font-size: remy(11px);
+          &.available{
+            @extend .color-success;
+          }
+          &.unavailable{
+            @extend .color-danger;
+          }
+        }
+        .atbd_color-success{
+          @extend .color-success;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,86 @@
+.social-list{
+  li{
+    margin-bottom: remy(8px);
+    &:last-child{
+      margin-bottom: 0;
+    }
+    a{
+      display: flex;
+      align-items: center;
+      color: $body-color;
+      &:hover{
+        @extend .color-primary;
+      }
+    }
+    span{
+      margin-right: remy(10px);
+      display: block;
+      font-size: remy(14px);
+      i{
+        width: remy(30px);
+        height: remy(30px);
+        border-radius: remy(300px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      &.mail{
+        i{
+          background: rgba($primary, .1);
+          color: $primary;
+        }
+      }
+      &.twitter{
+        i{
+          background: rgba(#4099ff, .1);
+          color: #4099ff;
+        }
+      }
+      &.facebook{
+        i{
+          background: rgba(#3b5998, .1);
+          color: #3b5998;
+        }
+      }
+      &.instagram{
+        i{
+          background: rgba(#ef0e11, .1);
+          color: #ef0e11;
+        }
+      }
+      &.gplus{
+        i{
+          background: rgba(#d34836, .1);
+          color: #d34836;
+        }
+      }
+    }
+  }
+}
+.social{
+  &.social--small{
+    ul{
+      margin: 0;
+      li{
+        margin-right: remy(10px);
+        &:last-child{
+          margin-right: 0;
+        }
+        a{
+          width: remy(38px);
+          height: remy(38px);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: $text-grey2;
+          border-radius: remy(300px);
+          background: $section-bg;
+          &:hover{
+            @extend .bg-primary;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}

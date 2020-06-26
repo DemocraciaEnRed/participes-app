@@ -1,0 +1,24 @@
+/* breadcrumb css */
+.header-breadcrumb{
+  .breadcrumb-wrapper{
+    padding: remy(65px) 0;
+    .page-title{
+      color: #fff;
+    }
+    nav{
+      margin-top: remy(15px);
+    }
+  }
+}
+.breadcrumb-item + .breadcrumb-item::before{
+  font-family: "LineAwesome";
+  font-size: remy(12px);
+}
+.breadcrumb{
+  justify-content: center;
+  .breadcrumb-item{
+    a{
+      color: $light;
+    }
+  }
+}

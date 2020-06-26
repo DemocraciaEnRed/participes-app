@@ -1,0 +1,138 @@
+.form-control{
+  box-shadow: none;
+  width: 100%;
+  &:focus{
+    box-shadow: none;
+    border-color: rgba($dark, 0.35);
+  }
+}
+.select-basic{
+  position: relative;
+  select{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+  &:before{
+    position: absolute;
+    content: "\f110";
+    right: remy(15px);
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: "LineAwesome";
+    font-size: remy(12px);
+    z-index: 10;
+  }
+}
+
+// checkbox styles
+// default checkbox filled
+.custom-checkbox{
+  padding-left: 0;
+  &:last-child{
+    margin-bottom: 0;
+  }
+  .custom-control-label{
+    min-width: remy(100px);
+    padding-left: remy(35px);
+    position: relative;
+    &::before{
+      box-shadow: none;
+      width: remy(20px);
+      height: remy(20px);
+      border-radius: 3px;
+      top: 0;
+      left: 0;
+      border-color: rgba($dark, 0.15);
+    }
+    &::after{
+      width: remy(20px);
+      height: remy(20px);
+      top: 0;
+    }
+  }
+  .custom-control-input:checked ~ .custom-control-label::after{
+    background-image: none;
+    content: "\f17b";
+    font-family: "LineAwesome";
+    left: 0;
+    font-size: remy(12px);
+    text-align: center;
+    top: 1px;
+    font-weight: 700;
+  }
+}
+
+// checkbox outline
+.checkbox-outline{
+  .custom-control-label{
+    &:before{
+      background: none;
+    }
+  }
+  .custom-control-input:checked ~ .custom-control-label::after{
+    background-image: none;
+    content: "\f17b";
+    font-family: "LineAwesome";
+    left: 0;
+    font-size: remy(10px);
+    text-align: center;
+    top: 2.5px;
+    font-weight: 700;
+    box-shadow: none;
+  }
+  .custom-control-input:focus ~ .custom-control-label::before {
+    box-shadow:none !important;
+  }
+}
+.checkbox-outline-gray{
+  .custom-control-label:before{
+    border: 1px solid $border-color;
+  }
+  .custom-control-input:checked ~ .custom-control-label::before{
+    border: 1px solid $border-color;
+  }
+  .custom-control-input:checked ~ .custom-control-label::after{
+    color: #fff;
+  }
+}
+
+.checkbox-rounded{
+  .custom-control-label:before{
+    border-radius: 50%;
+  }
+}
+
+//select 2
+.select2-container--default .select2-selection--single .select2-selection__rendered{
+  color: #495057;
+  opacity: 0.8;
+  padding-left:0;
+  margin-top: 4px;
+}
+.select2-container--default .select2-selection--single .select2-selection__placeholder{
+  color: #495057;
+}
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  @extend .bg-primary;
+  color: #fff;
+}
+.select2-container--default .select2-search--dropdown .select2-search__field{
+  border: 1px solid $border-color;
+  &:focus{
+    box-shadow: none;
+    border-color: rgba($dark, 0.3);
+    outline: 0;
+  }
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice{
+  @extend .bg-primary;
+  color: #fff;
+  @extend .border-primary;
+  border-radius: 3px;
+  padding: 0 5px;
+  .select2-selection__choice__remove{
+    color: #fff;
+    margin-right: 4px;
+  }
+}

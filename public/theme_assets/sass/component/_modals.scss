@@ -1,0 +1,69 @@
+.modal-backdrop.show{
+  z-index: 1;
+}
+
+#modal-item-remove{
+  .modal-body{
+    & > span{
+      font-size: remy(75px);
+    }
+  }
+}
+
+#login_modal,
+#signup_modal,
+#moda_claim_listing{
+  .modal-header{
+    padding: remy(30px);
+    .modal-title i{
+      font-size: remy(20px);
+      color: $light-gray;
+    }
+  }
+  .modal-body{
+    padding: remy(30px);
+    .form-control,
+    .keep_signed,
+    .btn{
+      margin-bottom: remy(20px);
+    }
+    .form-excerpts{
+      ul{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        li{
+          font-size: remy(14px);
+        }
+      }
+      .social-login{
+        text-align: center;
+        span, a{
+          display: inline-block;
+        }
+        p{
+          margin: remy(15px) 0 0 0;
+          a{
+            margin: 0 remy(5px);
+          }
+        }
+      }
+    }
+  }
+}
+#moda_claim_listing{
+  .modal-body{
+    .form-group{
+      margin-bottom: 0;
+      .btn{
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+#atbdp-report-abuse-modal{
+  .modal-header, .modal-body, .modal-footer{
+    padding: remy(25px) remy(30px);
+  }
+}

@@ -1,0 +1,30 @@
+.pagination{
+  .nav-links{
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    .page-numbers{
+      @extend .content-center;
+      width: remy(40px);
+      height: remy(40px);
+      border: 1px solid $border-color;
+      background: #fff;
+      margin-right: remy(6px);
+      color: $dark;
+      font-size: remy(14px);
+      transition: $transition-base;
+      &:last-child{
+        margin-right: 0;
+      }
+      &:hover{
+        @extend .border-primary;
+        @extend .color-primary;
+      }
+      &.current{
+        @extend .bg-primary;
+        @extend .border-primary;
+        color: #fff;
+      }
+    }
+  }
+}
