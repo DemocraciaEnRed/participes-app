@@ -1,0 +1,196 @@
+//btn styles
+.btn-xs{
+  line-height: $btn-line-height-xs;
+  padding: 0 remy(15px);
+  font-size: remy(13px);
+  font-weight: 600;
+}
+.btn-md{
+  line-height: $btn-line-height-md;
+}
+.btn-gradient{
+  color: #fff;
+  font-weight: 700;
+  border: 0 none;
+  line-height: remy(50px);
+  position: relative;
+  z-index: 1;
+  &:before{
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top:0;
+    border-radius: 3px;
+    opacity: 0;
+    transition: $transition-base;
+    z-index: -1;
+  }
+  &:hover{
+    color: #fff;
+    &:before{
+      opacity: 1;
+    }
+  }
+  &.btn-gradient-one{
+    background: linear-gradient(to right, $primary, $secondary);
+    &:before{
+      background: linear-gradient(to right, $secondary, $primary);
+    }
+  }
+
+  &.btn-gradient-two{
+    background: linear-gradient(to right, $primary, $warning);
+    &:before{
+      background: linear-gradient(to right, $warning, $primary);
+    }
+  }
+  &.btn-xs{
+    line-height: remy(38px);
+  }
+}
+
+.play-btn{
+  @extend .bg-danger;
+  @extend .content-center;
+  @include radius(300px);
+  width: remy(60px);
+  height: remy(60px);
+  color: #fff;
+  font-size: remy(24px);
+  transition: $transition-base;
+  &:hover{
+    background: #fff;
+  }
+  &.play-btn-sm{
+    width: remy(45px);
+    height: remy(45px);
+    font-size: remy(20px);
+  }
+}
+
+.play-btn-two{
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-top: remy(30px);
+  .icon{
+    width: remy(52px);
+    height: remy(52px);
+    background: #fff;
+    color: $dark;
+    font-size: remy(22px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: remy(300px);
+    position: relative;
+    margin-right: remy(40px);
+    transition: $transition-base;
+    &:before{
+      position: absolute;
+      content: '';
+      width: remy(78px);
+      height: remy(78px);
+      border-radius: remy(300px);
+      background: rgba(#fff, 0.1);
+      left: 50%;
+      top:50%;
+      transform: translate(-50%, -50%);
+      transition: $transition-base;
+      animation: wave-effect 1.5s alternate infinite;
+    }
+    &:after{
+      position: absolute;
+      content: '';
+      width: remy(110px);
+      height: remy(110px);
+      border-radius: remy(300px);
+      background: rgba(#fff, 0.1);
+      left: 50%;
+      top:50%;
+      transform: translate(-50%, -50%);
+      animation: wave-effect 1.5s alternate infinite;
+      animation-delay: 0.5s;
+    }
+  }
+  &:hover{
+    color: #fff;
+    .icon{
+      &:before{
+        width: remy(88px);
+        height: remy(88px);
+      }
+    }
+  }
+}
+
+@-webkit-keyframes wave-effect {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    visibility: visible;
+  }
+  100% {
+    width: remy(110px);
+    height: remy(110px);
+    opacity: 0.8;
+    visibility: hidden;
+  }
+}
+@-moz-keyframes wave-effect {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    visibility: visible;
+  }
+  100% {
+    width: remy(110px);
+    height: remy(110px);
+    opacity: 0.8;
+    visibility: hidden;
+  }
+}
+@-o-keyframes wave-effect {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    visibility: visible;
+  }
+  100% {
+    width: remy(110px);
+    height: remy(110px);
+    opacity: 0.8;
+    visibility: hidden;
+  }
+}
+@keyframes wave-effect {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    visibility: visible;
+  }
+  100% {
+    width: remy(110px);
+    height: remy(110px);
+    opacity: 0.8;
+    visibility: hidden;
+  }
+}
+
+.btn.btn-icon-left{
+  & > span{
+    font-size: remy(15px);
+  }
+}
+
+.claim-btn{
+  font-size: remy(16px);
+  line-height: remy(52px);
+}

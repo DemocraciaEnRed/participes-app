@@ -1,0 +1,152 @@
+.search-area{
+  .form-group{
+    position: relative;
+    .locator{
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 100%;
+      padding: 0 remy(15px);
+      font-size: remy(20px);
+      color: $text-light;
+      border: 0 none;
+      background: none;
+      cursor: pointer;
+      &:focus{
+        outline: 0;
+      }
+    }
+  }
+}
+
+.check-btn{
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: remy(10px);
+}
+.btn-checkbox {
+  background-color:#fff;
+  border-radius:3px;
+  overflow:auto;
+  margin-right: remy(6px);
+  &:last-child{
+    margin-right: 0;
+  }
+  label {
+    width:100%;
+    margin:0;
+    position: relative;
+    span {
+      text-align:center;
+      display:flex;
+      align-items: center;
+      transition: $transition-base;
+      padding: remy(8px) remy(15px);
+      font-weight: 500;
+      font-size: remy(14px);
+      border:1px solid $border-color;
+      i{
+        font-size: remy(18px);
+        margin-right: remy(5px);
+        margin-top: -1px;
+      }
+    }
+    input {
+      position:absolute;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      left:0;
+      top:0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      outline: 0;
+      &:checked + span {
+        color:#fff;
+      }
+    }
+  }
+}
+
+.default-ad-search{
+  border: 1px solid $border-color;
+  background: #fff;
+  padding: remy(30px);
+  .form-group, .filter-checklist, .range-filter, .check-btn{
+    margin-bottom: remy(20px);
+  }
+  .filter-checklist{
+    display: flex;
+    flex-wrap: wrap;
+    h5{
+      flex-basis: 100%;
+      padding: remy(10px) 0 remy(20px) 0;
+    }
+    .checklist-items{
+      width: 100%;
+      .custom-checkbox{
+        margin-bottom: remy(8px);
+        &:last-child{
+          margin-bottom: 0;
+        }
+        .custom-control-label{
+          font-size: remy(14px);
+          color: $text-light;
+        }
+      }
+      &.tags-checklist{
+        height: 180px;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+      &.feature-checklist{
+        &.hideContent{
+          height: 180px;
+          overflow: hidden;
+          transition: $transition-base;
+        }
+        &.showContent{
+          height: auto;
+          overflow-x: hidden;
+          overflow-y: auto;
+          transition: $transition-base;
+        }
+      }
+    }
+    .link{
+      flex-basis: 100%;
+      font-size: remy(14px);
+      display: block;
+      margin-top: remy(15px);
+    }
+    .show-link{
+      font-size: remy(13px);
+      font-weight: 700;
+      display: block;
+      margin-top: remy(8px);
+      &:hover{
+        @extend .color-secondary;
+      }
+    }
+  }
+  .range-filter{
+    margin-bottom: remy(35px);
+    h5{
+      flex-basis: 100%;
+      padding: remy(10px) 0 remy(20px) 0;
+    }
+    p{
+      font-size: remy(14px);
+      color: $text-grey1;
+    }
+  }
+  .datepicker-icon{
+    position: absolute;
+    right: remy(20px);
+    top:50%;
+    transform: translateY(-50%);
+    color: $text-light;
+    font-size: remy(18px);
+  }
+}

@@ -1,0 +1,60 @@
+.blockquote {
+  border: 1px solid $border-color;
+  padding: 2.5rem remy(50px);
+  border-radius: $border-radius-lg;
+  margin: 0;
+  p {
+    margin: 0;
+    font-size: 1.33rem;
+    @extend .color-dark;
+    line-height: 2.4rem;
+    font-weight: 500;
+  }
+  .quote-author {
+    margin-top: 1.66rem;
+    p {
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 2rem;
+      color: $light-gray;
+      position: relative;
+      display: inline-block;
+      padding-left: remy(55px);
+      &:before {
+        position: absolute;
+        content: "";
+        width: remy(40px);
+        height: 2px;
+        @extend .bg-light;
+        left: 0;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        transform: translateY(-50%);
+      }
+      span {
+        font-weight: 500;
+        @extend .color-dark;
+      }
+    }
+  }
+  &.blockquote1 {
+    border: 0 none;
+    border-radius: 0;
+    background: linear-gradient(to right, $primary, $secondary);
+    p {
+      font-weight: 400;
+      @extend .color-light;
+    }
+    .quote-author {
+      p {
+        color: rgba($light, 0.7);
+      }
+      span {
+        @extend .color-light;
+      }
+    }
+  }
+}

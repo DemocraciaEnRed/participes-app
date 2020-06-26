@@ -1,0 +1,104 @@
+//badges styles
+.badge-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .badge{
+    margin: 0 remy(5px);
+  }
+  .badges{
+    margin: 0 remy(15px);
+  }
+  &.badge-wrapper--float{
+    justify-content: flex-start;
+    .badge-sup, .badge-sub{
+      margin: 0 remy(15px);
+    }
+  }
+}
+.badge{
+  line-height: 1.6rem;
+  vertical-align: middle;
+  &.badge-lg{
+    line-height: 2.13rem;
+    padding: 0 remy(16px);
+    font-size: remy(14px);
+  }
+  &.badge-md{
+    line-height: 1.87rem;
+    padding: 0 remy(12px);
+    font-size: remy(13px);
+  }
+  &.badge-sm{
+    line-height: 1.33rem;
+    padding: 0 remy(8px);
+    font-size: remy(11px);
+  }
+}
+.badge-sup{
+  position: relative;
+  .badge{
+    border-radius: 50%;
+    padding: 0 remy(7px);
+    line-height: remy(22px);
+    position: absolute;
+    right: remy(-12px);
+    top: remy(-7px);
+    &.border-white{
+      border: 3px solid $white;
+      right: remy(-17px);
+      top: remy(-8px);
+    }
+  }
+}
+.badge-status{
+  position: relative;
+  .status{
+    position: absolute;
+    width: remy(14px);
+    height: remy(14px);
+    border: 3px solid $white;
+    border-radius: 50%;
+    &.place-top{
+      right: -5px;
+      top: -5px;
+    }
+    &.place-bottom{
+      right: 0;
+      bottom: 0;
+    }
+  }
+}
+
+.badge-verified{
+  position: relative;
+  &:before{
+    position: absolute;
+    content: '\f17b';
+    font-family: "LineAwesome";
+    font-size: remy(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    @extend .bg-success;
+    width: remy(20px);
+    height: remy(20px);
+    right: remy(10px);
+    bottom: remy(10px);
+    border-radius: 50%;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,54 @@
+//subscribe styles
+.subscribe-wrapper{
+  padding: remy(100px) 0 remy(100px);
+  position: relative;
+  text-align: center;
+  background: url("img/svg/sb-shape.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  h1{
+    margin: 0 0 remy(10px);
+  }
+  p{
+    font-size: remy(18px);
+    margin: 0;
+  }
+}
+.subscribe-form{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: remy(540px);
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 10px 10px rgba($secondary, 0.1);
+  border-radius: remy(300px);
+  overflow: hidden;
+  .form-group{
+    margin:0;
+    flex: 1;
+    position: relative;
+    input{
+      width: 100%;
+      height: remy(50px);
+      border: 0 none;
+      padding: 0 remy(15px) 0 remy(55px);
+      outline: 0;
+      &::placeholder{
+        color: #acb3cf;
+      }
+    }
+    span{
+      position: absolute;
+      font-size: remy(18px);
+      color: #acb3cf;
+      left: remy(24px);
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+  button.btn{
+    border-radius: 0;
+  }
+}

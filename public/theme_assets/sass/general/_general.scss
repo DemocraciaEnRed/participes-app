@@ -1,0 +1,88 @@
+@import "../mixins/functions";
+@import "../../../vendor_assets/css/bootstrap/config.bs";
+html{
+  font-size: 15px;
+}
+a{
+  transition: $transition-base;
+}
+p{
+  line-height: remy(27px);
+}
+
+.section-padding-strict{
+  padding: remy(100px) 0;
+}
+.section-padding{
+  padding: remy(91px) 0 remy(100px);
+}
+.section-padding-two{
+  padding: remy(91px) 0 remy(70px);
+}
+.section-padding-1_7{
+  padding: remy(100px) 0 remy(70px);
+}
+.section-padding--bottom{
+  padding-bottom: remy(100px);
+}
+
+/* Gradient BG */
+.bg-gradient-ps{
+  @include linear-gradient($secondary, $primary);
+}
+.bg-gradient-pw{
+  @include linear-gradient($primary, $warning);
+}
+
+/* Background Image */
+.bgimage{
+  position: relative;
+  &:before{
+    z-index:1;
+  }
+}
+.content_above{
+  position: relative;
+  z-index: 2;
+}
+
+/* Background image holder */
+.bg_image_holder{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat;
+  z-index: 0;
+  transition: opacity .3s linear;
+  -webkit-transition: opacity .3s linear;
+  opacity: 0;
+  img{
+    display: none;
+  }
+}
+
+/* overlays */
+.overlay{
+  position: relative;
+  &:before{
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+  }
+  &.overlay--dark{
+    &:before{
+      background: rgba(#2f2639, 0.8);
+    }
+  }
+}
+
+
+
+
