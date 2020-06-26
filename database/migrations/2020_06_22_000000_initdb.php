@@ -30,7 +30,7 @@ class InitDB extends Migration
         });
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name'); // admin
             $table->string('description');
             $table->timestamps();
         });
@@ -53,12 +53,6 @@ class InitDB extends Migration
             $table->string('name',550);
             $table->timestamps();
         });
-        Schema::create('organization_users', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->foreignId('organization_id')->constrained('organizations');
-            $table->foreignId('user_id')->constrained('users');
-            $table->timestamps();
-        });
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('title');
@@ -71,42 +65,47 @@ class InitDB extends Migration
             $table->string('file_name')->nullable();
             $table->string('file_size')->nullable();
             $table->string('mime_type')->nullable();
+            $table->morphs('file');
             $table->timestamps();
-        });
-        Schema::create('milestones', function (Blueprint $table) {
-            $table->id();
-            $table->string('title',550);
-            $table->boolean('completed')->default(false);
-            $table->timestamps();
-            $table->softDeletes('deleted_at', 0);
-        });
-        Schema::create('goals', function (Blueprint $table) {
-            $table->id();
-            $table->string('title',550);
-            $table->text('content');
-            $table->timestamps();
-            $table->softDeletes('deleted_at', 0);
         });
         Schema::create('objectives', function (Blueprint $table) {
             $table->id();
             $table->foreignId('category_id')->constrained('categories');
             $table->foreignId('author_id')->constrained('users');
-            $table->foreignId('organization_id')->constrained('organizations');
             $table->string('title',550);
             $table->text('content');
             $table->boolean('archived')->default(false);
             $table->boolean('hidden')->default(false);
             $table->softDeletes('deleted_at', 0);
         });
-        Schema::create('objective_goal', function (Blueprint $table) {
+        Schema::create('goals', function (Blueprint $table) {
             $table->id();
             $table->foreignId('objective_id')->constrained('objectives')->onDelete('cascade'); // Si el "id" en "objectives" se elimina, se elimina esta entrada
-            $table->foreignId('goal_id')->constrained('users')->onDelete('cascade'); // Si el "id" en "goals" se elimina, se elimina esta entrada
+            $table->string('title',550);
+            $table->text('content');
+            $table->timestamps();
+            $table->softDeletes('deleted_at', 0);
         });
-        Schema::create('objective_milestone', function (Blueprint $table) {
+        Schema::create('milestones', function (Blueprint $table) {
             $table->id();
             $table->foreignId('objective_id')->constrained('objectives')->onDelete('cascade'); // Si el "id" en "objectives" se elimina, se elimina esta entrada
-            $table->foreignId('milestone_id')->constrained('users')->onDelete('cascade'); // Si el "id" en "milestones" se elimina, se elimina esta entrada
+            $table->foreignId('report_id')->nullable()->constrained('reports')->onDelete('cascade'); // Si el "id" en "objectives" se elimina, se elimina esta entrada
+            $table->string('title',550);
+            $table->boolean('completed')->default(false);
+            $table->timestamps();
+            $table->softDeletes('deleted_at', 0);
+        });
+        Schema::create('objective_organization', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('objective_id')->constrained('objectives');
+            $table->foreignId('organization_id')->constrained('organizations');
+            $table->timestamps();
+        });
+        Schema::create('objective_user', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('objective_id')->constrained('objectives')->onDelete('cascade'); // Si el "id" en "objectives" se elimina, se elimina esta entrada
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Si el "id" en "goals" se elimina, se elimina esta entrada
+            $table->string('name'); // manager, reporter
         });
         Schema::create('objective_subscriber', function (Blueprint $table) {
             $table->id();
@@ -120,7 +119,7 @@ class InitDB extends Migration
         });
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('autor_id')->constrained('users');
+            $table->foreignId('author_id')->constrained('users');
             $table->foreignId('goal_id')->constrained('goals');
             $table->string('type');
             $table->string('title',550);
@@ -148,6 +147,24 @@ class InitDB extends Migration
             $table->foreignId('report_id')->constrained('reports')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->boolean('validation');
+            $table->timestamps();
+        });
+        
+        Schema::create('events', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('author_id')->constrained('users');
+            $table->datetime('date');
+            $table->string('title',550);
+            $table->text('content');
+            $table->string('address',550)->nullable();
+            $table->json('urls')->nullable();
+            $table->timestamps();
+            $table->softDeletes('deleted_at', 0);
+        });
+        Schema::create('event_objective', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('event_id')->constrained('events')->onDelete('cascade');
+            $table->foreignId('objective_id')->constrained('objectives')->onDelete('cascade');
             $table->timestamps();
         });
         Schema::create('action_logs', function (Blueprint $table) {
