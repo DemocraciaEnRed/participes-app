@@ -20,3 +20,22 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/bladeTest', 'HomeController@bladeTest')->name('bladeTest');
+
+Route::group([
+    'as' => 'panel.', 
+    'prefix' => 'panel', 
+    ],function () {
+    Route::get('/', 'UserPanelController@index')->name('index');
+    Route::get('/cambiar-acceso', 'UserPanelController@viewChangePassword')->name('password.change');
+});
+
+Route::group([
+    'as' => 'admin.', 
+    'prefix' => 'admin', 
+    ],function () {
+    Route::get('/', 'AdminPanelController@index')->name('index');
+    Route::get('/categorias', 'AdminPanelController@viewListCategories')->name('categories');
+    Route::get('/categorias/nuevo', 'AdminPanelController@viewCreateCategory')->name('categories.create');
+    Route::get('/categorias/{id}/editar', 'AdminPanelController@viewEditCategory')->name('categories.edit');
+});
