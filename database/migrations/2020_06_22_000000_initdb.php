@@ -89,7 +89,6 @@ class InitDB extends Migration
         Schema::create('milestones', function (Blueprint $table) {
             $table->id();
             $table->foreignId('objective_id')->constrained('objectives')->onDelete('cascade'); // Si el "id" en "objectives" se elimina, se elimina esta entrada
-            $table->foreignId('report_id')->nullable()->constrained('reports')->onDelete('cascade'); // Si el "id" en "objectives" se elimina, se elimina esta entrada
             $table->string('title',550);
             $table->boolean('completed')->default(false);
             $table->timestamps();
@@ -149,7 +148,6 @@ class InitDB extends Migration
             $table->boolean('validation');
             $table->timestamps();
         });
-        
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->foreignId('author_id')->constrained('users');
