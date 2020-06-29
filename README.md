@@ -57,3 +57,25 @@ By default the timezone is defined like this. Change it if you need to.
 ```
 'timezone' => 'America/Argentina/Buenos_Aires',
 ```
+
+#### Available roles
+
+**Role: user**
+
+By default, any new registered user gets the `user` role
+
+**Role: admin**
+
+Those who want to manage the platform should have the `admin` role, which gives them access to a few views and other things.
+These should be managed manually. An admin should be able to add other admins.
+
+Just to clarify: We follow this philosophy:
+**Admins are not human entities: They are one, and many at the same time. They share the same decisions. They work together. They have concensum. They dont make mistakes.**
+
+With this in mind, we give answers to a few questions:
+
+- *Can an admin delete other admins?* Yes.
+- *Can an admin delete content other admins created?* Yes.
+
+They are amazing, right?
+
