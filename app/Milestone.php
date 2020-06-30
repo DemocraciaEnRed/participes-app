@@ -10,12 +10,12 @@ class Milestone extends Model
     public $incrementing = true; // if IDs are auto-incrementing.
     public $timestamps = true; // if the model should be timestamped.
 
-    public function objective()
+    public function goal()
     {
-        return $this->belongsTo('App\Objective', 'objective_id');
+        return $this->belongsTo('App\Goal');
     }
     public function report()
     {
-        return $this->hasOne('App\Objective', 'report_id');
+        return $this->belongsTo('App\Report');
     }
 }

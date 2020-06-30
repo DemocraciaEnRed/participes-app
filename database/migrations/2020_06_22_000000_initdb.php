@@ -50,7 +50,8 @@ class InitDB extends Migration
         });
         Schema::create('organizations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name',550);
+            $table->string('name');
+            $table->string('description',550);
             $table->timestamps();
         });
         Schema::create('categories', function (Blueprint $table) {
@@ -62,10 +63,11 @@ class InitDB extends Migration
         });
         Schema::create('files', function (Blueprint $table) {
             $table->id();
-            $table->string('file_name')->nullable();
-            $table->string('file_size')->nullable();
-            $table->string('mime_type')->nullable();
-            $table->morphs('file');
+            $table->string('file_name');
+            $table->string('file_size');
+            $table->string('mime_type');
+            $table->string('path',550);
+            $table->morphs('fileable'); 
             $table->timestamps();
         });
         Schema::create('objectives', function (Blueprint $table) {
@@ -88,9 +90,9 @@ class InitDB extends Migration
         });
         Schema::create('milestones', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('objective_id')->constrained('objectives')->onDelete('cascade'); // Si el "id" en "objectives" se elimina, se elimina esta entrada
+            $table->foreignId('goals')->constrained('goals')->onDelete('cascade'); // Si el "id" en "objectives" se elimina, se elimina esta entrada
             $table->string('title',550);
-            $table->boolean('completed')->default(false);
+            $table->date('completed')->nullable(false);
             $table->timestamps();
             $table->softDeletes('deleted_at', 0);
         });

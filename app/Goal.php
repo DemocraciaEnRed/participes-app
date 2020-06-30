@@ -19,6 +19,10 @@ class Goal extends Model
     {
         return $this->belongsTo('App\Objective');
     }
+    public function milestones()
+    {
+        return $this->hasMany('App\Milestone','goal_id');
+    }
 
     public function reports()
     {

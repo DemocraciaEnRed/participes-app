@@ -35,9 +35,17 @@ Route::group([
     'prefix' => 'admin', 
     ],function () {
     Route::get('/', 'AdminPanelController@index')->name('index');
+    // Categorias
     Route::get('/categorias', 'AdminPanelController@viewListCategories')->name('categories');
     Route::get('/categorias/nuevo', 'AdminPanelController@viewCreateCategory')->name('categories.create');
     Route::post('/categorias/nuevo', 'AdminPanelController@formCreateCategory')->name('categories.create.form');
     Route::get('/categorias/{id}/editar', 'AdminPanelController@viewEditCategory')->name('categories.edit');
     Route::put('/categorias/{id}/editar', 'AdminPanelController@formEditCategory')->name('categories.edit.form');
+    // Organizaciones
+    Route::get('/organizaciones', 'AdminPanelController@viewListOrganizations')->name('organizations');
+    Route::get('/organizaciones/nuevo', 'AdminPanelController@viewCreateOrganization')->name('organizations.create');
+    Route::post('/organizaciones/nuevo', 'AdminPanelController@formCreateOrganization')->name('organizations.create.form');
+    Route::get('/organizaciones/{id}/editar', 'AdminPanelController@viewEditOrganization')->name('organizations.edit');
+    Route::put('/organizaciones/{id}/editar', 'AdminPanelController@formEditOrganization')->name('organizations.edit.form');
+    // Roles Usuarios
 });

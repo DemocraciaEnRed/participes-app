@@ -30,7 +30,7 @@ class Report extends Model
         return $this->belongsTo('App\Goal','goal_id');
     }
 
-    public function milestone()
+    public function milestone_achieved()
     {
         return $this->hasOne('App\Milestone','milestone_achieved');
     }

@@ -11,3 +11,8 @@ $currentRoute = Route::currentRouteName();
 <li><a href="{{ route('admin.categories') }}" class="text-dark {{ $currentRoute == 'admin.categories' ? 'font-weight-bold' : null }}">Listar</a></li>
 <li><a href="{{ route('admin.categories.create') }}" class="text-dark {{ $currentRoute == 'admin.categories.create' ? 'font-weight-bold' : null }}">Crear</a></li>
 </ul>
+<h6><b>Organizaciones</b></h5>
+<ul class="list-unstyled">
+<li><a href="{{ route('admin.organizations') }}" class="text-dark {{ $currentRoute == 'admin.organizations' ? 'font-weight-bold' : null }}">Listar</a></li>
+<li><a href="{{ route('admin.organizations.create') }}" class="text-dark {{ $currentRoute == 'admin.organizations.create' ? 'font-weight-bold' : null }}">Crear</a></li>
+</ul>

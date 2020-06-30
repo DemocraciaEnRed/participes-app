@@ -26,11 +26,6 @@ class Objective extends Model
         return $this->belongsToMany('App\Organization','objective_organization','objective_id','organization_id');
     }
 
-    public function milestones()
-    {
-        return $this->hasMany('App\Milestone','objective_id');
-    }
-
     public function goals()
     {
         return $this->hasMany('App\Goal','objective_id');

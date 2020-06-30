@@ -18,15 +18,15 @@
   <form method="POST" action="{{ route('admin.categories.create.form') }}">
     @csrf
     <div class="form-group">
-      <label for="exampleInputEmail1">Nombre</label>
+      <label>Nombre</label>
       <input type="text" class="form-control" name="title" placeholder="Ingrese un nombre">
     </div>
     <div class="form-group">
-      <label for="exampleInputEmail1">Icono</label>
+      <label>Icono</label>
       <input type="text" class="form-control" name="icon" placeholder="Ingrese un icono">
     </div>
     <div class="form-group">
-      <label for="exampleInputEmail1">Color</label>
+      <label>Color</label>
       <input type="text" class="form-control" name="color" placeholder="Ingrese un color en formato HEX">
       <small id="emailHelp" class="form-text text-muted">No ingrese el color con el "#"</small>
     </div>
