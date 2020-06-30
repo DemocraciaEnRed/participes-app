@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Category;
 use Illuminate\Http\Request;
+use App\Http\Requests\CategoryRequest;
 
 class AdminPanelController extends Controller
 {
@@ -28,7 +29,19 @@ class AdminPanelController extends Controller
     public function viewCreateCategory(Request $request){
         return view('admin.categories.create');
     }
+    public function formCreateCategory(CategoryRequest $request){
+        $category = new Category();
+        $category->title = $request->input('title');
+        $category->icon = $request->input('icon');
+        $category->color = $request->input('color');
+        $category->save();
+        return redirect()->route('admin.categories')->with('success','Categoria creada!');
+    }
     public function viewEditCategory(Request $request, $id){
+        $category = Category::findOrFail($id);
+        return view('admin.categories.edit',['category' => $category]);
+    }
+    public function formEditCategory(Request $request, $id){
         $category = Category::findOrFail($id);
         return view('admin.categories.edit',['category' => $category]);
     }

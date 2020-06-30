@@ -37,5 +37,7 @@ Route::group([
     Route::get('/', 'AdminPanelController@index')->name('index');
     Route::get('/categorias', 'AdminPanelController@viewListCategories')->name('categories');
     Route::get('/categorias/nuevo', 'AdminPanelController@viewCreateCategory')->name('categories.create');
+    Route::post('/categorias/nuevo', 'AdminPanelController@formCreateCategory')->name('categories.create.form');
     Route::get('/categorias/{id}/editar', 'AdminPanelController@viewEditCategory')->name('categories.edit');
+    Route::put('/categorias/{id}/editar', 'AdminPanelController@formEditCategory')->name('categories.edit.form');
 });
