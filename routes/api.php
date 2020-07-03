@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('users')->middleware('auth:api')->group(function () {
+    Route::get('/', 'UserController@fetch');
+    Route::get('/{id}', 'UserController@fetchOne');
 });

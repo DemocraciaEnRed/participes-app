@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 use App\Category;
 use App\Organization;
+use App\Role;
 use App\File;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoryRequest;
 use App\Http\Requests\OrganizationRequest;
@@ -96,5 +98,30 @@ class AdminPanelController extends Controller
     public function viewEditOrganization(Request $request, $id){
         $organization = Organization::findOrFail($id);
         return view('admin.organizations.edit',['organization' => $organization]);
+    }
+    // ====================================
+    // Admin Administrators
+    // ====================================
+
+    public function viewListAdministrators(Request $request){
+      $administrators = User::whereHas('roles', function ($q) { 
+            $q->where('name','admin');
+          })->get();
+      return view('admin.administrators.list',['administrators' => $administrators]);
+    }
+    public function viewCreateAdministrator(Request $request){
+        return view('admin.administrators.create');
+    }
+    public function formCreateAdministrator(Request $request){
+        $user = User::findOrFail($request->input('userId'));
+        $user->roles()->attach(Role::where('name', 'admin')->first());
+        
+        return redirect()->route('admin.administrators')->with('success','¡Nuevo administrador creado!');
+    }
+    public function formDeleteAdministrator(Request $request, $id){
+        $user = User::findOrFail($id);
+        $user->roles()->detach(Role::where('name', 'admin')->first());
+
+        return redirect()->route('admin.administrators')->with('success','Administrador eliminado');;
     }
 }

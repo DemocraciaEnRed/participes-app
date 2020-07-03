@@ -5,6 +5,7 @@
  */
 
 require('./bootstrap');
+import http from './axios'
 
 window.Vue = require('vue');
 
@@ -20,6 +21,9 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('admin-search-user-new-admin', require('./components/AdminSearchUserNewAdmin.vue').default);
+Vue.component('paginator', require('./components/utils/Paginator.vue').default);
+Vue.prototype.$http = http
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
