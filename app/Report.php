@@ -14,6 +14,10 @@ class Report extends Model
         'date',
     ];
 
+    protected $casts = [
+        'tags' => 'array',
+    ];
+
     public function objective()
     {
         return $this->hasOneThrough(
@@ -44,8 +48,8 @@ class Report extends Model
         return $this->hasMany('App\ReportPicture','report_id');
     }
 
-    public function validations()
+    public function testimonies()
     {
-        return $this->hasMany('App\ReportValidation','report_id');
+        return $this->hasMany('App\Testimony','report_id');
     }
 }

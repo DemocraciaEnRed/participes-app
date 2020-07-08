@@ -12,10 +12,10 @@ class Milestone extends Model
 
     public function goal()
     {
-        return $this->belongsTo('App\Goal');
+        return $this->belongsTo('App\Goal','goal_id');
     }
     public function report()
     {
-        return $this->belongsTo('App\Report');
+        return $this->belongsTo('App\Report','report_id');
     }
 }

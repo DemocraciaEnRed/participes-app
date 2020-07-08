@@ -22,12 +22,15 @@ class UserController extends Controller
             $n = $request->query('name');
             $users->where('name', 'like', "{$n}%");
         }
-        $users = $users->paginate(1);
+        $users = $users->paginate(10);
 
         return UserResource::collection($users);
     }
     public function fetchOne(Request $request, $id){
-        $user = User::findOrFail($id);
+        $user = User::find($id);
+        if(is_null($user)){
+            return response()->json(['message' => 'Not found'], 404); 
+        }
         return new UserResource($user);
     }
 }

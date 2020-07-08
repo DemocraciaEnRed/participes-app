@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ReportValidation extends Model
+class Testimonies extends Model
 {
-    protected $table = 'report_validation';
+    protected $table = 'testimonies';
     public $incrementing = true; // if IDs are auto-incrementing.
     public $timestamps = true; // if the model should be timestamped.
 

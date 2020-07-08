@@ -11,11 +11,16 @@
         </div>
       </div>
     </div>
+    <form :action="formUrl" ref="theForm" method="POST">
+      <input type="hidden" name="_token" :value="crsfToken">
+      <input type="hidden" name="userId" :value="userSelected">
+      <input type="hidden" name="role" :value="roleSelected">
+    </form>
         <table class="table table-sm">
           <thead>
             <tr>
               <th>Nombre y Apellido</th>
-              <th width="80" class="text-center">Acción</th>  
+              <th width="200" class="text-center">Acción</th>  
             </tr>
           </thead>
           <tbody v-if="!isFetching">
@@ -24,13 +29,15 @@
                 <p>{{user.name}}</p>
               </td>
               <td class="text-center">
-                <form :action="formUrl" method="POST">
-                  <input type="hidden" name="_token" :value="crsfToken">
-                  <input type="hidden" name="userId" :value="user.id">
-                  <button type="submit" class="btn btn-sm btn-primary">
-                    Asignar
+                <div class="dropdown">
+                  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="roleSelector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Seleccione rol
                   </button>
-                </form>
+                  <div class="dropdown-menu" aria-labelledby="roleSelector">
+                    <a class="dropdown-item is-clickable" @click="submit(user.id, 'manager')">Coordinador</a>
+                    <a class="dropdown-item is-clickable" @click="submit(user.id, 'reporter')">Reportero</a>
+                  </div>
+                </div>
               </td>
             </tr>
             <tr v-if="users.length == 0">
@@ -63,6 +70,8 @@ export default {
       status: 'Comience escribiendo el nombre',
       error: null,
       users: [],
+      roleSelected: null,
+      userSelected: null,
       paginatorData: {
         links: null,
         meta: null,
@@ -110,6 +119,13 @@ export default {
         links: data.links,
         meta: data.meta
       }
+    },
+    submit: function(userId, role){
+      this.userSelected = userId;
+      this.roleSelected = role;
+      this.$nextTick(() => {
+          this.$refs.theForm.submit();
+      });
     }
   },
   watch: {

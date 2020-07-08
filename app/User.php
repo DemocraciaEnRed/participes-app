@@ -43,6 +43,15 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany('App\Role','role_user','user_id','role_id')->withTimestamps();
     }
 
+    public function objectives()
+    {
+        return $this->belongsToMany('App\Objective','objective_user','user_id','objective_id')->withPivot('role')->withTimestamps();
+    }
+    public function subscriptions()
+    {
+        return $this->belongsToMany('App\Objective','objective_subscriber','subscriber_id','objective_id')->withPivot('role')->withTimestamps();
+    }
+
     public function authorizeRoles($roles)
     {
         abort_unless($this->hasAnyRole($roles), 401);    

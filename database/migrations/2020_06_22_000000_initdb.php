@@ -76,23 +76,32 @@ class InitDB extends Migration
             $table->foreignId('author_id')->constrained('users');
             $table->string('title',550);
             $table->text('content');
+            $table->json('tags')->nullable();
             $table->boolean('archived')->default(false);
-            $table->boolean('hidden')->default(false);
+            $table->boolean('hidden')->default(true);
+            $table->timestamps();
             $table->softDeletes('deleted_at', 0);
         });
         Schema::create('goals', function (Blueprint $table) {
             $table->id();
             $table->foreignId('objective_id')->constrained('objectives')->onDelete('cascade'); // Si el "id" en "objectives" se elimina, se elimina esta entrada
             $table->string('title',550);
-            $table->text('content');
+            $table->string('status')->nullable();
+            $table->string('indicator',550);
+            $table->smallInteger('indicator_goal')->default(0);
+            $table->smallInteger('indicator_progress')->default(0);
+            $table->string('indicator_unit',550);
+            $table->string('indicator_frequency',550)->nullable();
+            $table->string('source',550)->nullable();
             $table->timestamps();
             $table->softDeletes('deleted_at', 0);
         });
         Schema::create('milestones', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('goals')->constrained('goals')->onDelete('cascade'); // Si el "id" en "objectives" se elimina, se elimina esta entrada
+            $table->smallInteger('order')->default(0);
+            $table->foreignId('goal_id')->constrained('goals')->onDelete('cascade'); // Si el "id" en "objectives" se elimina, se elimina esta entrada
             $table->string('title',550);
-            $table->date('completed')->nullable(false);
+            $table->date('completed')->nullable();
             $table->timestamps();
             $table->softDeletes('deleted_at', 0);
         });
@@ -100,20 +109,28 @@ class InitDB extends Migration
             $table->id();
             $table->foreignId('objective_id')->constrained('objectives');
             $table->foreignId('organization_id')->constrained('organizations');
-            $table->timestamps();
         });
         Schema::create('objective_user', function (Blueprint $table) {
             $table->id();
             $table->foreignId('objective_id')->constrained('objectives')->onDelete('cascade'); // Si el "id" en "objectives" se elimina, se elimina esta entrada
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Si el "id" en "goals" se elimina, se elimina esta entrada
-            $table->string('name'); // manager, reporter
+            $table->string('role'); // manager, reporter
+            $table->timestamps();
         });
         Schema::create('objective_subscriber', function (Blueprint $table) {
             $table->id();
             $table->foreignId('objective_id')->constrained('objectives')->onDelete('cascade'); // Si el "id" en "objectives" se elimina, se elimina esta entrada
-            $table->foreignId('suscriptor_id')->constrained('users')->onDelete('cascade'); // Si el "id" en "users" se elimina, se elimina esta entrada
+            $table->foreignId('subscriber_id')->constrained('users')->onDelete('cascade'); // Si el "id" en "users" se elimina, se elimina esta entrada
+            $table->timestamps();
         });
         Schema::create('objective_file', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('objective_id')->constrained('objectives')->onDelete('cascade'); // Si el "id" en "objectives" se elimina, se elimina esta entrada
+            $table->foreignId('file_id')->constrained('files')->onDelete('cascade'); // Si el "id" en "files" se elimina, se elimina esta entrada
+            $table->string('name');
+            $table->string('description');
+        });
+        Schema::create('objective_picture', function (Blueprint $table) {
             $table->id();
             $table->foreignId('objective_id')->constrained('objectives')->onDelete('cascade'); // Si el "id" en "objectives" se elimina, se elimina esta entrada
             $table->foreignId('file_id')->constrained('files')->onDelete('cascade'); // Si el "id" en "files" se elimina, se elimina esta entrada
@@ -126,7 +143,8 @@ class InitDB extends Migration
             $table->string('title',550);
             $table->text('content');
             $table->datetime('date');
-            $table->string('state')->nullable();
+            $table->json('tags')->nullable();
+            $table->string('status')->nullable();
             $table->integer('progress')->nullable();
             $table->string('map_url')->nullable();
             $table->foreignId('milestone_achieved')->nullable()->constrained('milestones');
@@ -137,17 +155,14 @@ class InitDB extends Migration
             $table->id();
             $table->foreignId('report_id')->constrained('reports')->onDelete('cascade');
             $table->foreignId('file_id')->constrained('files')->onDelete('cascade');
+            $table->string('type'); // file, picture
         });
-        Schema::create('report_picture', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('report_id')->constrained('reports')->onDelete('cascade');
-            $table->foreignId('file_id')->constrained('files')->onDelete('cascade');
-        });
-        Schema::create('report_validation', function (Blueprint $table) {
+        Schema::create('testimonies', function (Blueprint $table) {
             $table->id();
             $table->foreignId('report_id')->constrained('reports')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->boolean('validation');
+            $table->boolean('liked');
+            $table->text('comment');
             $table->timestamps();
         });
         Schema::create('events', function (Blueprint $table) {
@@ -198,10 +213,11 @@ class InitDB extends Migration
         Schema::dropIfExists('objective_milestone');
         Schema::dropIfExists('objective_subscriber');
         Schema::dropIfExists('objective_file');
+        Schema::dropIfExists('objective_picture');
         Schema::dropIfExists('reports');
         Schema::dropIfExists('report_file');
         Schema::dropIfExists('report_picture');
-        Schema::dropIfExists('report_validation');
+        Schema::dropIfExists('testimonies');
         Schema::dropIfExists('action_logs');
 
     }

@@ -6,9 +6,11 @@ use App\Organization;
 use App\Role;
 use App\File;
 use App\User;
+use App\Objective;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoryRequest;
 use App\Http\Requests\OrganizationRequest;
+use App\Http\Requests\ObjectiveRequest;
 
 class AdminPanelController extends Controller
 {
@@ -109,19 +111,44 @@ class AdminPanelController extends Controller
           })->get();
       return view('admin.administrators.list',['administrators' => $administrators]);
     }
-    public function viewCreateAdministrator(Request $request){
-        return view('admin.administrators.create');
+    public function viewAddAdministrator(Request $request){
+        return view('admin.administrators.add');
     }
-    public function formCreateAdministrator(Request $request){
+    public function formAddAdministrator(Request $request){
         $user = User::findOrFail($request->input('userId'));
         $user->roles()->attach(Role::where('name', 'admin')->first());
-        
         return redirect()->route('admin.administrators')->with('success','¡Nuevo administrador creado!');
     }
     public function formDeleteAdministrator(Request $request, $id){
         $user = User::findOrFail($id);
         $user->roles()->detach(Role::where('name', 'admin')->first());
 
-        return redirect()->route('admin.administrators')->with('success','Administrador eliminado');;
+        return redirect()->route('admin.administrators')->with('success','Administrador eliminado');
+    }
+    // ====================================
+    // Admin Objectives
+    // ====================================
+
+    public function viewListObjectives(Request $request){
+      $objectives = Objective::paginate(10);
+      return view('admin.objectives.list',['objectives' => $objectives]);
+    }
+    public function viewCreateObjectives(Request $request){
+        $categories = Category::all();
+        $organizations = Organization::all();
+        return view('admin.objectives.create',['categories' => $categories, 'organizations' => $organizations]);
+    }
+    public function formCreateObjectives(ObjectiveRequest $request){
+        $category = Category::findOrFail($request->input('category'));
+        $objective = new Objective();
+        $objective->title = $request->input('title');
+        $objective->content = $request->input('content');
+        $objective->tags = $request->input('tags');
+        $objective->category()->associate($category);
+        $objective->author()->associate($request->user());
+        $objective->hidden = true;
+        $objective->save();
+        $objective->organizations()->attach($request->input('organizations'));
+        return redirect()->route('objective.manage.index',['objId' => $objective->id])->with('success','¡Nuevo objetivo creado! Ahora le toca configurar el objetivo');
     }
 }

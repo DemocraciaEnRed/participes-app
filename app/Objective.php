@@ -11,9 +11,13 @@ class Objective extends Model
     public $timestamps = true; // if the model should be timestamped.
 
 
+    protected $casts = [
+        'tags' => 'array',
+    ];
+
     public function category()
     {
-        return $this->hasOne('App\Objective', 'category_id');
+        return $this->belongsTo('App\Category','category_id');
     }
 
     public function author()
@@ -31,6 +35,11 @@ class Objective extends Model
         return $this->hasMany('App\Goal','objective_id');
     }
 
+    public function cover()
+    {
+        return $this->morphOne('App\File', 'fileable');
+    }
+
     public function files()
     {
         return $this->hasMany('App\ObjectiveFile','objective_id');
@@ -44,5 +53,15 @@ class Objective extends Model
     public function events()
     {
         return $this->belongsToMany('App\Event','event_objective','objective_id','event_id');
+    }
+
+    public function members()
+    {
+        return $this->belongsToMany('App\User','objective_user','objective_id','user_id')->withPivot('role')->withTimestamps();
+    }
+
+    public function subscribers()
+    {
+        return $this->belongsToMany('App\User','objective_subscriber','objective_id','subscriber_id')->withTimestamps();
     }
 }
