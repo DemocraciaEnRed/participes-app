@@ -7,9 +7,8 @@
   <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In eius ad officia tempora, temporibus repudiandae id
     ipsum neque deserunt rerum esse delectus consectetur voluptates eveniet quaerat commodi ducimus mollitia dolorem.
   </p>
-  <hr>
-  <table class="table table-sm">
-    <thead class="thead-dark">
+  <table class="table">
+    <thead class="thead">
       <tr>
         <th scope="col">Nombre y apellido</th>
         <th scope="col">Rol</th>

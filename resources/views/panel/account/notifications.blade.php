@@ -34,7 +34,7 @@ $checked = Str::contains(Auth::user()->notification_preferences,"mail")
     <div class="form-group">
       <div class="custom-control custom-switch">
         <input type="checkbox" class="custom-control-input" name="mailable" id="mailable" {{$checked ? 'checked' : ''}} value="true">
-        <label class="custom-control-label" for="mailable">Recibir correos electronicos</label>
+        <label class="custom-control-label is-clickable" for="mailable">Recibir correos electronicos</label>
       </div>
     </div>
     <button type="submit" class="btn btn-primary">Guardar</button>

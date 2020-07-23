@@ -3,10 +3,15 @@
 @section('panelContent')
 
 <section>
-  
-  <h1 class="display-4">{{$objective->title}}</h1>
-  <p class="lead">¡Bienvenido al panel de control del objetivo!</p>
-  <hr>
+  <div class="jumbotron d-flex">
+    {{-- <div class="mr-4">
+      @include('utils.avatar',['avatar' => Auth::user()->avatar, 'size' => 125])
+    </div> --}}
+    <div class="">
+      <h6 class="display-4">{{$objective->title}}</h6>
+      <p class="lead">¡Bienvenido al panel de control del objetivo!</p>
+    </div>
+  </div>
   @if($objective->hidden)
   <div class="alert alert-dark">
     <i class="fas fa-eye-slash"></i> El objetivo se encuentra <u>oculto</u> al publico

@@ -7,13 +7,12 @@
   <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In eius ad officia tempora, temporibus repudiandae id
     ipsum neque deserunt rerum esse delectus consectetur voluptates eveniet quaerat commodi ducimus mollitia dolorem.
   </p>
-  <table class="table table-sm">
-    <thead class="thead-dark">
+  <table class="table">
+    <thead class="thead">
       <tr>
         <th scope="col">Nombre y apellido</th>
         <th class="text-center" scope="col">Email</th>
         <th class="text-center" scope="col">Fecha Subscripción</th>
-        <th class="text-center" scope="col">Acción</th>
       </tr>
     </thead>
     <tbody>
@@ -22,7 +21,6 @@
           <td>@include('utils.avatar',['avatar' => $subscriber->avatar, 'size' => 32, 'thumbnail' => true]){{$subscriber->name}} {{$subscriber->surname}}</td>
           <td class="text-center">{{$subscriber->email}}</td>
           <td class="text-center">@datetime($subscriber->pivot->created_at)</td>
-          <td class="text-center">-</td>
         </tr>
       @empty
         <tr>

@@ -40,7 +40,7 @@
 
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             @hasRole('admin')
-            <a class="dropdown-item" href="{{ route('panel.index') }}">
+            <a class="dropdown-item" href="{{ route('admin.index') }}">
               <i class="fas fa-cog"></i>&nbsp;Administración
             </a>
             @endhasRole

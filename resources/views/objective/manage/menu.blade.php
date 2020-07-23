@@ -6,7 +6,9 @@ $currentRoute = Route::currentRouteName();
 {{$objective->title}}
 </h6>
 <div>
+@if($objective->hidden)
   <span class="badge badge-dark"><i class="fas fa-eye-slash"></i>&nbsp;Oculto</span>
+@endif
 </div>
 <hr>
 @yield('theMenu')
@@ -31,11 +33,13 @@ $currentRoute = Route::currentRouteName();
 <ul class="list-unstyled">
 <li><a href="{{ route('objective.manage.subscribers', ['objId' => $objective->id]) }}" class="text-dark {{ $currentRoute == 'objective.manage.subscribers' ? 'font-weight-bold' : null }}">Listar</a></li>
 </ul>
-<h6><b>El objetivo</b></h6>
+@isManager($objective->id)
+<h6><b>Administrar</b></h6>
 <ul class="list-unstyled">
-<li><a href="{{ route('objective.manage.team', ['objId' => $objective->id]) }}" class="text-dark {{ $currentRoute == 'objective.manage.team' ? 'font-weight-bold' : null }}"><i class="fas fa-plus"></i>&nbsp;Imagen de cover</a></li>
+<li><a href="{{ route('objective.manage.configuration', ['objId' => $objective->id]) }}" class="text-dark {{ $currentRoute == 'objective.manage.configuration' ? 'font-weight-bold' : null }}">Configuración</a></li>
+<li><a href="{{ route('objective.manage.cover', ['objId' => $objective->id]) }}" class="text-dark {{ $currentRoute == 'objective.manage.cover' ? 'font-weight-bold' : null }}">Imagen de portada</a></li>
+<li><a href="{{ route('objective.manage.files', ['objId' => $objective->id]) }}" class="text-dark {{ $currentRoute == 'objective.manage.files' ? 'font-weight-bold' : null }}">Repositorio de archivos</a></li>
+<li><a href="{{ route('objective.manage.album', ['objId' => $objective->id]) }}" class="text-dark {{ $currentRoute == 'objective.manage.album' ? 'font-weight-bold' : null }}">Album de fotos</a></li>
+<li><a href="{{ route('objective.manage.map', ['objId' => $objective->id]) }}" class="text-dark {{ $currentRoute == 'objective.manage.map' ? 'font-weight-bold' : null }}">Mapa de reportes</a></li>
 </ul>
-<h6><b>Bolsa de archivos</b></h6>
-<ul class="list-unstyled">
-<li><a href="{{ route('objective.manage.team', ['objId' => $objective->id]) }}" class="text-dark {{ $currentRoute == 'objective.manage.team' ? 'font-weight-bold' : null }}"><i class="fas fa-plus"></i>&nbsp;Crear</a></li>
-</ul>
+@endisManager
