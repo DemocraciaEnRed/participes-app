@@ -101,7 +101,6 @@ Route::group([
         ],function () {
         Route::get('/', 'ObjectivePanelController@index')->name('index');
         // Archivos
-        Route::get('/archivos', 'ObjectivePanelController@index')->name('files');
         Route::get('/suscriptores', 'ObjectivePanelController@viewListSubscribers')->name('subscribers');
         // Equipo
         Route::get('/equipo', 'ObjectivePanelController@viewListTeam')->name('team');
@@ -121,6 +120,18 @@ Route::group([
         Route::get('/metas/{goalId}/reportes', 'ObjectivePanelController@viewListGoalReports')->name('goals.reports');
         Route::get('/metas/{goalId}/reportes/nuevo', 'ObjectivePanelController@viewNewGoalReport')->name('goals.reports.add');
         Route::post('/metas/{goalId}/reportes/nuevo', 'ObjectivePanelController@formNewGoalReport')->name('goals.reports.add.form');
+        Route::get('/metas/{goalId}/reportes/{reportId}', 'ObjectivePanelController@viewListGoalReports')->name('goals.reports.index');
+        Route::get('/metas/{goalId}/reportes/{reportId}/album', 'ObjectivePanelController@viewAlbumReport')->name('goals.reports.album');
+        // Administracion
+        Route::get('/configuracion', 'ObjectivePanelController@viewObjectiveConfiguration')->name('configuration');
+        Route::put('/configuracion', 'ObjectivePanelController@formObjectiveConfiguration')->name('configuration.form');
+        Route::get('/portada', 'ObjectivePanelController@viewObjectiveCover')->name('cover');
+        Route::post('/portada', 'ObjectivePanelController@formObjectiveCover')->name('cover.form');
+        Route::get('/archivos', 'ObjectivePanelController@viewObjectiveFiles')->name('files');
+        Route::post('/archivos', 'ObjectivePanelController@formObjectiveFile')->name('files.form');
+        Route::get('/album', 'ObjectivePanelController@viewObjectiveAlbum')->name('album');
+        Route::get('/mapa', 'ObjectivePanelController@viewObjectiveMap')->name('map');
+
     });
 
 });

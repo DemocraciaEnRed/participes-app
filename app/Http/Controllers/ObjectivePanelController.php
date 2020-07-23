@@ -233,4 +233,47 @@ class ObjectivePanelController extends Controller
 
       return redirect()->route('objective.manage.goals.index', ['objId' => $request->objective->id, 'goalId' => $goal->id])->with('success','Reporte creado');
     }
+
+
+    public function viewObjectiveConfiguration (Request $request){
+      return view('objective.manage.configuration', ['objective' => $request->objective]);
+    } 
+
+    public function formObjectiveConfiguration (Request $request){
+      $rules = [
+        'hidden' => 'nullable|string|in:true',
+      ];
+      $request->validate($rules);
+      $request->objective->hidden = $request->input('hidden') == 'true' ? true : false;
+      $request->objective->save();
+      return redirect()->route('objective.manage.configuration', ['objId' => $request->objective->id])->with('success','Se actualizó el objetivo');
+    }
+
+    public function viewObjectiveCover (Request $request){
+      return view('objective.manage.cover', ['objective' => $request->objective]);
+    } 
+
+    public function formObjectiveCover (Request $request){
+      return redirect()->route('objective.manage.cover', ['objId' => $request->objective->id])->with('success','Se actualizó la imagen de portada del objetivo');
+    } 
+
+    public function viewObjectiveFiles (Request $request){
+      return view('objective.manage.files', ['objective' => $request->objective]);
+    } 
+
+    public function formObjectiveFile (Request $request){
+      return redirect()->route('objective.manage.files', ['objId' => $request->objective->id])->with('success','Se agrego el archivo al repositorio del objetivo');
+    } 
+
+    public function viewObjectiveAlbum (Request $request){
+      return view('objective.manage.album', ['objective' => $request->objective]);
+    } 
+
+    public function viewObjectiveMap (Request $request){
+      return view('objective.manage.map', ['objective' => $request->objective]);
+    } 
+
+    // public function viewAlbumReport (Request $request){
+    //   return view('objective.manage.')
+    // } 
 }
