@@ -5,9 +5,12 @@ use Image;
 use File;
 use Storage;
 use Str;
+use Hash;
+use App\User;
 use App\Category;
 use App\ImageFile;
 use App\Objective;
+use App\Rules\MatchOldPassword;
 use Illuminate\Http\Request;
 
 class UserPanelController extends Controller
@@ -63,7 +66,7 @@ class UserPanelController extends Controller
     public function formUnsubSubscription(Request $request, $objId){
         $request->user()->subscriptions()->detach($objId);
         // $subscriptions = $request->user()->subscriptions()->paginate(5);
-        return redirect()->route('panel.notifications')->with('success','Se desuscribió correctamente del objetivo');
+        return redirect()->route('panel.subscriptions')->with('success','Se desuscribió correctamente del objetivo');
     }
 
     public function viewListUnreadNotifications(Request $request){
@@ -111,8 +114,6 @@ class UserPanelController extends Controller
         // Create New Name
         $fileName = 'avatar-user-'.$user->id.'-'.substr(uniqid(),-5).'.'.$fileExtension;
         $fileNameThumbnail = 'avatar-user-'.$user->id.'-'.substr(uniqid(),-5).'-thumbnail.'.$fileExtension;
-        // Get Size
-        $fileSize = $avatarImage->filesize();
         // Make the File path
         $filePath = 'storage/avatars/'.$fileName;
         $filePathThumbnail = 'storage/avatars/'.$fileNameThumbnail;
@@ -122,11 +123,11 @@ class UserPanelController extends Controller
             Storage::disk('public')->put("avatars/".$fileNameThumbnail, (string) $avatarImageThumbnail->encode('jpg'));
             $imageFile = new ImageFile();
             $imageFile->name = $fileName;
-            $imageFile->size = $avatarImage->filesize();
+            $imageFile->size = Storage::disk('public')->size("avatars/".$fileName);
             $imageFile->mime = $mimeType;
             $imageFile->path = $filePath;
             $imageFile->thumbnail_name = $fileNameThumbnail;
-            $imageFile->thumbnail_size = $avatarImageThumbnail->filesize();
+            $imageFile->thumbnail_size = Storage::disk('public')->size("avatars/".$fileNameThumbnail);
             $imageFile->thumbnail_mime = $mimeType;
             $imageFile->thumbnail_path = $filePathThumbnail;
             $user->avatar()->save($imageFile);
@@ -141,11 +142,11 @@ class UserPanelController extends Controller
             Storage::disk('public')->put("avatars/".$fileName, (string) $avatarImage->encode('jpg'));
             Storage::disk('public')->put("avatars/".$fileNameThumbnail, (string) $avatarImageThumbnail->encode('jpg'));
             $user->avatar->name = $fileName;
-            $user->avatar->size = $fileSize;
+            $user->avatar->size = Storage::disk('public')->size("avatars/".$fileName);
             $user->avatar->mime = $mimeType;
             $user->avatar->path = $filePath;
             $user->avatar->thumbnail_name = $fileNameThumbnail;
-            $user->avatar->thumbnail_size = $avatarImageThumbnail->filesize();
+            $user->avatar->thumbnail_size = Storage::disk('public')->size("avatars/".$fileNameThumbnail);
             $user->avatar->thumbnail_mime = $mimeType;
             $user->avatar->thumbnail_path = $filePathThumbnail;
             $user->avatar->save();
@@ -190,11 +191,18 @@ class UserPanelController extends Controller
 
     public function formAccountAccess(Request $request){
         $rules = [
-            'old_password' => 'required|email',
-            'new_password' => 'required|email',
+            'current_password' =>  ['required', new MatchOldPassword],
+            'new_password' => 'required|string',
+            'repeat_password' => 'required|same:new_password',
         ];
+        
         $request->validate($rules);
-        dd($request->input());
+        if (Hash::check($request->input('current_password'), auth()->user()->password)) {
+            User::find(auth()->user()->id)->update(['password'=> Hash::make($request->input('new_password'))]);
+        } else {
+            return redirect()->route('panel.account.access')->with('danger','La contraseña actual no corresponde');
+        }
+    
         return redirect()->route('panel.account.access')->with('success','Se actualizo su contraseña');
     }
 
@@ -205,13 +213,11 @@ class UserPanelController extends Controller
 
     public function formAccountEmail(Request $request){
         $rules = [
-            'old_email' => 'required|email',
-            'new_email' => 'required|email',
+            'email' => 'required|email',
         ];
         $request->validate($rules);
-        dd($request->input());
-
-        return redirect()->route('panel.account.access')->with('success','Se cambió su correo electrónico');
+        User::find(auth()->user()->id)->update(['email'=> $request->input('email')]);
+        return redirect()->route('panel.account.email')->with('success','Se cambió su correo electrónico');
     }
 
     public function viewAccountNotifications(Request $request){

@@ -12,9 +12,9 @@ $checked = Str::contains(Auth::user()->notification_preferences,"mail")
     ipsum neque deserunt rerum esse delectus consectetur voluptates eveniet quaerat commodi ducimus mollitia dolorem.
   </p>
   <hr>
-   @if ($errors->any())
+  @if ($errors->any())
     <div class="alert alert-danger">
-        <ul>
+        <ul class="mb-0">
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
             @endforeach
