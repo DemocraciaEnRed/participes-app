@@ -8,7 +8,7 @@
     ipsum neque deserunt rerum esse delectus consectetur voluptates eveniet quaerat commodi ducimus mollitia dolorem.
   </p>
   @foreach ($objective->goals as $goal)
-  <div class="card mb-2">
+  <div class="card mb-3 shadow-sm">
     <div class="card-body d-flex justify-content-between align-items-center">
     <div>
       <h5 class="card-title font-weight-bold"><a href="{{ route('objective.manage.goals.index', ['objId' => $objective->id,'goalId' => $goal->id]) }}" class="text-primary">{{$goal->title}}</a></h5>

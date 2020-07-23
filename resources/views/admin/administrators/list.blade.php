@@ -12,35 +12,33 @@
     <thead class="thead-dark">
       <tr>
         <th scope="col">Nombre y apellido</th>
-        <th scope="col">Email</th>
+        <th class="text-center" scope="col">Email</th>
         <th width="80" class="text-center" scope="col">Accion</th>
       </tr>
     </thead>
     <tbody>
-      @if(count($administrators) > 0)
-        @foreach($administrators as $user)
-          <tr>
-            <td>{{$user->name}}</td>
-            <td>{{$user->email}}</td>
-             <td class="text-center">
-              <div class="btn-group btn-group-sm" role="group">
-                <form action="{{ route('admin.administrators.delete.form', ['id' => $user->id]) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <input type="hidden" value="{{$user->id}}">
-                <button type="submit" class="btn btn-danger btn-sm">
-                  Quitar
-                </button>
-                </form>
-              </div>
-            </td>
-          </tr>
-        @endforeach
-      @else
+      @forelse($administrators as $user)
+        <tr>
+          <td>{{$user->name}}</td>
+          <td class="text-center">{{$user->email}}</td>
+            <td class="text-center">
+            <div class="btn-group btn-group-sm" role="group">
+              <form action="{{ route('admin.administrators.delete.form', ['id' => $user->id]) }}" method="POST">
+              @csrf
+              @method('DELETE')
+              <input type="hidden" value="{{$user->id}}">
+              <button type="submit" class="btn btn-danger btn-sm">
+                Quitar
+              </button>
+              </form>
+            </div>
+          </td>
+        </tr>
+      @empty
         <tr>
           <td colspan="4">No hay organizaciones</td>
         </tr>
-      @endif
+      @endforelse
     </tbody>
   </table>
 </section>

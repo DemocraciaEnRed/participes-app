@@ -61,7 +61,7 @@
     </div>
     <div class="form-group">
       <label>Estado inicial de la meta</label>
-      <select class="form-control" name="status">
+      <select class="custom-select" name="status">
         <option value="ongoing" selected>En progreso</option>
         <option value="delayed" >Demorada</option>
         <option value="inactive" >Inactiva</option>

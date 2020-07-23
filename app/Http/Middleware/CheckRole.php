@@ -18,7 +18,8 @@ class CheckRole
         if (!$request->user()->hasAnyRole($role)) {
             // var_dump($request->user()->hasAnyRole($role));
             // var_dump($role);
-            return redirect('home');
+            // return redirect('home');
+            abort(403, 'No autorizado');
         }
 
         return $next($request);

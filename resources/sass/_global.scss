@@ -4,3 +4,105 @@
 .text-smaller{
   font-size: 0.8rem;
 }
+.text-smallest{
+  font-size: 0.65rem;
+}
+
+.custom-control.custom-checkbox.form-check-inline{
+  display: inline-flex;
+  align-items: center;
+  margin-right: 0.75rem;
+}
+
+.tiptap-editor-content .ProseMirror{
+  display: block;
+  padding: 0.375rem 0.75rem;
+  font-weight: 400;
+  color: #7b8a8b;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  
+  p:last-child{
+    margin-bottom: 0;
+  }
+}
+
+.tiptap-editor-content .ProseMirror-focused{
+
+  color: #7b8a8b;
+  background-color: #fff;
+  border-color: #597ea2;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);
+  
+}
+
+// label {
+//   font-weight: 800;
+// }
+
+.menububble {
+  position: absolute;
+  display: flex;
+  z-index: 20;
+  background: $gray-900;
+  border-radius: 5px;
+  padding: 0.3rem;
+  margin-bottom: 0.5rem;
+  transform: translateX(-50%);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s, visibility 0.2s;
+
+  &.is-active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &__button {
+    display: inline-flex;
+    background: transparent;
+    border: 0;
+    color: $white;
+    padding: 0.2rem 0.5rem;
+    margin-right: 0.2rem;
+    border-radius: 3px;
+    cursor: pointer;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &:hover {
+      background-color: rgba($white, 0.1);
+    }
+
+    &.is-active {
+      background-color: rgba($white, 0.2);
+    }
+  }
+
+  &__form {
+    display: flex;
+    align-items: center;
+  }
+
+  &__input {
+    font: inherit;
+    border: none;
+    background: transparent;
+    color: $white;
+  }
+}
+
+
+.header-objective {
+  height: 100px;
+  &.header-default{
+    background: url('/img/default-background.png');
+    background-repeat: repeat-x;
+  }
+}

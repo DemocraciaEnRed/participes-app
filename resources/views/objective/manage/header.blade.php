@@ -1,0 +1,1 @@
+<div class="header-objective {{ !is_null($objective->cover) ? 'header-custom' : 'header-default'}} mb-4" style="{{ !is_null($objective->cover) ? 'background-image: url(asset($organization->logo->path))' : ''}}"></div>

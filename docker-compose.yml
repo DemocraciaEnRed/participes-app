@@ -1,0 +1,97 @@
+version: '3'
+services:
+
+  #PHP Service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: participes
+    container_name: participes-app
+    restart: unless-stopped
+    tty: true
+    environment:
+      APP_ENV: local
+      CONTAINER_ROLE: app
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - app-network
+    depends_on:
+      - redis
+      - mysql
+
+
+  #Nginx Service
+  webserver:
+    image: nginx:alpine
+    container_name: participes-nginx
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "8000:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - app-network
+  
+  #Queue Service
+  queue:
+    image: participes
+    container_name: participes-queue
+    depends_on:
+      - app
+    volumes:
+      - .:/var/www
+    environment:
+      APP_ENV: local
+      CONTAINER_ROLE: queue
+      CACHE_DRIVER: redis
+      SESSION_DRIVER: redis
+      QUEUE_DRIVER: redis
+      REDIS_HOST: redis
+
+  #Redis Service
+  redis:
+    container_name: participes-redis
+    image: redis:4-alpine
+    ports:
+      - 16379:6379
+    volumes:
+      - redis:/data
+    networks:
+      - app-network
+
+  #MySQL Service
+  mysql:
+    image: mysql:5.7
+    container_name: participes-mysql
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_ROOT_PASSWORD: your_mysql_root_password
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - dbdata:/var/lib/mysql/
+      - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
+    networks:
+      - app-network
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
+#Volumes
+volumes:
+  redis:
+    driver: "local"
+  dbdata:
+    driver: local

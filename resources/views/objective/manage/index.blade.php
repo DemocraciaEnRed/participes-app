@@ -3,6 +3,7 @@
 @section('panelContent')
 
 <section>
+  
   <h1 class="display-4">{{$objective->title}}</h1>
   <p class="lead">¡Bienvenido al panel de control del objetivo!</p>
   <hr>

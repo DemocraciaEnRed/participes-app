@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class CheckRole
+class CanManageObjective
 {
     /**
      * Handle an incoming request.
@@ -14,13 +14,20 @@ class CheckRole
      * @return mixed
      */
     public function handle($request, Closure $next, ...$role)
-    {
-        if (!$request->user()->hasAnyRole($role)) {
-            // var_dump($request->user()->hasAnyRole($role));
-            // var_dump($role);
-            return redirect('home');
+    {   
+        $objId = $request->route()->parameter('objId');
+
+        // Admin can access
+        if ($request->user()->hasAnyRole(['admin'])) {
+            return $next($request);
         }
 
-        return $next($request);
+        // Members can access
+        if ($request->user()->isMemberObjective($objId)) {
+            return $next($request);
+        }
+
+        // Any other, unauthorized
+        abort(403, 'No autorizado');
     }
 }

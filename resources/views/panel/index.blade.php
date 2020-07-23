@@ -1,14 +1,42 @@
+@php
+$countUnreadNotifications = count(Auth::user()->unreadNotifications)   
+@endphp
+
 @extends('panel.master')
 
 @section('panelContent')
 
 <section>
-<div class="jumbotron">
-  <h1 class="display-4">Hello, {{Auth::user()->name}}!</h1>
-  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-  <hr class="my-4">
-  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-</div>
+  <div class="jumbotron d-flex" style="background: url({{asset('img/default-background.png')}})">
+      <div class="mr-4">
+      @include('utils.avatar',['avatar' => Auth::user()->avatar, 'size' => 125])
+      </div>
+      <div class="">
+
+    <h1 class="display-4 text-white">
+       ¡Hola, {{Auth::user()->name}}!</h1>
+    @if($countUnreadNotifications > 0)
+      <p class="lead text-white">¡Tenes {{$countUnreadNotifications}} {{$countUnreadNotifications > 1 ? 'notificaciones' : 'notificación'}} pendientes de leer!</p>
+    @else 
+      <p class="lead text-white">¡Que tengas buen dia!</p>
+    @endif
+      </div>
+  </div>
+  {{-- @if($countUnreadNotifications > 0)
+  <div class="card border-secondary">
+    <div class="card-body text-dark">
+      <h5 class="card-title"><i class="far fa-bell"></i>&nbsp;Notificaciones sin leer</h5>
+      <p class="card-text">Podes leerlos haciendo <a href="{{ route('panel.notifications.unread') }}">click aquí <i class="fas fa-arrow-right"></i></a></p>
+    </div>
+  </div>
+  @else 
+  <div class="card border-secondary">
+    <div class="card-body text-dark">
+      <h5 class="card-title"><i class="far fa-bell"></i>&nbsp;Mis nofiticaciones</h5>
+      <p class="card-text">Leelos haciendo <a href="{{ route('panel.notifications') }}">click aquí <i class="fas fa-arrow-right"></i></a></p>
+    </div>
+  </div>
+  @endif --}}
 </section>
 
 @endsection

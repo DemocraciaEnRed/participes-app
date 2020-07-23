@@ -1,5 +1,6 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+// @import url('https://fonts.googleapis.com/css?family=Nunito');
+@import 'fonts';
 
 // Variables
 @import 'variables';
@@ -9,5 +10,8 @@
 
 // Bootswatch
 @import 'bootswatch';
+
+@import '~animate.css/animate.min.css';
+@import '~vue-croppa/dist/vue-croppa.css';
 
 @import 'global';

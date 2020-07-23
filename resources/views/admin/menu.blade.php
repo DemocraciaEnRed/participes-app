@@ -2,9 +2,9 @@
 $currentRoute = Route::currentRouteName();
 @endphp
 
-<h5>Menu</h5>
+<h5>Panel de Admin</h5>
 <ul class="list-unstyled">
-<li><a href="{{ route('admin.index') }}" class="text-dark {{ $currentRoute == 'admin.index'  ? 'font-weight-bold' : null }}">Inicio</a></li>
+<li><a href="{{ route('admin.index') }}" class="text-dark {{ $currentRoute == 'admin.index'  ? 'font-weight-bold' : null }}">Dashboard</a></li>
 </ul>
 <h6><b>Categorias</b></h6>
 <ul class="list-unstyled">
@@ -23,6 +23,6 @@ $currentRoute = Route::currentRouteName();
 </ul>
 <h6><b>Administradores</b></h6>
 <ul class="list-unstyled">
-<li><a href="{{ route('admin.administrators.add') }}" class="text-dark {{ $currentRoute == 'admin.administrators.create' ? 'font-weight-bold' : null }}"><i class="fas fa-plus"></i>&nbsp;Agregar</a></li>
 <li><a href="{{ route('admin.administrators') }}" class="text-dark {{ $currentRoute == 'admin.administrators' ? 'font-weight-bold' : null }}">Listar</a></li>
+<li><a href="{{ route('admin.administrators.add') }}" class="text-dark {{ $currentRoute == 'admin.administrators.create' ? 'font-weight-bold' : null }}"><i class="fas fa-plus"></i>&nbsp;Agregar</a></li>
 </ul>

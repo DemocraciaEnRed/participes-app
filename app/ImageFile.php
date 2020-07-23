@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ObjectivePicture extends Model
+class ImageFile extends Model
 {
-    protected $table = 'objective_picture';
+    protected $table = 'image_files';
     public $incrementing = true; // if IDs are auto-incrementing.
     public $timestamps = true; // if the model should be timestamped.
 
-    public function file()
+    public function imageable()
     {
-        return $this->morphOne('App\File', 'fileable');
-    }    
+        return $this->morphTo();
+    }
 }

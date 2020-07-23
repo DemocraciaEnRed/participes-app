@@ -61,7 +61,12 @@ return [
             'emoji' => ':boom:',
             'level' => 'critical',
         ],
-
+        'mysql' => [
+            'driver' => 'custom',
+            'handler' => App\Logging\MySQLLoggingHandler::class,
+            'via' => App\Logging\MySQLCustomLogger::class,
+            'level' => 'debug',
+        ],
         'papertrail' => [
             'driver' => 'monolog',
             'level' => 'debug',

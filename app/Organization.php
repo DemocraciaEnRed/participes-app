@@ -16,6 +16,6 @@ class Organization extends Model
     }
     public function logo()
     {
-        return $this->morphOne('App\File', 'fileable');
+        return $this->morphOne('App\ImageFile', 'imageable');
     }
 }

@@ -27,7 +27,24 @@ Route::group([
     'prefix' => 'panel', 
     ],function () {
     Route::get('/', 'UserPanelController@index')->name('index');
-    Route::get('/cambiar-acceso', 'UserPanelController@viewChangePassword')->name('password.change');
+    // Mis objetivos
+    Route::get('/objetivos', 'UserPanelController@viewListObjectives')->name('objectives');
+    // Mis suscripciones
+    Route::get('/suscripciones', 'UserPanelController@viewListSubscriptions')->name('subscriptions');
+    Route::post('/suscripciones/{objId}/desuscribir', 'UserPanelController@formUnsubSubscription')->name('subscriptions.unsubscribe.form');
+    // Mis notificaciones
+    Route::get('/notificaciones', 'UserPanelController@viewListNotifications')->name('notifications');
+    Route::get('/notificaciones/pendientes', 'UserPanelController@viewListUnreadNotifications')->name('notifications.unread');
+    Route::post('/notificaciones/pendientes/marcar', 'UserPanelController@formMarkAllUnreadNotifications')->name('notifications.mark.all.form');
+    // Mi cuenta
+    Route::get('/preferencias/avatar', 'UserPanelController@viewAccountAvatar')->name('account.avatar');
+    Route::post('/preferencias/avatar', 'UserPanelController@formAccountAvatar')->name('account.avatar.form');
+    Route::get('/preferencias/acceso', 'UserPanelController@viewAccountAccess')->name('account.access');
+    Route::put('/preferencias/acceso', 'UserPanelController@formAccountAccess')->name('account.access.form');
+    Route::get('/preferencias/email', 'UserPanelController@viewAccountEmail')->name('account.email');
+    Route::put('/preferencias/email', 'UserPanelController@formAccountEmail')->name('account.email.form');
+    Route::get('/preferencias/notificationes', 'UserPanelController@viewAccountNotifications')->name('account.notifications');
+    Route::put('/preferencias/notificationes', 'UserPanelController@formAccountNotifications')->name('account.notifications.form');
 });
 
 Route::group([
@@ -65,6 +82,11 @@ Route::group([
     // Userss
     Route::get('/users', 'UserController@fetch')->name('users');
     Route::get('/users/{id}', 'UserController@fetchOne')->name('users.fetch');
+    Route::put('/notification/read', 'NotificationController@markAllRead')->name('notification.mark.all');
+    Route::put('/notification/read/{id}', 'NotificationController@markOneRead')->name('notification.mark.one');
+    Route::delete('/notification/clean', 'NotificationController@cleanAll')->name('notification.clean');
+
+
 });
 
 Route::group([
@@ -80,6 +102,7 @@ Route::group([
         Route::get('/', 'ObjectivePanelController@index')->name('index');
         // Archivos
         Route::get('/archivos', 'ObjectivePanelController@index')->name('files');
+        Route::get('/suscriptores', 'ObjectivePanelController@viewListSubscribers')->name('subscribers');
         // Equipo
         Route::get('/equipo', 'ObjectivePanelController@viewListTeam')->name('team');
         Route::get('/equipo/agregar', 'ObjectivePanelController@viewAddTeam')->name('team.add');
@@ -95,9 +118,9 @@ Route::group([
         Route::get('/metas/{goalId}/hitos/nuevo', 'ObjectivePanelController@viewAddGoalMilestone')->name('goals.milestones.add');
         Route::post('/metas/{goalId}/hitos/nuevo', 'ObjectivePanelController@formAddGoalMilestone')->name('goals.milestones.add.form');
         // Reporte
-        Route::get('/metas/{goalId}/reportes', 'ObjectivePanelController@viewNewReport')->name('goals.reports');
-        Route::get('/metas/{goalId}/reportes/nuevo', 'ObjectivePanelController@viewNewReport')->name('goals.reports.add');
-        Route::post('/metas/{goalId}/reportes/nuevo', 'ObjectivePanelController@formNewReport')->name('goals.reports.add.form');
+        Route::get('/metas/{goalId}/reportes', 'ObjectivePanelController@viewListGoalReports')->name('goals.reports');
+        Route::get('/metas/{goalId}/reportes/nuevo', 'ObjectivePanelController@viewNewGoalReport')->name('goals.reports.add');
+        Route::post('/metas/{goalId}/reportes/nuevo', 'ObjectivePanelController@formNewGoalReport')->name('goals.reports.add.form');
     });
 
 });

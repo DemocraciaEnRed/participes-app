@@ -20,12 +20,15 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('notification-item', require('./components/NotificationItem.vue').default);
+Vue.component('form-new-report', require('./components/FormNewReport.vue').default);
 Vue.component('admin-search-user-new-admin', require('./components/AdminSearchUserNewAdmin.vue').default);
 Vue.component('objective-search-user-add-team', require('./components/ObjectiveSearchUserAddTeam.vue').default);
 Vue.component('paginator', require('./components/utils/Paginator.vue').default);
 Vue.component('error-alert', require('./components/utils/ErrorAlert.vue').default);
+Vue.component('content-visor', require('./components/utils/ContentVisor.vue').default);
 Vue.component('input-tags', require('./components/inputs/InputTag.vue').default);
+Vue.component('input-user-avatar', require('./components/inputs/InputUserAvatar.vue').default);
 Vue.component('input-add-milestones-create-goal', require('./components/inputs/InputAddMilestonesCreateGoal.vue').default);
 Vue.prototype.$http = http
 

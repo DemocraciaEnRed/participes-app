@@ -28,7 +28,7 @@
     </div>
     <div class="form-group">
       <label>Categoria del objetivo</label>
-      <select class="form-control" name="category">
+      <select class="custom-select" name="category">
         @foreach ($categories as $category)
         <option value="{{$category->id}}">{{$category->title}}</option>
         @endforeach
@@ -40,7 +40,7 @@
     </div>
     <div class="form-group">
       <label>Categoria del objetivo</label>
-      <select class="form-control" name="category">
+      <select class="custom-select" name="category">
         @foreach ($categories as $category)
         <option value="{{$category->id}}">{{$category->title}}</option>
         @endforeach
@@ -50,9 +50,9 @@
       <label>Organizaciones relacionadas con el objetivo</label>
       <div>
         @foreach($organizations as $organization)
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" name="organizations[]" id="org{{$organization->id}}" :value="{{$organization->id}}">
-            <label class="form-check-label" for="org{{$organization->id}}">{{$organization->name}}</label>
+          <div class="custom-control custom-checkbox form-check-inline">
+            <input class="custom-control-input" type="checkbox" name="organizations[]" id="org{{$organization->id}}" :value="{{$organization->id}}">
+            <label class="custom-control-label" for="org{{$organization->id}}">{{$organization->name}}</label>
           </div>
         @endforeach
       </div>

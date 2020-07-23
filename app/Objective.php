@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Objective extends Model
 {
+    use SoftDeletes;
+
     protected $table = 'objectives';
     public $incrementing = true; // if IDs are auto-incrementing.
     public $timestamps = true; // if the model should be timestamped.
@@ -37,19 +40,14 @@ class Objective extends Model
 
     public function cover()
     {
-        return $this->morphOne('App\File', 'fileable');
+        return $this->morphOne('App\ImageFile', 'imageable');
     }
 
     public function files()
     {
-        return $this->hasMany('App\ObjectiveFile','objective_id');
+        return $this->morphMany('App\Files','fileable');
     }
-
-    public function pictures()
-    {
-        return $this->hasMany('App\ObjectivePicture','objective_id');
-    }
-
+    
     public function events()
     {
         return $this->belongsToMany('App\Event','event_objective','objective_id','event_id');

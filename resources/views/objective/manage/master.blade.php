@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+{{-- @include('objective.manage.header') --}}
 <div class="container">
   @if($objective->hidden)
   <div class="alert alert-info">

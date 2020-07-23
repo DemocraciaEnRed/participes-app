@@ -2,7 +2,7 @@
   <section>
     <input type="text"  class="form-control" v-model="inputTag" @keyup.enter="addTag" @keyup.188="addTagWithoutComma">
     <input type="hidden" :name="`${name}[]`" v-for="(tag,i) in tagList" :key="`tag${i}`" :value="tag">
-    <small class="form-text text-muted">Escriba su tag y presione  <kbd>ENTER</kbd> o <kbd>,</kbd> para ingresar</small>
+    <small class="form-text text-muted mt-2">Escriba su tag y presione  <kbd>ENTER</kbd> o <kbd>,</kbd> para ingresar</small>
     <div class="tag-list mt-3 mb-3">
     <span class="tag badge badge-primary" v-for="(tag,i) in tagList" :key="`tag${i}`">
       <span>{{tag}}</span>

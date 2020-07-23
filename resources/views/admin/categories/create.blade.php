@@ -30,7 +30,9 @@
       <input type="text" class="form-control" name="color" placeholder="Ingrese un color en formato HEX">
       <small id="emailHelp" class="form-text text-muted">No ingrese el color con el "#"</small>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="text-right">
+    <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Crear</button>
+    </div>
   </form>
 </section>
 

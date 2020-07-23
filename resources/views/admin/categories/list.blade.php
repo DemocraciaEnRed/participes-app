@@ -7,38 +7,29 @@
   <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In eius ad officia tempora, temporibus repudiandae id
     ipsum neque deserunt rerum esse delectus consectetur voluptates eveniet quaerat commodi ducimus mollitia dolorem.
   </p>
-  <hr>
-  <table class="table table-sm">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">Nombre</th>
-        <th class="text-center" scope="col">Icono</th>
-        <th class="text-center" scope="col">Color</th>
-        <th class="text-center" scope="col">Accion</th>
-      </tr>
-    </thead>
-    <tbody>
-      @if(count($categories) > 0)
-        @foreach($categories as $category)
-          <tr>
-            <td>{{ $category->title }}</td>
-            <td class="text-center">{{ $category->icon }}</td>
-            <td class="text-center">{{ $category->color }}</td>
-            <td class="text-center">
-              <div class="btn-group btn-group-sm" role="group">
-                <a href="{{ route('admin.categories.edit', ['id' => $category->id]) }}"
-                  type="button" class="btn btn-primary">Editar</a>
-              </div>
-            </td>
-          </tr>
-        @endforeach
-      @else
-        <tr>
-          <td colspan="4">No hay categorias</td>
-        </tr>
-      @endif
-    </tbody>
-  </table>
+  @forelse($categories as $category)
+  <div class="card mb-3 shadow-sm">
+    <div class="card-body d-flex justify-content-between">
+        <div>
+          <h4 class="card-title font-weight-bold">{{$category->title}}</h4>
+          <a href="#" class="card-link"><i class="fas fa-pencil-alt"></i> Editar</a>
+          <a href="#" class="card-link text-danger"><i class="fas fa-trash"></i> Eliminar</a>
+        </div>
+        <div class="ml-3">
+          <i class="{{$category->icon}} fa-3x fa-fw mt-1" style="color:{{$category->color}}"></i>
+        </div>
+    </div>
+  </div>
+  @empty
+  <div class="card mb-3 shadow-sm">
+    <div class="card-body">
+        <div>
+          <h6 class="card-title">No hay categorias cargadas</h4>
+          <a href="{{ route('admin.categories.create') }}" class="card-link"><b>Haga clic para crear una nueva categoria <i class="fas fa-arrow-right"></i></b></a>
+        </div>
+    </div>
+  </div>
+  @endforelse
 </section>
 
 @endsection

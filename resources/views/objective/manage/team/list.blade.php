@@ -14,16 +14,19 @@
         <th scope="col">Nombre y apellido</th>
         <th scope="col">Rol</th>
         <th scope="col">Email</th>
+        @isManager($objective->id)
         <th width="80" class="text-center" scope="col">Accion</th>
+        @endisManager
       </tr>
     </thead>
     <tbody>
       @if(count($objective->members) > 0)
         @foreach($objective->members as $member)
           <tr>
-            <td>{{$member->name}}<br><span class="badge badge-primary">{{$member->role}}</span></td>
+            <td>@include('utils.avatar',['avatar' => $member->avatar, 'size' => 32, 'thumbnail' => true]) {{$member->name}}<br><span class="badge badge-primary">{{$member->role}}</span></td>
             <td>{{$member->pivot->role}}</td>
             <td>{{$member->email}}</td>
+            @isManager($objective->id)
              <td class="text-center">
               <div class="btn-group btn-group-sm" role="group">
                 <form action="{{ route('objective.manage.team.remove.form', ['objId' => $objective->id, 'usrId' => $member->id]) }}" method="POST">
@@ -36,6 +39,8 @@
                 </form>
               </div>
             </td>
+          @endisManager
+            
           </tr>
         @endforeach
       @else
