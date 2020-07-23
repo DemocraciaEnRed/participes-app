@@ -157,7 +157,8 @@ class InitDB extends Migration
             $table->json('tags')->nullable();
             $table->string('status')->nullable();
             $table->integer('progress')->nullable();
-            $table->string('map_url')->nullable();
+            $table->string('lat')->nullable();
+            $table->string('long')->nullable();
             $table->foreignId('milestone_achieved')->nullable()->constrained('milestones');
             $table->timestamps();
             $table->softDeletes('deleted_at', 0);

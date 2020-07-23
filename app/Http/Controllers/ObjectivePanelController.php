@@ -14,11 +14,6 @@ use App\Milestone;
 use App\Report;
 use App\Notifications\NewReport;
 use Illuminate\Http\Request;
-use App\Http\Requests\CategoryRequest;
-use App\Http\Requests\OrganizationRequest;
-use App\Http\Requests\ObjectiveRequest;
-use App\Http\Requests\GoalRequest;
-use App\Http\Requests\MilestoneRequest;
 
 class ObjectivePanelController extends Controller
 {
@@ -177,6 +172,8 @@ class ObjectivePanelController extends Controller
         'content' => 'required|string',
         'date' => 'required|date',
         'status' => 'nullable|string|max:550',
+        'lat' => 'nullable|string',
+        'long' => 'nullable|string',
         'progress' => 'integer|min:1',
         'milestone_date' => 'nullable|date',
         'milestone' => 'integer',
