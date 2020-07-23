@@ -11,7 +11,11 @@
   <div class="card mb-3 shadow-sm">
     <div class="card-body d-flex">
         <div class="mr-4">
+          @if($organization->logo)
           <img src="{{ asset($organization->logo->path) }}" class="mt-1 rounded" width="100" alt="" title="" />
+          @else
+          <img src="{{ asset('img/default-background.png') }}" class="mt-1 rounded" width="100" alt="" title="" />
+          @endif
         </div>
         <div>
           <h4 class="card-title font-weight-bold">{{ $organization->name }}</h4>
@@ -30,6 +34,8 @@
     </div>
   </div>
   @endforelse
+  {{ $organizations->links() }}
+
 </section>
 
 @endsection

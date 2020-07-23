@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+use Image;
+use Storage;
 use App\Category;
 use App\Organization;
 use App\Role;
 use App\File;
+use App\ImageFile;
 use App\User;
 use App\Objective;
 use Illuminate\Http\Request;
@@ -64,7 +67,7 @@ class AdminPanelController extends Controller
     // ====================================
 
     public function viewListOrganizations(Request $request){
-      $organizations = Organization::all();
+      $organizations = Organization::paginate(5);
       return view('admin.organizations.list',['organizations' => $organizations]);
     }
     public function viewCreateOrganization(Request $request){
@@ -85,25 +88,39 @@ class AdminPanelController extends Controller
         $newOrganization->save();
         //Handle Logo
         if($request->hasFile('logo')){
-            $newFile = new File();
+            $orgLogo = Image::make($request->file('logo'));
+            $orgLogo->resize(300, 300, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $orgLogoThumbnail = Image::make($request->file('logo'));
+            $orgLogoThumbnail->resize(96, 96, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            // Get mimeType
+            $mimeType = $orgLogo->mime();
             // Get Extension
-            $extension = $request->file('logo')->getClientOriginalExtension();
+            $fileExtension = explode('/',$mimeType)[1];
             // Create New Name
-            $fileName = 'logo-org-'.$newOrganization->id.'.'.$extension;
-            // Get Size
-            $fileSize = $request->file('logo')->getSize();
-            // Get Mime Type
-            $mimeType = $request->file('logo')->getClientMimeType();
-            // Save in storage/app/public/organizations
-            $filePath = $request->file('logo')->storeAs('organizations', $fileName,'public');
-            $filePath = 'storage/'.$filePath;
-            error_log('Filepath: '. $filePath);
-            $newFile->file_name = $fileName;
-            $newFile->file_size = $fileSize;
-            $newFile->mime_type = $mimeType;
-            $newFile->path= $filePath;
-            $newOrganization->logo()->save($newFile);
-            $newOrganization->save();
+            $fileName = 'org-'.$newOrganization->id.'-'.substr(uniqid(),-5).'.'.$fileExtension;
+            $fileNameThumbnail = 'org-'.$newOrganization->id.'-'.substr(uniqid(),-5).'-thumbnail.'.$fileExtension;
+            // Make the File path
+            $filePath = 'storage/organizations/'.$fileName;
+            $filePathThumbnail = 'storage/organizations/'.$fileNameThumbnail;
+            // Save Logo
+            Storage::disk('public')->put("organizations/".$fileName, (string) $orgLogo->encode());
+            Storage::disk('public')->put("organizations/".$fileNameThumbnail, (string) $orgLogoThumbnail->encode());
+            $imageFile = new ImageFile();
+            $imageFile->name = $fileName;
+            $imageFile->size = Storage::disk('public')->size("organizations/".$fileName);
+            $imageFile->mime = $mimeType;
+            $imageFile->path = $filePath;
+            $imageFile->thumbnail_name = $fileNameThumbnail;
+            $imageFile->thumbnail_size = Storage::disk('public')->size("organizations/".$fileNameThumbnail);
+            $imageFile->thumbnail_mime = $mimeType;
+            $imageFile->thumbnail_path = $filePathThumbnail;
+            $newOrganization->logo()->save($imageFile);
         }
         
         return redirect()->route('admin.organizations')->with('success','¡Organizacion creada!');
