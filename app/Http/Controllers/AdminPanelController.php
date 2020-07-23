@@ -8,9 +8,6 @@ use App\File;
 use App\User;
 use App\Objective;
 use Illuminate\Http\Request;
-use App\Http\Requests\CategoryRequest;
-use App\Http\Requests\OrganizationRequest;
-use App\Http\Requests\ObjectiveRequest;
 
 class AdminPanelController extends Controller
 {
@@ -41,7 +38,15 @@ class AdminPanelController extends Controller
     public function viewCreateCategory(Request $request){
         return view('admin.categories.create');
     }
-    public function formCreateCategory(CategoryRequest $request){
+    public function formCreateCategory(Request $request){
+        $rules = [
+            'title' => 'required|string|max:255' ,
+            'icon' => 'required|string|max:100',
+            'color' => 'required|string|max:100' ,
+        ];
+
+        $request->validate($rules);
+
         $category = new Category();
         $category->title = $request->input('title');
         $category->icon = $request->input('icon');
@@ -65,7 +70,13 @@ class AdminPanelController extends Controller
     public function viewCreateOrganization(Request $request){
         return view('admin.organizations.create');
     }
-    public function formCreateOrganization(OrganizationRequest $request){
+    public function formCreateOrganization(Request $request){
+        $rules = [
+            'name' => 'required|string|max:225',
+            'description' => 'required|string|max:550',
+            'logo' => 'image|nullable|max:1999'
+        ];
+        $request->validate($rules);
         
         // Handle data
         $newOrganization = new Organization();
@@ -138,7 +149,19 @@ class AdminPanelController extends Controller
         $organizations = Organization::all();
         return view('admin.objectives.create',['categories' => $categories, 'organizations' => $organizations]);
     }
-    public function formCreateObjectives(ObjectiveRequest $request){
+    public function formCreateObjectives(Request $request){
+
+        $rules = [
+            'title' => 'required|string|max:550' ,
+            'content' => 'required|string|max:2000',
+            'category' => 'required' ,
+            'tags' => 'array' ,
+            'tags.*' => 'required|string|max:100' ,
+            'organizations' => 'array' ,
+            'organizations.*' => 'required|numeric' ,
+        ];
+        $request->validate($rules);
+
         $category = Category::findOrFail($request->input('category'));
         $objective = new Objective();
         $objective->title = $request->input('title');
