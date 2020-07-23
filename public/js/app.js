@@ -2693,9 +2693,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['formUrl', 'crsfToken'],
@@ -2719,16 +2716,15 @@ __webpack_require__.r(__webpack_exports__);
       this.myCroppa.remove();
       this.dataUrl = null;
     },
-    handleCroppaFileChoose: function handleCroppaFileChoose() {},
     handleCroppaFileSizeExceed: function handleCroppaFileSizeExceed() {
       alert('Excede el tamaño maximo: 8MB');
     },
-    handleCroppaFileTypeMismatch: function handleCroppaFileTypeMismatch() {},
+    handleCroppaFileTypeMismatch: function handleCroppaFileTypeMismatch() {
+      alert('Tipo de archivo no soportado, utilice imagenes .jpg o .jpeg');
+    },
     handleImageRemove: function handleImageRemove() {
       this.dataUrl = null;
     },
-    handleCroppaMove: function handleCroppaMove() {},
-    handleCroppaZoom: function handleCroppaZoom() {},
     submit: function submit() {
       var _this = this;
 
@@ -70216,18 +70212,15 @@ var render = function() {
                 "placeholder-font-size": 12,
                 disabled: false,
                 "prevent-white-space": true,
-                "show-remove-button": true,
+                "show-remove-button": false,
                 "disable-click-to-choose": true,
                 "disable-rotation": true,
                 "zoom-speed": 7
               },
               on: {
-                "file-choose": _vm.handleCroppaFileChoose,
                 "file-size-exceed": _vm.handleCroppaFileSizeExceed,
                 "file-type-mismatch": _vm.handleCroppaFileTypeMismatch,
-                "image-remove": _vm.handleImageRemove,
-                move: _vm.handleCroppaMove,
-                zoom: _vm.handleCroppaZoom
+                "image-remove": _vm.handleImageRemove
               },
               model: {
                 value: _vm.myCroppa,

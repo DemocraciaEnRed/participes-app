@@ -15,16 +15,13 @@
           :placeholder-font-size="12"
           :disabled="false"
           :prevent-white-space="true"
-          :show-remove-button="true"
+          :show-remove-button="false"
           :disable-click-to-choose="true"
           :disable-rotation="true"
           :zoom-speed="7"
-          @file-choose="handleCroppaFileChoose"
           @file-size-exceed="handleCroppaFileSizeExceed"
           @file-type-mismatch="handleCroppaFileTypeMismatch"
           @image-remove="handleImageRemove"
-          @move="handleCroppaMove"
-          @zoom="handleCroppaZoom"
         ></croppa>
       </div>
       <img :src="dataUrl" class="rounded-circle img-thumbnail shadow mb-3" v-show="hasDataUrl" width="300" alt="">
@@ -96,23 +93,14 @@ export default {
       this.myCroppa.remove();
       this.dataUrl = null;
     },
-    handleCroppaFileChoose(){
-
-    },
     handleCroppaFileSizeExceed(){
       alert('Excede el tamaño maximo: 8MB')
     },
     handleCroppaFileTypeMismatch(){
-
+      alert('Tipo de archivo no soportado, utilice imagenes .jpg o .jpeg')
     },
     handleImageRemove(){
       this.dataUrl = null;
-    },
-    handleCroppaMove(){
-
-    },
-    handleCroppaZoom(){
-
     },
     submit() {
       if(!this.dataUrl) return true;
