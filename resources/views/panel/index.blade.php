@@ -7,18 +7,18 @@ $countUnreadNotifications = count(Auth::user()->unreadNotifications)
 @section('panelContent')
 
 <section>
-  <div class="jumbotron d-flex" style="background: url({{asset('img/default-background.png')}})">
+  <div class="jumbotron d-flex">
       <div class="mr-4">
       @include('utils.avatar',['avatar' => Auth::user()->avatar, 'size' => 125])
       </div>
       <div class="">
 
-    <h1 class="display-4 text-white">
+    <h1 class="display-4">
        ¡Hola, {{Auth::user()->name}}!</h1>
     @if($countUnreadNotifications > 0)
-      <p class="lead text-white">¡Tenes {{$countUnreadNotifications}} {{$countUnreadNotifications > 1 ? 'notificaciones' : 'notificación'}} pendientes de leer!</p>
+      <p class="lead">¡Tenes {{$countUnreadNotifications}} {{$countUnreadNotifications > 1 ? 'notificaciones' : 'notificación'}} pendientes de leer!</p>
     @else 
-      <p class="lead text-white">¡Que tengas buen dia!</p>
+      <p class="lead">¡Que tengas buen dia!</p>
     @endif
       </div>
   </div>

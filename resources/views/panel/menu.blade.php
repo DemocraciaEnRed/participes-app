@@ -4,7 +4,6 @@ $countUnreadNotifications = count(Auth::user()->unreadNotifications)
 @endphp
 
 
-<h5>Menu</h5>
 <ul class="list-unstyled">
 <li><a href="{{route('panel.index') }}" class="text-dark {{ $currentRoute == 'panel.index'  ? 'font-weight-bold' : null }}">Inicio</a></li>
 </ul>
