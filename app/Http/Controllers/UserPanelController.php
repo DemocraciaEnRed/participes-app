@@ -152,37 +152,6 @@ class UserPanelController extends Controller
             $user->avatar->save();
         }
         return response()->json(['message' => 'El avatar se subio correctamente'], 200);
-
-
-        // $image = Image::make(base64_encode($request->input('avatar')));
-        // echo $image->response('jpg', 70);  
-        // $meee = base64_decode($imgData);
-        // $data = getimagesizefromstring($meee);
-        // data($data);
-        // if($request->hasFile('avatar')){
-        //     $newFile = new Image();
-        //     // Get Extension
-        //     $extension = $request->file('avatar')->getClientOriginalExtension();
-        //     // Create New Name
-        //     $fileName = 'avatar-user-'.$user->id.'.'.$extension;
-        //     // Get Size
-        //     $fileSize = $request->file('avatar')->getSize();
-        //     // Get Mime Type
-        //     $mimeType = $request->file('avatar')->getClientMimeType();
-        //     // Save in storage/app/public/organizations
-        //     $filePath = $request->file('avatar')->storeAs('avatars', $fileName,'public');
-        //     $filePath = 'storage/'.$filePath;
-        //     error_log('Filepath: '. $filePath);
-        //     $newFile->name = $fileName;
-        //     $newFile->size = $fileSize;
-        //     $newFile->mime = $mimeType;
-        //     $newFile->path= $filePath;
-        //     $user->avatar()->save($newFile);
-        //     $user->save();
-            
-        // }
-        // return response()->json(['message' => 'Ocurrio un error procesando su avatar'], 500);
-        // return redirect()->route('panel.account.avatar')->with('success','Se guardo su nuevo avatar');
     }
 
     public function viewAccountAccess(Request $request){
