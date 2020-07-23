@@ -27,8 +27,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-        Blade::if('role', function ($roles) {
+        Blade::if('hasRole', function ($roles) {
             $user = auth()->user();
+            error_log($roles);
             if($user){
                 return $user->hasAnyRole($roles);
             } 
@@ -74,14 +75,6 @@ class AppServiceProvider extends ServiceProvider
             $user = auth()->user();
             if($user){
                 return $user->isReporterObjective($objectiveId);
-            } 
-            return false;
-        });
-
-        Blade::if('role', function ($objective) {
-            $user = auth()->user();
-            if($user){
-                return $user->isMemberObjective($objective);
             } 
             return false;
         });
