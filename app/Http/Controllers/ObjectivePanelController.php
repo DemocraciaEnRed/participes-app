@@ -279,8 +279,9 @@ class ObjectivePanelController extends Controller
       // $fileExtension = explode('/',$mimeType)[1];
       $fileExtension = 'jpg';
       // Create New Name
-      $fileName = 'cover-'.$request->objective->id.'-'.substr(uniqid(),-5).'.'.$fileExtension;
-      $fileNameThumbnail = 'cover-'.$request->objective->id.'-'.substr(uniqid(),-5).'-thumbnail.'.$fileExtension;
+      $uniqueHash = substr(uniqid(),-5);
+      $fileName = 'cover-'.$request->objective->id.'-'.$uniqueHash.'.'.$fileExtension;
+      $fileNameThumbnail = 'cover-'.$request->objective->id.'-'.$uniqueHash.'-thumbnail.'.$fileExtension;
       // Make the File path
       $filePath = 'storage/objectives/covers/'.$fileName;
       $filePathThumbnail = 'storage/objectives/covers/'.$fileNameThumbnail;

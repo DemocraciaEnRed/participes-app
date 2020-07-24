@@ -112,22 +112,23 @@ class UserPanelController extends Controller
         // $fileExtension = explode('/',$mimeType)[1];
         $fileExtension = 'jpg';
         // Create New Name
-        $fileName = 'avatar-user-'.$user->id.'-'.substr(uniqid(),-5).'.'.$fileExtension;
-        $fileNameThumbnail = 'avatar-user-'.$user->id.'-'.substr(uniqid(),-5).'-thumbnail.'.$fileExtension;
+        $uniqueHash = substr(uniqid(),-5);
+        $fileName = 'avatar-user-'.$user->id.'-'.$uniqueHash.'.'.$fileExtension;
+        $fileNameThumbnail = 'avatar-user-'.$user->id.'-'.$uniqueHash.'-thumbnail.'.$fileExtension;
         // Make the File path
         $filePath = 'storage/avatars/'.$fileName;
         $filePathThumbnail = 'storage/avatars/'.$fileNameThumbnail;
         if(is_null($user->avatar)){
             // User doesn't have avatar... Create File and create relationship
-            Storage::disk('public')->put("avatars/".$fileName, (string) $avatarImage->encode('jpg'));
-            Storage::disk('public')->put("avatars/".$fileNameThumbnail, (string) $avatarImageThumbnail->encode('jpg'));
+            Storage::disk('avatars')->put($fileName, (string) $avatarImage->encode('jpg'));
+            Storage::disk('avatars')->put($fileNameThumbnail, (string) $avatarImageThumbnail->encode('jpg'));
             $imageFile = new ImageFile();
             $imageFile->name = $fileName;
-            $imageFile->size = Storage::disk('public')->size("avatars/".$fileName);
+            $imageFile->size = Storage::disk('avatars')->size($fileName);
             $imageFile->mime = $mimeType;
             $imageFile->path = $filePath;
             $imageFile->thumbnail_name = $fileNameThumbnail;
-            $imageFile->thumbnail_size = Storage::disk('public')->size("avatars/".$fileNameThumbnail);
+            $imageFile->thumbnail_size = Storage::disk('avatars')->size($fileNameThumbnail);
             $imageFile->thumbnail_mime = $mimeType;
             $imageFile->thumbnail_path = $filePathThumbnail;
             $user->avatar()->save($imageFile);
@@ -135,18 +136,18 @@ class UserPanelController extends Controller
             // User has avatar...
             // First, delete existing avatar
             $deletePath = Str::replaceFirst('storage/', '', $user->avatar->path);
-            Storage::disk('public')->delete($deletePath);
+            Storage::disk('avatars')->delete($deletePath);
             $deletePath = Str::replaceFirst('storage/', '', $user->avatar->thumbnail_path);
-            Storage::disk('public')->delete($deletePath);
+            Storage::disk('avatars')->delete($deletePath);
             // Create File and update relationship
-            Storage::disk('public')->put("avatars/".$fileName, (string) $avatarImage->encode('jpg'));
-            Storage::disk('public')->put("avatars/".$fileNameThumbnail, (string) $avatarImageThumbnail->encode('jpg'));
+            Storage::disk('avatars')->put($fileName, (string) $avatarImage->encode('jpg'));
+            Storage::disk('avatars')->put($fileNameThumbnail, (string) $avatarImageThumbnail->encode('jpg'));
             $user->avatar->name = $fileName;
             $user->avatar->size = Storage::disk('public')->size("avatars/".$fileName);
             $user->avatar->mime = $mimeType;
             $user->avatar->path = $filePath;
             $user->avatar->thumbnail_name = $fileNameThumbnail;
-            $user->avatar->thumbnail_size = Storage::disk('public')->size("avatars/".$fileNameThumbnail);
+            $user->avatar->thumbnail_size = Storage::disk('avatars')->size($fileNameThumbnail);
             $user->avatar->thumbnail_mime = $mimeType;
             $user->avatar->thumbnail_path = $filePathThumbnail;
             $user->avatar->save();
