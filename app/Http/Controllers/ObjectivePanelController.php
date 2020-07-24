@@ -257,8 +257,10 @@ class ObjectivePanelController extends Controller
     } 
 
     public function formObjectiveCover (Request $request){
+      $this->hasManagerPrivileges($request);
+
       $rules = [
-          'image' => 'image|nullable|max:8000'
+          'image' => 'required|image|max:8000'
       ];
       $request->validate($rules);
       $cover = Image::make($request->file('image'));
@@ -283,26 +285,26 @@ class ObjectivePanelController extends Controller
       $filePath = 'storage/objectives/covers/'.$fileName;
       $filePathThumbnail = 'storage/objectives/covers/'.$fileNameThumbnail;
       if(is_null($request->objective->cover)){
-        Storage::disk('public')->put("objectives/covers/".$fileName, (string) $cover->encode('jpg'));
-        Storage::disk('public')->put("objectives/covers/".$fileNameThumbnail, (string) $coverThumbnail->encode('jpg',80));
+        Storage::disk('objectives')->put("covers/".$fileName, (string) $cover->encode('jpg'));
+        Storage::disk('objectives')->put("covers/".$fileNameThumbnail, (string) $coverThumbnail->encode('jpg',80));
         $imageFile = new ImageFile();
         $imageFile->name = $fileName;
-        $imageFile->size = Storage::disk('public')->size("objectives/covers/".$fileName);
+        $imageFile->size = Storage::disk('objectives')->size("covers/".$fileName);
         $imageFile->mime = $mimeType;
         $imageFile->path = $filePath;
         $imageFile->thumbnail_name = $fileNameThumbnail;
-        $imageFile->thumbnail_size = Storage::disk('public')->size("objectives/covers/".$fileNameThumbnail);
+        $imageFile->thumbnail_size = Storage::disk('objectives')->size("covers/".$fileNameThumbnail);
         $imageFile->thumbnail_mime = $mimeType;
         $imageFile->thumbnail_path = $filePathThumbnail;
         $request->objective->cover()->save($imageFile);
       } else {
           $deletePath = Str::replaceFirst('storage/', '', $request->objective->cover->path);
-          Storage::disk('public')->delete($deletePath);
+          Storage::disk('objectives')->delete($deletePath);
           $deletePath = Str::replaceFirst('storage/', '', $request->objective->cover->thumbnail_path);
-          Storage::disk('public')->delete($deletePath);
+          Storage::disk('objectives')->delete($deletePath);
           // Create File and update relationship
-          Storage::disk('public')->put("objectives/covers/".$fileName, (string) $cover->encode('jpg'));
-          Storage::disk('public')->put("objectives/covers/".$fileNameThumbnail, (string) $coverThumbnail->encode('jpg'));
+          Storage::disk('objectives')->put("covers/".$fileName, (string) $cover->encode('jpg'));
+          Storage::disk('objectives')->put("covers/".$fileNameThumbnail, (string) $coverThumbnail->encode('jpg'));
           $request->objective->cover->name = $fileName;
           $request->objective->cover->size = Storage::disk('public')->size("objectives/covers/".$fileName);
           $request->objective->cover->mime = $mimeType;
@@ -318,10 +320,40 @@ class ObjectivePanelController extends Controller
     } 
 
     public function viewObjectiveFiles (Request $request){
-      return view('objective.manage.files', ['objective' => $request->objective]);
+      $files = $request->objective->files()->paginate(10);
+      return view('objective.manage.files', ['objective' => $request->objective, 'files' => $files]);
     } 
 
     public function formObjectiveFile (Request $request){
+      $this->hasManagerPrivileges($request);
+
+      $rules = [
+          'files' => 'required|array',
+          'files.*' => 'required|file|max:102400'
+      ];
+      $request->validate($rules);
+
+      foreach($request->file('files') as $file){
+        $fileName = 'obj-'.$request->objective->id.'-'.$file->getClientOriginalName();
+        $exists = Storage::disk('objectives')->exists('files/'.$fileName);
+        $filePath = $file->storeAs('files',$fileName, 'objectives');
+        if($exists){
+          $existingFile = File::where('name',$fileName)->first();
+          $existingFile->name = $fileName;
+          $existingFile->size = $file->getSize();
+          $existingFile->mime = $file->getMimeType();
+          $existingFile->path = 'storage/objectives/'.$filePath;
+          $existingFile->save();
+        } else {
+          $saveFile = new File();
+          $saveFile->name = $fileName;
+          $saveFile->size = $file->getSize();
+          $saveFile->mime = $file->getMimeType();
+          $saveFile->path = 'storage/objectives/'.$filePath;
+          $request->objective->files()->save($saveFile);
+        }
+      }
+
       return redirect()->route('objective.manage.files', ['objId' => $request->objective->id])->with('success','Se agrego el archivo al repositorio del objetivo');
     } 
 

@@ -45,7 +45,7 @@ class Objective extends Model
 
     public function files()
     {
-        return $this->morphMany('App\Files','fileable');
+        return $this->morphMany('App\File','fileable');
     }
     
     public function events()

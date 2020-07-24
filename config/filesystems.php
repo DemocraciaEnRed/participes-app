@@ -54,6 +54,30 @@ return [
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
+        'avatars' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/avatars'),
+            'url' => env('APP_URL').'/storage/avatars',
+            'visibility' => 'public',
+        ],
+        'objectives' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/objectives'),
+            'url' => env('APP_URL').'/storage/objectives',
+            'visibility' => 'public',
+        ],
+        'organizations' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/organizations'),
+            'url' => env('APP_URL').'/storage/organizations',
+            'visibility' => 'public',
+        ],
+        'reports' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/reports'),
+            'url' => env('APP_URL').'/storage/reports',
+            'visibility' => 'public',
+        ],
 
         's3' => [
             'driver' => 's3',
