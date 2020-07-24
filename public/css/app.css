@@ -11452,6 +11452,47 @@ a.text-dark:focus {
   color: #000;
 }
 
+.custom-file-label::after {
+  content: "\F002";
+  font-family: FontAwesome;
+}
+
+.is-100 {
+  font-weight: 100;
+}
+
+.is-200 {
+  font-weight: 200;
+}
+
+.is-300 {
+  font-weight: 300;
+}
+
+.is-400 {
+  font-weight: 400;
+}
+
+.is-500 {
+  font-weight: 500;
+}
+
+.is-600 {
+  font-weight: 600;
+}
+
+.is-700 {
+  font-weight: 700;
+}
+
+.is-800 {
+  font-weight: 800;
+}
+
+.is-900 {
+  font-weight: 900;
+}
+
 .is-clickable:hover {
   cursor: pointer;
 }
@@ -11462,6 +11503,17 @@ a.text-dark:focus {
 
 .text-smallest {
   font-size: 0.65rem;
+}
+
+.has-background-image {
+  background-size: cover;
+  background-position: center center;
+}
+
+.has-background-image > .jumbotron {
+  background: #ced4da;
+  background: linear-gradient(45deg, #1477f8 0%, rgba(5, 5, 5, 0.75) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="$primary",endColorstr="#050505",GradientType=1);
 }
 
 .custom-control.custom-checkbox.form-check-inline {

@@ -3,13 +3,10 @@
 @section('panelContent')
 
 <section>
-  <div class="jumbotron d-flex">
-    {{-- <div class="mr-4">
-      @include('utils.avatar',['avatar' => Auth::user()->avatar, 'size' => 125])
-    </div> --}}
-    <div class="">
-      <h6 class="display-4">{{$objective->title}}</h6>
-      <p class="lead">¡Bienvenido al panel de control del objetivo!</p>
+  <div class="{{ !$objective->cover ?: 'has-background-image rounded'}}" style="{{!$objective->cover ?: 'background-image: url('.asset($objective->cover->thumbnail_path).')'}}">
+    <div class="jumbotron rounded">
+      <h2 class="is-300 {{ !$objective->cover ?: 'text-white'}}">{{$objective->title}}</h2>
+      <p class="lead {{ !$objective->cover ?: 'text-white'}}">¡Bienvenido al panel de control del objetivo!</p>
     </div>
   </div>
   @if($objective->hidden)

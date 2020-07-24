@@ -1,3 +1,17 @@
+//==========================
+
+@mixin font-weight($weight) {
+  font-weight: $weight;
+}
+
+//==========================
+
+@for $i from 1 through 9 {
+  .is-#{100 * $i} {
+    @include font-weight(100 * $i)
+  }
+}
+
 .is-clickable:hover{
   cursor: pointer;
 }
@@ -6,6 +20,18 @@
 }
 .text-smallest{
   font-size: 0.65rem;
+}
+
+.has-background-image{
+  background-size: cover;
+  background-position: center center;
+  & > .jumbotron {
+    background: $light;
+    background: -moz-linear-gradient(45deg, $primary 0%, rgba(5,5,5,0.75) 100%);
+    background: -webkit-linear-gradient(45deg, $primary 0%, #050505bf 100%);
+    background: linear-gradient(45deg, $primary 0%, rgba(5,5,5,0.75) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="$primary",endColorstr="#050505",GradientType=1);
+  }
 }
 
 .custom-control.custom-checkbox.form-check-inline{

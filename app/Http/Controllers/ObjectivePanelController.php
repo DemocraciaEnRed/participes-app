@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 use Notification;
-
+use Image;
+use Storage;
+use Str;
 use App\Category;
 use App\Organization;
 use App\Role;
 use App\File;
+use App\ImageFile;
 use App\User;
 use App\Objective;
 use App\Goal;
@@ -254,6 +257,63 @@ class ObjectivePanelController extends Controller
     } 
 
     public function formObjectiveCover (Request $request){
+      $rules = [
+          'image' => 'image|nullable|max:8000'
+      ];
+      $request->validate($rules);
+      $cover = Image::make($request->file('image'));
+      $cover->resize(1366, null, function ($constraint) {
+          $constraint->aspectRatio();
+          $constraint->upsize();
+      });
+      $coverThumbnail = Image::make($request->file('image'));
+      $coverThumbnail->resize(500, null, function ($constraint) {
+          $constraint->aspectRatio();
+          $constraint->upsize();
+      });
+      // Get mimeType
+      $mimeType = $cover->mime();
+      // Get Extension
+      // $fileExtension = explode('/',$mimeType)[1];
+      $fileExtension = 'jpg';
+      // Create New Name
+      $fileName = 'cover-'.$request->objective->id.'-'.substr(uniqid(),-5).'.'.$fileExtension;
+      $fileNameThumbnail = 'cover-'.$request->objective->id.'-'.substr(uniqid(),-5).'-thumbnail.'.$fileExtension;
+      // Make the File path
+      $filePath = 'storage/objectives/covers/'.$fileName;
+      $filePathThumbnail = 'storage/objectives/covers/'.$fileNameThumbnail;
+      if(is_null($request->objective->cover)){
+        Storage::disk('public')->put("objectives/covers/".$fileName, (string) $cover->encode('jpg'));
+        Storage::disk('public')->put("objectives/covers/".$fileNameThumbnail, (string) $coverThumbnail->encode('jpg',80));
+        $imageFile = new ImageFile();
+        $imageFile->name = $fileName;
+        $imageFile->size = Storage::disk('public')->size("objectives/covers/".$fileName);
+        $imageFile->mime = $mimeType;
+        $imageFile->path = $filePath;
+        $imageFile->thumbnail_name = $fileNameThumbnail;
+        $imageFile->thumbnail_size = Storage::disk('public')->size("objectives/covers/".$fileNameThumbnail);
+        $imageFile->thumbnail_mime = $mimeType;
+        $imageFile->thumbnail_path = $filePathThumbnail;
+        $request->objective->cover()->save($imageFile);
+      } else {
+          $deletePath = Str::replaceFirst('storage/', '', $request->objective->cover->path);
+          Storage::disk('public')->delete($deletePath);
+          $deletePath = Str::replaceFirst('storage/', '', $request->objective->cover->thumbnail_path);
+          Storage::disk('public')->delete($deletePath);
+          // Create File and update relationship
+          Storage::disk('public')->put("objectives/covers/".$fileName, (string) $cover->encode('jpg'));
+          Storage::disk('public')->put("objectives/covers/".$fileNameThumbnail, (string) $coverThumbnail->encode('jpg'));
+          $request->objective->cover->name = $fileName;
+          $request->objective->cover->size = Storage::disk('public')->size("objectives/covers/".$fileName);
+          $request->objective->cover->mime = $mimeType;
+          $request->objective->cover->path = $filePath;
+          $request->objective->cover->thumbnail_name = $fileNameThumbnail;
+          $request->objective->cover->thumbnail_size = Storage::disk('public')->size("objectives/covers/".$fileNameThumbnail);
+          $request->objective->cover->thumbnail_mime = $mimeType;
+          $request->objective->cover->thumbnail_path = $filePathThumbnail;
+          $request->objective->cover->save();
+      }
+      // Save Logo
       return redirect()->route('objective.manage.cover', ['objId' => $request->objective->id])->with('success','Se actualizó la imagen de portada del objetivo');
     } 
 
