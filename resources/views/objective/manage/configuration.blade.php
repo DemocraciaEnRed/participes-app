@@ -26,7 +26,7 @@
     <li>Miembros del equipo pueden crear reportes, pero los suscriptores no serán notificados</li>
     <li>Coordinadores pueden seguir creando metas.</li>
   </ul>
-  <form action="{{ route('objective.manage.configuration.form',['objId' => $objective->id]) }}" method="POST">
+  <form action="{{ route('objective.manage.configuration.form',['objectiveId' => $objective->id]) }}" method="POST">
     @method('PUT')
     @csrf
     <div class="form-group">

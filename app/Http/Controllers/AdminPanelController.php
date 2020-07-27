@@ -189,6 +189,6 @@ class AdminPanelController extends Controller
         $objective->hidden = true;
         $objective->save();
         $objective->organizations()->attach($request->input('organizations'));
-        return redirect()->route('objective.manage.index',['objId' => $objective->id])->with('success','¡Nuevo objetivo creado! Ahora le toca configurar el objetivo');
+        return redirect()->route('objective.manage.index',['objectiveId' => $objective->id])->with('success','¡Nuevo objetivo creado! Ahora le toca configurar el objetivo');
     }
 }

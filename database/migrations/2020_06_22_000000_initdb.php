@@ -172,6 +172,13 @@ class InitDB extends Migration
             $table->timestamps();
             $table->softDeletes('deleted_at', 0);
         });
+        Schema::create('testimonies', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('report_id')->constrained('reports');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->boolean('value');
+            $table->timestamps();
+        });
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->foreignId('author_id')->constrained('users');

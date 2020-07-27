@@ -3,9 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Objective;
+use App\Report;
 
-class FetchObjective
+class FetchReport
 {
     /**
      * Handle an incoming request.
@@ -16,8 +16,8 @@ class FetchObjective
      */
     public function handle($request, Closure $next)
     {
-        $objectiveId = $request->route()->parameter('objectiveId');
-        $request->objective = Objective::findorfail($objectiveId);
+        $reportId = $request->route()->parameter('reportId');
+        $request->report = Report::findorfail($reportId);
         return $next($request);
     }
 }

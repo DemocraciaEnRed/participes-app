@@ -3,9 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Objective;
 
-class FetchObjective
+class ReportBelongsGoal
 {
     /**
      * Handle an incoming request.
@@ -15,9 +14,12 @@ class FetchObjective
      * @return mixed
      */
     public function handle($request, Closure $next)
-    {
-        $objectiveId = $request->route()->parameter('objectiveId');
-        $request->objective = Objective::findorfail($objectiveId);
-        return $next($request);
+    {   
+        $reportId = $request->route()->parameter('reportId');
+        if($request->goal->hasReport($reportId)){
+          return $next($request);
+        } else {
+          abort(404, 'El reporte no pertenece a la meta');
+        }
     }
 }

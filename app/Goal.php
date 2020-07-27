@@ -31,4 +31,8 @@ class Goal extends Model
     {
         return $this->hasMany('App\Report','goal_id');
     }
+
+    public function hasReport($reportId){
+        return $this->reports()->where('id', $reportId)->exists();
+    }
 }

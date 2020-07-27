@@ -30,6 +30,8 @@ class GoalPanelController extends Controller
         // Forces to be authenticated.
         $this->middleware('auth');
         $this->middleware('fetch_objective');
+        $this->middleware('goal_belongs_objective');
+        $this->middleware('fetch_goal');
         $this->middleware('can_manage_objective');
     }
 
@@ -40,23 +42,20 @@ class GoalPanelController extends Controller
       return;
     }
 
-    public function viewGoal(Request $request, $objId, $goalId){
-      $goal = Goal::findorfail($goalId);
-      return view('objective.manage.goals.view',['objective' => $request->objective, 'goal' => $goal]);
+    public function viewGoal(Request $request, $objectiveId, $goalId){    
+      return view('objective.manage.goals.view',['objective' => $request->objective, 'goal' => $request->goal]);
     }
 
-    public function viewListGoalMilestones(Request $request, $objId, $goalId){
-      $goal = Goal::findorfail($goalId);
-      return view('objective.manage.goals.milestones.list',['objective' => $request->objective, 'goal' => $goal]);
+    public function viewListGoalMilestones(Request $request, $objectiveId, $goalId){
+      return view('objective.manage.goals.milestones.list',['objective' => $request->objective, 'goal' => $request->goal]);
     }
 
-    public function viewAddGoalMilestone(Request $request, $objId, $goalId){
+    public function viewAddGoalMilestone(Request $request, $objectiveId, $goalId){
       $this->hasManagerPrivileges($request);
-      $goal = Goal::findorfail($goalId);
-      return view('objective.manage.goals.milestones.add',['objective' => $request->objective, 'goal' => $goal]);
+      return view('objective.manage.goals.milestones.add',['objective' => $request->objective, 'goal' => $request->goal]);
     }
 
-    public function formAddGoalMilestone(Request $request, $objId, $goalId){
+    public function formAddGoalMilestone(Request $request, $objectiveId, $goalId){
       $this->hasManagerPrivileges($request);
 
       $rules = [
@@ -65,7 +64,7 @@ class GoalPanelController extends Controller
 
       $request->validate($rules);
 
-      $goal = Goal::findorfail($goalId);
+      $goal = $request->goal;
       $lastMilestone = Milestone::where('goal_id', $goalId)->orderBy('order', 'desc')->first();
       $milestone = new Milestone();
       $milestone->order = $lastMilestone->order + 1;
@@ -73,22 +72,22 @@ class GoalPanelController extends Controller
       $milestone->goal()->associate($goal);
       $milestone->save();
       
-      return redirect()->route('objective.manage.goals.milestones', ['objId' => $request->objective->id, 'goalId' => $goal->id])->with('success','Hito creado');
+      return redirect()->route('objective.manage.goals.milestones', ['objectiveId' => $request->objective->id, 'goalId' => $goal->id])->with('success','Hito creado');
     }
 
-    public function viewListGoalReports(Request $request, $objId, $goalId){
-      $goal = Goal::findorfail($goalId);
+    public function viewListGoalReports(Request $request, $objectiveId, $goalId){
+      $goal = $request->goal;
       $reports = Report::where('goal_id',$goalId)->orderBy('date','DESC')->paginate(10);
-      return view('objective.manage.goals.reports.list',['objective' => $request->objective, 'goal' => $goal, 'reports' => $reports]);
+      return view('objective.manage.goals.reports.list',['objective' => $request->objective, 'goal' => $request->goal, 'reports' => $reports]);
     }
 
-    public function viewNewGoalReport(Request $request, $objId, $goalId){
+    public function viewNewGoalReport(Request $request, $objectiveId, $goalId){
       $this->hasManagerPrivileges($request);
-      $goal = Goal::findorfail($goalId);
-      return view('objective.manage.goals.reports.add',['objective' => $request->objective, 'goal' => $goal]);
+      $goal = $request->goal;
+      return view('objective.manage.goals.reports.add',['objective' => $request->objective, 'goal' => $request->goal]);
     }
 
-    public function formNewGoalReport(Request $request, $objId, $goalId){
+    public function formNewGoalReport(Request $request, $objectiveId, $goalId){
       $this->hasManagerPrivileges($request);
      
       $rules = [
@@ -112,7 +111,7 @@ class GoalPanelController extends Controller
 
       $request->validate($rules);
      
-      $goal = Goal::findorfail($goalId);
+      $goal = $request->goal;
       $goalDirty = false;
       $milestoneDirty = false;
 
@@ -213,7 +212,7 @@ class GoalPanelController extends Controller
         Notification::locale('es')->send($request->objective->subscribers, new NewReport($request->objective, $goal, $report));
       }
       
-      return redirect()->route('objective.manage.goals.reports.index', ['objId' => $request->objective->id, 'goalId' => $goal->id,'reportId' => $report->id])->with('success','El reporte fue creado con exito');
+      return redirect()->route('objective.manage.goals.reports.index', ['objectiveId' => $request->objective->id, 'goalId' => $goal->id,'reportId' => $report->id])->with('success','El reporte fue creado con exito');
     }
 
 }

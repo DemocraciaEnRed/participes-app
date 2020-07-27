@@ -15,7 +15,7 @@
         </ul>
     </div>
   @endif
-  <form method="POST" action="{{ route('objective.manage.goals.milestones.add.form',['objId' => $objective->id, 'goalId' => $goal->id]) }}">
+  <form method="POST" action="{{ route('objective.manage.goals.milestones.add.form',['objectiveId' => $objective->id, 'goalId' => $goal->id]) }}">
     @csrf
     <div class="form-group">
       <label>Defina el hito</label>

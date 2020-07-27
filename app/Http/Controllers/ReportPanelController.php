@@ -30,6 +30,10 @@ class ReportPanelController extends Controller
         // Forces to be authenticated.
         $this->middleware('auth');
         $this->middleware('fetch_objective');
+        $this->middleware('goal_belongs_objective');
+        $this->middleware('fetch_goal');
+        $this->middleware('report_belongs_goal');
+        $this->middleware('fetch_report');
         $this->middleware('can_manage_objective');
     }
 
@@ -40,9 +44,8 @@ class ReportPanelController extends Controller
       return;
     }
 
-    public function viewReport(Request $request, $objId, $goalId, $reportId){
-      $goal = Goal::findorfail($goalId);
-      $report = Report::findorfail($reportId);
-      return view('objective.manage.goals.reports.view',['objective' => $request->objective, 'goal' => $goal, 'report' => $report]);
+    public function viewReport(Request $request, $objectiveId, $goalId, $reportId){
+
+      return view('objective.manage.goals.reports.view',['objective' => $request->objective, 'goal' => $request->goal, 'report' => $request->report]);
     }
 }
