@@ -13,14 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/bladeTest', 'HomeController@bladeTest')->name('bladeTest');
 
 Auth::routes(['verify' => true]);
-
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/bladeTest', 'HomeController@bladeTest')->name('bladeTest');
 
 Route::group([
     'as' => 'panel.', 
@@ -111,17 +107,17 @@ Route::group([
         Route::get('/metas', 'ObjectivePanelController@viewListGoals')->name('goals');
         Route::get('/metas/nuevo', 'ObjectivePanelController@viewAddGoal')->name('goals.add');
         Route::post('/metas/nuevo', 'ObjectivePanelController@formAddGoal')->name('goals.add.form');
-        Route::get('/metas/{goalId}', 'ObjectivePanelController@viewGoal')->name('goals.index');
+        Route::get('/metas/{goalId}', 'GoalPanelController@viewGoal')->name('goals.index');
         // Hitos
-        Route::get('/metas/{goalId}/hitos', 'ObjectivePanelController@viewListGoalMilestones')->name('goals.milestones');
-        Route::get('/metas/{goalId}/hitos/nuevo', 'ObjectivePanelController@viewAddGoalMilestone')->name('goals.milestones.add');
-        Route::post('/metas/{goalId}/hitos/nuevo', 'ObjectivePanelController@formAddGoalMilestone')->name('goals.milestones.add.form');
+        Route::get('/metas/{goalId}/hitos', 'GoalPanelController@viewListGoalMilestones')->name('goals.milestones');
+        Route::get('/metas/{goalId}/hitos/nuevo', 'GoalPanelController@viewAddGoalMilestone')->name('goals.milestones.add');
+        Route::post('/metas/{goalId}/hitos/nuevo', 'GoalPanelController@formAddGoalMilestone')->name('goals.milestones.add.form');
         // Reporte
-        Route::get('/metas/{goalId}/reportes', 'ObjectivePanelController@viewListGoalReports')->name('goals.reports');
-        Route::get('/metas/{goalId}/reportes/nuevo', 'ObjectivePanelController@viewNewGoalReport')->name('goals.reports.add');
-        Route::post('/metas/{goalId}/reportes/nuevo', 'ObjectivePanelController@formNewGoalReport')->name('goals.reports.add.form');
-        Route::get('/metas/{goalId}/reportes/{reportId}', 'ObjectivePanelController@viewListGoalReports')->name('goals.reports.index');
-        Route::get('/metas/{goalId}/reportes/{reportId}/album', 'ObjectivePanelController@viewAlbumReport')->name('goals.reports.album');
+        Route::get('/metas/{goalId}/reportes', 'GoalPanelController@viewListGoalReports')->name('goals.reports');
+        Route::get('/metas/{goalId}/reportes/nuevo', 'GoalPanelController@viewNewGoalReport')->name('goals.reports.add');
+        Route::post('/metas/{goalId}/reportes/nuevo', 'GoalPanelController@formNewGoalReport')->name('goals.reports.add.form');
+        Route::get('/metas/{goalId}/reportes/{reportId}', 'ReportPanelController@viewReport')->name('goals.reports.index');
+        Route::get('/metas/{goalId}/reportes/{reportId}/album', 'ReportPanelController@viewAlbumReport')->name('goals.reports.album');
         // Administracion
         Route::get('/configuracion', 'ObjectivePanelController@viewObjectiveConfiguration')->name('configuration');
         Route::put('/configuracion', 'ObjectivePanelController@formObjectiveConfiguration')->name('configuration.form');

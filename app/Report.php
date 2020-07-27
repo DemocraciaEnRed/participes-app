@@ -52,9 +52,9 @@ class Report extends Model
         return $this->morphMany('App\File','fileable');
     }
 
-    public function pictures()
+    public function photos()
     {
-        return $this->morphMany('App\ImageFiles','imageable');
+        return $this->morphMany('App\ImageFile','imageable');
     }
 
     public function testimonies()

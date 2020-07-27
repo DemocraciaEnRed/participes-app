@@ -118,124 +118,6 @@ class ObjectivePanelController extends Controller
       return redirect()->route('objective.manage.goals.index', ['objId' => $request->objective->id, 'goalId' => $goal->id])->with('success','Meta creada');
     }
 
-    public function viewGoal(Request $request, $objId, $goalId){
-      $goal = Goal::findorfail($goalId);
-      return view('objective.manage.goals.view',['objective' => $request->objective, 'goal' => $goal]);
-    }
-
-    public function viewListGoalMilestones(Request $request, $objId, $goalId){
-      $goal = Goal::findorfail($goalId);
-      return view('objective.manage.goals.milestones.list',['objective' => $request->objective, 'goal' => $goal]);
-    }
-
-    public function viewAddGoalMilestone(Request $request, $objId, $goalId){
-      $this->hasManagerPrivileges($request);
-      $goal = Goal::findorfail($goalId);
-      return view('objective.manage.goals.milestones.add',['objective' => $request->objective, 'goal' => $goal]);
-    }
-
-    public function formAddGoalMilestone(Request $request, $objId, $goalId){
-      $this->hasManagerPrivileges($request);
-
-      $rules = [
-        'title' => 'required|string|max:550',
-      ];
-
-      $request->validate($rules);
-
-      $goal = Goal::findorfail($goalId);
-      $lastMilestone = Milestone::where('goal_id', $goalId)->orderBy('order', 'desc')->first();
-      $milestone = new Milestone();
-      $milestone->order = $lastMilestone->order + 1;
-      $milestone->title = $request->input('title');
-      $milestone->goal()->associate($goal);
-      $milestone->save();
-      
-      return redirect()->route('objective.manage.goals.milestones', ['objId' => $request->objective->id, 'goalId' => $goal->id])->with('success','Hito creado');
-    }
-
-    public function viewListGoalReports(Request $request, $objId, $goalId){
-      $goal = Goal::findorfail($goalId);
-      $reports = Report::where('goal_id',$goalId)->orderBy('date','DESC')->paginate(10);
-      return view('objective.manage.goals.reports.list',['objective' => $request->objective, 'goal' => $goal, 'reports' => $reports]);
-    }
-
-    public function viewNewGoalReport(Request $request, $objId, $goalId){
-      $this->hasManagerPrivileges($request);
-      $goal = Goal::findorfail($goalId);
-      return view('objective.manage.goals.reports.add',['objective' => $request->objective, 'goal' => $goal]);
-    }
-
-    public function formNewGoalReport(Request $request, $objId, $goalId){
-      $this->hasManagerPrivileges($request);
-     
-      $rules = [
-        'title' => 'required|string|max:550',
-        'type' => 'required|string|in:post,progress,milestone',
-        'content' => 'required|string',
-        'date' => 'required|date',
-        'status' => 'nullable|string|max:550',
-        'lat' => 'nullable|string',
-        'long' => 'nullable|string',
-        'progress' => 'integer|min:1',
-        'milestone_date' => 'nullable|date',
-        'milestone' => 'integer',
-        'tags' => 'array' ,
-        'tags.*' => 'required|string|max:100' ,
-      ];
-
-      $request->validate($rules);
-     
-      $goal = Goal::findorfail($goalId);
-      $goalDirty = false;
-      $milestoneDirty = false;
-
-      $report = new Report();
-      $report->title = $request->input('title');
-      $report->type = $request->input('type');
-      $report->content = $request->input('content');
-      $report->date = $request->input('date');
-      $report->tags = $request->input('tags');
-      if(!empty($request->input('status'))){
-        $report->status = $request->input('status');
-        $goal->status = $request->input('status');
-        $goalDirty = true;
-      }
-      switch($request->input('type')){
-        case 'post':
-          break;
-        case 'progress':
-          $report->progress = $request->input('progress');
-          $goal->indicator_progress += intval($request->input('progress'));
-          $goalDirty = true;
-          break;
-        case 'milestone':
-          $milestone = Milestone::findorfail($request->input('milestone'));
-          
-          if(!empty($request->input('milestone_date'))){
-            $milestone->completed = $request->input('milestone_date');
-          } else {
-            $milestone->completed = $request->input('date');
-          }
-          $milestoneDirty = true;
-          $report->milestone()->associate($milestone);
-          break;
-      }
-      if($goalDirty){
-        $goal->save();
-      }
-      if($milestoneDirty){
-        $milestone->save();
-      }
-      $report->author()->associate($request->user());
-      $report->goal()->associate($goal);
-      $report->save();
-      
-      // Notify
-      Notification::locale('es_AR')->send($request->objective->subscribers, new NewReport($request->objective, $goal, $report));
-
-      return redirect()->route('objective.manage.goals.index', ['objId' => $request->objective->id, 'goalId' => $goal->id])->with('success','Reporte creado');
-    }
 
 
     public function viewObjectiveConfiguration (Request $request){
@@ -335,19 +217,19 @@ class ObjectivePanelController extends Controller
       $request->validate($rules);
 
       foreach($request->file('files') as $file){
-        $fileName = 'obj-'.$request->objective->id.'-'.$file->getClientOriginalName();
+        $fileName = 'report-'.$request->objective->id.'-'.$file->getClientOriginalName();
         $exists = Storage::disk('objectives')->exists('files/'.$fileName);
         $filePath = $file->storeAs('files',$fileName, 'objectives');
         if($exists){
           $existingFile = File::where('name',$fileName)->first();
-          $existingFile->name = $fileName;
+          $existingFile->name = $file->getClientOriginalName();
           $existingFile->size = $file->getSize();
           $existingFile->mime = $file->getMimeType();
           $existingFile->path = 'storage/objectives/'.$filePath;
           $existingFile->save();
         } else {
           $saveFile = new File();
-          $saveFile->name = $fileName;
+          $saveFile->name = $file->getClientOriginalName();
           $saveFile->size = $file->getSize();
           $saveFile->mime = $file->getMimeType();
           $saveFile->path = 'storage/objectives/'.$filePath;

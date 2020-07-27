@@ -1,5 +1,5 @@
 <template>
-  <form :action="formUrl" method="POST">
+  <form :action="formUrl" method="POST" enctype="multipart/form-data">
 				<h5 class="text-center mb-4 animate__animated animate__flash animate__slow">¿Que tipo de reporte va a crear?</h5>
 		<ul class="nav nav-tabs justify-content-center">
 			<li class="nav-item">
@@ -32,8 +32,8 @@
 			</div>
 			<div class="form-group">
       	<label>Descripción del objetivo</label>
-      	<!-- <textarea name="content" class="form-control" rows="4"></textarea> -->
-				<text-editor name="content"/>
+      	<textarea name="content" class="form-control" rows="4"></textarea>
+				<!-- <text-editor name="content"/> -->
     	</div>
 			<div class="form-group">
 				<label>Tags del reporte</label>
@@ -124,6 +124,16 @@
 					</div>
 				</div>
 			</section>
+			<div class="form-group">
+				<label>Album de fotos del reporte</label>
+				<p class="form-text text-muted">Las fotos se verán en formato de album. En el reporte, tendran su previsualización. Ingrese solamente archivos en formato .JPG, .JPEG o .PNG, </p>
+				<input-file name="photos[]" multiple accept="image/*"></input-file>
+			</div>
+			<div class="form-group">
+				<label>Repositorio de archivos del reporte</label>
+				<p class="form-text text-muted">Nota: A diferencia de las fotos del reporte, estas no se presentan con previsualizaciones.</p>
+				<input-file name="files[]" multiple></input-file>
+			</div>
 			<br>
 			<div class="form-group">
 				<input type="hidden" name="_token" :value="crsfToken" />
@@ -134,14 +144,16 @@
 </template>
 
 <script>
-import debounce from "lodash/debounce";
-import TextEditor from "./inputs/TextEditor.vue"
+// import debounce from "lodash/debounce";
+// import TextEditor from "./inputs/TextEditor.vue"
+import InputFile from "./inputs/InputFile.vue"
 import InputTag from "./inputs/InputTag.vue"
 
 export default {
   props: ["formUrl", "crsfToken", "goal", "objective", "milestones"],
 	components: {
-		TextEditor,
+		// TextEditor,
+		InputFile,
 		InputTag
 	},
   data() {
