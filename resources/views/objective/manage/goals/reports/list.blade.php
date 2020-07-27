@@ -13,7 +13,7 @@
     <div class="card mb-3 shadow-sm">
       <div class="card-body d-flex justify-content-between">
         <div>
-          <h5 class="card-title font-weight-bold m-0">{{$report->title}}</h5>
+          <h5 class="card-title font-weight-bold m-0"><a href="{{ route('objective.manage.goals.reports.index',['objId' => $objective->id, 'goalId' => $report->id,'reportId' => $report->id]) }}">{{$report->title}}</a></h5>
           <p title="{{$report->date}}" class="text-muted text-smaller">{{$report->date->diffForHumans()}}</p>
           @if($report->type == "progress")
           <p class="text-smaller mb-0">Progreso declarado - {{$report->progress}} ({{$goal->indicator_unit}})</p>

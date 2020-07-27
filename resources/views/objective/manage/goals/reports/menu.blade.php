@@ -17,7 +17,7 @@ $currentRoute = Route::currentRouteName();
 <ul class="list-unstyled">
 <li><a href="{{ route('objective.manage.index', ['objId' => $objective->id]) }}" class="text-dark {{ $currentRoute == 'objective.manage.index'  ? 'font-weight-bold' : null }}"><i class="fas fa-arrow-left"></i>&nbsp;Volver al objetivo</a></li>
 <li><a href="{{ route('objective.manage.goals', ['objId' => $objective->id]) }}" class="text-dark {{ $currentRoute == 'objective.manage.goals'  ? 'font-weight-bold' : null }}"><i class="fas fa-arrow-left"></i>&nbsp;Volver a las metas</a></li>
-<li><a href="{{ route('objective.manage.goals', ['objId' => $objective->id, 'goalId' => $goal->id]) }}" class="text-dark {{ $currentRoute == 'objective.manage.goals'  ? 'font-weight-bold' : null }}"><i class="fas fa-arrow-left"></i>&nbsp;Volver a los reportes</a></li>
+<li><a href="{{ route('objective.manage.goals.reports', ['objId' => $objective->id, 'goalId' => $goal->id]) }}" class="text-dark {{ $currentRoute == 'objective.manage.goals'  ? 'font-weight-bold' : null }}"><i class="fas fa-arrow-left"></i>&nbsp;Volver a los reportes</a></li>
 </ul>
 {{-- <hr>
 <ul class="list-unstyled">

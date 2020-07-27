@@ -6,7 +6,7 @@
 @section('panelContent')
   <h3 class="font-weight-bold">Dashboard</h3>
   <h5 class="font-weight-bold">Creado por</h5>
-    <p>{{$report->author->name}} {{$report->author->surname}}</p>
+    <p>@include('utils.avatar',['avatar' => $report->author->avatar, 'size' => 32, 'thumbnail' => true]) {{$report->author->name}} {{$report->author->surname}}</p>
   <h5 class="font-weight-bold">Album de fotos</h5>
   @forelse ($report->photos as $photo)
       <p class="d-inline"><a href="{{asset($photo->path)}}" target="_blank"><img src="{{asset($photo->thumbnail_path)}}" height="80" class="img rounded" alt=""></a></p>
