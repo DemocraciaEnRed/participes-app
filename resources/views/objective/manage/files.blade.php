@@ -8,7 +8,7 @@
    <hr>
   <h5 class="font-weight-bold"><i class="fas fa-upload"></i> Nueva imagen</h5>
   <p>Cargue sus archivos haciendo clic en el campo para poder seleccionar. Cargue uno a uno. Intente no subir mucho peso de una sola vez.</p>
-  <form action="{{route('objective.manage.files.form',['objId' => $objective->id])}}" method="POST" enctype="multipart/form-data">
+  <form action="{{route('objective.manage.files.form',['objectiveId' => $objective->id])}}" method="POST" enctype="multipart/form-data">
     @csrf
     <input-file name="files[]" multiple></input-file>
     <div class="form-group">

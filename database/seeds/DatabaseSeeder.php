@@ -10,12 +10,7 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        $this->call(RoleTableSeeder::class);
-        $this->call(CategoryTableSeeder::class);
-        if (App::environment(['local'])) {
-            // The environment is local
-            $this->call(DemoSeeder::class);
-        }
+    {   
+        $this->call(DefaultDemoSeeder::class);
     }
 }

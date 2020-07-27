@@ -29,7 +29,6 @@ class AppServiceProvider extends ServiceProvider
         //
         Blade::if('hasRole', function ($roles) {
             $user = auth()->user();
-            error_log($roles);
             if($user){
                 return $user->hasAnyRole($roles);
             } 

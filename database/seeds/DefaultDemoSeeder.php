@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
-class DemoSeeder extends Seeder
+class DefaultDemoSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -24,7 +24,7 @@ class DemoSeeder extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create('es_AR');
-        
+
         $category = new Category();
         $category->title = 'Educacion';
         $category->icon = 'fas fa-book';

@@ -15,7 +15,7 @@ class CanManageObjective
      */
     public function handle($request, Closure $next, ...$role)
     {   
-        $objId = $request->route()->parameter('objId');
+        $objectiveId = $request->route()->parameter('objectiveId');
 
         // Admin can access
         if ($request->user()->hasAnyRole(['admin'])) {
@@ -23,7 +23,7 @@ class CanManageObjective
         }
 
         // Members can access
-        if ($request->user()->isMemberObjective($objId)) {
+        if ($request->user()->isMemberObjective($objectiveId)) {
             return $next($request);
         }
 

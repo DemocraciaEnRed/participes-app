@@ -17,7 +17,7 @@
         <i class="{{$objective->category->icon}}"></i> {{$objective->category->title}} -
         {{$objective->goals()->count()}} Metas</p>
       <h5 class="card-title font-weight-bold mb-1"><a class="text-primary"
-          href="{{route('objective.manage.index',['objId' => $objective->id])}}">{{$objective->title}}</a></h5>
+          href="{{route('objective.manage.index',['objectiveId' => $objective->id])}}">{{$objective->title}}</a></h5>
       <p>
         @foreach ($objective->tags as $tag)
         <span class="badge badge-light align-middle">{{$tag}}</span>
@@ -30,7 +30,7 @@
           <div class="mt-1 ml-2 text-center">
             <a onclick="event.preventDefault();document.getElementById('unsub{{$objective->id}}').submit();" class="text-dark is-clickable"><i class="fas fa-times fa-circle fa-2x"></i></a>
             <span class="text-smallest">Desuscribirse</span>
-          <form id="unsub{{$objective->id}}" action="{{route('panel.subscriptions.unsubscribe.form',['objId' => $objective->id]) }}" method="POST" style="display: none;">
+          <form id="unsub{{$objective->id}}" action="{{route('panel.subscriptions.unsubscribe.form',['objectiveId' => $objective->id]) }}" method="POST" style="display: none;">
             @csrf
           </form>
           </div>

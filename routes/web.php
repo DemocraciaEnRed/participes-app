@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/start', 'MiscController@start')->name('start');
+Route::post('/start', 'MiscController@startApp')->name('start.form');
 Route::get('/bladeTest', 'HomeController@bladeTest')->name('bladeTest');
 
 Auth::routes(['verify' => true]);
@@ -27,7 +29,7 @@ Route::group([
     Route::get('/objetivos', 'UserPanelController@viewListObjectives')->name('objectives');
     // Mis suscripciones
     Route::get('/suscripciones', 'UserPanelController@viewListSubscriptions')->name('subscriptions');
-    Route::post('/suscripciones/{objId}/desuscribir', 'UserPanelController@formUnsubSubscription')->name('subscriptions.unsubscribe.form');
+    Route::post('/suscripciones/{objectiveId}/desuscribir', 'UserPanelController@formUnsubSubscription')->name('subscriptions.unsubscribe.form');
     // Mis notificaciones
     Route::get('/notificaciones', 'UserPanelController@viewListNotifications')->name('notifications');
     Route::get('/notificaciones/pendientes', 'UserPanelController@viewListUnreadNotifications')->name('notifications.unread');
@@ -87,7 +89,7 @@ Route::group([
 
 Route::group([
     'as' => 'objective.', 
-    'prefix' => 'objetivo/{objId}', 
+    'prefix' => 'objetivo/{objectiveId}', 
     ],function () {
     Route::get('/', 'ObjectiveController@index')->name('index');
     // Manage

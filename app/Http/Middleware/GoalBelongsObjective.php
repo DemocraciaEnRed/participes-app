@@ -3,9 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Objective;
 
-class FetchObjective
+class GoalBelongsObjective
 {
     /**
      * Handle an incoming request.
@@ -15,9 +14,13 @@ class FetchObjective
      * @return mixed
      */
     public function handle($request, Closure $next)
-    {
-        $objectiveId = $request->route()->parameter('objectiveId');
-        $request->objective = Objective::findorfail($objectiveId);
-        return $next($request);
+    {   
+        $goalId = $request->route()->parameter('goalId');
+        if($request->objective->hasGoal($goalId)){
+          return $next($request);
+
+        } else {
+          abort(404, 'La meta no pertenece al objetivo');
+        }
     }
 }

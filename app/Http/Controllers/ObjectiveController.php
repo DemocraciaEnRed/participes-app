@@ -18,8 +18,8 @@ class ObjectiveController extends Controller
         // $this->middleware('check_role:admin');
     }
 
-    public function index(Request $request, $objId){
-        $objective = Objective::findorfail($objId);
+    public function index(Request $request, $objectiveId){
+        $objective = Objective::findorfail($objectiveId);
         return view('objective.view',['objective' => $objective]);
     }
 

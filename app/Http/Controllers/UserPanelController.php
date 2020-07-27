@@ -63,8 +63,8 @@ class UserPanelController extends Controller
         $subscriptions = $request->user()->subscriptions()->paginate(5);
         return view('panel.subscriptions.list', ['subscriptions' => $subscriptions]);
     }
-    public function formUnsubSubscription(Request $request, $objId){
-        $request->user()->subscriptions()->detach($objId);
+    public function formUnsubSubscription(Request $request, $objectiveId){
+        $request->user()->subscriptions()->detach($objectiveId);
         // $subscriptions = $request->user()->subscriptions()->paginate(5);
         return redirect()->route('panel.subscriptions')->with('success','Se desuscribió correctamente del objetivo');
     }

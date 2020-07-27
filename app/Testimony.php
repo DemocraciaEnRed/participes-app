@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Testimonies extends Model
+class Testimony extends Model
 {
     protected $table = 'testimonies';
     public $incrementing = true; // if IDs are auto-incrementing.
