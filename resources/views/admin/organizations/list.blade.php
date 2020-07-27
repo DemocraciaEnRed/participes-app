@@ -4,9 +4,7 @@
 
 <section>
   <h1 class="">Organizaciones</h1>
-  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In eius ad officia tempora, temporibus repudiandae id
-    ipsum neque deserunt rerum esse delectus consectetur voluptates eveniet quaerat commodi ducimus mollitia dolorem.
-  </p>
+  <p>En esta sección se podrán cargar organizaciones de la sociedad civil, agrupaciones conformadas por ciudadanos independientes, o bien, cualquier sector que pueda estar asociado a un objetivo.</p>
   @forelse($organizations as $organization)
   <div class="card mb-3 shadow-sm">
     <div class="card-body d-flex">

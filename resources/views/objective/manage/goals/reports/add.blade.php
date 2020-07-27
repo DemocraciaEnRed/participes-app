@@ -4,7 +4,7 @@
 
 <section>
   <h1 class="">Nuevo reporte</h1>
-  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In eius ad officia tempora, temporibus repudiandae id ipsum neque deserunt rerum esse delectus consectetur voluptates eveniet quaerat commodi ducimus mollitia dolorem.</p>
+  <p>Podés hacer reportes sobre la meta. Tené en cuenta que existen tres tipos: el de avance (implica un aumento en el valor del indicador), el de hito (implica el cumplimiento de un acontecimiento importante) y el de novedad (utilizado para contar noticias generales,  relacionadas a la meta)</p>
   <hr>
   @if ($errors->any())
     <div class="alert alert-danger">

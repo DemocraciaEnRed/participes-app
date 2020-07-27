@@ -4,9 +4,7 @@
 
 <section>
   <h1 class="">Imagen de portada</h1>
-  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In eius ad officia tempora, temporibus repudiandae id
-    ipsum neque deserunt rerum esse delectus consectetur voluptates eveniet quaerat commodi ducimus mollitia dolorem.
-  </p>
+  <p>Podés seleccionar una imagen desde tu computadora, para agregarla como portada del objetivo</p>
   <hr>
   <h5 class="font-weight-bold"><i class="fas fa-upload"></i> Nueva imagen</h5>
   <p>Debe ser una imagen JPG o JPEG , hasta 8 MB. Si el ancho de la imagen es mayor a 1366px, sera ajustada a este

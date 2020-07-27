@@ -4,7 +4,7 @@
 
 <section>
   <h1 class="">Nuevo administrador</h1>
-  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In eius ad officia tempora, temporibus repudiandae id ipsum neque deserunt rerum esse delectus consectetur voluptates eveniet quaerat commodi ducimus mollitia dolorem.</p>
+  <p>Para crear un nuevo administrador, completá los campos a continuación:<br><i>Nota: Recordá que el administrador podrá gestionar la totalidad de los objetivos, metas y reportes</i></p>
   <hr>
   <admin-search-user-new-admin fetch-url="{{ route('apiService.users') }}" form-url="{{ route('admin.administrators.add.form') }}" crsf-token="{{ csrf_token() }}"/>
 

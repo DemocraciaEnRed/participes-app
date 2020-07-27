@@ -4,8 +4,7 @@
 
 <section>
   <h1 class="">Equipo</h1>
-  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In eius ad officia tempora, temporibus repudiandae id
-    ipsum neque deserunt rerum esse delectus consectetur voluptates eveniet quaerat commodi ducimus mollitia dolorem.
+  <p>El equipo de un objetivo está conformado por los usuarios que podrán coordinar objetivos y realizar reportes y usuarios que únicamente podrán realizar reportes.
   </p>
   <table class="table">
     <thead class="thead">

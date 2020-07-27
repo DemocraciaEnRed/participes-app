@@ -5,9 +5,7 @@
 <section>
   <h1 class="">Hitos de la meta</h1>
   <h6 class="text-muted">Meta: {{$goal->title}}</h6>
-  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In eius ad officia tempora, temporibus repudiandae id
-    ipsum neque deserunt rerum esse delectus consectetur voluptates eveniet quaerat commodi ducimus mollitia dolorem.
-  </p>
+  <p>Un hito es un acontecimiento importante y necesario para el cumplimiento de la meta, sin embargo, no responde a un indicador concreto ni representa un avance en términos cuantitativos. Podrás hacer reportes para informar el cumplimiento  de estos hitos.</p>
   @foreach ($goal->milestones as $milestone)
   <div class="card mb-3 shadow-sm">
     <div class="card-body d-flex justify-content-between">

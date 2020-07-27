@@ -4,7 +4,7 @@
 
 <section>
   <h1 class="">Nueva meta del objetivo</h1>
-  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In eius ad officia tempora, temporibus repudiandae id ipsum neque deserunt rerum esse delectus consectetur voluptates eveniet quaerat commodi ducimus mollitia dolorem.</p>
+  <p>Para sumar una nueva a tu objetivo, completá los campos a continuación:</p>
   <hr>
     @if ($errors->any())
     <div class="alert alert-danger">

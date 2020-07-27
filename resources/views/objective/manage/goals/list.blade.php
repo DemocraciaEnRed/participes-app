@@ -4,9 +4,7 @@
 
 <section>
   <h1 class="">Metas del objetivo</h1>
-  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In eius ad officia tempora, temporibus repudiandae id
-    ipsum neque deserunt rerum esse delectus consectetur voluptates eveniet quaerat commodi ducimus mollitia dolorem.
-  </p>
+  <p>A continuación, encontrarás todas las metas asociadas a tu objetivo</p>
   @foreach ($objective->goals as $goal)
   <div class="card mb-3 shadow-sm">
     <div class="card-body d-flex justify-content-between align-items-center">

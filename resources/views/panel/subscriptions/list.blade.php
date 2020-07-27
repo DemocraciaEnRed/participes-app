@@ -4,7 +4,7 @@
 
 <section>
 <h1 class="">Mis suscripciones</h1>
-<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In eius ad officia tempora, temporibus repudiandae id ipsum neque deserunt rerum esse delectus consectetur voluptates eveniet quaerat commodi ducimus mollitia dolorem.</p>
+<p>A continuación, podrás ver el listado de objetivos que estás monitoreando actualmente</p>
  @if(count($subscriptions) > 0)
     @foreach($subscriptions as $objective)
     <div class="card mb-3 shadow-sm">

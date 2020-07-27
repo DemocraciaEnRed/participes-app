@@ -4,10 +4,7 @@
 
 <section>
   <h1 class="">Objetivos</h1>
-  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In eius ad officia tempora, temporibus repudiandae id
-    ipsum neque deserunt rerum esse delectus consectetur voluptates eveniet quaerat commodi ducimus mollitia dolorem.
-  </p>
-  
+  <p>Acá encontrarás el listado de objetivos que podés administrar</p>
   @if(count($objectives) > 0)
     @foreach($objectives as $objective)
     <div class="card mb-3 shadow-sm">

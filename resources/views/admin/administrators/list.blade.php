@@ -4,9 +4,7 @@
 
 <section>
   <h1 class="">Administradores de la plataforma</h1>
-  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In eius ad officia tempora, temporibus repudiandae id
-    ipsum neque deserunt rerum esse delectus consectetur voluptates eveniet quaerat commodi ducimus mollitia dolorem.
-  </p>
+  <p>Los administradores de la plataforma pueden gestionar la totalidad de los objetivos, metas y reportes. Pudiendo crear, editar, y eliminar.</p>
   <hr>
   <table class="table table-sm">
     <thead class="thead-dark">

@@ -4,9 +4,7 @@
 
 <section>
   <h1 class="">Repositorio de archivos</h1>
-  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In eius ad officia tempora, temporibus repudiandae id
-    ipsum neque deserunt rerum esse delectus consectetur voluptates eveniet quaerat commodi ducimus mollitia dolorem.
-  </p>
+  <p>Aquí podrás encontrar y cargar todos los archivos vinculados a tu objetivo</p>
    <hr>
   <h5 class="font-weight-bold"><i class="fas fa-upload"></i> Nueva imagen</h5>
   <p>Cargue sus archivos haciendo clic en el campo para poder seleccionar. Cargue uno a uno. Intente no subir mucho peso de una sola vez.</p>

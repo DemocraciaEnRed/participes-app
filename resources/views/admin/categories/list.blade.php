@@ -4,9 +4,7 @@
 
 <section>
   <h1 class="">Categorias</h1>
-  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In eius ad officia tempora, temporibus repudiandae id
-    ipsum neque deserunt rerum esse delectus consectetur voluptates eveniet quaerat commodi ducimus mollitia dolorem.
-  </p>
+  <p>A continuación encontrarán las categorías dentro de las cuales se agruparán los objetivos:</p>
   @forelse($categories as $category)
   <div class="card mb-3 shadow-sm">
     <div class="card-body d-flex justify-content-between">

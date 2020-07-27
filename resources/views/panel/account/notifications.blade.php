@@ -8,9 +8,7 @@ $checked = Str::contains(Auth::user()->notification_preferences,"mail")
 
 <section>
   <h1 class="">Preferencias de envio</h1>
-  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In eius ad officia tempora, temporibus repudiandae id
-    ipsum neque deserunt rerum esse delectus consectetur voluptates eveniet quaerat commodi ducimus mollitia dolorem.
-  </p>
+  <p>Desde Partícipes, te estaremos envíando notificaciones de los objetivos que monitorees. Acá, podrás configurarlas según tu preferencia</p>
   <hr>
   @if ($errors->any())
     <div class="alert alert-danger">
