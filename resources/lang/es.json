@@ -33,6 +33,7 @@
   "Send Password Reset Link": "Enviar enlace para restablecer la contraseña",
   "Server Error": "Error del servidor",
   "Service Unavailable": "Servicio no disponible",
+  "Surname": "Apellido",
   "This action is unauthorized.": "Esta acción no está autorizada.",
   "This password reset link will expire in :count minutes.": "Este enlace de restablecimiento de contraseña caducará en :count minutos.",
   "Toggle navigation": "Activar navegación",

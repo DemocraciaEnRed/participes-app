@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic,900,900italic&display=swap);
+
 @charset "UTF-8";
 /*!
  * animate.css - https://animate.style/
@@ -469,13 +469,13 @@ sup {
 }
 
 a {
-  color: #3498DB;
+  color: #1477f8;
   text-decoration: none;
   background-color: transparent;
 }
 
 a:hover {
-  color: #1d6fa5;
+  color: #0654ba;
   text-decoration: underline;
 }
 
@@ -3621,12 +3621,12 @@ fieldset:disabled a.btn {
 
 .btn-link {
   font-weight: 400;
-  color: #3498DB;
+  color: #1477f8;
   text-decoration: none;
 }
 
 .btn-link:hover {
-  color: #1d6fa5;
+  color: #0654ba;
   text-decoration: underline;
 }
 
