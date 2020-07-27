@@ -24,7 +24,6 @@ class UserPanelController extends Controller
     {
         // Forces to be authenticated.
         $this->middleware('auth');
-        $this->middleware('verified');
         $this->middleware('check_role:user');
     }
 
