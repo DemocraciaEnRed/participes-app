@@ -135,6 +135,10 @@ return [
         'email' => [
             'unique' => 'El :attribute ya ha sido registrado.',
         ],
+        'g-recaptcha-response' => [
+            'required' => 'Por favor, complete el captcha de "No soy un robot".',
+            'captcha' => 'Error de Google Captcha! Intente nuevamente o contacte al administrador.',
+        ],
     ],
 
     /*
