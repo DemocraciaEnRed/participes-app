@@ -99,6 +99,7 @@ class DemoSeeder extends Seeder
             $objective->title = $faker->sentence;
             $objective->content = $faker->text(600);
             $objective->tags = $faker->randomElements(['tag1','tag2','tag3','tag4','tag5','tag6'],3);
+            $objective->hidden = false;
             $objective->category()->associate($category);
             $objective->author()->associate($admin);
             $objective->save();

@@ -98,6 +98,7 @@ class DefaultDemoSeeder extends Seeder
             $category = Category::findorfail($faker->randomElement([1,2,3,4]));
             $objective->title = $faker->sentence;
             $objective->content = $faker->text(600);
+            $objective->hidden = false;
             $objective->tags = $faker->randomElements(['tag1','tag2','tag3','tag4','tag5','tag6'],3);
             $objective->category()->associate($category);
             $objective->author()->associate($admin);
