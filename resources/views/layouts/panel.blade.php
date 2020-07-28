@@ -12,20 +12,26 @@
     @yield('metatags')
 
     <!-- Styles -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @yield('stylesheets')
-
+    {{-- <link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' /> --}}
     <!-- Scripts -->
-    @yield('headscripts')
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+    {{-- <script src='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js'></script> --}}
+    @yield('headscripts')
 </head>
 
 <body>
     <div id="app">
         @include('layouts.navbar')
-        @include('partials.flashMessageApp')
-        @yield('content')
+        @include('partials.flashMessagePanel')
+
+        <main class="py-4">
+            <div class="container">
+              @yield('content')
+            </div>
+        </main>
     </div>
     <script type="text/javascript">
         window.addEventListener('keydown',function(e){if(e.keyIdentifier=='U+000A'||e.keyIdentifier=='Enter'||e.keyCode==13){if(e.target.nodeName=='INPUT'&&e.target.type=='text'){e.preventDefault();return false;}}},true);

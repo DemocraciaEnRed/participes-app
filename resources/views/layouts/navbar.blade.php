@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark p-2 bg-primary shadow-sm">
+<nav class="navbar navbar-expand-md navbar-dark p-2 bg-primary">
   <div class="container">
     <a class="navbar-brand" href="{{ url('/') }}">
       <img src="{{asset('img/participes-white.svg')}}" width="120" class="img-fluid" alt="{{ config('app.name', 'Laravel') }}">
