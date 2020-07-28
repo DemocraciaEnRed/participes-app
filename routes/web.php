@@ -119,7 +119,13 @@ Route::group([
         Route::get('/metas/{goalId}/reportes/nuevo', 'GoalPanelController@viewNewGoalReport')->name('goals.reports.add');
         Route::post('/metas/{goalId}/reportes/nuevo', 'GoalPanelController@formNewGoalReport')->name('goals.reports.add.form');
         Route::get('/metas/{goalId}/reportes/{reportId}', 'ReportPanelController@viewReport')->name('goals.reports.index');
-        Route::get('/metas/{goalId}/reportes/{reportId}/album', 'ReportPanelController@viewAlbumReport')->name('goals.reports.album');
+        Route::get('/metas/{goalId}/reportes/{reportId}/comentarios', 'ReportPanelController@viewReportComments')->name('goals.reports.comments');
+        Route::post('/metas/{goalId}/reportes/{reportId}/comentarios', 'ReportPanelController@formReportComment')->name('goals.reports.comments.form');
+        Route::post('/metas/{goalId}/reportes/{reportId}/comentarios/{commentId}/responder', 'ReportPanelController@formReportReplyComment')->name('goals.reports.comments.reply.form');
+        Route::get('/metas/{goalId}/reportes/{reportId}/archivos', 'ReportPanelController@viewReportFiles')->name('goals.reports.files');
+        Route::post('/metas/{goalId}/reportes/{reportId}/archivos', 'ReportPanelController@formReportFile')->name('goals.reports.files.form');
+        Route::get('/metas/{goalId}/reportes/{reportId}/album', 'ReportPanelController@viewReportAlbum')->name('goals.reports.album');
+        Route::post('/metas/{goalId}/reportes/{reportId}/album', 'ReportPanelController@formReportAlbum')->name('goals.reports.album.form');
         // Administracion
         Route::get('/configuracion', 'ObjectivePanelController@viewObjectiveConfiguration')->name('configuration');
         Route::put('/configuracion', 'ObjectivePanelController@formObjectiveConfiguration')->name('configuration.form');

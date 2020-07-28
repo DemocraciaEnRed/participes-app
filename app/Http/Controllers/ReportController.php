@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class ReportController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -26,5 +27,12 @@ class HomeController extends Controller
     {
         return view('portal.home');
     }
+
+    // public function commentReport(Request $request, $reportId){
+    //   if (!Auth::check()) {
+    //       abort(403, 'No autorizado')
+    //   }
+    //   return view('porta.home')
+    // }
 
 }

@@ -58,15 +58,15 @@ $progress = round( ($goal->indicator_progress / $goal->indicator_goal)*100  )
     </div>
   </div>
   @endif
-  @if(count($goal->reports) > 0)
-  <h5 class="font-weight-bold">Reportes&nbsp;<span class="badge badge-primary badge-pill">{{count($goal->reports)}}</span></h6>
+  @if($goal->reports()->count() > 0)
+  <h5 class="font-weight-bold">Reportes&nbsp;<span class="badge badge-primary badge-pill">{{$goal->reports()->count()}}</span></h6>
   <p>
-    La meta cuenta con {{count($goal->reports)}} reportes. Para verlo, haga <a href="{{ route('objective.manage.goals.reports', ['objectiveId' => $objective->id,'goalId' => $goal->id]) }}">click aqui <i class="fas fa-arrow-right"></i></a>
+    La meta cuenta con {{$goal->reports()->count()}} reportes. Para verlo, haga <a href="{{ route('objective.manage.goals.reports', ['objectiveId' => $objective->id,'goalId' => $goal->id]) }}">click aqui <i class="fas fa-arrow-right"></i></a>
   </p>
   @else
   <div class="card border-secondary">
     <div class="card-body text-dark">
-      <h5 class="card-title"><i class="fas fa-info-circle"></i>&nbsp;La meta no cuenta con hitos</h5>
+      <h5 class="card-title"><i class="fas fa-info-circle"></i>&nbsp;La meta no cuenta con reportes</h5>
       <p class="card-text">Si necesita crear reportes, puede crearlos haciendo <a href="{{ route('objective.manage.goals.reports.add', ['objectiveId' => $objective->id,'goalId' => $goal->id]) }}">click aquí <i class="fas fa-arrow-right"></i></a></p>
     </div>
   </div>

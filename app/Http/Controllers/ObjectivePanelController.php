@@ -209,14 +209,44 @@ class ObjectivePanelController extends Controller
     public function formObjectiveFile (Request $request){
       $this->hasManagerPrivileges($request);
 
+      // FOR MULTIPLE FILES
+
+      // $rules = [
+      //     'files' => 'required|array',
+      //     'files.*' => 'required|file|max:102400'
+      // ];
+      // $request->validate($rules);
+
+      // foreach($request->file('files') as $file){
+      //   $fileName = 'objective-'.$request->objective->id.'-'.$file->getClientOriginalName();
+      //   $exists = Storage::disk('objectives')->exists('files/'.$fileName);
+      //   $filePath = $file->storeAs('files',$fileName, 'objectives');
+      //   if($exists){
+      //     $existingFile = File::where('name',$fileName)->first();
+      //     $existingFile->name = $file->getClientOriginalName();
+      //     $existingFile->size = $file->getSize();
+      //     $existingFile->mime = $file->getMimeType();
+      //     $existingFile->path = 'storage/objectives/'.$filePath;
+      //     $existingFile->save();
+      //   } else {
+      //     $saveFile = new File();
+      //     $saveFile->name = $file->getClientOriginalName();
+      //     $saveFile->size = $file->getSize();
+      //     $saveFile->mime = $file->getMimeType();
+      //     $saveFile->path = 'storage/objectives/'.$filePath;
+      //     $request->objective->files()->save($saveFile);
+      //   }
+      // }
+
       $rules = [
-          'files' => 'required|array',
-          'files.*' => 'required|file|max:102400'
+        'file' => 'required|file|max:102400'
       ];
+
       $request->validate($rules);
 
-      foreach($request->file('files') as $file){
-        $fileName = 'report-'.$request->objective->id.'-'.$file->getClientOriginalName();
+      if($request->hasFile('file')){
+        $file = $request->file('file');
+        $fileName = 'objective-'.$request->objective->id.'-'.$file->getClientOriginalName();
         $exists = Storage::disk('objectives')->exists('files/'.$fileName);
         $filePath = $file->storeAs('files',$fileName, 'objectives');
         if($exists){
@@ -235,7 +265,7 @@ class ObjectivePanelController extends Controller
           $request->objective->files()->save($saveFile);
         }
       }
-
+      
       return redirect()->route('objective.manage.files', ['objectiveId' => $request->objective->id])->with('success','Se agrego el archivo al repositorio del objetivo');
     } 
 

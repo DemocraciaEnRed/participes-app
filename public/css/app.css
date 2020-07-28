@@ -11453,8 +11453,7 @@ a.text-dark:focus {
 }
 
 .custom-file-label::after {
-  content: "\F002";
-  font-family: FontAwesome;
+  content: "Examinar";
 }
 
 .is-100 {

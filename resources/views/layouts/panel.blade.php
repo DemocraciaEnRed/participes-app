@@ -25,12 +25,12 @@
 <body>
     <div id="app">
         @include('layouts.navbar')
-        @include('partials.flashMessagePanel')
 
         <main class="py-4">
-            <div class="container">
-              @yield('content')
-            </div>
+          <div class="container">
+            @include('partials.flashMessagePanel')
+          </div>
+          @yield('content')
         </main>
     </div>
     <script type="text/javascript">

@@ -1,19 +1,18 @@
-@extends('objective.manage.master')
+@extends('objective.manage.goals.reports.master')
 
 @section('panelContent')
 
 <section>
   <h1 class="">Repositorio de archivos</h1>
-  <p>Aquí podrás encontrar y cargar todos los archivos vinculados a tu objetivo</p>
+  <p>Aquí podrás encontrar y cargar todos los archivos vinculados a el reporte</p>
    <hr>
-  <h5 class="font-weight-bold"><i class="fas fa-upload"></i> Nueva imagen</h5>
-  <p>Cargue sus archivos haciendo clic en el campo para poder seleccionar. Cargue uno a uno. Intente no subir mucho peso de una sola vez.</p>
-  <form action="{{route('objective.manage.files.form',['objectiveId' => $objective->id])}}" method="POST" enctype="multipart/form-data">
+  <h5 class="font-weight-bold"><i class="fas fa-upload"></i> Nuevo archivo</h5>
+  <p>Cargue su archivo haciendo clic en el campo para poder seleccionar. Intente no subir archivos de mucho peso.</p>
+  <form action="{{route('objective.manage.goals.reports.files.form',['objectiveId' => $objective->id, 'goalId' => $goal->id, 'reportId' => $report->id])}}" method="POST" enctype="multipart/form-data">
     @csrf
-    {{-- <input-file name="files[]" multiple></input-file> --}}
     <input-file name="file"></input-file>
     <div class="form-group">
-      <button class="btn btn-primary" type="submit">Subir archivos</button>
+      <button class="btn btn-primary" type="submit">Subir archivo</button>
     </div>
   </form>
   <hr>
