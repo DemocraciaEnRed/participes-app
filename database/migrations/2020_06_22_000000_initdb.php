@@ -102,6 +102,9 @@ class InitDB extends Migration
             $table->json('tags')->nullable();
             $table->boolean('archived')->default(false);
             $table->boolean('hidden')->default(true);
+            $table->string('lat')->nullable();
+            $table->string('long')->nullable();
+            $table->string('map_zoom')->nullable();
             $table->timestamps();
             $table->softDeletes('deleted_at', 0);
         });
@@ -159,6 +162,7 @@ class InitDB extends Migration
             $table->integer('progress')->nullable();
             $table->string('lat')->nullable();
             $table->string('long')->nullable();
+            $table->string('map_zoom')->nullable();
             $table->foreignId('milestone_achieved')->nullable()->constrained('milestones');
             $table->timestamps();
             $table->softDeletes('deleted_at', 0);
