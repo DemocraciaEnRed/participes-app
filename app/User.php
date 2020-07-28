@@ -43,14 +43,23 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany('App\Role','role_user','user_id','role_id')->withTimestamps();
     }
 
-    public function objectives($hidden = true)
+    public function objectives($hidden = null)
     {
-        return $this->belongsToMany('App\Objective','objective_user','user_id','objective_id')->where('hidden',$hidden)->withPivot('role')->withTimestamps();
+        $q = $this->belongsToMany('App\Objective','objective_user','user_id','objective_id')->withPivot('role')->withTimestamps();
+        if(!is_null($hidden)){
+            $q = $q->where('hidden',$hidden);
+        }
+        return $q;
+
     }
 
-    public function subscriptions($hidden = true)
+    public function subscriptions($hidden = null)
     {
-        return $this->belongsToMany('App\Objective','objective_subscriber','subscriber_id','objective_id')->where('hidden',$hidden)->withTimestamps();
+        $q = $this->belongsToMany('App\Objective','objective_subscriber','subscriber_id','objective_id')->withTimestamps();
+        if(!is_null($hidden)){
+            $q = $q->where('hidden',$hidden);
+        }
+        return $q;
     }
     
     public function avatar()
