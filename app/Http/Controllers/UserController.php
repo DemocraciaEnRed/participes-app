@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Storage;
+use Str;
 use Illuminate\Http\Request;
 use App\User;
 use App\Http\Resources\User as UserResource;
@@ -32,5 +33,14 @@ class UserController extends Controller
             return response()->json(['message' => 'Not found'], 404); 
         }
         return new UserResource($user);
+    }
+
+    public function fetchAvatar(Request $request){
+        if($request->query('thumbnail') == '1'){
+            $path = Str::replaceFirst("/storage/avatars", '', $request->user()->avatar->thumbnail_path);
+        } else {
+            $path = Str::replaceFirst("/storage/avatars", '', $request->user()->avatar->path);
+        }
+        return Storage::disk('avatars')->get($path);
     }
 }
