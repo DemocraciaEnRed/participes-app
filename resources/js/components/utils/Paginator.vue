@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import debounce from "lodash/debounce";
 
 export default {
   props: ['paginatorData'],

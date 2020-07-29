@@ -1,22 +1,4 @@
 /*!
-    * tiptap v1.29.0
-    * (c) 2020 Scrumpy UG (limited liability)
-    * @license MIT
-    */
-
-/*!
-    * tiptap-extensions v1.31.0
-    * (c) 2020 Scrumpy UG (limited liability)
-    * @license MIT
-    */
-
-/*!
-    * tiptap-utils v1.10.0
-    * (c) 2020 Scrumpy UG (limited liability)
-    * @license MIT
-    */
-
-/*!
   * Bootstrap v4.5.0 (https://getbootstrap.com/)
   * Copyright 2011-2020 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)

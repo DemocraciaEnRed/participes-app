@@ -31,6 +31,7 @@ Vue.component('input-tags', require('./components/inputs/InputTag.vue').default)
 Vue.component('input-file', require('./components/inputs/InputFile.vue').default);
 Vue.component('input-user-avatar', require('./components/inputs/InputUserAvatar.vue').default);
 Vue.component('input-add-milestones-create-goal', require('./components/inputs/InputAddMilestonesCreateGoal.vue').default);
+Vue.component('report-comments', require('./components/comments/ReportComments.vue').default);
 Vue.prototype.$http = http
 
 /**

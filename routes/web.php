@@ -79,10 +79,16 @@ Route::group([
     ],function () {
     // Userss
     Route::get('/users', 'UserController@fetch')->name('users');
+    Route::get('/users/avatar', 'UserController@fetchAvatar')->name('users.avatar');
     Route::get('/users/{id}', 'UserController@fetchOne')->name('users.fetch');
     Route::put('/notification/read', 'NotificationController@markAllRead')->name('notification.mark.all');
     Route::put('/notification/read/{id}', 'NotificationController@markOneRead')->name('notification.mark.one');
     Route::delete('/notification/clean', 'NotificationController@cleanAll')->name('notification.clean');
+    Route::get('/reports/{reportId}/comments', 'ReportController@fetchComments')->name('reports.comments');
+    Route::post('/reports/{reportId}/comments', 'ReportController@runCreateComment')->name('reports.comments.create');
+    Route::post('/reports/{reportId}/comments/{commentId}/reply', 'ReportController@runCreateReply')->name('reports.comments.reply');
+    Route::delete('/reports/{reportId}/comments/{commentId}/delete', 'ReportController@runDeleteComment')->name('reports.comments.delete');
+    Route::delete('/reports/{reportId}/comments/{commentId}/reply/{replyId}/delete', 'ReportController@runDeleteReply')->name('reports.comments.reply.delete');
 
 
 });
