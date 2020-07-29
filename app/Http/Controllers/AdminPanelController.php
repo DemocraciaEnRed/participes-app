@@ -106,8 +106,8 @@ class AdminPanelController extends Controller
             $fileName = 'org-'.$newOrganization->id.'-'.substr(uniqid(),-5).'.'.$fileExtension;
             $fileNameThumbnail = 'org-'.$newOrganization->id.'-'.substr(uniqid(),-5).'-thumbnail.'.$fileExtension;
             // Make the File path
-            $filePath = 'storage/organizations/'.$fileName;
-            $filePathThumbnail = 'storage/organizations/'.$fileNameThumbnail;
+            $filePath = '/storage/organizations/'.$fileName;
+            $filePathThumbnail = '/storage/organizations/'.$fileNameThumbnail;
             // Save Logo
             Storage::disk('public')->put("organizations/".$fileName, (string) $orgLogo->encode());
             Storage::disk('public')->put("organizations/".$fileNameThumbnail, (string) $orgLogoThumbnail->encode());

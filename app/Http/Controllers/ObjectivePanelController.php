@@ -164,8 +164,8 @@ class ObjectivePanelController extends Controller
       $fileName = 'cover-'.$request->objective->id.'-'.$uniqueHash.'.'.$fileExtension;
       $fileNameThumbnail = 'cover-'.$request->objective->id.'-'.$uniqueHash.'-thumbnail.'.$fileExtension;
       // Make the File path
-      $filePath = 'storage/objectives/covers/'.$fileName;
-      $filePathThumbnail = 'storage/objectives/covers/'.$fileNameThumbnail;
+      $filePath = '/storage/objectives/covers/'.$fileName;
+      $filePathThumbnail = '/storage/objectives/covers/'.$fileNameThumbnail;
       if(is_null($request->objective->cover)){
         Storage::disk('objectives')->put("covers/".$fileName, (string) $cover->encode('jpg'));
         Storage::disk('objectives')->put("covers/".$fileNameThumbnail, (string) $coverThumbnail->encode('jpg',80));

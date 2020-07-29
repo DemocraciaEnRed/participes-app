@@ -116,8 +116,8 @@ class UserPanelController extends Controller
         $fileName = 'avatar-user-'.$user->id.'-'.$uniqueHash.'.'.$fileExtension;
         $fileNameThumbnail = 'avatar-user-'.$user->id.'-'.$uniqueHash.'-thumbnail.'.$fileExtension;
         // Make the File path
-        $filePath = 'storage/avatars/'.$fileName;
-        $filePathThumbnail = 'storage/avatars/'.$fileNameThumbnail;
+        $filePath = '/storage/avatars/'.$fileName;
+        $filePathThumbnail = '/storage/avatars/'.$fileNameThumbnail;
         if(is_null($user->avatar)){
             // User doesn't have avatar... Create File and create relationship
             Storage::disk('avatars')->put($fileName, (string) $avatarImage->encode('jpg'));
