@@ -172,7 +172,7 @@ class InitDB extends Migration
             $table->foreignId('parent_id')->nullable()->constrained('comments')->onDelete('cascade');
             $table->text('content');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->morphs('commentable'); 
+            $table->nullableMorphs('commentable'); 
             $table->timestamps();
             $table->softDeletes('deleted_at', 0);
         });

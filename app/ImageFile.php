@@ -10,6 +10,10 @@ class ImageFile extends Model
     public $incrementing = true; // if IDs are auto-incrementing.
     public $timestamps = true; // if the model should be timestamped.
 
+    protected $hidden = [
+        'imageable_type', 'imageable_id', 
+    ];
+
     public function imageable()
     {
         return $this->morphTo();

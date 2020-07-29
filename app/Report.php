@@ -23,14 +23,7 @@ class Report extends Model
 
     public function objective()
     {
-        return $this->hasOneThrough(
-            'App\Objective',
-            'App\Goal',
-            'objective_id', // Foreign key on cars table...
-            'goal_id', // Foreign key on owners table...
-            'id', // Local key on mechanics table...
-            'id' // Local key on cars table...
-        );
+        return $this->goal->objective();
     }
 
     public function author()
