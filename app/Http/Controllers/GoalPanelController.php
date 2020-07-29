@@ -82,13 +82,11 @@ class GoalPanelController extends Controller
     }
 
     public function viewNewGoalReport(Request $request, $objectiveId, $goalId){
-      $this->hasManagerPrivileges($request);
       $goal = $request->goal;
       return view('objective.manage.goals.reports.add',['objective' => $request->objective, 'goal' => $request->goal]);
     }
 
     public function formNewGoalReport(Request $request, $objectiveId, $goalId){
-      $this->hasManagerPrivileges($request);
      
       $rules = [
         'title' => 'required|string|max:550',
