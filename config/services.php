@@ -30,4 +30,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'mapbox' => [
+        'key' => env('MAPBOX_API_KEY'),
+        'style' => env('MAPBOX_MAP_STYLE'),
+    ],
+
 ];

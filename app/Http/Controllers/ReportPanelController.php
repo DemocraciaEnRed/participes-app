@@ -166,5 +166,30 @@ class ReportPanelController extends Controller
       }
 
       return redirect()->route('objective.manage.goals.reports.files', ['objectiveId' => $request->objective->id, 'goalId' => $request->goal->id, 'reportId' => $request->report->id])->with('success','Se agrego el archivo al repositorio del objetivo');
+    } 
+
+    public function viewReportMap (Request $request){
+      return view('objective.manage.goals.reports.map', ['objective' => $request->objective, 'goal' => $request->goal, 'report' => $request->report]);
     }  
+
+     public function formReportMap (Request $request){
+      $rules = [
+        'map_lat' => 'nullable|numeric',
+        'map_long' => 'nullable|numeric',
+        'map_zoom' => 'nullable|numeric',
+        'map_geometries' => 'nullable|string',
+        'map_center' => 'nullable|string',
+      ];
+
+      $request->validate($rules);
+      $report = $request->report;
+      $report->map_lat = $request->input('map_lat');
+      $report->map_long = $request->input('map_long');
+      $report->map_zoom = $request->input('map_zoom');
+      $report->map_geometries = $request->input('map_geometries');
+      $report->map_center = $request->input('map_center');
+      $report->save();
+
+      return redirect()->route('objective.manage.goals.reports.map', ['objectiveId' => $request->objective->id, 'goalId' => $request->goal->id, 'reportId' => $request->report->id])->with('success','Geometria actualizada!');
+    } 
 }

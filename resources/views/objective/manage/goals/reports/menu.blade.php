@@ -28,5 +28,6 @@ $currentRoute = Route::currentRouteName();
 <li><a href="{{ route('objective.manage.goals.reports.comments', ['objectiveId' => $objective->id, 'goalId' => $goal->id, 'reportId' => $report->id]) }}" class="text-dark {{ $currentRoute == 'objective.manage.goals.reports.comments'  ? 'font-weight-bold' : null }}">Comentarios</a></li>
 <li><a href="{{ route('objective.manage.goals.reports.album', ['objectiveId' => $objective->id, 'goalId' => $goal->id, 'reportId' => $report->id]) }}" class="text-dark {{ $currentRoute == 'objective.manage.goals.reports.album'  ? 'font-weight-bold' : null }}">Album de fotos</a></li>
 <li><a href="{{ route('objective.manage.goals.reports.files', ['objectiveId' => $objective->id, 'goalId' => $goal->id, 'reportId' => $report->id]) }}" class="text-dark {{ $currentRoute == 'objective.manage.goals.reports.files'  ? 'font-weight-bold' : null }}">Repositorio de archivos</a></li>
+<li><a href="{{ route('objective.manage.goals.reports.map', ['objectiveId' => $objective->id, 'goalId' => $goal->id, 'reportId' => $report->id]) }}" class="text-dark {{ $currentRoute == 'objective.manage.goals.reports.map'  ? 'font-weight-bold' : null }}">Mapa</a></li>
 </ul>
 </ul>

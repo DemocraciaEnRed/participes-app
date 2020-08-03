@@ -132,6 +132,8 @@ Route::group([
         Route::post('/metas/{goalId}/reportes/{reportId}/archivos', 'ReportPanelController@formReportFile')->name('goals.reports.files.form');
         Route::get('/metas/{goalId}/reportes/{reportId}/album', 'ReportPanelController@viewReportAlbum')->name('goals.reports.album');
         Route::post('/metas/{goalId}/reportes/{reportId}/album', 'ReportPanelController@formReportAlbum')->name('goals.reports.album.form');
+        Route::get('/metas/{goalId}/reportes/{reportId}/mapa', 'ReportPanelController@viewReportMap')->name('goals.reports.map');
+        Route::put('/metas/{goalId}/reportes/{reportId}/mapa', 'ReportPanelController@formReportMap')->name('goals.reports.map.form');
         // Administracion
         Route::get('/configuracion', 'ObjectivePanelController@viewObjectiveConfiguration')->name('configuration');
         Route::put('/configuracion', 'ObjectivePanelController@formObjectiveConfiguration')->name('configuration.form');

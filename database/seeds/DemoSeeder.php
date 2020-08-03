@@ -67,7 +67,7 @@ class DemoSeeder extends Seeder
         $users = array();
         for ($i=0; $i < 50; $i++) { 
             $user = new User();
-            $user->name = $faker->name;
+            $user->name = $faker->firstName;
             $user->surname = "Usuario${i}";
             $user->email = "user${i}@user.com";
             $user->email_verified_at = now();

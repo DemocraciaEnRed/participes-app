@@ -4,7 +4,6 @@
 @extends('objective.manage.goals.reports.master')
 
 @section('panelContent')
-
     <div class="card shadow-sm mb-3">
       <div class="card-body d-flex justify-content-between">
         <div>
@@ -35,8 +34,6 @@
   @else
     <p>No hay archivos asociados al reporte</p>
   @endif
-  <br>
-  <br>
   <h5 class="font-weight-bold">Archivos</h5>
   @if($report->files()->count())
     <p>
@@ -44,5 +41,13 @@
   </p>
   @else
     <p>No hay archivos asociados al reporte</p>
+  @endif
+  <h5 class="font-weight-bold">Mapa</h5>
+  @if(isset($report->map_lat))
+    <p>
+      El reporte cuenta con un mapa. Para ver el mapa, haga <a href="{{ route('objective.manage.goals.reports.map', ['objectiveId' => $objective->id,'goalId' => $goal->id, 'reportId' => $report->id]) }}">click aqui <i class="fas fa-arrow-right"></i></a>
+    </p>
+  @else
+    <p>No hay un mapa asociado al reporte</p>
   @endif
 @endsection

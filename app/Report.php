@@ -19,6 +19,8 @@ class Report extends Model
 
     protected $casts = [
         'tags' => 'array',
+        'map_center' => 'array',
+        'map_geometries' => 'array'
     ];
 
     public function objective()
