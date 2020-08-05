@@ -123,17 +123,22 @@ class ObjectivePanelController extends Controller
       return view('objective.manage.configuration', ['objective' => $request->objective]);
     } 
 
-    public function formObjectiveConfiguration (Request $request){
+    public function formObjectiveConfigurationHide (Request $request){
       $rules = [
         'hidden' => 'nullable|string|in:true',
+      ];
+      $request->validate($rules);
+      $request->objective->hidden = $request->boolean('hidden');
+      $request->objective->save();
+      return redirect()->route('objective.manage.configuration', ['objectiveId' => $request->objective->id])->with('success','Se actualizó el objetivo');
+    }
+    public function formObjectiveConfigurationMap (Request $request){
+      $rules = [
         'map_lat' => 'nullable|numeric',
         'map_long' => 'nullable|numeric',
         'map_zoom' => 'nullable|numeric',
       ];
       $request->validate($rules);
-      if ($request->has('name')) {
-          $request->objective->hidden = $request->boolean('hidden');
-      }
       if ($request->has(['map_lat', 'map_long', 'map_zoom'])) {
         $request->objective->map_lat = $request->input('map_lat');
         $request->objective->map_long = $request->input('map_long');

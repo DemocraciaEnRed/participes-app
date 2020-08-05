@@ -26,5 +26,30 @@ class HomeController extends Controller
     {
         return view('portal.home');
     }
+    public function viewAboutGeneral()
+    {
+        return view('portal.about.general');
+    }
+    public function viewAboutQuestions()
+    {
+        return view('portal.about.faq');
+    }
+    public function viewAboutLegals()
+    {
+        return view('portal.about.legal');
+    }
+    // --------------------------
+    public function viewAboutGeneralTwo()
+    {
+        return view('portal.about2.general');
+    }
+    public function viewAboutQuestionsTwo()
+    {
+        return view('portal.about2.faq');
+    }
+    public function viewAboutLegalsTwo()
+    {
+        return view('portal.about2.legal');
+    }
 
 }
