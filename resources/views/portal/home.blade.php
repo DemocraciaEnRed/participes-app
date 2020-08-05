@@ -1,9 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="bg-light p-5">
-	<div class="container">
-		<img src="{{asset('img/participes-color.svg')}}" class="img-fluid" alt="">
-	</div>
+<div class="container push-to-header">
+  	<img src="{{asset('img/participes-white.svg')}}" width="300" class="img-fluid image is-centered mb-5 mt-2"
+					alt="{{ config('app.name', 'Laravel') }}">
+          <div class="row">
+            <div class="col-lg-12">
+            </div>
+          </div>
 </div>
 @endsection

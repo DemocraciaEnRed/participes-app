@@ -7,7 +7,7 @@ $countUnreadNotifications = count(Auth::user()->unreadNotifications)
 @section('panelContent')
 
 <section>
-  <div class="jumbotron d-flex">
+  <div class="jumbotron d-flex bg-white">
     <div class="mr-4">
       @include('utils.avatar',['avatar' => Auth::user()->avatar, 'size' => 125])
     </div>

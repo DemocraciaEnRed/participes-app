@@ -1,14 +1,18 @@
-@extends('layouts.panel')
+@extends('layouts.app')
 
 @section('content')
 
-<div class="container">
+<div class="container push-to-header">
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4 col-lg-3">
+      <div id="menu" class="card shadow-sm rounded">
       @include('panel.menu')
+      </div>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-8 col-lg-9">
+      <div class="card shadow-sm rounded p-3 p-lg-5">
       @yield('panelContent')
+      </div>
     </div>
   </div>
 </div>

@@ -133,6 +133,30 @@
   }
 }
 
-// .mapboxgl-map{
-//   border-radius: 15px;
-// }
+
+.image{
+  display: block;
+  position: relative;
+}
+
+.is-centered{
+  margin: 0 auto;
+}
+
+.app-portal-header {
+  background: url('/img/citybg.jpg');
+  background-size: cover;
+  background-position: center center;
+  .app-portal-header-overlay {
+    height: 200px;
+    background-color: transparentize($primary, 0.25);
+  }
+}
+.push-to-header{
+  margin-top: -150px
+}
+
+#app{
+  background-color: #f2f2f2;
+  padding-bottom: 75px;
+}

@@ -1,15 +1,15 @@
-@extends('layouts.panel')
+@extends('layouts.app')
 
 @section('headscripts')
 {!! NoCaptcha::renderJs('es') !!}
 @endsection
 
 @section('content')
-<div class="container">
+<div class="container push-to-header">
 	<div class="row justify-content-center">
 		<div class="col-md-10 col-lg-8">
 			<div class="text-center">
-				<img src="{{asset('img/participes-color.svg')}}" width="300" class="img-fluid mb-5 mt-2"
+				<img src="{{asset('img/participes-white.svg')}}" width="300" class="img-fluid mb-5 mt-2"
 					alt="{{ config('app.name', 'Laravel') }}">
 			</div>
 			@if ($errors->any())
@@ -21,7 +21,7 @@
 				</ul>
 			</div>
 			@endif
-			<div class="card shadow-sm">
+			<div class="card shadow-sm py-4">
 				{{-- <div class="card-header">{{ __('Reset Password') }}</div> --}}
 
 				<div class="card-body">
@@ -62,6 +62,7 @@
 									{{-- {{ __('Send Password Reset Link') }} --}}
 									Enviar correo de recuperación
 								</button>
+								<a href="{{route('login')}}" class="btn btn-outline-white">Volver</a>
 							</div>
 						</div>
 					</form>

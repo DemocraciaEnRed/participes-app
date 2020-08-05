@@ -10,13 +10,14 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <!-- Left Side Of Navbar -->
-      {{-- <ul class="navbar-nav mr-auto">
-        @hasRole('admin')
+      <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a href="{{ route('admin.index') }}" class="nav-link">Administracion</a>
+          <a href="{{ route('about.general') }}" class="nav-link text-smaller">¿Como funciona?</a>
         </li>
-        @endhasRole
-      </ul> --}}
+        <li class="nav-item">
+          <a href="{{ route('admin.index') }}" class="nav-link text-smaller">Listado de objetivos</a>
+        </li>
+      </ul>
 
       <!-- Right Side Of Navbar -->
       <ul class="navbar-nav ml-auto">

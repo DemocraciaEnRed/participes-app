@@ -3,27 +3,24 @@ $currentRoute = Route::currentRouteName();
 $countUnreadNotifications = count(Auth::user()->unreadNotifications)   
 @endphp
 
-
-<ul class="list-unstyled">
-<li><a href="{{route('panel.index') }}" class="text-dark {{ $currentRoute == 'panel.index'  ? 'font-weight-bold' : null }}">Inicio</a></li>
-</ul>
-<h6><b>Mis notificationes</b></h5>
-<ul class="list-unstyled">
-<li><a href="{{route('panel.notifications') }}" class="text-dark {{ $currentRoute == 'panel.notifications' ? 'font-weight-bold' : null }}">Todas</a></li>
-<li><a href="{{route('panel.notifications.unread') }}" class="text-dark {{ $currentRoute == 'panel.notifications.unread' ? 'font-weight-bold' : null }}">Pendientes <span class="badge badge-primary badge-pill align-middle">{{$countUnreadNotifications}}</span></a></li>
-</ul>
-<h6><b>Mis objetivos</b></h5>
-<ul class="list-unstyled">
-<li><a href="{{route('panel.objectives') }}" class="text-dark {{ $currentRoute == 'panel.objectives' ? 'font-weight-bold' : null }}">Listar</a></li>
-</ul>
-<h6><b>Mis suscripciones</b></h5>
-<ul class="list-unstyled">
-<li><a href="{{route('panel.subscriptions') }}" class="text-dark {{ $currentRoute == 'panel.subscriptions' ? 'font-weight-bold' : null }}">Listar</a></li>
-</ul>
-<h6><b>Mi cuenta</b></h5>
-<ul class="list-unstyled">
-<li><a href="{{route('panel.account.avatar') }}" class="text-dark {{ $currentRoute == 'panel.account.avatar' ? 'font-weight-bold' : null }}">Cambiar mi avatar</a></li>
-<li><a href="{{route('panel.account.email') }}" class="text-dark {{ $currentRoute == 'panel.account.email' ? 'font-weight-bold' : null }}">Cambiar mi email</a></li>
-<li><a href="{{route('panel.account.access') }}" class="text-dark {{ $currentRoute == 'panel.account.access' ? 'font-weight-bold' : null }}">Cambiar contraseña</a></li>
-<li><a href="{{route('panel.account.notifications') }}" class="text-dark {{ $currentRoute == 'panel.account.notifications' ? 'font-weight-bold' : null }}">Preferencias de envio</a></li>
-</ul>
+<a href="{{route('panel.index') }}" class="category {{ $currentRoute == 'panel.index'  ? 'is-active' : null }}"><i class="fas fa-tachometer-alt fa-fw"></i>&nbsp;Inicio</a></li>
+<h6 class="category"><i class="fas fa-bell fa-fw"></i>&nbsp;Mis notificationes</h6>
+<div class="menu-link">
+<a href="{{route('panel.notifications') }}" class="item-link {{ $currentRoute == 'panel.notifications' ? 'is-active' : null }}">Todas</a>
+<a href="{{route('panel.notifications.unread') }}" class="item-link {{ $currentRoute == 'panel.notifications.unread' ? 'is-active' : null }}">Pendientes <span class="badge badge-primary badge-pill align-middle">{{$countUnreadNotifications}}</span></a>
+</div>
+<h6 class="category"><i class="fas fa-marker fa-fw"></i>&nbsp;Mis objetivos</h6>
+<div class="menu-link">
+<a href="{{route('panel.objectives') }}" class="item-link {{ $currentRoute == 'panel.objectives' ? 'is-active' : null }}">Listar</a>
+</div>
+<h6 class="category"><i class="fas fa-envelope fa-fw"></i>&nbsp;Mis suscripciones</h6>
+<div class="menu-link">
+<a href="{{route('panel.subscriptions') }}" class="item-link {{ $currentRoute == 'panel.subscriptions' ? 'is-active' : null }}">Listar</a>
+</div>
+<h6 class="category"><i class="fas fa-user fa-fw"></i>&nbsp;Mi cuenta</h6>
+<div class="menu-link">
+<a href="{{route('panel.account.email') }}" class="item-link {{ $currentRoute == 'panel.account.email' ? 'is-active' : null }}">Cambiar mi email</a>
+<a href="{{route('panel.account.avatar') }}" class="item-link {{ $currentRoute == 'panel.account.avatar' ? 'is-active' : null }}">Cambiar mi avatar</a>
+<a href="{{route('panel.account.access') }}" class="item-link {{ $currentRoute == 'panel.account.access' ? 'is-active' : null }}">Cambiar contraseña</a>
+<a href="{{route('panel.account.notifications') }}" class="item-link {{ $currentRoute == 'panel.account.notifications' ? 'is-active' : null }}">Preferencias de envio</a>
+</div>

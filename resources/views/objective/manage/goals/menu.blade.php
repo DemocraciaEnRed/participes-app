@@ -2,31 +2,28 @@
 $currentRoute = Route::currentRouteName();
 @endphp
 <p class="text-smaller text-muted mb-0">Meta</p>
-<h5 class="font-weight-bold">
+<h6 class="font-weight-bold">
 {{$goal->title}}
-</h5>
+</h6>
 <p class="text-smaller text-muted mb-0">Objetivo</p>
 <h6 class="font-weight-bold text-smaller">
 {{$objective->title}}
 </h6>
-<hr>
-<ul class="list-unstyled">
-<li><a href="{{ route('objective.manage.index', ['objectiveId' => $objective->id]) }}" class="text-dark {{ $currentRoute == 'objective.manage.index'  ? 'font-weight-bold' : null }}"><i class="fas fa-arrow-left"></i>&nbsp;Volver al objetivo</a></li>
-<li><a href="{{ route('objective.manage.goals', ['objectiveId' => $objective->id]) }}" class="text-dark {{ $currentRoute == 'objective.manage.goals'  ? 'font-weight-bold' : null }}"><i class="fas fa-arrow-left"></i>&nbsp;Volver a las metas</a></li>
+<ul class="list-unstyled mb-0">
+<li><a href="{{ route('objective.manage.index', ['objectiveId' => $objective->id]) }}" class="text-smaller text-dark"><i class="fas fa-arrow-left"></i>&nbsp;Volver al objetivo</a></li>
+<li><a href="{{ route('objective.manage.goals', ['objectiveId' => $objective->id]) }}" class="text-smaller text-dark"><i class="fas fa-arrow-left"></i>&nbsp;Volver a las metas</a></li>
 </ul>
 <hr>
-<ul class="list-unstyled">
-<li><a href="{{ route('objective.manage.goals.index', ['objectiveId' => $objective->id, 'goalId' => $goal->id]) }}" class="text-dark {{ $currentRoute == 'objective.manage.goals.index'  ? 'font-weight-bold' : null }}">Dashboard</a></li>
-</ul>
-<h6><b>Reportes</b></h6>
-<ul class="list-unstyled">
-<li><a href="{{ route('objective.manage.goals.reports', ['objectiveId' => $objective->id, 'goalId' => $goal->id]) }}" class="text-dark {{ $currentRoute == 'objective.manage.goals.reports'  ? 'font-weight-bold' : null }}">Listar</a></li>
-<li><a href="{{ route('objective.manage.goals.reports.add', ['objectiveId' => $objective->id, 'goalId' => $goal->id ]) }}" class="text-dark {{ $currentRoute == 'objective.manage.goals.reports.add'  ? 'font-weight-bold' : null }}"><i class="fas fa-plus"></i>&nbsp;Nuevo</a></li>
-</ul>
-<h6><b>Hitos</b></h6>
-<ul class="list-unstyled">
-<li><a href="{{ route('objective.manage.goals.milestones', ['objectiveId' => $objective->id, 'goalId' => $goal->id]) }}" class="text-dark {{ $currentRoute == 'objective.manage.goals.milestones'  ? 'font-weight-bold' : null }}">Listar</a></li>
+<a href="{{ route('objective.manage.goals.index', ['objectiveId' => $objective->id, 'goalId' => $goal->id]) }}" class="category {{ $currentRoute == 'objective.manage.goals.index'  ? 'is-active' : null }}"><i class="fas fa-tachometer-alt fa-fw"></i>&nbsp;Dashboard</a>
+<h6 class="category"><i class="far fa-file-alt fa-fw"></i>&nbsp;Reportes</h6>
+<div class="menu-link">
+<a href="{{ route('objective.manage.goals.reports.add', ['objectiveId' => $objective->id, 'goalId' => $goal->id ]) }}" class="item-link {{ $currentRoute == 'objective.manage.goals.reports.add'  ? 'is-active' : null }}"><i class="fas fa-plus fa-fw"></i>&nbsp;Nuevo</a>
+<a href="{{ route('objective.manage.goals.reports', ['objectiveId' => $objective->id, 'goalId' => $goal->id]) }}" class="item-link {{ $currentRoute == 'objective.manage.goals.reports'  ? 'is-active' : null }}">Listar</a>
+</div>
+<h6 class="category"><i class="fas fa-star fa-fw"></i>&nbsp;Hitos</h6>
+<div class="menu-link">
 @isManager($objective->id)
-<li><a href="{{ route('objective.manage.goals.milestones.add', ['objectiveId' => $objective->id, 'goalId' => $goal->id]) }}" class="text-dark {{ $currentRoute == 'objective.manage.goals.milestones.add'  ? 'font-weight-bold' : null }}"><i class="fas fa-plus"></i>&nbsp;Crear</a></li>
+<a href="{{ route('objective.manage.goals.milestones.add', ['objectiveId' => $objective->id, 'goalId' => $goal->id]) }}" class="item-link {{ $currentRoute == 'objective.manage.goals.milestones.add'  ? 'is-active' : null }}"><i class="fas fa-plus fa-fw"></i>&nbsp;Crear</a>
 @endisManager
-</ul>
+<a href="{{ route('objective.manage.goals.milestones', ['objectiveId' => $objective->id, 'goalId' => $goal->id]) }}" class="item-link {{ $currentRoute == 'objective.manage.goals.milestones'  ? 'is-active' : null }}">Listar</a>
+</div>

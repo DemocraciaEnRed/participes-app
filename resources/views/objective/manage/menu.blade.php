@@ -12,34 +12,32 @@ $currentRoute = Route::currentRouteName();
 </div>
 <hr>
 @yield('theMenu')
-<ul class="list-unstyled">
-<li><a href="{{ route('objective.manage.index', ['objectiveId' => $objective->id]) }}" class="text-dark {{ $currentRoute == 'admin.index'  ? 'font-weight-bold' : null }}">Dashboard</a></li>
-</ul>
-<h6><b>Metas del objetivo</b></h6>
-<ul class="list-unstyled">
-<li><a href="{{ route('objective.manage.goals', ['objectiveId' => $objective->id]) }}" class="text-dark {{ $currentRoute == 'objective.manage.goals' ? 'font-weight-bold' : null }}">Listar</a></li>
+<a href="{{route('objective.manage.index', ['objectiveId' => $objective->id]) }}" class="category {{ $currentRoute == 'objective.manage.index'  ? 'is-active' : null }}"><i class="fas fa-tachometer-alt fa-fw"></i>&nbsp;Dashboard</a>
+
+<h6 class="category"><i class="fas fa-medal fa-fw"></i>&nbsp;Metas del objetivo</h6>
+<div class="menu-link">
 @isManager($objective->id)
-<li><a href="{{ route('objective.manage.goals.add', ['objectiveId' => $objective->id]) }}" class="text-dark {{ $currentRoute == 'objective.manage.goals.add' ? 'font-weight-bold' : null }}"><i class="fas fa-plus"></i>&nbsp;Nuevo</a></li>
+<a href="{{ route('objective.manage.goals.add', ['objectiveId' => $objective->id]) }}" class="item-link {{ $currentRoute == 'objective.manage.goals.add' ? 'is-active' : null }}"><i class="fas fa-plus fa-fw"></i>&nbsp;Nuevo</a>
 @endisManager
-</ul>
-<h6><b>Miembros del equipo</b></h6>
-<ul class="list-unstyled">
-<li><a href="{{ route('objective.manage.team', ['objectiveId' => $objective->id]) }}" class="text-dark {{ $currentRoute == 'objective.manage.team' ? 'font-weight-bold' : null }}">Listar miembros</a></li>
+<a href="{{ route('objective.manage.goals', ['objectiveId' => $objective->id]) }}" class="item-link {{ $currentRoute == 'objective.manage.goals' ? 'is-active' : null }}">Listar</a>
+</div>
+
+<h6 class="category"><i class="fas fa-users fa-fw"></i>&nbsp;Miembros del equipo</h6>
+<div class="menu-link">
 @isManager($objective->id)
-<li><a href="{{ route('objective.manage.team.add', ['objectiveId' => $objective->id]) }}" class="text-dark {{ $currentRoute == 'objective.manage.team.add' ? 'font-weight-bold' : null }}"><i class="fas fa-plus"></i>&nbsp;Nuevo</a></li>
+<a href="{{ route('objective.manage.team.add', ['objectiveId' => $objective->id]) }}" class="item-link {{ $currentRoute == 'objective.manage.team.add' ? 'is-active' : null }}"><i class="fas fa-plus fa-fw"></i>&nbsp;Nuevo</a>
 @endisManager
-</ul>
-<h6><b>Suscriptores</b></h6>
-<ul class="list-unstyled">
-<li><a href="{{ route('objective.manage.subscribers', ['objectiveId' => $objective->id]) }}" class="text-dark {{ $currentRoute == 'objective.manage.subscribers' ? 'font-weight-bold' : null }}">Listar</a></li>
-</ul>
+<a href="{{ route('objective.manage.team', ['objectiveId' => $objective->id]) }}" class="item-link {{ $currentRoute == 'objective.manage.team' ? 'is-active' : null }}">Listar</a>
+</div>
+<a href="{{route('objective.manage.subscribers', ['objectiveId' => $objective->id]) }}" class="category {{ $currentRoute == 'objective.manage.subscribers'  ? 'is-active' : null }}"><i class="fas fa-user-tag fa-fw"></i>&nbsp;Suscriptores</a>
+
 @isManager($objective->id)
-<h6><b>Administrar</b></h6>
-<ul class="list-unstyled">
-<li><a href="{{ route('objective.manage.configuration', ['objectiveId' => $objective->id]) }}" class="text-dark {{ $currentRoute == 'objective.manage.configuration' ? 'font-weight-bold' : null }}">Configuración</a></li>
-<li><a href="{{ route('objective.manage.cover', ['objectiveId' => $objective->id]) }}" class="text-dark {{ $currentRoute == 'objective.manage.cover' ? 'font-weight-bold' : null }}">Imagen de portada</a></li>
-<li><a href="{{ route('objective.manage.files', ['objectiveId' => $objective->id]) }}" class="text-dark {{ $currentRoute == 'objective.manage.files' ? 'font-weight-bold' : null }}">Repositorio de archivos</a></li>
-<li><a href="{{ route('objective.manage.album', ['objectiveId' => $objective->id]) }}" class="text-dark {{ $currentRoute == 'objective.manage.album' ? 'font-weight-bold' : null }}">Album de fotos</a></li>
-<li><a href="{{ route('objective.manage.map', ['objectiveId' => $objective->id]) }}" class="text-dark {{ $currentRoute == 'objective.manage.map' ? 'font-weight-bold' : null }}">Mapa de reportes</a></li>
-</ul>
+<h6 class="category"><i class="fas fa-cog fa-fw"></i>&nbsp;Administrar</h6>
+<div class="menu-link">
+<a href="{{route('objective.manage.configuration', ['objectiveId' => $objective->id]) }}" class="item-link {{ $currentRoute == 'objective.manage.configuration'  ? 'is-active' : null }}">Configuración</a>
+<a href="{{route('objective.manage.cover', ['objectiveId' => $objective->id]) }}" class="item-link {{ $currentRoute == 'objective.manage.cover'  ? 'is-active' : null }}">Imagen de portada</a>
+<a href="{{route('objective.manage.files', ['objectiveId' => $objective->id]) }}" class="item-link {{ $currentRoute == 'objective.manage.files'  ? 'is-active' : null }}">Repositorio de archivos</a>
+<a href="{{route('objective.manage.album', ['objectiveId' => $objective->id]) }}" class="item-link {{ $currentRoute == 'objective.manage.album'  ? 'is-active' : null }}">Album de fotos</a>
+<a href="{{route('objective.manage.map', ['objectiveId' => $objective->id]) }}" class="item-link {{ $currentRoute == 'objective.manage.map'  ? 'is-active' : null }}">Mapa de reportes</a>
+</div>
 @endisManager

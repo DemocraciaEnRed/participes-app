@@ -1,15 +1,15 @@
-@extends('layouts.panel')
+@extends('layouts.app')
 
 @section('headscripts')
 {!! NoCaptcha::renderJs('es') !!}
 @endsection
 
 @section('content')
-<div class="container">
+<div class="container push-to-header">
 	<div class="row justify-content-center">
 		<div class="col-md-10 col-lg-8">
 			<div class="text-center">
-				<img src="{{asset('img/participes-color.svg')}}" width="300" class="img-fluid mb-5 mt-2"
+				<img src="{{asset('img/participes-white.svg')}}" width="300" class="img-fluid mb-5 mt-2"
 					alt="{{ config('app.name', 'Laravel') }}">
 			</div>
 			@if ($errors->any())
@@ -21,7 +21,7 @@
 				</ul>
 			</div>
 			@endif
-			<div class="card shadow-sm">
+			<div class="card shadow-sm py-4">
 				<div class="card-body">
 					<form method="POST" action="{{ route('register') }}">
 						@csrf
@@ -103,9 +103,9 @@
 							<div class="col-md-6 offset-md-4">
 								<p class="text-smaller is-400">Al registrarse, usted da conformidad con los <a href="#">Terminos y condiciones</a> del portal</p>
 								<button type="submit" class="btn btn-primary">
-									{{ __('Register') }}
+									<i class="fas fa-paper-plane"></i>&nbsp;{{ __('Register') }}
 								</button>
-								<button type="submit" class="btn btn-light">
+								<button type="submit" class="btn btn-outline-white">
 									<i class="fas fa-home"></i> Volver al inicio
 								</button>
 							</div>

@@ -36,19 +36,19 @@
     <li>Miembros del equipo pueden crear reportes, pero los suscriptores no serán notificados</li>
     <li>Coordinadores pueden seguir creando metas.</li>
   </ul>
-  <form action="{{ route('objective.manage.configuration.form',['objectiveId' => $objective->id]) }}" method="POST">
+  <form action="{{ route('objective.manage.configuration.hide.form',['objectiveId' => $objective->id]) }}" method="POST">
     @method('PUT')
     @csrf
     <div class="form-group">
       <div class="custom-control custom-switch">
-        <input type="checkbox" class="custom-control-input" name="hidden" id="mailable" {{$objective->hidden ? 'checked' : ''}} value="true">
-        <label class="custom-control-label is-clickable" for="mailable">Ocultar objetivo</label>
+        <input type="checkbox" class="custom-control-input" name="hidden" id="isHidden" {{$objective->hidden ? 'checked' : ''}} value="true">
+        <label class="custom-control-label is-clickable" for="isHidden">Ocultar objetivo</label>
       </div>
     </div>
     <button type="submit" class="btn btn-primary">Guardar</button>
   </form>
   <hr>
-  <form action="{{ route('objective.manage.configuration.form',['objectiveId' => $objective->id]) }}" method="POST">
+  <form action="{{ route('objective.manage.configuration.map.form',['objectiveId' => $objective->id]) }}" method="POST">
     @method('PUT')
     @csrf
     <h5 class="font-weight-bold"><i class="far fa-eye"></i> Definir centro y zoom por defecto del mapa</h5>

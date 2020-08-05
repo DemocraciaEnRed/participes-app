@@ -3,7 +3,7 @@
 @section('adminContent')
 
 <section>
-<div class="jumbotron">
+<div class="jumbotron bg-white">
   <h1 class="display-4">Hello, {{Auth::user()->name}}!</h1>
   <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
   <hr class="my-4">

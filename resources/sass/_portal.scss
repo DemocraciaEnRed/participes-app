@@ -1,0 +1,255 @@
+.portal-header {
+  background: url('/img/citybg.jpg');
+  background-size: cover;
+  background-position: center center;
+
+  .portal-header-overlay {
+    padding-top: 40px;
+    padding-bottom: 80px;
+    background-color: transparentize($primary, 0.25);
+  }
+
+  .logo-header {
+    max-width: 250px;
+    width: 100%;
+  }
+
+  .portal-header-subtitle {}
+}
+
+#portal-sections-buttons {
+  background-color: #FFF;
+
+  .buttons-container {
+    margin-top: -40px;
+  }
+
+  .section-button {
+    a {
+      color: $dark;
+
+      &:hover {
+        color: $primary;
+
+        .liner {
+          background-color: $primary;
+        }
+      }
+
+      text-decoration: none;
+    }
+
+    .liner {
+      height: 2px;
+      width: 90%;
+      margin: 0 auto;
+      background-color: $light;
+      border-radius: 2px;
+      width: 150px;
+
+      @include media-breakpoint-up(sm) {
+        width: 90%;
+      }
+    }
+
+    &.active {
+      color: $primary;
+
+      a {
+        color: $primary;
+
+        &:hover {
+          color: $primary;
+        }
+      }
+
+      .liner {
+        background-color: $primary;
+      }
+    }
+  }
+}
+
+#about {
+  background-color: #FFF;
+
+  .custom-border {
+    border-radius: 10px;
+  }
+
+  #about-one {
+    padding: 3rem 15px;
+
+    .column-picture img {
+      max-width: 90%;
+
+      @include media-breakpoint-up(lg) {
+        max-width: 100%;
+      }
+    }
+
+    @include media-breakpoint-up(lg) {
+      .column-text {
+        z-index: 2;
+      }
+
+      .column-picture {
+        margin-left: -80px;
+        z-index: 1;
+        max-width: none;
+      }
+    }
+  }
+
+  #about-two {
+    padding: 0rem 15px 3rem;
+
+    .row {
+      flex-direction: column-reverse;
+
+      @include media-breakpoint-up(lg) {
+        flex-direction: row;
+      }
+    }
+
+    .column-picture img {
+      max-width: 90%;
+
+      @include media-breakpoint-up(lg) {
+        max-width: 100%;
+      }
+    }
+
+    @include media-breakpoint-up(lg) {
+      padding-top: 3rem;
+
+      .column-text {
+        z-index: 2;
+      }
+
+      .column-picture {
+        margin-right: -80px;
+        z-index: 1;
+        max-width: none;
+      }
+    }
+  }
+
+  #about-three {
+    padding: 0rem 15px 3rem;
+
+    @include media-breakpoint-up(lg) {
+      padding-top: 3rem;
+    }
+  }
+}
+
+#final-about {
+  .custom-border {
+    border-radius: 10px;
+  }
+
+  .final-about-picture {
+    max-width: 90%;
+    margin: 0 auto 30px;
+  }
+
+  .first-container {
+    padding-top: 0rem;
+
+    @include media-breakpoint-up(lg) {
+      padding-top: 135px;
+    }
+  }
+
+  .second-container {
+    position: relative;
+
+    .picture-container {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+  }
+}
+
+#footer {
+  background-color: #FFF;
+  padding: 3rem 0 4rem;
+
+  @include media-breakpoint-up(lg) {
+    padding: 4rem 0 6rem;
+  }
+
+  .footer-logo {
+    margin-bottom: 15px;
+    width: 130px;
+  }
+}
+
+.about-portal-header {
+  background: url('/img/citybg.jpg');
+  background-size: cover;
+  background-position: center center;
+
+  .about-portal-header-overlay {
+    height: 200px;
+    background-color: transparentize($primary, 0.25);
+  }
+}
+
+#about-container {
+  margin-top: -150px;
+  margin-bottom: 50px;
+  #about-content{
+    section {
+      font-size: 0.875rem;
+      p:last-child{
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+#menu {
+  margin-bottom: 20px;
+  padding: 1rem;
+  @include media-breakpoint-up(lg) {
+    position: sticky;
+    z-index: 1024;
+    top: 10px;
+    margin-bottom: 0;
+  }
+  a:hover{
+    text-decoration: none;
+  }
+  .category{
+    display: block;
+    padding: 10px 0 5px;
+    color: $dark;
+    font-weight: 600;
+  }
+  a.category:hover{
+    color: $primary;
+  }
+  .menu-link {
+    margin-bottom: 10px;
+    a.item-link {
+      display: block;
+      margin-bottom: 0;
+      margin-left: 9px;
+      border-left: 1px solid $gray-700;
+      color: $gray-600;
+      &:hover {
+        color: $primary;
+        border-left: 2px solid $primary;
+      }
+      padding: 2px 5px 2px 15px;
+      font-size: 0.80rem;
+      &.is-active {
+        border-left: 2px solid $primary;
+          color: $primary;
+      }
+    }
+  }
+} 

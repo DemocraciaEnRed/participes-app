@@ -1,11 +1,11 @@
-@extends('layouts.panel')
+@extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container push-to-header">
 	<div class="row justify-content-center">
 		<div class="col-md-10 col-lg-8">
 			<div class="text-center">
-				<img src="{{asset('img/participes-color.svg')}}" width="300" class="img-fluid mb-5 mt-2"
+				<img src="{{asset('img/participes-white.svg')}}" width="300" class="img-fluid mb-5 mt-2"
 					alt="{{ config('app.name', 'Laravel') }}">
 			</div>
 			@if ($errors->any())
@@ -17,7 +17,7 @@
 				</ul>
 			</div>
 			@endif
-			<div class="card shadow-sm">
+			<div class="card shadow-sm py-4">
 				{{-- <div class="card-header">{{ __('Login') }}</div> --}}
 
 				<div class="card-body">
@@ -69,12 +69,12 @@
 						<div class="form-group row mb-0">
 							<div class="col-md-8 offset-md-4">
 								<button type="submit" class="btn btn-primary">
-									{{ __('Login') }}
+									<i class="fas fa-sign-in-alt"></i>&nbsp;{{ __('Login') }}
 								</button>
 
 								@if (Route::has('password.request'))
-								<a class="btn btn-link" href="{{ route('password.request') }}">
-									{{ __('Forgot Your Password?') }}
+								<a class="btn btn-outline-white btn-sm" href="{{ route('password.request') }}">
+									<i class="fas fa-question-circle"></i>&nbsp;{{ __('Forgot Your Password?') }}
 								</a>
 								@endif
 							</div>
