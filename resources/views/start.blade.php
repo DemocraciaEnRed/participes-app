@@ -25,7 +25,7 @@
   <div id="app">
     <main class="py-4">
       <div class="container">
-        @include('flashMessage')
+        @include('partials.flashMessage')
         <h1>Start app</h1>
         <hr>
          @if ($errors->any())

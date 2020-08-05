@@ -141,3 +141,10 @@ $ php artisan queue:work redis --queue:mailer
 $ php artisan queue:work redis --queue:default
 ```
 
+## Files - Storage Link
+
+Run the following
+```
+php artisan storage:link
+```
+

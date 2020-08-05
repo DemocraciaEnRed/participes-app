@@ -1,5 +1,4 @@
 <div id="footer">
-
 <div class="container">
   <div class="row text-smaller text-center text-lg-left">
     <div class="col-lg-3 mb-2 mb-lg-0">
