@@ -33,7 +33,8 @@
         "tiptap": "^1.29.1",
         "tiptap-extensions": "^1.31.1",
         "vue-chartjs": "^3.5.0",
-        "vue-croppa": "^1.3.8"
+        "vue-croppa": "^1.3.8",
+        "vue-scrollactive": "^0.9.3"
     },
     "browser": {
         "fs": false,

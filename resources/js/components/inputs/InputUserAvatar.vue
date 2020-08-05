@@ -10,7 +10,7 @@
           :file-size-limit="8*1024*1024"
           :quality="2"
           accept="image/jpeg"
-          class="shadow"
+          class="shadow-sm"
           placeholder="Haga clic en Cargar Imagen"
           :placeholder-font-size="12"
           :disabled="false"
@@ -24,7 +24,7 @@
           @image-remove="handleImageRemove"
         ></croppa>
       </div>
-      <img :src="dataUrl" class="rounded-circle img-thumbnail shadow mb-3" v-show="hasDataUrl" width="300" alt="">
+      <img :src="dataUrl" class="rounded-circle img-thumbnail shadow-sm mb-3" v-show="hasDataUrl" width="300" alt="">
     </div>
     <div class="col" v-if="!isLoading && !(success || error)">
       <div v-if="myCroppa && !myCroppa.hasImage() && !hasDataUrl" class="animate__animated animate__flash">

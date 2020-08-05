@@ -6,8 +6,11 @@
 
 require('./bootstrap');
 import http from './axios'
+import VueScrollactive from 'vue-scrollactive';
 
 window.Vue = require('vue');
+
+Vue.use(VueScrollactive);
 
 /**
  * The following block of code may be used to automatically register your

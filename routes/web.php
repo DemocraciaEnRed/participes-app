@@ -16,7 +16,24 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/start', 'MiscController@start')->name('start');
 Route::post('/start', 'MiscController@startApp')->name('start.form');
-Route::get('/bladeTest', 'HomeController@bladeTest')->name('bladeTest');
+
+Route::group([
+    'as' => 'about.', 
+    'prefix' => 'acerca', 
+    ],function () {
+    Route::get('/general', 'HomeController@viewAboutGeneral')->name('general');
+    Route::get('/faq', 'HomeController@viewAboutQuestions')->name('faq');
+    Route::get('/legales', 'HomeController@viewAboutLegals')->name('legal');
+});
+
+Route::group([
+    'as' => 'aboutTwo.', 
+    'prefix' => 'acerca2', 
+    ],function () {
+    Route::get('/general', 'HomeController@viewAboutGeneralTwo')->name('general');
+    Route::get('/faq', 'HomeController@viewAboutQuestionsTwo')->name('faq');
+    Route::get('/legales', 'HomeController@viewAboutLegalsTwo')->name('legal');
+});
 
 Auth::routes(['verify' => true]);
 
@@ -136,7 +153,8 @@ Route::group([
         Route::put('/metas/{goalId}/reportes/{reportId}/mapa', 'ReportPanelController@formReportMap')->name('goals.reports.map.form');
         // Administracion
         Route::get('/configuracion', 'ObjectivePanelController@viewObjectiveConfiguration')->name('configuration');
-        Route::put('/configuracion', 'ObjectivePanelController@formObjectiveConfiguration')->name('configuration.form');
+        Route::put('/configuracion/ocultar', 'ObjectivePanelController@formObjectiveConfigurationHide')->name('configuration.hide.form');
+        Route::put('/configuracion/mapa', 'ObjectivePanelController@formObjectiveConfigurationMap')->name('configuration.map.form');
         Route::get('/portada', 'ObjectivePanelController@viewObjectiveCover')->name('cover');
         Route::post('/portada', 'ObjectivePanelController@formObjectiveCover')->name('cover.form');
         Route::get('/archivos', 'ObjectivePanelController@viewObjectiveFiles')->name('files');
