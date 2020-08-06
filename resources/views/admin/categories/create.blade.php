@@ -23,12 +23,13 @@
     </div>
     <div class="form-group">
       <label>Icono</label>
-      <input type="text" class="form-control" name="icon" placeholder="Ingrese un icono">
+      {{-- <input type="text" class="form-control" name="icon" placeholder="Ingrese un icono"> --}}
+      <input-icon name="icon"></input-icon>
     </div>
     <div class="form-group">
       <label>Color</label>
-      <input type="text" class="form-control" name="color" placeholder="Ingrese un color en formato HEX">
-      <small id="emailHelp" class="form-text text-muted">No ingrese el color con el "#"</small>
+      <input type="color" class="form-control" name="color" placeholder="Ingrese un color en formato HEX">
+      {{-- <small id="emailHelp" class="form-text text-muted">No ingrese el color con el "#"</small> --}}
     </div>
     <div class="text-right">
     <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Crear</button>
