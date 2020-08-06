@@ -6,8 +6,8 @@ $countUnreadNotifications = count(Auth::user()->unreadNotifications)
 <a href="{{route('panel.index') }}" class="category {{ $currentRoute == 'panel.index'  ? 'is-active' : null }}"><i class="fas fa-tachometer-alt fa-fw"></i>&nbsp;Inicio</a></li>
 <h6 class="category"><i class="fas fa-bell fa-fw"></i>&nbsp;Mis notificationes</h6>
 <div class="menu-link">
+<a href="{{route('panel.notifications.unread') }}" class="item-link {{ $currentRoute == 'panel.notifications.unread' ? 'is-active' : null }}">Pendientes <span class="badge badge-primary badge-pill align-middle {{$countUnreadNotifications > 0 ?: 'd-none'}}" >{{$countUnreadNotifications}}</span></a>
 <a href="{{route('panel.notifications') }}" class="item-link {{ $currentRoute == 'panel.notifications' ? 'is-active' : null }}">Todas</a>
-<a href="{{route('panel.notifications.unread') }}" class="item-link {{ $currentRoute == 'panel.notifications.unread' ? 'is-active' : null }}">Pendientes <span class="badge badge-primary badge-pill align-middle">{{$countUnreadNotifications}}</span></a>
 </div>
 <h6 class="category"><i class="fas fa-marker fa-fw"></i>&nbsp;Mis objetivos</h6>
 <div class="menu-link">

@@ -13,7 +13,7 @@
     </notification-item>
     @endforeach
   @else
-   <li class="list-group-item">¡Ka-boom! ¡No tenes notificaciones sin leer!</li>
+   <li class="list-group-item">¡Ka-boom! ¡No tenes notificaciones!</li>
   @endif
 </ul>
 <br>
