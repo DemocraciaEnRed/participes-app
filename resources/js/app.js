@@ -7,11 +7,23 @@
 require('./bootstrap');
 import http from './axios'
 import VueScrollactive from 'vue-scrollactive';
+import Toasted from 'vue-toasted';
 
 window.Vue = require('vue');
 
 Vue.use(VueScrollactive);
-
+Vue.use(Toasted, {
+    iconPack: 'fontawesome',
+    theme: 'toasted-primary',
+    className: 'custom-toast',
+    // you can pass a single action as below
+    action : {
+        text : 'OK',
+        onClick : (e, toastObject) => {
+            toastObject.goAway(0);
+        }
+    }
+})
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -30,12 +42,12 @@ Vue.component('objective-search-user-add-team', require('./components/ObjectiveS
 Vue.component('paginator', require('./components/utils/Paginator.vue').default);
 Vue.component('error-alert', require('./components/utils/ErrorAlert.vue').default);
 Vue.component('content-visor', require('./components/utils/ContentVisor.vue').default);
+Vue.component('input-icon', require('./components/inputs/InputIcon.vue').default);
 Vue.component('input-tags', require('./components/inputs/InputTag.vue').default);
 Vue.component('input-file', require('./components/inputs/InputFile.vue').default);
 Vue.component('input-user-avatar', require('./components/inputs/InputUserAvatar.vue').default);
 Vue.component('input-add-milestones-create-goal', require('./components/inputs/InputAddMilestonesCreateGoal.vue').default);
 Vue.component('report-comments', require('./components/comments/ReportComments.vue').default);
-
 Vue.component('mapita', require('./components/maps/Mapita.vue').default);
 Vue.component('set-map-default', require('./components/maps/SetMapDefault.vue').default);
 Vue.component('draw-map', require('./components/maps/DrawMap.vue').default);
