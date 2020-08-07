@@ -8,7 +8,7 @@
     </div>
     <div v-else>
       <comment v-for="comment in comments" :key="`comment${comment.id}`" :comment="comment" :user="user" @fetchComments="fetchComments"></comment>
-      <paginator v-if="paginatorData.links && !isFetching" :paginatorData="paginatorData" @updateData="updateData" />
+      <paginator v-if="paginatorData.links" :paginatorData="paginatorData" @updateData="updateData" />
 
     </div>
   </section>

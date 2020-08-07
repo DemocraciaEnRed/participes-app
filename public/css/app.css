@@ -11820,3 +11820,16 @@ a.text-dark:focus {
   color: #2c59fb;
 }
 
+.report-marker {
+  background-image: url(/images/marker.svg?ff94c5ecb03b5eea899a158444d5850f);
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.mapboxgl-popup {
+  max-width: 200px;
+}
+

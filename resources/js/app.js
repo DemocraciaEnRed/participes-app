@@ -51,6 +51,7 @@ Vue.component('report-comments', require('./components/comments/ReportComments.v
 Vue.component('mapita', require('./components/maps/Mapita.vue').default);
 Vue.component('set-map-default', require('./components/maps/SetMapDefault.vue').default);
 Vue.component('draw-map', require('./components/maps/DrawMap.vue').default);
+Vue.component('map-reports', require('./components/maps/MapReports.vue').default);
 
 
 Vue.prototype.$http = http

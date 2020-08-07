@@ -1,5 +1,5 @@
 @php
-$progress = round( ($goal->indicator_progress / $goal->indicator_goal)*100  )
+$progress = round( ($goal->indicator_progress / $goal->indicator_goal)*100  );
 @endphp
 
 @extends('objective.manage.goals.master')

@@ -61,4 +61,20 @@ class Report extends Model
     {
         return $this->morphMany('App\Comment', 'commentable')->whereNull('parent_id');
     }
+    public function typeLabel()
+    {
+        switch($this->type){
+            case 'post':
+                return 'Novedad';
+                break;
+            case 'progress':
+                return 'Avance';
+                break;
+            case 'milestone':
+                return 'Hito';
+                break;    
+            default:
+                return 'Sin etiqueta';
+        }
+    }
 }

@@ -98,7 +98,7 @@
 							<div class="card">
 								<div class="card-body text-center">
 								<h4 class="card-title text-primary font-weight-bold">{{progressTotal}}%</h4>
-								<h6 class="card-subtitle">Porcentaje final de la meta</h6> 
+								<h6 class="card-subtitle">Porcentaje nuevo de la meta</h6> 
 								</div>
 							</div>
 						</div>
