@@ -7,6 +7,7 @@ use App\Comment;
 use App\Report;
 use Illuminate\Http\Request;
 use App\Http\Resources\Comment as CommentResource;
+use App\Http\Resources\Report as ReportResource;
 
 class ReportController extends Controller
 {
@@ -19,7 +20,7 @@ class ReportController extends Controller
     {
         // Forces to be authenticated.
         // $this->middleware('auth');
-        $this->middleware('fetch_report');
+        // $this->middleware('fetch_report');
     }
 
     private function hasManagerPrivileges(Request $request){
@@ -34,20 +35,15 @@ class ReportController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
-    {
-        return view('portal.home');
+    public function fetch(Request $request)
+    {   
+        $reports = Report::query(); 
+        $reports->orderBy('created_at','DESC');
+        $reports = $reports->paginate(10);
+        return ReportResource::collection($reports);
     }
 
-    // public function commentReport(Request $request, $reportId){
-    //   if (!Auth::check()) {
-    //       abort(403, 'No autorizado')
-    //   }
-    //   return view('porta.home')
-    // }
-
     public function fetchComments(Request $request, $reportId){
-        // dd(Auth::user());
         $comments = Comment::query();
         $comments->whereHasMorph(
             'commentable',
@@ -62,6 +58,8 @@ class ReportController extends Controller
     }
 
     public function runCreateComment(Request $request, $reportId){
+        $report = Report::findorfail($reportId);
+
         if(!$request->user()){
             return response()->json(['message' => 'Not authorized'], 403);
         }
@@ -75,7 +73,7 @@ class ReportController extends Controller
         $comment = new Comment();
         $comment->content = $request->input('content');
         $comment->user()->associate($request->user());
-        $request->report->comments()->save($comment);
+        $report->comments()->save($comment);
 
         return response()->json(['message' => 'Se ha creado el comentario'], 200);
 
@@ -102,6 +100,7 @@ class ReportController extends Controller
     }
 
     public function runDeleteComment(Request $request, $reportId, $commentId){
+        $report = Report::findorfail($reportId);
         $comment = Comment::findorfail($commentId);
         $isTheOwner = $comment->user_id == $request->user()->id;
         if($isTheOwner){
@@ -109,7 +108,7 @@ class ReportController extends Controller
             return response()->json(['message' => 'El comentario ha sido borrado'], 200);
         }
         
-        $isUserObjectiveMember = $request->user()->isMemberObjective($request->report->objective->id);
+        $isUserObjectiveMember = $request->user()->isMemberObjective($report->objective->id);
         if($isUserObjectiveMember){
             $comment->delete();
             return response()->json(['message' => 'El comentario ha sido borrado'], 200);

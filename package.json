@@ -29,6 +29,7 @@
         "@turf/center-of-mass": "^6.0.1",
         "animate.css": "^4.1.0",
         "chart.js": "^2.9.3",
+        "hooper": "^0.3.4",
         "mapbox-gl-vue": "^2.0.4",
         "tiptap": "^1.29.1",
         "tiptap-extensions": "^1.31.1",

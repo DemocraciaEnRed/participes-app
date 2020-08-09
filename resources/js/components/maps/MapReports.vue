@@ -111,7 +111,7 @@ export default {
       if(this.reports.length == 0){
         this.$toasted.show('El objetivo no cuenta con reportes geolocalizados', {icon: 'exclamation-triangle'})
       } else {
-        this.$toasted.success('¡Se cargaron los marcadores!',{icon: 'map-marker-alt'})
+        this.$toasted.success('¡Se cargaron los marcadores!',{icon: 'map-marker-alt', duration: 2000})
       }
     },
     updateData: function(data){

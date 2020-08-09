@@ -95,12 +95,14 @@ Route::group([
     'prefix' => 'api-service', 
     ],function () {
     // Userss
+    Route::get('/home/stats', 'HomeController@fetchStats')->name('home.stats');
     Route::get('/users', 'UserController@fetch')->name('users');
     Route::get('/users/avatar', 'UserController@fetchAvatar')->name('users.avatar');
     Route::get('/users/{id}', 'UserController@fetchOne')->name('users.fetch');
     Route::put('/notification/read', 'NotificationController@markAllRead')->name('notification.mark.all');
     Route::put('/notification/read/{id}', 'NotificationController@markOneRead')->name('notification.mark.one');
     Route::delete('/notification/clean', 'NotificationController@cleanAll')->name('notification.clean');
+    Route::get('/reports', 'ReportController@fetch')->name('reports');
     Route::get('/reports/{reportId}/comments', 'ReportController@fetchComments')->name('reports.comments');
     Route::post('/reports/{reportId}/comments', 'ReportController@runCreateComment')->name('reports.comments.create');
     Route::post('/reports/{reportId}/comments/{commentId}/reply', 'ReportController@runCreateReply')->name('reports.comments.reply');

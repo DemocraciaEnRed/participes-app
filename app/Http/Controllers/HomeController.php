@@ -1,7 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DB;
+use Carbon\Carbon;
+use App\Objective;
+use App\Goal;
+use App\Report;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,8 +28,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('portal.home');
+        $countObjectives = Objective::count();
+        $countGoals = Goal::count();
+        $countGoalsCompleted = Goal::where('status','reached')->count();
+        return view('portal.home',[
+            'countObjectives' => $countObjectives,
+            'countGoals' => $countGoals,
+            'countGoalsCompleted' => $countGoalsCompleted,
+        ]);
     }
+    
     public function viewAboutGeneral()
     {
         return view('portal.about.general');
@@ -51,5 +63,34 @@ class HomeController extends Controller
     {
         return view('portal.about2.legal');
     }
+    // --------------------------------
 
+    public function fetchStats(Request $request){
+        $countGoals = Goal::count();
+        $countGoalsCompleted = Goal::where('status','reached')->count();
+        $countGoalsOngoin = Goal::where('status','ongoing')->count();
+        $countGoalsDelayed = Goal::where('status','delayed')->count();
+        $countGoalsInactive = Goal::where('status','inactive')->count();
+        $reportsTotal = Report::where('created_at','>=',Carbon::now()->subdays(15))->count();
+        $reportsData = Report::where('created_at', '>=', Carbon::now()->subdays(15))
+                            ->groupBy(DB::raw('DATE(created_at)'))
+                            ->orderBy('date', 'ASC')
+                            ->get(array(
+                                DB::raw('DATE(created_at) as "date"'),
+                                DB::raw('COUNT(*) as "count"')
+                            ));
+        return response()->json([
+            'message' => 'Ok',
+            'data' => [
+                'goals_total' => $countGoals,
+                'goals_reached' => $countGoalsCompleted,
+                'goals_ongoing' => $countGoalsOngoin,
+                'goals_delayed' => $countGoalsDelayed,
+                'goals_inactive' => $countGoalsInactive,
+                'reports_total' => $reportsTotal,
+                'reports_data' => $reportsData
+            ]
+        ],200);
+
+    }
 }

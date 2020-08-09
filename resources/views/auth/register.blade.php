@@ -58,7 +58,7 @@
 
 							<div class="col-md-6">
 								<input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"
-									value="{{ old('email') }}" required autocomplete="email">
+									value="{{ old('email') }}" required>
 
 								@error('email')
 								<span class="invalid-feedback" role="alert">
@@ -105,9 +105,9 @@
 								<button type="submit" class="btn btn-primary">
 									<i class="fas fa-paper-plane"></i>&nbsp;{{ __('Register') }}
 								</button>
-								<button type="submit" class="btn btn-outline-white">
+								<a href="{{route('home')}}" class="btn btn-outline-white btn-sm">
 									<i class="fas fa-home"></i> Volver al inicio
-								</button>
+								</a>
 							</div>
 						</div>
 					</form>

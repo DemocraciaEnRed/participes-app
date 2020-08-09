@@ -37,13 +37,20 @@ Vue.use(Toasted, {
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('notification-item', require('./components/NotificationItem.vue').default);
+Vue.component('form-new-report', require('./components/FormNewReport.vue').default);
+Vue.component('admin-search-user-new-admin', require('./components/AdminSearchUserNewAdmin.vue').default);
+Vue.component('objective-search-user-add-team', require('./components/ObjectiveSearchUserAddTeam.vue').default);
 Vue.component('paginator', require('./components/utils/Paginator.vue').default);
 Vue.component('error-alert', require('./components/utils/ErrorAlert.vue').default);
+Vue.component('input-icon', require('./components/inputs/InputIcon.vue').default);
+Vue.component('input-tags', require('./components/inputs/InputTag.vue').default);
 Vue.component('input-file', require('./components/inputs/InputFile.vue').default);
-Vue.component('input-user-avatar', require('./components/inputs/InputUserAvatar.vue').default);
-Vue.component('portal-home-reports-carrousel', require('./components/portal/home/ReportsCarrousel.vue').default);
-Vue.component('portal-home-stats', require('./components/portal/home/Stats.vue').default);
-
+Vue.component('input-add-milestones-create-goal', require('./components/inputs/InputAddMilestonesCreateGoal.vue').default);
+Vue.component('report-comments', require('./components/comments/ReportComments.vue').default);
+Vue.component('mapita', require('./components/maps/Mapita.vue').default);
+Vue.component('set-map-default', require('./components/maps/SetMapDefault.vue').default);
+Vue.component('draw-map', require('./components/maps/DrawMap.vue').default);
+Vue.component('map-reports', require('./components/maps/MapReports.vue').default);
 
 Vue.prototype.$http = http
 

@@ -11,7 +11,12 @@
     @include font-weight(100 * $i)
   }
 }
-
+h1,h2,h3,h4{
+  letter-spacing: -1px;
+}
+h5,h6{
+  letter-spacing: -0.5px;
+}
 .is-clickable:hover{
   cursor: pointer;
 }
