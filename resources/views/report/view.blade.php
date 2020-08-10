@@ -76,7 +76,7 @@
         <div class="col-sm-6 my-2">
           <h5 class="is-700">Tags</h5>
           <ul class="list-inline mb-0">
-            @forelse ($report->tags as $tag)
+            @forelse ($report->tags ?: [] as $tag)
             <li class="list-inline-item"><span class="is-size-5">{{$tag}}</span></li>
             @empty
             <li class="list-inline-item text-muted">No hay tags</li>
