@@ -142,6 +142,9 @@
                 <li>7 metas por objetivos</li>
                 <li>6 usuarios miembros del equipo de cada objetivo</li>
                 <li>4 usuarios suscriptos por cada objetivo</li>
+                <li>Entre 1 y 9 reportes por meta, siendo, al azar, que sean, de novedad, progreso, o hito.</li>
+                <li>Un 60% de que el reporte sea geolocalizado</li>
+                <li>Un 40% de que haya un reporte que cambie el estado de la meta a completada</li>
               </ul>
             </div>
           </div>
