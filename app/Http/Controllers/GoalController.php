@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Goal;
+use App\Objective;
 
 class GoalController extends Controller
 {
@@ -17,14 +19,12 @@ class GoalController extends Controller
         // $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
-        return view('portal.home');
+     public function index(Request $request, $goalId){
+        $goal = Goal::findorfail($goalId);
+        $objective = Objective::findorfail($goal->objective_id);
+        return view('goal.view',[
+            'goal' => $goal,
+            'objective' => $objective
+        ]);
     }
-
 }

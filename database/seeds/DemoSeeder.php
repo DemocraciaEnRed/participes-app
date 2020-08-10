@@ -116,12 +116,89 @@ class DemoSeeder extends Seeder
                 $goal->source = $faker->sentence;
                 $goal->objective()->associate($objective);
                 $goal->save();
+                $theMilestones = array();
                 for ($z=0; $z < 5; $z++) { 
                     $milestone = new Milestone();
                     $milestone->order = ($z+1);
                     $milestone->title = $faker->sentence;
                     $milestone->goal()->associate($goal);
                     $milestone->save();
+                    array_push($theMilestones, $milestone);
+                }
+                # Create reports
+                $howManyReports = rand(1,9);
+                for($k = 0; $k < $howManyReports; $k++){
+                    // Date?
+                    $fromDate = Carbon::now()->subWeeks($howManyReports - $k)->toDateTimeString();
+                    $toDate = Carbon::now()->subWeeks($howManyReports - ($k+1))->toDateTimeString();
+                    $reportDate = $faker->dateTimeBetween($fromDate, $toDate);
+                    // Continue
+                    $report = new Report();
+                    $reportType = $faker->randomElement(['post','progress','milestone']);
+                    $report->type = $reportType;
+                    $report->tags = $faker->words(3);
+                    $report->title = $faker->sentence();
+                    $report->content = $faker->realText(450);
+                    $newStatus = $faker->randomElement(['ongoing','delayed','inactive']);
+                    $report->status = $newStatus;
+                    $goal->status = $newStatus;
+                    $goal->save();
+                    $report->date = $reportDate;
+                    $auxProgressRemaining = $goal->indicator_goal - $goal->indicator_progress;
+                    switch($reportType){
+                        case 'post':
+                            break;
+                        case 'progress':
+                            $reportProgress = $faker->numberBetween(0,$auxProgressRemaining);
+                            $report->progress = $reportProgress;
+                            $auxProgressRemaining -= $reportProgress;
+                            $goal->indicator_progress += $reportProgress;
+                            $goal->save();
+                            break;
+                        case 'milestone':
+                            $theMile = array_shift($theMilestones);
+                            if(!is_null($theMile)){
+                                $report->milestone()->associate($theMile);
+                                $theMile->completed = $reportDate;
+                                $theMile->save();
+                            }
+                            break;
+                    }
+                    if($faker->boolean(60)){ // Add Localization?
+                        $lat = $faker->latitude;
+                        $long = $faker->longitude;
+                        $report->map_lat = $lat;
+                        $report->map_long = $long;
+                        $report->map_zoom = 1;
+                        $report->map_center = "{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Point\",\"coordinates\":[{$long},{$lat}]}}";
+                        $report->map_geometries = "{\"type\":\"FeatureCollection\",\"features\":[{\"id\":\"2792417c82752ae1060a24bceac6c3bc\",\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"coordinates\":[{$long},{$lat}],\"type\":\"Point\"}}]}";
+                    }
+                    $report->created_at = $reportDate;
+                    $report->updated_at = $reportDate;
+                    $report->author()->associate($admin);
+                    $report->goal()->associate($goal);
+                    $report->save();
+                }
+                if($faker->boolean(30)){ // Finish Progress?
+                    $fromDate = Carbon::now()->subWeeks(1)->toDateTimeString();
+                    $toDate = Carbon::now()->toDateTimeString();
+                    $reportDate = $faker->dateTimeBetween($fromDate, $toDate);
+                    $report = new Report();
+                    $report->type = 'progress';
+                    $report->tags = $faker->words(3);
+                    $report->title = $faker->sentence();
+                    $report->content = $faker->realText(450);
+                    $report->status = 'reached';
+                    $report->progress = $goal->indicator_goal;
+                    $report->date = $faker->date();
+                    $goal->status = 'reached';
+                    $goal->indicator_progress = $goal->indicator_goal;
+                    $goal->save();
+                    $report->created_at = $reportDate;
+                    $report->updated_at = $reportDate;
+                    $report->author()->associate($admin);
+                    $report->goal()->associate($goal);
+                    $report->save();
                 }
             }
             for ($y=0; $y < 3; $y++) { 

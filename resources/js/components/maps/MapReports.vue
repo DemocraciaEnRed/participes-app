@@ -4,15 +4,12 @@
       :access-token="accessToken"
       :map-options="mapOption"
       @map-init="mapInitialized"
+      @map-load="mapLoaded"
     />
-    <br>
-    <div class="alert alert-light" v-if="isLoading">
-      <i class="fas fa-sync fa-spin"></i>&nbsp;Cargando
+    <div class="alert alert-info my-2" v-if="currentMarkers.length == 0 && !isLoading">
+      <i class="fas fa-exclamation-triangle"></i>&nbsp;¡No hay reportes geolocalizados!
     </div>
-    <div class="alert alert-info" v-if="currentMarkers.length == 0 && !isLoading">
-      <i class="fas fa-exclamation-triangle"></i>&nbsp;El objetivo no cuenta con reportes geolocalizados
-    </div>
-      <paginator v-if="paginatorData.links" :paginatorData="paginatorData" @updateData="updateData" />
+      <paginator v-if="paginatorData.meta && paginatorData.meta.last_page > 1 && paginated" :paginatorData="paginatorData" @updateData="updateData" />
 
   </section>
 </template>
@@ -45,6 +42,10 @@ export default {
    zoom: {
      type: Number,
      default: 4
+   },
+   paginated: {
+     type: Boolean,
+     default: true
    }
   },
   components: { Mapbox },
@@ -86,6 +87,8 @@ export default {
     },
     mapInitialized: function(map) {
       this.map = map
+    },
+    mapLoaded: function(map){
       this.fetchReports();
     },
     addMarkers: function(){
@@ -100,7 +103,7 @@ export default {
 
         // create the popup
         let theHtml = `<div class="text-center">`
-        theHtml += `<p class="is-600 mb-0"><a href="https://google.com" class="text-primary" target="_blank">${report.title}</a></p>`
+        theHtml += `<p class="is-600 mb-0"><a href="/reportes/${report.id}" class="text-primary" target="_blank">${report.title}</a></p>`
         theHtml += `<p class="text-smallest text-muted mb-0">${report.type_label} - ${report.when}</p>`
         theHtml += `</div>`
         let popup = new mapboxgl.Popup({ offset: 25 }).setHTML(theHtml);
@@ -111,7 +114,7 @@ export default {
       if(this.reports.length == 0){
         this.$toasted.show('El objetivo no cuenta con reportes geolocalizados', {icon: 'exclamation-triangle'})
       } else {
-        this.$toasted.success('¡Se cargaron los marcadores!',{icon: 'map-marker-alt', duration: 2000})
+        // this.$toasted.success('¡Se cargaron los marcadores!',{icon: 'map-marker-alt', duration: 2000})
       }
     },
     updateData: function(data){

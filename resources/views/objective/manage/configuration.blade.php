@@ -36,7 +36,7 @@
     <li>Miembros del equipo pueden crear reportes, pero los suscriptores no serán notificados</li>
     <li>Coordinadores pueden seguir creando metas.</li>
   </ul>
-  <form action="{{ route('objective.manage.configuration.hide.form',['objectiveId' => $objective->id]) }}" method="POST">
+  <form action="{{ route('objectives.manage.configuration.hide.form',['objectiveId' => $objective->id]) }}" method="POST">
     @method('PUT')
     @csrf
     <div class="form-group">
@@ -48,7 +48,7 @@
     <button type="submit" class="btn btn-primary">Guardar</button>
   </form>
   <hr>
-  <form action="{{ route('objective.manage.configuration.map.form',['objectiveId' => $objective->id]) }}" method="POST">
+  <form action="{{ route('objectives.manage.configuration.map.form',['objectiveId' => $objective->id]) }}" method="POST">
     @method('PUT')
     @csrf
     <h5 class="font-weight-bold"><i class="far fa-eye"></i> Definir centro y zoom por defecto del mapa</h5>

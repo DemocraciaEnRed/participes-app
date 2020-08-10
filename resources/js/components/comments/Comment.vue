@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class="media pl-3 mb-3 pr-3">
-      <img :src="comment.user.avatar.thumbnail_path" alt="" class="align-self-start mr-3 rounded-circle" style="width: 64px">
+      <img :src="comment.user.avatar ? comment.user.avatar.thumbnail_path : '/img/default-avatar.png'" alt="" class="align-self-start mr-3 rounded-circle" style="width: 64px">
       <div class="media-body">
         <p class="text-smaller mb-0"><i class="fas fa-shield-alt fa-fw"></i><b>{{`${comment.user.name} ${comment.user.surname}`}}</b></p>
         <div class="animate__animated animate__flash mb-2" v-if="showConfirmDelete">

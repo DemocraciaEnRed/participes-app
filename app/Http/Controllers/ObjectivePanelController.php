@@ -62,12 +62,12 @@ class ObjectivePanelController extends Controller
       $this->hasManagerPrivileges($request);
       $user = User::findOrFail($request->input('userId'));
       $request->objective->members()->attach($user, ['role' => $request->input('role')]);
-      return redirect()->route('objective.manage.team', ['objectiveId' => $request->objective->id])->with('success','Miembro agregado');
+      return redirect()->route('objectives.manage.team', ['objectiveId' => $request->objective->id])->with('success','Miembro agregado');
     }
     public function formRemoveTeam(Request $request){
       $this->hasManagerPrivileges($request);
       //TODO
-      return redirect()->route('objective.manage.team', ['objectiveId' => $request->objective->id])->with('success','Miembro eliminado');
+      return redirect()->route('objectives.manage.team', ['objectiveId' => $request->objective->id])->with('success','Miembro eliminado');
     }
     public function viewListGoals(Request $request){
       return view('objective.manage.goals.list',['objective' => $request->objective]);
@@ -114,7 +114,7 @@ class ObjectivePanelController extends Controller
         $milestone->goal()->associate($goal);
         $milestone->save();
       }
-      return redirect()->route('objective.manage.goals.index', ['objectiveId' => $request->objective->id, 'goalId' => $goal->id])->with('success','Meta creada');
+      return redirect()->route('objectives.manage.goals.index', ['objectiveId' => $request->objective->id, 'goalId' => $goal->id])->with('success','Meta creada');
     }
 
 
@@ -130,7 +130,7 @@ class ObjectivePanelController extends Controller
       $request->validate($rules);
       $request->objective->hidden = $request->boolean('hidden');
       $request->objective->save();
-      return redirect()->route('objective.manage.configuration', ['objectiveId' => $request->objective->id])->with('success','Se actualizó el objetivo');
+      return redirect()->route('objectives.manage.configuration', ['objectiveId' => $request->objective->id])->with('success','Se actualizó el objetivo');
     }
     public function formObjectiveConfigurationMap (Request $request){
       $rules = [
@@ -145,7 +145,7 @@ class ObjectivePanelController extends Controller
         $request->objective->map_zoom = $request->input('map_zoom');
       }
       $request->objective->save();
-      return redirect()->route('objective.manage.configuration', ['objectiveId' => $request->objective->id])->with('success','Se actualizó el objetivo');
+      return redirect()->route('objectives.manage.configuration', ['objectiveId' => $request->objective->id])->with('success','Se actualizó el objetivo');
     }
 
     public function viewObjectiveCover (Request $request){
@@ -213,7 +213,7 @@ class ObjectivePanelController extends Controller
           $request->objective->cover->save();
       }
       // Save Logo
-      return redirect()->route('objective.manage.cover', ['objectiveId' => $request->objective->id])->with('success','Se actualizó la imagen de portada del objetivo');
+      return redirect()->route('objectives.manage.cover', ['objectiveId' => $request->objective->id])->with('success','Se actualizó la imagen de portada del objetivo');
     } 
 
     public function viewObjectiveFiles (Request $request){
@@ -281,7 +281,7 @@ class ObjectivePanelController extends Controller
         }
       }
       
-      return redirect()->route('objective.manage.files', ['objectiveId' => $request->objective->id])->with('success','Se agrego el archivo al repositorio del objetivo');
+      return redirect()->route('objectives.manage.files', ['objectiveId' => $request->objective->id])->with('success','Se agrego el archivo al repositorio del objetivo');
     } 
 
     public function viewObjectiveAlbum (Request $request){

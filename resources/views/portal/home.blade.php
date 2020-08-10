@@ -2,6 +2,14 @@
     $heightHeader = 300
 @endphp
 
+@section('stylesheets')
+<link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' />
+@endsection
+
+@section('headscripts')
+<script src='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js'></script>
+@endsection
+
 @extends('layouts.app')
 
 @section('content')
@@ -38,37 +46,30 @@
         <div class="card-body">
           <p><b>Estado de las metas</b></p>
           <portal-home-stats fetch-url="{{route('apiService.home.stats')}}">
-            <div class="alert alert-light p-5 text-center">
-              <i class="fas fa-sync fa-spin"></i>&nbsp;Cargando...
-            </div>
+            @include('partials.loading')
           </portal-home-stats>
         </div>
       </div>
     </div>
   </div>
   <h4 class="is-400 mb-3">Ultimos reportes publicados</h4>
-  <portal-home-reports-carrousel fetch-url="{{route('apiService.reports')}}"/>
-  <p class="mb-4"><a href="#" class="btn btn-primary">Ver reportes</a></p>
-  <h4 class="is-400 mb-3">Ultimos objetivos actualizados</h4>
+  <portal-home-reports-carrousel fetch-url="{{route('apiService.reports')}}"></portal-home-reports-carrousel>
+  {{-- <p class="mb-4"><a href="{{route('reports')}}" class="btn btn-primary">Ver mas reportes</a></p> --}}
+  <h4 class="is-400 mb-3">Ultimos objetivos actualizados</h4> 
+  @foreach ($objectives as $objective)
   <div class="card rounded shadow-sm mb-3">
     <div class="card-body">
-      l
+      <a href="{{route('objectives.index',['objectiveId' => $objective->id])}}"><h5 class="is-600">{{$objective->title}}</h5></a>
     </div>
   </div>
-  <div class="card rounded shadow-sm mb-3">
+  @endforeach
+  <p class="mb-4"><a href="{{route('objectives')}}" class="btn btn-primary">Ver mas objetivos</a></p>
+  <h4 class="is-400 mb-3">Ultimos 15 reportes geolocalizados</h4>
+  <div class="card shadow-sm">
     <div class="card-body">
-      l
+      <map-reports fetch-url="{{route('apiService.reports',['mappable' => true, 'size'=> 15])}}" access-token="{{config('services.mapbox.key')}}" :paginated="false" map-style="{{config('services.mapbox.style')}}" :lat="{{$objective->map_lat ?: 'undefined'}}" :long="{{$objective->map_long ?: 'undefined'}}" :zoom="{{$objective->map_zoom ?: 'undefined'}}">
     </div>
   </div>
-  <div class="card rounded shadow-sm mb-3">
-    <div class="card-body">
-      l
-    </div>
-  </div>
-  <div class="card rounded shadow-sm mb-3">
-    <div class="card-body">
-      l
-    </div>
-  </div>
+
 </div>
 @endsection

@@ -9,7 +9,7 @@
   <h5 class="font-weight-bold"><i class="fas fa-upload"></i> Nueva imagen</h5>
   <p>Debe ser una imagen JPG o JPEG , hasta 8 MB. Si el ancho de la imagen es mayor a 1366px, sera ajustada a este
     tamaño.</p>  
-    <form action="{{route('objective.manage.goals.reports.album.form',['objectiveId' => $objective->id, 'goalId' => $goal->id, 'reportId' => $report->id])}}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('objectives.manage.goals.reports.album.form',['objectiveId' => $objective->id, 'goalId' => $goal->id, 'reportId' => $report->id])}}" method="POST" enctype="multipart/form-data">
     @csrf
     <input-file name="photo" accept="image/*"></input-file>
     <div class="form-group">

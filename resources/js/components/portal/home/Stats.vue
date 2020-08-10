@@ -85,22 +85,6 @@ export default {
         this.isLoading = false
       })
     },
-    getIcon: function(type){
-      switch(type){
-        case 'post':
-          return 'fa-bullhorn'
-          break;
-        case 'progress':
-          return 'fa-fast-forward'
-          break;
-        case 'milestone':
-          return 'fa-medal'
-          break;
-        default:
-          return 'fa-file'
-      }
-      return 'fa-question-circle'
-    }
   },
   computed: {
     goalsReachedPercent: function(){

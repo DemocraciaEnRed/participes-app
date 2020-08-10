@@ -8,7 +8,7 @@
    <hr>
   <h5 class="font-weight-bold"><i class="fas fa-upload"></i> Nuevo archivo</h5>
   <p>Cargue su archivo haciendo clic en el campo para poder seleccionar. Intente no subir archivos de mucho peso.</p>
-  <form action="{{route('objective.manage.goals.reports.files.form',['objectiveId' => $objective->id, 'goalId' => $goal->id, 'reportId' => $report->id])}}" method="POST" enctype="multipart/form-data">
+  <form action="{{route('objectives.manage.goals.reports.files.form',['objectiveId' => $objective->id, 'goalId' => $goal->id, 'reportId' => $report->id])}}" method="POST" enctype="multipart/form-data">
     @csrf
     <input-file name="file"></input-file>
     <div class="form-group">

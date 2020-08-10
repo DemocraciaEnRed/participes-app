@@ -18,6 +18,6 @@
 <hr>
 <section id="manual" class="py-4">
  <h4 class="is-600 mb-5">Manual de usuario</h4>
-  <h6 class="is-600 mb-3">//TODO</h5>
+  <h6 class="is-600 mb-3">Proximamente</h5>
 </section>
 @endsection

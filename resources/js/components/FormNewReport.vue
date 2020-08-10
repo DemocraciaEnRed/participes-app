@@ -31,7 +31,7 @@
 				<input type="text" name="title" class="form-control" placeholder="" />
 			</div>
 			<div class="form-group">
-      	<label>Descripción del objetivo</label>
+      	<label>Descripción del reporte</label>
       	<textarea name="content" class="form-control" rows="4"></textarea>
 				<!-- <text-editor name="content"/> -->
     	</div>

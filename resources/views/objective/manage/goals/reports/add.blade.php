@@ -17,7 +17,7 @@
   @endif
 
   
-  <form-new-report form-url="{{ route('objective.manage.goals.reports.add.form',['objectiveId' => $objective->id, 'goalId' => $goal->id])}}" crsf-token="{{ csrf_token() }}" :goal='@json($goal)' :milestones='@json($goal->milestones)'>
+  <form-new-report form-url="{{ route('objectives.manage.goals.reports.add.form',['objectiveId' => $objective->id, 'goalId' => $goal->id])}}" crsf-token="{{ csrf_token() }}" :goal='@json($goal)' :milestones='@json($goal->milestones)'>
     <div class="alert alert-light text-center">
       <p class="m-0"><i class="fas fa-sync fa-spin"></i>&nbsp;Cargando</p>
       <span class="text-smaller font-italic">Si no carga, intente recargar la pagina</span>

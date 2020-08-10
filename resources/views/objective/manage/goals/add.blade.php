@@ -15,7 +15,7 @@
         </ul>
     </div>
   @endif
-  <form method="POST" action="{{ route('objective.manage.goals.add.form',['objectiveId' => $objective->id]) }}">
+  <form method="POST" action="{{ route('objectives.manage.goals.add.form',['objectiveId' => $objective->id]) }}">
     @csrf
     <div class="form-group">
       <label>Meta</label>

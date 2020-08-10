@@ -101,7 +101,7 @@
 
 						<div class="form-group row mb-0">
 							<div class="col-md-6 offset-md-4">
-								<p class="text-smaller is-400">Al registrarse, usted da conformidad con los <a href="#">Terminos y condiciones</a> del portal</p>
+								<p class="text-smaller is-400">Al registrarse, usted da conformidad con los <a href="{{route('about.legal')}}">Terminos y condiciones</a> del portal</p>
 								<button type="submit" class="btn btn-primary">
 									<i class="fas fa-paper-plane"></i>&nbsp;{{ __('Register') }}
 								</button>

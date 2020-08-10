@@ -24,7 +24,7 @@ $zoom = $report->map_zoom ?: ($objective->map_zoom ?: 'undefined');
   <h1 class="">Mapa</h1>
   <p>Aqui puede crear puntos, areas, o lineas que tengan que ver con el reporte publicado</p>
    <hr />
-    <form action="{{route('objective.manage.goals.reports.map.form',['objectiveId' => $objective->id, 'goalId' => $goal->id, 'reportId' => $report->id])}}" method="POST">
+    <form action="{{route('objectives.manage.goals.reports.map.form',['objectiveId' => $objective->id, 'goalId' => $goal->id, 'reportId' => $report->id])}}" method="POST">
       @method('PUT')
       @csrf
       <draw-map access-token="{{config('services.mapbox.key')}}" map-style="{{config('services.mapbox.style')}}" :lat="{{$lat}}" :long="{{$long}}" :zoom="{{$zoom}}" :init-collection="{{$geometry}}" />

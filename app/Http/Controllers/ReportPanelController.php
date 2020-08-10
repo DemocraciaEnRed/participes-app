@@ -66,7 +66,7 @@ class ReportPanelController extends Controller
       $comment->user()->associate($request->user());
       $request->report->comments()->save($comment);
 
-      return redirect()->route('objective.manage.goals.reports.comments', ['objectiveId' => $request->objective->id, 'goalId' => $request->goal->id, 'reportId' => $request->report->id])->with('success','Se agrego un comentario al reporte');
+      return redirect()->route('objectives.manage.goals.reports.comments', ['objectiveId' => $request->objective->id, 'goalId' => $request->goal->id, 'reportId' => $request->report->id])->with('success','Se agrego un comentario al reporte');
     }
     public function formReportReplyComment (Request $request){
       $rules = [
@@ -80,7 +80,7 @@ class ReportPanelController extends Controller
       $comment->user()->attach($request->user());
       $request->report->comments()->save($comment);
 
-      return redirect()->route('objective.manage.goals.reports.comments', ['objectiveId' => $request->objective->id, 'goalId' => $request->goal->id, 'reportId' => $request->report->id])->with('success','Se agrego un comentario al reporte');
+      return redirect()->route('objectives.manage.goals.reports.comments', ['objectiveId' => $request->objective->id, 'goalId' => $request->goal->id, 'reportId' => $request->report->id])->with('success','Se agrego un comentario al reporte');
     }
 
      public function viewReportAlbum (Request $request){
@@ -129,7 +129,7 @@ class ReportPanelController extends Controller
         $request->report->photos()->save($imageFile);
       }
 
-      return redirect()->route('objective.manage.goals.reports.album', ['objectiveId' => $request->objective->id, 'goalId' => $request->goal->id, 'reportId' => $request->report->id])->with('success','Se agrego la foto al album del reporte');
+      return redirect()->route('objectives.manage.goals.reports.album', ['objectiveId' => $request->objective->id, 'goalId' => $request->goal->id, 'reportId' => $request->report->id])->with('success','Se agrego la foto al album del reporte');
     }
 
     public function viewReportFiles (Request $request){
@@ -165,7 +165,7 @@ class ReportPanelController extends Controller
         }
       }
 
-      return redirect()->route('objective.manage.goals.reports.files', ['objectiveId' => $request->objective->id, 'goalId' => $request->goal->id, 'reportId' => $request->report->id])->with('success','Se agrego el archivo al repositorio del objetivo');
+      return redirect()->route('objectives.manage.goals.reports.files', ['objectiveId' => $request->objective->id, 'goalId' => $request->goal->id, 'reportId' => $request->report->id])->with('success','Se agrego el archivo al repositorio del objetivo');
     } 
 
     public function viewReportMap (Request $request){
@@ -190,6 +190,6 @@ class ReportPanelController extends Controller
       $report->map_center = $request->input('map_center');
       $report->save();
 
-      return redirect()->route('objective.manage.goals.reports.map', ['objectiveId' => $request->objective->id, 'goalId' => $request->goal->id, 'reportId' => $request->report->id])->with('success','Geometria actualizada!');
+      return redirect()->route('objectives.manage.goals.reports.map', ['objectiveId' => $request->objective->id, 'goalId' => $request->goal->id, 'reportId' => $request->report->id])->with('success','Geometria actualizada!');
     } 
 }

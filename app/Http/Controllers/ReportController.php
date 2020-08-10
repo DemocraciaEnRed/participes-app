@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Comment;
 use App\Report;
+use App\Goal;
+use App\Objective   ;
 use Illuminate\Http\Request;
 use App\Http\Resources\Comment as CommentResource;
 use App\Http\Resources\Report as ReportResource;
@@ -30,6 +32,24 @@ class ReportController extends Controller
       return;
     }
 
+    public function index(Request $request, $reportId){
+        $report = Report::findorfail($reportId);
+        $goal = Goal::findorfail($report->goal_id);
+        $objective = Objective::findorfail($goal->objective_id);
+        return view('report.view',[
+            'report' => $report,
+            'goal' => $goal,
+            'objective' => $objective
+        ]);
+    }
+
+    public function viewList(Request $request){
+       
+        return view('portal.catalogs.reports',[
+            
+        ]);
+    }
+
     /**
      * Show the application dashboard.
      *
@@ -37,13 +57,20 @@ class ReportController extends Controller
      */
     public function fetch(Request $request)
     {   
-        $reports = Report::query(); 
+        $isMappable = $request->query('mappable');
+        $pageSize = $request->query('size',10);
+
+        $reports = Report::query();
         $reports->orderBy('created_at','DESC');
-        $reports = $reports->paginate(10);
+        if($isMappable){
+            $reports->whereNotNull('map_long')->whereNotNull('map_lat')->whereNotNull('map_center');
+        }
+        $reports = $reports->paginate($pageSize);
         return ReportResource::collection($reports);
     }
 
     public function fetchComments(Request $request, $reportId){
+        $request->report = Report::findorfail($reportId);
         $comments = Comment::query();
         $comments->whereHasMorph(
             'commentable',

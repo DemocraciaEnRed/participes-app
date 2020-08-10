@@ -8,7 +8,7 @@
     <a class="item-link scrollactive-item" href="#que-es">¿Que es participes?</a>
     <a class="item-link scrollactive-item" href="#quienes-somos">Quienes somos Partícipes Rosario?</a>
     <a class="item-link scrollactive-item" href="#como-participo">¿Cómo participo?</a>
-    <a class="item-link scrollactive-item" href="#mas-alla">Más alla de la ciudad?</a>
+    <a class="item-link scrollactive-item" href="#mas-alla">Más allá de nuestra ciudad</a>
   </scrollactive>
   @else
   @endif

@@ -11,12 +11,16 @@
   <div class="row">
     <div class="col-md-4 col-lg-3">
       <div id="menu" class="card shadow-sm rounded">
-      @include('objective.manage.goals.reports.menu')
+        <div class="card-body">
+          @include('objective.manage.goals.reports.menu')
+        </div>
       </div>
     </div>
     <div class="col-md-8 col-lg-9">
-      <div class="card shadow-sm rounded p-3 p-lg-5">
-      @yield('panelContent')
+      <div class="card shadow-sm rounded">
+        <div class="card-body p-3 p-lg-5">
+          @yield('panelContent')
+        </div>
       </div>
     </div>
   </div>

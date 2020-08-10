@@ -29,7 +29,7 @@
   <h5 class="font-weight-bold">Album de fotos</h5>
   @if($report->photos()->count())
     <p>
-    El reporte cuenta con {{$report->photos()->count()}} fotos. Para verlos, haga <a href="{{ route('objective.manage.goals.reports.album', ['objectiveId' => $objective->id,'goalId' => $goal->id, 'reportId' => $report->id]) }}">click aqui <i class="fas fa-arrow-right"></i></a>
+    El reporte cuenta con {{$report->photos()->count()}} fotos. Para verlos, haga <a href="{{ route('objectives.manage.goals.reports.album', ['objectiveId' => $objective->id,'goalId' => $goal->id, 'reportId' => $report->id]) }}">click aqui <i class="fas fa-arrow-right"></i></a>
   </p>
   @else
     <p>No hay archivos asociados al reporte</p>
@@ -37,15 +37,15 @@
   <h5 class="font-weight-bold">Archivos</h5>
   @if($report->files()->count())
     <p>
-    El reporte cuenta con {{$report->files()->count()}} archivos. Para verlos, haga <a href="{{ route('objective.manage.goals.reports.files', ['objectiveId' => $objective->id,'goalId' => $goal->id, 'reportId' => $report->id]) }}">click aqui <i class="fas fa-arrow-right"></i></a>
-  </p>
+    El reporte cuenta con {{$report->files()->count()}} archivos. Para verlos, haga <a href="{{ route('objectives.manage.goals.reports.files', ['objectiveId' => $objective->id,'goalId' => $goal->id, 'reportId' => $report->id]) }}">click aqui <i class="fas fa-arrow-right"></i></a>
+    </p>
   @else
     <p>No hay archivos asociados al reporte</p>
   @endif
   <h5 class="font-weight-bold">Mapa</h5>
   @if(isset($report->map_lat))
     <p>
-      El reporte cuenta con un mapa. Para ver el mapa, haga <a href="{{ route('objective.manage.goals.reports.map', ['objectiveId' => $objective->id,'goalId' => $goal->id, 'reportId' => $report->id]) }}">click aqui <i class="fas fa-arrow-right"></i></a>
+      El reporte cuenta con un mapa. Para ver el mapa, haga <a href="{{ route('objectives.manage.goals.reports.map', ['objectiveId' => $objective->id,'goalId' => $goal->id, 'reportId' => $report->id]) }}">click aqui <i class="fas fa-arrow-right"></i></a>
     </p>
   @else
     <p>No hay un mapa asociado al reporte</p>

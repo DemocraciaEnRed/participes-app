@@ -5,7 +5,7 @@
         <div class="report-card-carrousel card shadow-sm">
           <div class="card-body d-flex align-start flex-column">
             <p class="text-muted mb-1 align-self-start text-smaller"> <i :class="`fas ${getIcon(report.type)}`"></i>&nbsp;{{report.type_label}}</p>
-            <h5 class="is-600 m-0"><a :href="`/reporte/${report.id}`">{{shortString(report.title, 250)}}</a></h5>
+            <h5 class="is-600 m-0"><a :href="`/reportes/${report.id}`">{{shortString(report.title, 250)}}</a></h5>
             <div class="mt-auto">
               <div class="row align-self-strech">
                 <div class="col text-center text-muted">
@@ -23,7 +23,7 @@
         <div class="report-card-carrousel card shadow-sm bg-primary">
             <div class="card-body d-flex align-items-end flex-column text-white">
                 <h5 class="is-600 m-0">¡Hace clic para ver todos los reportes!</h5>
-                <p class="mt-auto h2 mb-1"><a href="/" class="text-white"><i class="fas fa-arrow-alt-circle-right"></i></a></p>
+                <p class="mt-auto h2 mb-1"><a href="/reportes" class="text-white"><i class="fas fa-arrow-alt-circle-right"></i></a></p>
             </div>
         </div>
       </slide>

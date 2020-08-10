@@ -1,0 +1,3 @@
+<div class="alert alert-light p-5 text-center mb-0">
+  <i class="fas fa-sync fa-spin"></i>&nbsp;Cargando...
+</div>

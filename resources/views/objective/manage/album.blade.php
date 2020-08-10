@@ -4,9 +4,9 @@
 
 <section>
   <h1 class="">Album de fotos</h1>
-  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In eius ad officia tempora, temporibus repudiandae id
-    ipsum neque deserunt rerum esse delectus consectetur voluptates eveniet quaerat commodi ducimus mollitia dolorem.
+  <p>A continuación encontrarás todas las fotos asociadas al objetivo
   </p>
+  <p>// TODO</p>
 </section>
 
 @endsection

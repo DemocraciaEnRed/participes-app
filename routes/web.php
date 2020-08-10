@@ -109,20 +109,26 @@ Route::group([
     Route::delete('/reports/{reportId}/comments/{commentId}/delete', 'ReportController@runDeleteComment')->name('reports.comments.delete');
     Route::delete('/reports/{reportId}/comments/{commentId}/reply/{replyId}/delete', 'ReportController@runDeleteReply')->name('reports.comments.reply.delete');
     Route::get('/objectives/{objectiveId}/reports', 'ObjectiveController@fetchObjectiveReports')->name('objectives.reports');
+    Route::get('/objectives/{objectiveId}/stats', 'ObjectiveController@fetchStats')->name('objectives.stats');
 
 
 
 });
 
+Route::get('/objetivos', 'ObjectiveController@viewList')->name('objectives');
+Route::get('/reportes', 'ReportController@viewList')->name('reports');
+Route::get('/reportes/{reportId}', 'ReportController@index')->name('reports.index');
+Route::get('/metas/{goalId}', 'GoalController@index')->name('goals.index');
+
 Route::group([
-    'as' => 'objective.', 
-    'prefix' => 'objetivo/{objectiveId}', 
+    'as' => 'objectives.', 
+    'prefix' => 'objetivos', 
     ],function () {
-    Route::get('/', 'ObjectiveController@index')->name('index');
+    Route::get('/{objectiveId}', 'ObjectiveController@index')->name('index');
     // Manage
     Route::group([
         'as' => 'manage.', 
-        'prefix' => 'administrar', 
+        'prefix' => '/{objectiveId}/administrar', 
         ],function () {
         Route::get('/', 'ObjectivePanelController@index')->name('index');
         // Archivos

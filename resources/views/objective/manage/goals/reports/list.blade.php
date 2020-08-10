@@ -4,16 +4,13 @@
 
 <section>
   <h1 class="">Reportes</h1>
-  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In eius ad officia tempora, temporibus repudiandae id
-    ipsum neque deserunt rerum esse delectus consectetur voluptates eveniet quaerat commodi ducimus mollitia dolorem.
-  </p>
-  
+  <p>A continuación encontrarás el listado de reportes asociados a la meta</p>
   @if(count($reports) > 0)
     @foreach($reports as $report)
     <div class="card mb-3 shadow-sm">
       <div class="card-body d-flex justify-content-between">
         <div>
-          <h5 class="card-title font-weight-bold m-0"><a href="{{ route('objective.manage.goals.reports.index',['objectiveId' => $objective->id, 'goalId' => $goal->id, 'reportId' => $report->id]) }}">{{$report->title}}</a></h5>
+          <h5 class="card-title font-weight-bold m-0"><a href="{{ route('objectives.manage.goals.reports.index',['objectiveId' => $objective->id, 'goalId' => $goal->id, 'reportId' => $report->id]) }}">{{$report->title}}</a></h5>
           <p title="{{$report->date}}" class="text-muted text-smaller">{{$report->date->diffForHumans()}}</p>
           @if($report->type == "progress")
           <p class="text-smaller mb-0">Progreso declarado - {{$report->progress}} ({{$goal->indicator_unit}})</p>
@@ -41,7 +38,7 @@
     <div class="card mb-3 shadow-sm">
       <div class="card-body">
         <h6 class="card-title">No hay reportes creados</h6>
-          <a href="{{ route('objective.manage.goals.reports.add', ['objectiveId' => $objective->id, 'goalId' => $goal->id]) }}" class="card-link"><b>Haga clic para crear un nuevo reporte <i class="fas fa-arrow-right"></i></b></a>
+          <a href="{{ route('objectives.manage.goals.reports.add', ['objectiveId' => $objective->id, 'goalId' => $goal->id]) }}" class="card-link"><b>Haga clic para crear un nuevo reporte <i class="fas fa-arrow-right"></i></b></a>
       </div>
     </div>
   @endif

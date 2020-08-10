@@ -213,7 +213,7 @@
 
 #menu {
   margin-bottom: 20px;
-  padding: 1rem;
+  // padding: 1rem;
   @include media-breakpoint-up(lg) {
     position: sticky;
     z-index: 1024;

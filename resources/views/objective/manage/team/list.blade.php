@@ -27,7 +27,7 @@
             @isManager($objective->id)
              <td class="text-center">
               <div class="btn-group btn-group-sm" role="group">
-                <form action="{{ route('objective.manage.team.remove.form', ['objectiveId' => $objective->id, 'usrId' => $member->id]) }}" method="POST">
+                <form action="{{ route('objectives.manage.team.remove.form', ['objectiveId' => $objective->id, 'usrId' => $member->id]) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <input type="hidden" value="{{$member->id}}">

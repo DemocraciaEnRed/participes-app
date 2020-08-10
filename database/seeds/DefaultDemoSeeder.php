@@ -161,6 +161,8 @@ class DefaultDemoSeeder extends Seeder
                             $theMile = array_shift($theMilestones);
                             if(!is_null($theMile)){
                                 $report->milestone()->associate($theMile);
+                                $theMile->completed = $reportDate;
+                                $theMile->save();
                             }
                             break;
                     }
@@ -200,7 +202,6 @@ class DefaultDemoSeeder extends Seeder
                     $report->goal()->associate($goal);
                     $report->save();
                 }
-
             }
             for ($y=0; $y < 3; $y++) { 
                 $objective->members()->attach($faker->randomElements($users,2), ['role' => $faker->randomElement(['manager','reporter'])]);

@@ -72,7 +72,7 @@ class GoalPanelController extends Controller
       $milestone->goal()->associate($goal);
       $milestone->save();
       
-      return redirect()->route('objective.manage.goals.milestones', ['objectiveId' => $request->objective->id, 'goalId' => $goal->id])->with('success','Hito creado');
+      return redirect()->route('objectives.manage.goals.milestones', ['objectiveId' => $request->objective->id, 'goalId' => $goal->id])->with('success','Hito creado');
     }
 
     public function viewListGoalReports(Request $request, $objectiveId, $goalId){
@@ -210,7 +210,7 @@ class GoalPanelController extends Controller
         Notification::locale('es')->send($request->objective->subscribers, new NewReport($request->objective, $goal, $report));
       }
       
-      return redirect()->route('objective.manage.goals.reports.index', ['objectiveId' => $request->objective->id, 'goalId' => $goal->id,'reportId' => $report->id])->with('success','El reporte fue creado con exito');
+      return redirect()->route('objectives.manage.goals.reports.index', ['objectiveId' => $request->objective->id, 'goalId' => $goal->id,'reportId' => $report->id])->with('success','El reporte fue creado con exito');
     }
 
 }

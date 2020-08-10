@@ -1,6 +1,6 @@
 <template>
     <div class="media pl-3 mb-3 pr-3" style="margin-left: 80px;">
-      <img :src="reply.user.avatar.thumbnail_path" alt="" class="align-self-start mr-3 rounded-circle" style="width: 32px">
+      <img :src="reply.user.avatar ? reply.user.avatar.thumbnail_path : '/img/default-avatar.png'" alt="" class="align-self-start mr-3 rounded-circle" style="width: 32px">
       <div class="media-body">
         <p class="text-smaller mb-0"><i class="fas fa-shield-alt fa-fw"></i><b>{{`${reply.user.name} ${reply.user.surname}`}}</b></p>
         <div class="animate__animated animate__flash mb-2" v-if="showConfirmDelete">

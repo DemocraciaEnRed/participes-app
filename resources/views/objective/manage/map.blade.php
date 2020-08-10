@@ -13,9 +13,7 @@
 
 <section>
   <h1 class="">Mapa de reportes</h1>
-  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In eius ad officia tempora, temporibus repudiandae id
-    ipsum neque deserunt rerum esse delectus consectetur voluptates eveniet quaerat commodi ducimus mollitia dolorem.
-  </p>
+  <p>A continuación podrás ver todos los reportes que estén georeferenciados</p>
   <map-reports fetch-url="{{route('apiService.objectives.reports',['objectiveId' => $objective->id, 'mappable'=> true])}}" access-token="{{config('services.mapbox.key')}}" map-style="{{config('services.mapbox.style')}}" :lat="{{$objective->map_lat ?: 'undefined'}}" :long="{{$objective->map_long ?: 'undefined'}}" :zoom="{{$objective->map_zoom ?: 'undefined'}}">
 
 </section>

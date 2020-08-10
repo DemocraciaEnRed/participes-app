@@ -27,7 +27,7 @@
   @endforeach
    <div class="card mb-3 shadow-sm">
     <div class="card-body">
-      <h6 class="card-title font-weight-bold m-0"><a href="{{ route('objective.manage.goals.milestones.add', ['objectiveId' => $objective->id, 'goalId' => $goal->id]) }}">Crear nuevo hito <i class="fas fa-arrow-right"></i></a></h6>
+      <h6 class="card-title font-weight-bold m-0"><a href="{{ route('objectives.manage.goals.milestones.add', ['objectiveId' => $objective->id, 'goalId' => $goal->id]) }}">Crear nuevo hito <i class="fas fa-arrow-right"></i></a></h6>
     </div>
   </div>
 </section>

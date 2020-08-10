@@ -4,7 +4,7 @@
 
 <section>
   <h1 class="">Nuevo hito</h1>
-  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In eius ad officia tempora, temporibus repudiandae id ipsum neque deserunt rerum esse delectus consectetur voluptates eveniet quaerat commodi ducimus mollitia dolorem.</p>
+  <p>Para sumar un nuevo hito a la meta, completá el siguiente campo</p>
   <hr>
   @if ($errors->any())
     <div class="alert alert-danger">
@@ -15,7 +15,7 @@
         </ul>
     </div>
   @endif
-  <form method="POST" action="{{ route('objective.manage.goals.milestones.add.form',['objectiveId' => $objective->id, 'goalId' => $goal->id]) }}">
+  <form method="POST" action="{{ route('objectives.manage.goals.milestones.add.form',['objectiveId' => $objective->id, 'goalId' => $goal->id]) }}">
     @csrf
     <div class="form-group">
       <label>Defina el hito</label>

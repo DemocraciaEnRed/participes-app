@@ -16,7 +16,7 @@
         <i class="{{$objective->category->icon}}"></i> {{$objective->category->title}} -
         {{$objective->goals()->count()}} Metas</p>
       <h5 class="card-title font-weight-bold mb-1"><a class="text-primary"
-          href="{{route('objective.manage.index',['objectiveId' => $objective->id])}}">{{$objective->title}}</a></h5>
+          href="{{route('objectives.manage.index',['objectiveId' => $objective->id])}}">{{$objective->title}}</a></h5>
       <p>
         @foreach ($objective->tags as $tag)
         <span class="badge badge-light align-middle">{{$tag}}</span>
