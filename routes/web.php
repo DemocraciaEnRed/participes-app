@@ -52,6 +52,7 @@ Route::group([
     Route::get('/notificaciones/pendientes', 'UserPanelController@viewListUnreadNotifications')->name('notifications.unread');
     Route::post('/notificaciones/pendientes/marcar', 'UserPanelController@formMarkAllUnreadNotifications')->name('notifications.mark.all.form');
     // Mi cuenta
+    Route::get('/preferencias/verificar', 'UserPanelController@viewVerifyAccount')->name('account.verify');
     Route::get('/preferencias/avatar', 'UserPanelController@viewAccountAvatar')->name('account.avatar');
     Route::post('/preferencias/avatar', 'UserPanelController@formAccountAvatar')->name('account.avatar.form');
     Route::get('/preferencias/acceso', 'UserPanelController@viewAccountAccess')->name('account.access');

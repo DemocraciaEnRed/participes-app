@@ -4,9 +4,11 @@
 # {{ $greeting }}
 @else
 @if ($level === 'error')
-# @lang('Whoops!')
+{{-- # @lang('Whoops!') --}}
+# Whoops!
 @else
-# @lang('Hello!')
+{{-- # @lang('Hello!') --}}
+# ¡Hola!
 @endif
 @endif
 
@@ -51,8 +53,8 @@
 @isset($actionText)
 @slot('subcopy')
 @lang(
-    "If you’re having trouble clicking the \":actionText\" button, copy and paste the URL below\n".
-    'into your web browser:',
+    "Si estas teniendo problemas al hacer click en el botón \":actionText\", copiá y pega la siguiente URL\n".
+    'en tu navegador:',
     [
         'actionText' => $actionText,
     ]

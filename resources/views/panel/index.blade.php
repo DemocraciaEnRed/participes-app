@@ -33,7 +33,6 @@ $saluditosIndex = array_rand($saluditos);
       @include('utils.avatar',['avatar' => Auth::user()->avatar, 'size' => 125])
     </div>
     <div class="">
-
       <h1 class="display-4">
         ¡Hola, {{Auth::user()->name}}!</h1>
       @if($countUnreadNotifications > 0)
@@ -44,16 +43,21 @@ $saluditosIndex = array_rand($saluditos);
       @endif
     </div>
   </div>
+  @if(!Auth::user()->hasVerifiedEmail())
+  <div class="alert alert-info my-3">
+      <h5 class=""><i class="fas fa-exclamation-triangle"></i>&nbsp;Debe verificar su cuenta</h5>
+      <p class="mb-0">Hacé <a href="{{ route('panel.account.verify') }}">click aquí <i class="fas fa-arrow-right"></i></a></p>
+  </div>
+  @endif
   @if($countUnreadNotifications > 0)
-  <div class="card border-secondary">
+  <div class="card border-secondary my-3">
     <div class="card-body text-dark">
       <h5 class="card-title"><i class="far fa-bell"></i>&nbsp;Notificaciones sin leer</h5>
-      <p class="card-text">Podes leerlos haciendo <a href="{{ route('panel.notifications.unread') }}">click aquí <i
-    class="fas fa-arrow-right"></i></a></p>
-  </div>
+      <p class="card-text">Hacé <a href="{{ route('panel.notifications.unread') }}">click aquí <i class="fas fa-arrow-right"></i></a></p>
+    </div>
   </div>
   @else
-  <div class="card border-secondary">
+  <div class="card border-secondary my-3">
     <div class="card-body text-dark">
       <h5 class="card-title"><i class="far fa-bell"></i>&nbsp;Mis nofiticaciones</h5>
       <p class="card-text">Leelas haciendo <a href="{{ route('panel.notifications') }}">click aquí <i

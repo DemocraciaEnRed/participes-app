@@ -176,6 +176,11 @@ class UserPanelController extends Controller
         return redirect()->route('panel.account.access')->with('success','Se actualizo su contraseña');
     }
 
+    public function viewVerifyAccount(Request $request){
+
+        return view('panel.account.verify');
+    }
+
     public function viewAccountEmail(Request $request){
 
         return view('panel.account.email');

@@ -17,10 +17,10 @@
 				</ul>
 			</div>
 			@endif
-			<div class="card shadow-sm py-4">
+			<div class="card shadow-sm">
 				{{-- <div class="card-header">{{ __('Login') }}</div> --}}
 
-				<div class="card-body">
+				<div class="card-body py-4">
 					<form method="POST" action="{{ route('login') }}">
 						@csrf
 						<div class="form-group row">
