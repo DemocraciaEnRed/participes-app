@@ -38,27 +38,7 @@
       <label>Tags</label>
       <input-tags name="tags"></input-tags>
     </div>
-    <div class="form-group">
-      <label>Categoria del objetivo</label>
-      <select class="custom-select" name="category">
-        @foreach ($categories as $category)
-        <option value="{{$category->id}}">{{$category->title}}</option>
-        @endforeach
-      </select>
-    </div>
-    <div class="form-group">
-      <label>Organizaciones relacionadas con el objetivo</label>
-      <div>
-        @foreach($organizations as $organization)
-          <div class="custom-control custom-checkbox form-check-inline">
-            <input class="custom-control-input" type="checkbox" name="organizations[]" id="org{{$organization->id}}" :value="{{$organization->id}}">
-            <label class="custom-control-label" for="org{{$organization->id}}">{{$organization->name}}</label>
-          </div>
-        @endforeach
-      </div>
-
-    </div>
-    <div class="alert alert-info">
+    <div class="alert alert-light">
       Luego de hacer clic en el boton <b>Crear</b>, sera redireccionado al panel de control del objetivo.<br>
       Recuerde: El objetivo se va a crear como <u>oculto</u>.
     </div>
