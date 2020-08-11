@@ -28,12 +28,12 @@ $saluditosIndex = array_rand($saluditos);
 @section('panelContent')
 
 <section>
-  <div class="jumbotron d-flex bg-white">
-    <div class="mr-4">
-      @include('utils.avatar',['avatar' => Auth::user()->avatar, 'size' => 125])
+  <div class="d-flex bg-white justify-content-center">
+    <div class="mr-4 animate__animated animate__bounceIn">
+      @include('utils.avatar',['avatar' => Auth::user()->avatar, 'size' => 120])
     </div>
-    <div class="">
-      <h1 class="display-4">
+    <div class="align-self-center animate__animated animate__bounceIn  animate__delay-1s text-center">
+      <h1 class="">
         ¡Hola, {{Auth::user()->name}}!</h1>
       @if($countUnreadNotifications > 0)
       <p class="lead">¡Tenes {{$countUnreadNotifications}}
@@ -43,6 +43,8 @@ $saluditosIndex = array_rand($saluditos);
       @endif
     </div>
   </div>
+  <hr class="my-4">
+
   @if(!Auth::user()->hasVerifiedEmail())
   <div class="alert alert-info my-3">
       <h5 class=""><i class="fas fa-exclamation-triangle"></i>&nbsp;Debe verificar su cuenta</h5>

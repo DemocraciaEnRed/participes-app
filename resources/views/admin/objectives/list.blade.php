@@ -4,7 +4,7 @@
 
 <section>
   <h1 class="">Objetivos</h1>
-  <p>Acá encontrarás el listado de objetivos que podés administrar</p>
+  <p class="lead">Acá encontrarás el listado de objetivos que podés administrar</p>
   @if(count($objectives) > 0)
     @foreach($objectives as $objective)
     <div class="card mb-3 shadow-sm">

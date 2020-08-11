@@ -3,12 +3,13 @@
 @section('adminContent')
 
 <section>
-<div class="jumbotron bg-white">
-  <h1 class="display-4">Hello, {{Auth::user()->name}}!</h1>
-  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+  <div class="text-center">
+
+  <h1><i class="fas fa-cog fa-fw fa-spin"></i> Administración</h1>
+  <p class="lead">Este es el panel de administración de la plataforma Participes.</p>
   <hr class="my-4">
-  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-</div>
+  <p class="is-600">Estadisticas (Proximamente)</p>
+  </div>
 </section>
 
 @endsection

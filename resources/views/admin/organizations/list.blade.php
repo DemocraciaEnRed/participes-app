@@ -3,7 +3,7 @@
 @section('adminContent')
 
 <section>
-  <h1 class="">Organizaciones</h1>
+  <h1>Organizaciones</h1>
   <p>En esta sección se podrán cargar organizaciones de la sociedad civil, agrupaciones conformadas por ciudadanos independientes, o bien, cualquier sector que pueda estar asociado a un objetivo.</p>
   @forelse($organizations as $organization)
   <div class="card mb-3 shadow-sm">
