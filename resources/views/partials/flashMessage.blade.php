@@ -41,7 +41,7 @@
 <div class="alert alert-danger rounded-0 mb-0">
     <div class="container">
       <button type="button" class="close" data-dismiss="alert">×</button>    
-      Please check the form below for errors
+      Hubo un error en la operación. Por favor, revisé el mensaje de error.
     </div>
 </div>
 @endif

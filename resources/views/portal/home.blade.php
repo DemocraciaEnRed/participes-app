@@ -16,7 +16,7 @@
 <div class="container push-to-header" style="margin-top: -250px">
   <div class="row justify-content-between mb-3 mb-md-5 flex-column-reverse flex-md-row">
     <div class="col-md-5 text-center text-md-left mb-3 mb-md-0">
-      <h5 class="text-white">Canal de gestión y seguimiento de proyectos, donde podes ver el avance de tus objetivos y metas</h5>
+      <h5 class="text-white">Canal de monitoreo ciudadano, para hacer seguimiento de objetivos y metas de gobierno</h5>
       <a href="#" class="btn btn-info">¿Que es participes?</a>
     </div>
     <div class="col-md-5 align-self-center">
