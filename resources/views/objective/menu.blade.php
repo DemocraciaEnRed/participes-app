@@ -27,7 +27,9 @@
       @endforelse
     </div>
     <p class="text-smaller text-muted my-2">Unirse a la comunidad</p>
-      <a href="https://google.com" class="btn btn-outline-primary btn-sm">Contactanos</a>
+      @foreach($objective->communities as $community)
+      <a href="{{$community->url}}" class="btn btn-outline-primary btn-sm"><i class="{{$community->icon}}"></i>&nbsp;{{$community->label}}</a>
+      @endforeach
       <hr>
     <p class="text-smaller text-muted mt-2 mb-0">Visualizar</p>
   </div>

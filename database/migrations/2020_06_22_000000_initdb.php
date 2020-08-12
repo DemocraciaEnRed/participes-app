@@ -108,6 +108,14 @@ class InitDB extends Migration
             $table->timestamps();
             $table->softDeletes('deleted_at', 0);
         });
+        Schema::create('communities', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('objective_id')->constrained('objectives')->onDelete('cascade'); // Si el "id" en "objectives" se elimina, se elimina esta entrada
+            $table->string('label');
+            $table->string('icon',100);
+            $table->string('color',100);
+            $table->string('url',550);
+        });
         Schema::create('goals', function (Blueprint $table) {
             $table->id();
             $table->foreignId('objective_id')->constrained('objectives')->onDelete('cascade'); // Si el "id" en "objectives" se elimina, se elimina esta entrada

@@ -5,6 +5,7 @@ use App\Role;
 use App\File;
 use App\ImageFile;
 use App\Category;
+use App\Community;
 use App\Organization;
 use App\Objective;
 use App\Goal;
@@ -104,6 +105,13 @@ class DemoSeeder extends Seeder
             $objective->author()->associate($admin);
             $objective->save();
             $objective->organizations()->attach($faker->randomElements($organizations,3));
+            
+            $community = new Community();
+            $community->label = '¡Unite al Telegram!';
+            $community->icon = 'fas fa-headphones';
+            $community->color = #0088cc;
+            $community->url = 'https://google.com';
+            $objective->communities()->save($community);
             for ($y=0; $y < 7; $y++) { 
                 $goal = new Goal();
                 $goal->title = $faker->sentence;

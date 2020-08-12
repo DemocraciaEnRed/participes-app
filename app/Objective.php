@@ -38,6 +38,11 @@ class Objective extends Model
         return $this->hasMany('App\Goal','objective_id');
     }
 
+    public function communities()
+    {
+        return $this->hasMany('App\Community','objective_id');
+    }
+
     public function cover()
     {
         return $this->morphOne('App\ImageFile', 'imageable');

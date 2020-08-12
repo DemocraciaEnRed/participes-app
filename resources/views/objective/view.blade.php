@@ -22,21 +22,11 @@
 			</div> --}}
 			<div class="card shadow-sm">
 				<div class="card-body">
-					<div class="mb-4">
-						<div class="clearfix mb-3">
-							<a href="#" class="btn  my-1 ml-1 btn-sm btn-outline-primary is-600 float-right"><i class="fas fa-eye"></i>&nbsp;Monitorear</a>
-				    	<h5 class="is-700 my-2 float-left">Estado del objetivo</h5>
-						</div>
-						<portal-objective-stats fetch-url="{{route('apiService.objectives.stats',['objectiveId' => $objective->id])}}">
-							@include('partials.loading')
-						</portal-objective-stats>
-					</div>
-					<hr>
 					<div class="row my-4">
 							<div class="col-sm-6">
 								<collapse>
 									<h5 slot="title" class="is-700 my-2">Descripción del objetivo</h5>
-									<p slot="content" class="text-smallest">{{nl2br(e($objective->content))}}</p>
+									<p slot="content" class="text-smaller">{{nl2br(e($objective->content))}}</p>
 								</collapse>
 							</div>
 							@if(!empty($objective->organizations))
@@ -52,14 +42,24 @@
 							@endif
 					</div>
 					<hr>
+					<div class="mb-4">
+						<div class="clearfix mb-3">
+							<a href="#" class="btn  my-1 ml-1 btn-sm btn-outline-primary is-600 float-right"><i class="fas fa-eye"></i>&nbsp;Monitorear</a>
+				    	<h5 class="is-700 my-2 float-left">Estado de las metas</h5>
+						</div>
+						<portal-objective-stats fetch-url="{{route('apiService.objectives.stats',['objectiveId' => $objective->id])}}">
+							@include('partials.loading')
+						</portal-objective-stats>
+					</div>
+					<hr>
 					<h5 class="is-700 mt-2 mb-4">Reportes</h5>
 					@forelse ($reports as $report)
 					<div class="card my-4 ml-lg-5 shadow-sm border-secondary">
 						<div class="card-body text-secondary">
 								<p class="mb-3 float-lg-right ml-lg-4  text-secondary text-right"><i class="{{$report->typeIcon()}} text-primary"></i>&nbsp;{{$report->typeLabel()}}</p>
 								<h5 class="is-700 my-2"><a href="{{route('reports.index',['reportId' => $report->id])}}"class="text-secondary">{{$report->title}}</a></h5>
-								<p class="text-smallest mb-0">{{nl2br(e(Str::limit($objective->content, 280, $end=' [...]')))}}</p>
-								<p class="text-muted text-smallest my-2">Publicado {{$report->created_at->diffForHumans()}} por {{$report->author->name}} {{$report->author->surname}}</p>
+								<p class="text-smaller mb-0">{{nl2br(e(Str::limit($objective->content, 280, $end=' [...]')))}}</p>
+								<p class="text-muted text-smaller my-2">Publicado {{$report->created_at->diffForHumans()}} por {{$report->author->name}} {{$report->author->surname}}</p>
 								<div class="div d-flex justify-content-between mt-4">
 									<div class="div">
 										<a href="#" class="btn btn-outline-success btn-sm is-600">Estoy de acuerdo&nbsp;<i class="fas fa-check"></i>&nbsp;<span class="text-secondary is-700">{{$report->testimonies->count()}}</span></a>
