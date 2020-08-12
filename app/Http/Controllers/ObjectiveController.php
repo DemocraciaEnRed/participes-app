@@ -5,7 +5,9 @@ use App\Objective;
 use App\Goal;
 use App\Report;
 use Illuminate\Http\Request;
+use App\Http\Resources\Objective as ObjectiveResource;
 use App\Http\Resources\Report as ReportResource;
+use App\Http\Resources\SimpleReport as SimpleReportResource;
 
 class ObjectiveController extends Controller
 {
@@ -23,8 +25,9 @@ class ObjectiveController extends Controller
     }
 
     public function index(Request $request, $objectiveId){
-        $objective = Objective::findorfail($objectiveId);
-        return view('objective.view',['objective' => $objective]);
+        $objective = Objective::findorfail($objectiveId)->load(['organizations','organizations.logo']);
+        $reports = $objective->reports()->paginate(5);
+        return view('objective.view',['objective' => $objective,'reports' => $reports]);
     }
 
      public function viewList(Request $request){
@@ -34,26 +37,54 @@ class ObjectiveController extends Controller
         ]);
     }
 
+    public function fetch(Request $request)
+    {   
+        $pageSize = $request->query('size',10);
+        $orderBy = $request->query('order_by');
+        $hidden = $request->query('hidden',false);
+        
+        $objectives = Objective::query();
+        if(!is_null($orderBy)){
+            $orderByParams = explode(',',$orderBy);
+            $objectives->orderBy($orderByParams[0],$orderByParams[1]);
+        }
+        $objectives->where('hidden',false);
+        $objectives = $objectives->paginate($pageSize);
+        return ObjectiveResource::collection($objectives);
+    }
+
+    public function fetchOne(Request $request, $objectiveId)
+    {   
+        $objective = Objective::findorfail($objectiveId);
+        dd($objective);   
+    }
+
     public function fetchObjectiveReports(Request $request, $objectiveId){
+        $pageSize = $request->query('size',10);
+        $detailed = $request->query('detailed');
         $fetchAll = $request->query('all');
-        $isMappable = $request->query('mappable');
+        $onlyMappable = $request->query('mappable');
         $reports = Report::query();
-        $reports->whereHas('goal',function ($q) use($request) { 
+        $reports->whereHas('goal',function ($q) use($request, $objectiveId) { 
             $q->where('objective_id',$objectiveId);
           });
-        if($isMappable){
+        if($onlyMappable){
             $reports->whereNotNull('map_long')->whereNotNull('map_lat')->whereNotNull('map_center');
         }
         // If "all=1" is not present
         if($fetchAll){
             // Paginate
             $reports = $reports->get();
-            return ReportResource::collection($reports);
+        } else {
+            // Otherwise
+            // Get all
+            $reports = $reports->paginate($pageSize)->withQueryString();
         }
-        // Otherwise
-        // Get all
-        $reports = $reports->paginate(10)->withQueryString();
-        return ReportResource::collection($reports);
+        if($detailed){
+            return ReportResource::collection($reports);
+        } else {
+            return SimpleReportResource::collection($reports);
+        }
     }
 
     public function fetchStats(Request $request, $objectiveId){

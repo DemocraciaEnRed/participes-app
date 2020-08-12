@@ -4,6 +4,7 @@
 	}
 	$urlHeader = !is_null($objective->cover) ? $objective->cover->thumbnail_path : null;
 	$heightHeader = !is_null($objective->cover) ? 400 : null;
+	$currentRoute = Route::currentRouteName();
 @endphp
 
 @extends('layouts.app')
@@ -12,46 +13,65 @@
 <div class="container {{ is_null($objective->cover) ? 'py-5' : null }}" style="{{ !is_null($objective->cover) ? 'margin-top: -350px;' : null}}" >
 	<div class="row justify-content-center">
 		<div class="col-md-4">
-			<div class="card shadow-sm rounded">
-				@if(!is_null($objective->cover))
-				  <div class="card-img-top has-background-image" alt="Card image cap" style="height:200px; background-image:url('{{$objective->cover->thumbnail_path}}')"></div>
-				@endif
-				<div class="card-body">
-					<p class="text-smaller text-muted mb-0">Objetivo</p>
-					<h5 class="is-700">
-						{{$objective->title}}
-					</h5>
-					<ul class="list-inline mb-0">
-            @forelse ($objective->tags as $tag)
-            <li class="list-inline-item"><span class="text-muted">{{$tag}}</span></li>
-            @empty
-            <li class="list-inline-item text-muted">No hay tags</li>
-            @endforelse
-          </ul>
-					<hr>
-					<h5 class="is-600">Metas</h5>
-					<ul class="list-unstyled">
-						@forelse ($objective->goals as $goal)
-            <li class="list-item my-1"><a href="{{route('goals.index',['goalId' => $goal->id])}}" class="text-primary">{{$goal->title}}</a></li>
-            @empty
-            <li class="list-item my-1 text-muted">No hay metas</li>
-            @endforelse
-					</ul>
-				</div>
-			</div>
+			@include('objective.menu')
 		</div>
 		<div class="col-md-8">
-			<div class="card shadow-sm mb-3">
-				<div class="card-body p-3">
-					<div class="my-4">
-
-					<portal-objective-stats fetch-url="{{route('apiService.objectives.stats',['objectiveId' => $objective->id])}}">
-            @include('partials.loading')
-					</portal-objective-stats>
+			{{-- <div class="rounded shadow-sm p-3 bg-primary mb-3 text-white">
+				<h5 class="is-700 mb-0">Monitorea de cerca el objetivo!</h5>
+				<p class="mb-0">Recibí notificaciones del objetivo y enterate de las ultimas</p>
+			</div> --}}
+			<div class="card shadow-sm">
+				<div class="card-body">
+					<div class="mb-4">
+						<div class="clearfix mb-3">
+							<a href="#" class="btn  my-1 ml-1 btn-sm btn-outline-primary is-600 float-right"><i class="fas fa-eye"></i>&nbsp;Monitorear</a>
+				    	<h5 class="is-700 my-2 float-left">Estado del objetivo</h5>
+						</div>
+						<portal-objective-stats fetch-url="{{route('apiService.objectives.stats',['objectiveId' => $objective->id])}}">
+							@include('partials.loading')
+						</portal-objective-stats>
 					</div>
 					<hr>
-					<h5 class="is-600">Archivos</h5>
-					@forelse ($objective->files as $file)
+					<div class="row my-4">
+							<div class="col-sm-6">
+								<h5 class="is-700 my-2">Descripción del objetivo</h5>
+								<p class="text-smallest">{{nl2br(e($objective->content))}}</p>
+							</div>
+							@if(!empty($objective->organizations))
+								<div class="col-sm-6">
+									<h5 class="is-700 my-2">Organizaciones</h5>
+									<objective-organizations-carrousel :slides='@json($objective->organizations)'>	
+									</objective-organizations-carrousel>
+								</div>
+							@endif
+					</div>
+					<hr>
+					<h5 class="is-700 mt-2 mb-4">Reportes</h5>
+					@forelse ($reports as $report)
+					<div class="card my-4 ml-lg-5 shadow-sm border-secondary">
+						<div class="card-body text-secondary">
+								<p class="mb-3 float-lg-right ml-lg-4  text-secondary text-right"><i class="{{$report->typeIcon()}} text-primary"></i>&nbsp;{{$report->typeLabel()}}</p>
+								<h5 class="is-700 my-2"><a href="{{route('reports.index',['reportId' => $report->id])}}"class="text-secondary">{{$report->title}}</a></h5>
+								<p class="text-smallest mb-0">{{nl2br(e(Str::limit($objective->content, 280, $end=' [...]')))}}</p>
+								<p class="text-muted text-smallest my-2">Publicado {{$report->created_at->diffForHumans()}} por {{$report->author->name}} {{$report->author->surname}}</p>
+								<div class="div d-flex justify-content-between mt-4">
+									<div class="div">
+										<a href="#" class="btn btn-outline-success btn-sm is-600">Estoy de acuerdo&nbsp;<i class="fas fa-check"></i>&nbsp;<span class="text-secondary is-700">{{$report->testimonies->count()}}</span></a>
+										<a href="#" class="btn btn-outline-info btn-sm is-600">Quiero sumar información&nbsp;<i class="far fa-comment"></i>&nbsp;<span class="text-secondary is-700">{{$report->comments->count()}}</span></a>
+									</div>
+									<div>
+										<a href="{{route('reports.index',['reportId' => $report->id])}}" class="btn btn-outline-primary btn-sm">Detalles&nbsp;<i class="fas fa-arrow-right"></i></a>
+									</div>
+								</div>
+						</div>
+					</div>
+					@empty
+					<p class="my-2 text-muted">No hay reportesdel objetivo</p>
+					@endforelse
+					<div class="text-center">
+						{{$reports->links()}}
+					</div>
+					{{-- @forelse ($objective->files as $file)
 					<div class="card mb-2 shadow-sm">
 						<div class="card-body p-2 pl-4 pr-4 d-flex">
 							<div class="mr-3 mt-2">
@@ -68,28 +88,8 @@
 					</div>
 					@empty
 					<p class="my-2 text-muted">No hay archivos adjuntos al objetivo</p>
-					@endforelse
-					<hr>
-					<h5 class="is-600">Metas del objetivo</h5>
-					@forelse ($objective->goals as $goal)
-						<div class="my-4 d-flex justify-content-between align-items-center">
-							<div>
-								<h6 class="is-600 mb-0"><a href="{{ route('goals.index', ['goalId' => $goal->id]) }}" class="text-primary">{{$goal->title}}</a></h6>
-								<h6 class="text-muted text-smaller">Indicador: {{$goal->indicator}}</h6>
-							</div>
-							<div class="text-right">
-								<h6 class="text-info is-600 mb-1">{{$goal->progressPercentage()}}%</h6>
-								{{-- <h6 class="text-muted text-smaller mt-0">Progreso</h6> --}}
-								<div class="progress mb-0'" style="height:2px; width: 60px">
-									<div class="progress-bar bg-info" role="progressbar" style="width:{{$goal->progressPercentage()}}%" aria-valuenow="{{$goal->progressPercentage()}}" aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-							</div>
-						</div>
-						@empty
-						<div class="my-4">
-							<span class="text-muted">No hay metas del objetivo</span>
-						</div>
-						@endforelse
+					@endforelse --}}
+
 				</div>
 			</div>
 		</div>

@@ -9,9 +9,11 @@ import http from './axios'
 import globals from './globals'
 import VueScrollactive from 'vue-scrollactive';
 import Toasted from 'vue-toasted';
+import VueCollapse from 'vue2-collapse'
 
 window.Vue = require('vue');
 
+Vue.use(VueCollapse);
 Vue.use(VueScrollactive);
 Vue.use(Toasted, {
     iconPack: 'fontawesome',

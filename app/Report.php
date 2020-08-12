@@ -77,4 +77,41 @@ class Report extends Model
                 return 'Sin etiqueta';
         }
     }
+    public function statusLabel()
+    {
+        switch($this->status){
+            case 'reached':
+                return 'Alcanzada';
+                break;
+            case 'ongoing':
+                return 'En progreso';
+                break;
+            case 'delayed':
+                return 'Demorada';
+                break;
+            case 'inactive':
+                return 'Inactiva';
+                break;
+
+            default:
+                return '???';
+        }
+    }
+    public function typeIcon()
+    {
+        switch($this->type){
+            case 'post':
+                return 'fas fa-bullhorn';
+                break;
+            case 'progress':
+                return 'fas fa-fast-forward';
+                break;
+            case 'milestone':
+                return 'fas fa-medal';
+                break;
+            default:
+                return 'fas fa-question';
+                break;
+        }
+    }
 }

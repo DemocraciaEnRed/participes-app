@@ -8,5 +8,17 @@
 }
 
 .mapboxgl-popup {
-  max-width: 200px;
+  max-width: 230px;
+  .mapboxgl-popup-content{
+    padding: 20px 15px 15px;
+    .report-popup{
+      p.report-title{
+        line-height: normal;
+        font-size: 0.875rem;
+        margin-bottom:10px;
+        font-family: $headings-font-family;
+        font-weight: 700;
+      }
+    }
+  }
 }

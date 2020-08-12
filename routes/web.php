@@ -109,6 +109,8 @@ Route::group([
     Route::post('/reports/{reportId}/comments/{commentId}/reply', 'ReportController@runCreateReply')->name('reports.comments.reply');
     Route::delete('/reports/{reportId}/comments/{commentId}/delete', 'ReportController@runDeleteComment')->name('reports.comments.delete');
     Route::delete('/reports/{reportId}/comments/{commentId}/reply/{replyId}/delete', 'ReportController@runDeleteReply')->name('reports.comments.reply.delete');
+    Route::get('/objectives', 'ObjectiveController@fetch')->name('objectives');
+    Route::get('/objectives/{objectiveId}', 'ObjectiveController@fetchOne')->name('objectives.fetch');
     Route::get('/objectives/{objectiveId}/reports', 'ObjectiveController@fetchObjectiveReports')->name('objectives.reports');
     Route::get('/objectives/{objectiveId}/stats', 'ObjectiveController@fetchStats')->name('objectives.stats');
 

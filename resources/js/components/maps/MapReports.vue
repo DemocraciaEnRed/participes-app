@@ -6,11 +6,10 @@
       @map-init="mapInitialized"
       @map-load="mapLoaded"
     />
-    <div class="alert alert-info my-2" v-if="currentMarkers.length == 0 && !isLoading">
+    <div class="alert alert-info my-3" v-if="currentMarkers.length == 0 && !isLoading">
       <i class="fas fa-exclamation-triangle"></i>&nbsp;¡No hay reportes geolocalizados!
     </div>
-      <paginator v-if="paginatorData.meta && paginatorData.meta.last_page > 1 && paginated" :paginatorData="paginatorData" @updateData="updateData" />
-
+    <paginator class="mt-3" v-if="paginatorData.meta && paginatorData.meta.last_page > 1 && paginated" :paginatorData="paginatorData" @updateData="updateData" />
   </section>
 </template>
 
@@ -102,9 +101,10 @@ export default {
         el.className = 'report-marker';
 
         // create the popup
-        let theHtml = `<div class="text-center">`
-        theHtml += `<p class="is-600 mb-0"><a href="/reportes/${report.id}" class="text-primary" target="_blank">${report.title}</a></p>`
-        theHtml += `<p class="text-smallest text-muted mb-0">${report.type_label} - ${report.when}</p>`
+        let theHtml = `<div class="report-popup">`
+        theHtml += `<p class="text-smaller text-muted mb-1"><i class="fas ${this.getReportIcon(report.type)} text-primary"></i>&nbsp;&nbsp;${report.type_label}</p>`
+        theHtml += `<p class="report-title mb-3"><a href="${report.url}" class="text-primary" target="_blank">${report.title}</a></p>`
+        theHtml += `<p class="text-smaller text-muted mb-0"><i class="far fa-comment"></i>&nbsp;${report.comments_count} comentarios<br><i class="far fa-clock"></i>&nbsp;${report.published_at}</p>`
         theHtml += `</div>`
         let popup = new mapboxgl.Popup({ offset: 25 }).setHTML(theHtml);
 

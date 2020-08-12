@@ -53,23 +53,43 @@
     </div>
   </div>
   <h4 class="is-400 mb-3">Ultimos reportes publicados</h4>
-  <portal-home-reports-carrousel fetch-url="{{route('apiService.reports')}}"></portal-home-reports-carrousel>
+  <portal-home-reports-carrousel fetch-url="{{route('apiService.reports',['order_by'=>'updated_at,DESC'])}}"></portal-home-reports-carrousel>
   {{-- <p class="mb-4"><a href="{{route('reports')}}" class="btn btn-primary">Ver mas reportes</a></p> --}}
   <h4 class="is-400 mb-3">Ultimos objetivos actualizados</h4> 
-  @foreach ($objectives as $objective)
+  <portal-last-objectives fetch-url="{{route('apiService.objectives',['order_by'=>'updated_at,DESC','with'=>'objective_latest_goals,objective_latest_reports,objective_stats,','size' => 5])}}"></portal-last-objectives>
+  {{-- @foreach ($objectives as $objective)
   <div class="card rounded shadow-sm mb-3">
     <div class="card-body">
-      <a href="{{route('objectives.index',['objectiveId' => $objective->id])}}"><h5 class="is-600">{{$objective->title}}</h5></a>
+      <div class="d-flex  align-items-center">
+
+      <div class="mr-4 category-bg" style="background-color: {{$objective->category->backgroundColor()}}; padding: 8px 6px 6px; border-radius: 6px">
+        <i class="{{$objective->category->icon}} fa-lg fa-fw" style="color: {{$objective->category->color}}"></i>
+      </div>
+      <div class="w-100"><a class="text-dark is-700" href="{{route('objectives.index',['objectiveId' => $objective->id])}}">{{$objective->title}}</a></div>
+      <div class="ml-1">
+        <div class="btn btn-outline-primary " v-collapse-toggle="'toggle_metas_{{$objective->id}}'">Ver mas</div>
+      </div>
+      </div>
+      <v-collapse-wrapper ref="toggle_metas_{{$objective->id}}">
+      <div class="content" v-collapse-content>
+        @foreach ($objective->goals as $goal)
+          <div class="my-1">
+            <a href="{{route('goals.index',['goalId' => $goal->id])}}" class="text-dark is-700">{{$goal->id}} - {{$goal->title}}</a>
+            </div>
+            
+        @endforeach
+      </div>
+      </v-collapse-wrapper>
     </div>
   </div>
-  @endforeach
+  @endforeach --}}
   <p class="mb-4"><a href="{{route('objectives')}}" class="btn btn-primary">Ver mas objetivos</a></p>
   <h4 class="is-400 mb-3">Ultimos 15 reportes geolocalizados</h4>
-  <div class="card shadow-sm">
+  {{-- <div class="card shadow-sm">
     <div class="card-body">
-      <map-reports fetch-url="{{route('apiService.reports',['mappable' => true, 'size'=> 15])}}" access-token="{{config('services.mapbox.key')}}" :paginated="false" map-style="{{config('services.mapbox.style')}}" :lat="{{$objective->map_lat ?: 'undefined'}}" :long="{{$objective->map_long ?: 'undefined'}}" :zoom="{{$objective->map_zoom ?: 'undefined'}}">
     </div>
-  </div>
+  </div> --}}
+      <map-reports fetch-url="{{route('apiService.reports',['mappable' => true, 'size'=> 15])}}" access-token="{{config('services.mapbox.key')}}" :paginated="false" map-style="{{config('services.mapbox.style')}}">
 
 </div>
 @endsection

@@ -31,12 +31,10 @@ class HomeController extends Controller
         $countObjectives = Objective::count();
         $countGoals = Goal::count();
         $countGoalsCompleted = Goal::where('status','reached')->count();
-        $objectives = Objective::orderBy('updated_at','DESC')->take(5)->get();
         return view('portal.home',[
             'countObjectives' => $countObjectives,
             'countGoals' => $countGoals,
-            'countGoalsCompleted' => $countGoalsCompleted,
-            'objectives' => $objectives
+            'countGoalsCompleted' => $countGoalsCompleted
         ]);
     }
     

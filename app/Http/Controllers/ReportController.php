@@ -10,6 +10,7 @@ use App\Objective   ;
 use Illuminate\Http\Request;
 use App\Http\Resources\Comment as CommentResource;
 use App\Http\Resources\Report as ReportResource;
+use App\Http\Resources\SimpleReport as SimpleReportResource;
 
 class ReportController extends Controller
 {
@@ -59,6 +60,7 @@ class ReportController extends Controller
     {   
         $isMappable = $request->query('mappable');
         $pageSize = $request->query('size',10);
+        $detailed = $request->query('detailed',false);
 
         $reports = Report::query();
         $reports->orderBy('created_at','DESC');
@@ -66,7 +68,11 @@ class ReportController extends Controller
             $reports->whereNotNull('map_long')->whereNotNull('map_lat')->whereNotNull('map_center');
         }
         $reports = $reports->paginate($pageSize);
-        return ReportResource::collection($reports);
+        if($detailed){
+            return ReportResource::collection($reports);
+        } else {
+            return SimpleReportResource::collection($reports);
+        }
     }
 
     public function fetchComments(Request $request, $reportId){

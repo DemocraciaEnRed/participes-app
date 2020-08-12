@@ -40,9 +40,6 @@ h5,h6{
   word-wrap: anywhere;
 }
 
-
-
-
 .is-clickable:hover{
   cursor: pointer;
 }
@@ -50,7 +47,8 @@ h5,h6{
   font-size: 0.8rem;
 }
 .text-smallest{
-  font-size: 0.65rem;
+  font-size: 0.68rem;
+  // font-size: 0.75em;
 }
 
 .has-background-image{
@@ -69,6 +67,31 @@ h5,h6{
   display: inline-flex;
   align-items: center;
   margin-right: 0.75rem;
+}
+
+.bg-reached{
+  background-color: #2eda54;
+}
+.bg-ongoing{
+  background-color: #ffa51e;
+}
+.bg-delayed{
+  background-color: #f15454;
+}
+.bg-inactive{
+  background-color: #7e7e7e;
+}
+.text-reached{
+  color: #2eda54;
+}
+.text-ongoing{
+  color: #ffa51e;
+}
+.text-delayed{
+  color: #f15454;
+}
+.text-inactive{
+  color: #7e7e7e;
 }
 
 .tiptap-editor-content .ProseMirror{

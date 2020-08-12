@@ -2,12 +2,12 @@
   <section v-if="!isLoading">
     <div class="row justify-content-md-center">
       <div class="col-lg-4 text-center align-self-center text-center">
-        <div class="row">
+        <div class="row mb-3 mb-lg-0">
           <div class="col-6">
-            <span class="h4 is-700"><i class="fas fa-file"></i>&nbsp;&nbsp;{{reportsTotal}}</span><br><span class="text-smaller">Reportes</span>
+            <span class="h4 is-600"><i class="far fa-file text-primary"></i>&nbsp;&nbsp;{{reportsTotal}}</span><br><span class="text-smaller">Reportes</span>
             </div>
           <div class="col-6">
-            <span class="h4 is-700"><i class="fas fa-medal"></i>&nbsp;&nbsp;{{goalsTotal}}</span><br><span class="text-smaller">Metas</span>
+            <span class="h4 is-600"><i class="fas fa-medal text-primary"></i>&nbsp;&nbsp;{{goalsTotal}}</span><br><span class="text-smaller">Metas</span>
             </div>
         </div>
       </div>
@@ -17,18 +17,18 @@
       <div class="col-md-6 col-lg-4 text-center">
         <div class="row mb-2">
           <div class="col-6">
-            <span class="h4 is-700"><i class="fas fa-circle fa-fw text-success"></i>&nbsp;{{goalsReached}}</span><br><span class="text-smaller">Alcanzados</span>
+            <span class="h4 is-600"><i class="far fa-dot-circle fa-fw text-reached"></i>&nbsp;{{goalsReached}}</span><br><span class="text-smaller">Alcanzados</span>
             </div>
           <div class="col-6">
-            <span class="h4 is-700"><i class="fas fa-circle fa-fw text-warning"></i>&nbsp;{{goalsOngoing}}</span><br><span class="text-smaller">En progreso</span>
+            <span class="h4 is-600"><i class="far fa-dot-circle fa-fw text-ongoing"></i>&nbsp;{{goalsOngoing}}</span><br><span class="text-smaller">En progreso</span>
             </div>
         </div>
         <div class="row">
           <div class="col-6">
-            <span class="h4 is-700"><i class="fas fa-circle fa-fw text-danger"></i>&nbsp;{{goalsDelayed}}</span><br><span class="text-smaller">Demorados</span>
+            <span class="h4 is-600"><i class="far fa-dot-circle fa-fw text-delayed"></i>&nbsp;{{goalsDelayed}}</span><br><span class="text-smaller">Demorados</span>
             </div>
           <div class="col-6">
-            <span class="h4 is-700"><i class="fas fa-circle fa-fw text-dark"></i>&nbsp;{{goalsInactive}}</span><br><span class="text-smaller">Inactivos</span>
+            <span class="h4 is-600"><i class="far fa-dot-circle fa-fw text-inactive"></i>&nbsp;{{goalsInactive}}</span><br><span class="text-smaller">Inactivos</span>
             </div>
           </div>
         </div>
@@ -102,7 +102,7 @@ export default {
           this.goalsDelayed,
           this.goalsInactive,
         ],
-        labelsColors: ['#18bc49','#F39C12','#E74C3C','#343a40']
+        labelsColors: ['#2eda54','#ffa51e','#f15454','#7e7e7e']
       }
     },
     chartStyle: function(){

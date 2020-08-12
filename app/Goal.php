@@ -36,7 +36,7 @@ class Goal extends Model
         return $this->reports()->where('id', $reportId)->exists();
     }
 
-      public function statusLabel()
+    public function statusLabel()
     {
         switch($this->status){
             case 'reached':
@@ -56,6 +56,7 @@ class Goal extends Model
                 return '???';
         }
     }
+    
     public function progressPercentage(){
         return round( ($this->indicator_progress / $this->indicator_goal)*100 );
     }

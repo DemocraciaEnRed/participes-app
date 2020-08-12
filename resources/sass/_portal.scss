@@ -13,8 +13,27 @@
     max-width: 250px;
     width: 100%;
   }
+}
 
-  .portal-header-subtitle {}
+.category-icon-container{
+  padding: 8px 6px 6px;
+  border-radius: 6px
+}
+
+.objective-goals-list{
+  a {
+    color: $black;
+    &:hover {
+      font-weight: 700;
+      text-decoration: none;
+    }
+  }
+  .active {
+    background-color: #c6defc;
+    a {
+    font-weight: 700;
+    }
+  }
 }
 
 #portal-sections-buttons {

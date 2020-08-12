@@ -9,9 +9,11 @@ import http from './axios'
 import globals from './globals'
 import VueScrollactive from 'vue-scrollactive';
 import Toasted from 'vue-toasted';
+import VueCollapse from 'vue2-collapse'
 
 window.Vue = require('vue');
 
+Vue.use(VueCollapse);
 Vue.use(VueScrollactive);
 Vue.use(Toasted, {
     iconPack: 'fontawesome',
@@ -46,6 +48,8 @@ Vue.component('portal-home-stats', require('./components/portal/home/Stats.vue')
 Vue.component('report-comments', require('./components/comments/ReportComments.vue').default);
 Vue.component('portal-report-map', require('./components/portal/report/Map.vue').default);
 Vue.component('portal-objective-stats', require('./components/portal/objective/Stats.vue').default);
+Vue.component('portal-last-objectives', require('./components/portal/home/LastObjectives.vue').default);
+Vue.component('objective-organizations-carrousel', require('./components/portal/objective/OrganizationCarrousel.vue').default);
 Vue.component('map-reports', require('./components/maps/MapReports.vue').default);
 
 

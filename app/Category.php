@@ -14,4 +14,9 @@ class Category extends Model
     {
         return $this->hasMany('App\Objective','category_id');
     }
+
+    public function backgroundColor()
+    {
+        return "{$this->color}33";
+    }
 }

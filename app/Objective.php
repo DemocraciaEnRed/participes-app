@@ -56,6 +56,11 @@ class Objective extends Model
     public function members()
     {
         return $this->belongsToMany('App\User','objective_user','objective_id','user_id')->withPivot('role')->withTimestamps();
+    
+    }
+    public function reports()
+    {
+        return $this->hasManyThrough('App\Report','App\Goal','objective_id','goal_id','id','id');
     }
 
     public function subscribers()

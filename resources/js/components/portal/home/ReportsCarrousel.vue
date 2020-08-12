@@ -1,20 +1,13 @@
 <template>
   <div class="section" v-if="!isLoading">
-    <hooper :settings="hooperSettings" style="height: 100%">
+    <hooper :settings="hooperSettings" v-if="reports.length > 0" style="height: 100%">
       <slide class="px-2" v-for="report in reports" :key="`report-${report.id}`">
         <div class="report-card-carrousel card shadow-sm">
           <div class="card-body d-flex align-start flex-column">
-            <p class="text-muted mb-1 align-self-start text-smaller"> <i :class="`fas ${getIcon(report.type)}`"></i>&nbsp;{{report.type_label}}</p>
-            <h5 class="is-600 m-0"><a :href="`/reportes/${report.id}`">{{shortString(report.title, 250)}}</a></h5>
+            <p class="text-muted mb-1 align-self-start text-smaller"> <i :class="`fas ${getReportIcon(report.type)} text-primary`"></i>&nbsp;&nbsp;{{report.type_label}}</p>
+            <p class="is-700 h5 m-0"><a :href="`/reportes/${report.id}`">{{shortString(report.title, 70)}}</a></p>
             <div class="mt-auto">
-              <div class="row align-self-strech">
-                <div class="col text-center text-muted">
-                  <i class="far fa-comment fa-fw"></i>&nbsp;0
-                </div>
-                <div class="col text-center text-muted">
-                  2020-05-20
-                </div>
-              </div>
+              <span class="text-muted"><i class="far fa-comment fa-fw"></i>&nbsp;{{report.comments_count}} comentarios<br><i class="far fa-clock fa-fw"></i>&nbsp;{{report.published_at}}</span>
             </div>
           </div>
         </div>
@@ -27,9 +20,11 @@
             </div>
         </div>
       </slide>
-          <!-- <hooper-navigation slot="hooper-addons"></hooper-navigation> -->
           <hooper-pagination slot="hooper-addons"></hooper-pagination>
     </hooper>
+    <section class="p-5 text-center" v-else>
+        <i class="fas fa-info-circle"></i>&nbsp; No hay reportes cargados en la plataforma
+      </section>
   </div>
   <section class="p-5 text-center" v-else>
     <i class="fas fa-sync fa-spin"></i> Cargando...
@@ -102,21 +97,11 @@ export default {
         this.isLoading = false
       })
     },
-    getIcon: function(type){
-      switch(type){
-        case 'post':
-          return 'fa-bullhorn'
-          break;
-        case 'progress':
-          return 'fa-fast-forward'
-          break;
-        case 'milestone':
-          return 'fa-medal'
-          break;
-        default:
-          return 'fa-file'
-      }
-      return 'fa-question-circle'
+    getDate: function(date){
+      let theDate = new Date(date);
+      const offset = theDate.getTimezoneOffset()
+      theDate = new Date(theDate.getTime() + (offset*60*1000))
+      return theDate.toISOString().split('T')[0]
     }
   },
 }

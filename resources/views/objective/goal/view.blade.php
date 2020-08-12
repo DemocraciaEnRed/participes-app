@@ -12,37 +12,7 @@
 <div class="container {{ is_null($objective->cover) ? 'py-5' : null }}" style="{{ !is_null($objective->cover) ? 'margin-top: -350px;' : null}}" >
 	<div class="row justify-content-center">
 		<div class="col-md-4">
-			<div class="card shadow-sm rounded">
-				@if(!is_null($objective->cover))
-				  <div class="card-img-top has-background-image" alt="Card image cap" style="height:200px; background-image:url('{{$objective->cover->thumbnail_path}}')"></div>
-				@endif
-				<div class="card-body">
-					<p class="text-smaller text-muted mb-0">Meta</p>
-					<h5 class="is-700">
-						{{$goal->title}}
-					</h5>
-					<p class="text-smaller text-muted mb-0">Objetivo</p>
-					<h6 class="is-500">
-						<a href="{{route('objectives.index',['objectiveId' => $objective->id])}}" class="text-dark">{{$objective->title}}</a>
-					</h6>
-					<ul class="list-inline mb-0">
-            @forelse ($objective->tags as $tag)
-            <li class="list-inline-item"><span class="text-muted">{{$tag}}</span></li>
-            @empty
-            <li class="list-inline-item text-muted">No hay tags</li>
-            @endforelse
-          </ul>
-					<hr>
-					<h5 class="is-600">Metas</h5>
-					<ul class="list-unstyled">
-						@forelse ($objective->goals as $auxGoal)
-            <li class="list-item my-1"><a href="{{route('goals.index',['goalId' => $auxGoal->id])}}" class="text-primary">{{$auxGoal->title}}</a></li>
-            @empty
-            <li class="list-item my-1 text-muted">No hay metas</li>
-            @endforelse
-					</ul>
-				</div>
-			</div>
+			@include('objective.menu')
 		</div>
 		<div class="col-md-8">
 			<div class="card shadow-sm mb-3">
