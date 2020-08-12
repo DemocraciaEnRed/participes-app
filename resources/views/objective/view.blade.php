@@ -34,15 +34,21 @@
 					<hr>
 					<div class="row my-4">
 							<div class="col-sm-6">
-								<h5 class="is-700 my-2">Descripción del objetivo</h5>
-								<p class="text-smallest">{{nl2br(e($objective->content))}}</p>
+								<collapse>
+									<h5 slot="title" class="is-700 my-2">Descripción del objetivo</h5>
+									<p slot="content" class="text-smallest">{{nl2br(e($objective->content))}}</p>
+								</collapse>
 							</div>
 							@if(!empty($objective->organizations))
-								<div class="col-sm-6">
-									<h5 class="is-700 my-2">Organizaciones</h5>
-									<objective-organizations-carrousel :slides='@json($objective->organizations)'>	
-									</objective-organizations-carrousel>
-								</div>
+									<div class="col-sm-6">
+								<collapse>
+										<h5 slot="title" class="is-700 my-2">Organizaciones</h5>
+										<div slot="content">
+											<objective-organizations-carrousel :slides='@json($objective->organizations)'>	
+											</objective-organizations-carrousel>
+										</div>
+								</collapse>
+									</div>
 							@endif
 					</div>
 					<hr>

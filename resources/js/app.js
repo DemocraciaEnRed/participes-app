@@ -9,11 +9,9 @@ import http from './axios'
 import globals from './globals'
 import VueScrollactive from 'vue-scrollactive';
 import Toasted from 'vue-toasted';
-import VueCollapse from 'vue2-collapse'
 
 window.Vue = require('vue');
 
-Vue.use(VueCollapse);
 Vue.use(VueScrollactive);
 Vue.use(Toasted, {
     iconPack: 'fontawesome',
@@ -51,6 +49,7 @@ Vue.component('portal-objective-stats', require('./components/portal/objective/S
 Vue.component('portal-last-objectives', require('./components/portal/home/LastObjectives.vue').default);
 Vue.component('objective-organizations-carrousel', require('./components/portal/objective/OrganizationCarrousel.vue').default);
 Vue.component('map-reports', require('./components/maps/MapReports.vue').default);
+Vue.component('collapse', require('./components/utils/Collapse.vue').default);
 
 
 Vue.prototype.$http = http
