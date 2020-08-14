@@ -42,7 +42,7 @@
 					    <h6 class="is-700">Progreso</h6>
 					   <div class="my-1 d-flex justify-content-between align-items-center goal-container">
 								<div class="progress my-0 mx-1 w-100" style="height: 10px;">
-									<div class="progress-bar bg-{{$goal->status}}" role="progressbar" style="width: {{$goal->progressPercentage()}}%" aria-valuenow="{{$goal->progressPercentage()}}" aria-valuemin="0" aria-valuemax="100" :login-url="{{route('login')}}"></div>
+									<div class="progress-bar bg-{{$goal->status}}" role="progressbar" style="width: {{$goal->progressPercentage()}}%" aria-valuenow="{{$goal->progressPercentage()}}" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 								<span class="goal-percentage text-smallest is-700 ml-1">{{$goal->progressPercentage()}}%</span>
 							</div>
