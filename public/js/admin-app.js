@@ -5520,7 +5520,7 @@ __webpack_require__.r(__webpack_exports__);
         var theHtml = "<div class=\"report-popup\">";
         theHtml += "<p class=\"text-smaller text-muted mb-1\"><i class=\"fas ".concat(_this2.getReportIcon(report.type), " text-primary\"></i>&nbsp;&nbsp;").concat(report.type_label, "</p>");
         theHtml += "<p class=\"report-title mb-3\"><a href=\"".concat(report.url, "\" class=\"text-primary\" target=\"_blank\">").concat(report.title, "</a></p>");
-        theHtml += "<p class=\"text-smaller text-muted mb-0\"><i class=\"far fa-comment\"></i>&nbsp;".concat(report.comments_count, " comentarios<br><i class=\"far fa-clock\"></i>&nbsp;").concat(report.published_at, "</p>");
+        theHtml += "<p class=\"text-smaller text-muted mb-0\"><i class=\"far fa-comment\"></i>&nbsp;".concat(report.comments_count, " comentarios<br><i class=\"far fa-thumbs-up\"></i>&nbsp;").concat(report.positive_testimonies_count, " - <i class=\"far fa-clock\"></i>&nbsp;").concat(report.published_at, "</p>");
         theHtml += "</div>";
         var popup = new mapboxgl.Popup({
           offset: 25
@@ -48207,7 +48207,7 @@ var globals = {
       if (text.length > limit) {
         for (var i = limit; i > 0; i--) {
           if (text.charAt(i) === " " && (text.charAt(i - 1) != "," || text.charAt(i - 1) != "." || text.charAt(i - 1) != ";")) {
-            return text.substring(0, i) + "...";
+            return text.substring(0, i) + "[...]";
           }
         }
       } else {

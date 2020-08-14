@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex justify-content-between align-items-center is-clickable"  @click="showMore = !showMore">
       <div class="w-100">
         <slot name="title"></slot>
       </div>
       <div class="ml-1">
-        <a class="text-dark is-clickable" @click="showMore = !showMore"><i class="fas fa-lg fa-fw" :class="{'fa-chevron-up': showMore, 'fa-chevron-down': !showMore}"></i></a>
+        <i class="fas fa-lg fa-fw" :class="{'fa-chevron-up': showMore, 'fa-chevron-down': !showMore}"></i>
       </div>
     </div>
     <transition name="fade">

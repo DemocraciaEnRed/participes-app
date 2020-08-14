@@ -25,7 +25,7 @@ const globals = {
               text.charAt(i - 1) != "." ||
               text.charAt(i - 1) != ";")
           ) {
-            return text.substring(0, i) + "...";
+            return text.substring(0, i) + "[...]";
           }
         }
       } else {

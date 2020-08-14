@@ -12,7 +12,7 @@
       <!-- Left Side Of Navbar -->
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a href="{{ route('about.general') }}" class="nav-link text-smaller">¿Como funciona?</a>
+          <a href="{{ route('about.general') }}" class="nav-link">¿Como funciona?</a>
         </li>
       </ul>
 

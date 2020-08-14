@@ -59,15 +59,21 @@ class ObjectiveController extends Controller
         dd($objective);   
     }
 
-    public function fetchObjectiveReports(Request $request, $objectiveId){
+    public function fetchReports(Request $request, $objectiveId){
         $pageSize = $request->query('size',10);
+        $orderBy = $request->query('order_by');
         $detailed = $request->query('detailed');
         $fetchAll = $request->query('all');
         $onlyMappable = $request->query('mappable');
         $reports = Report::query();
+        if(!is_null($orderBy)){
+            $orderByParams = explode(',',$orderBy);
+            $reports->orderBy($orderByParams[0],$orderByParams[1]);
+        }
         $reports->whereHas('goal',function ($q) use($request, $objectiveId) { 
             $q->where('objective_id',$objectiveId);
           });
+        
         if($onlyMappable){
             $reports->whereNotNull('map_long')->whereNotNull('map_lat')->whereNotNull('map_center');
         }
@@ -88,12 +94,16 @@ class ObjectiveController extends Controller
     }
 
     public function fetchStats(Request $request, $objectiveId){
+        $objective = Objective::findorfail($objectiveId);
         $countGoals = Goal::where('objective_id',$objectiveId)->count();
         $countGoalsCompleted = Goal::where('objective_id',$objectiveId)->where('status','reached')->count();
         $countGoalsOngoin = Goal::where('objective_id',$objectiveId)->where('status','ongoing')->count();
         $countGoalsDelayed = Goal::where('objective_id',$objectiveId)->where('status','delayed')->count();
         $countGoalsInactive = Goal::where('objective_id',$objectiveId)->where('status','inactive')->count();
-
+        $countGoalsInactive = Goal::where('objective_id',$objectiveId)->where('status','inactive')->count();
+        $reportsTotal =$objective->reports()->count(); 
+        $filesTotal =$objective->files()->count(); 
+        $subscribersTotal =$objective->subscribers()->count(); 
         // $reportsTotal = Report::->where('objective_id',$objectiveId)->where('created_at','>=',Carbon::now()->subdays(15))->count();
         // $reportsData = Report::->where('objective_id',$objectiveId)->where('created_at', '>=', Carbon::now()->subdays(15))
         //                     ->groupBy(DB::raw('DATE(created_at)'))
@@ -110,10 +120,28 @@ class ObjectiveController extends Controller
                 'goals_ongoing' => $countGoalsOngoin,
                 'goals_delayed' => $countGoalsDelayed,
                 'goals_inactive' => $countGoalsInactive,
-                // 'reports_total' => $reportsTotal,
+                'reports_total' => $reportsTotal,
+                'files_total' => $filesTotal,
+                'subscribers_total' => $subscribersTotal,
                 // 'reports_data' => $reportsData
             ]
         ],200);
+    }
+
+     public function formToggleSubscription(Request $request, $objectiveId){
+        if(!$request->user()) {
+            abort(403, 'No autorizado');
+        }
+        $objective = Objective::findorfail($objectiveId);
+        $isSubscriber = $objective->isSubscriber($request->user()->id);
+        if($isSubscriber){
+            $objective->subscribers()->detach($request->user()->id);
+            $msg = 'Te has desubscripto del objetivo';
+        } else {
+            $objective->subscribers()->attach($request->user()->id);
+            $msg = '¡Te has subscripto al objetivo!';
+        }
+        return redirect()->back()->with('success',$msg);
 
     }
 }

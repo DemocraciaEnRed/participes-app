@@ -104,7 +104,7 @@ export default {
         let theHtml = `<div class="report-popup">`
         theHtml += `<p class="text-smaller text-muted mb-1"><i class="fas ${this.getReportIcon(report.type)} text-primary"></i>&nbsp;&nbsp;${report.type_label}</p>`
         theHtml += `<p class="report-title mb-3"><a href="${report.url}" class="text-primary" target="_blank">${report.title}</a></p>`
-        theHtml += `<p class="text-smaller text-muted mb-0"><i class="far fa-comment"></i>&nbsp;${report.comments_count} comentarios<br><i class="far fa-clock"></i>&nbsp;${report.published_at}</p>`
+        theHtml += `<p class="text-smaller text-muted mb-0"><i class="far fa-comment"></i>&nbsp;${report.comments_count} comentarios<br><i class="far fa-thumbs-up"></i>&nbsp;${report.positive_testimonies_count} - <i class="far fa-clock"></i>&nbsp;${report.published_at}</p>`
         theHtml += `</div>`
         let popup = new mapboxgl.Popup({ offset: 25 }).setHTML(theHtml);
 

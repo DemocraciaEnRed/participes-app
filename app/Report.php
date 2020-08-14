@@ -61,6 +61,21 @@ class Report extends Model
     {
         return $this->morphMany('App\Comment', 'commentable')->whereNull('parent_id');
     }
+
+    public function positiveTestimonies()
+    {
+        return $this->testimonies()->where('value', true);
+    }
+
+    public function negativeTestimonies()
+    {
+        return $this->testimonies()->where('value', false);
+    }
+
+    public function userTestimony($userId)
+    {
+        return $this->testimonies()->where('user_id', $userId);
+    }
     public function typeLabel()
     {
         switch($this->type){

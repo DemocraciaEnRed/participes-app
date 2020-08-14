@@ -20,4 +20,7 @@ class Testimony extends Model
         return $this->belongsTo('App\User', 'user_id');
     }
 
+    public function userTestimony($reportId, $userId){
+        return $this->where('report_id', $report_id)->where('user_id', $userId);
+    }
 }

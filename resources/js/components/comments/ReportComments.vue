@@ -1,6 +1,6 @@
 <template>
   <section>
-      <new-comment :url="commentUrl" :user="user" v-if="user" @fetchComments="fetchComments"></new-comment>
+    <new-comment :url="commentUrl" :user="user" v-if="user" @fetchComments="fetchComments"></new-comment>
     <div v-if="isLoading">
       <div class="alert alert-light p-5 text-center">
         <i class="fas fa-sync fa-spin"></i>&nbsp;Cargando

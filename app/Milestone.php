@@ -23,6 +23,6 @@ class Milestone extends Model
     }
     public function report()
     {
-        return $this->hasOne('App\Report','report_id');
+        return $this->hasOne('App\Report','milestone_achieved');
     }
 }

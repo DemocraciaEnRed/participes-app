@@ -6,7 +6,8 @@ use Auth;
 use App\Comment;
 use App\Report;
 use App\Goal;
-use App\Objective   ;
+use App\Testimony;
+use App\Objective;
 use Illuminate\Http\Request;
 use App\Http\Resources\Comment as CommentResource;
 use App\Http\Resources\Report as ReportResource;
@@ -37,10 +38,15 @@ class ReportController extends Controller
         $report = Report::findorfail($reportId);
         $goal = Goal::findorfail($report->goal_id);
         $objective = Objective::findorfail($goal->objective_id);
+        $testimony = null;
+        if($request->user()){
+            $testimony = $report->userTestimony($request->user()->id)->first();
+        }
         return view('report.view',[
             'report' => $report,
             'goal' => $goal,
-            'objective' => $objective
+            'objective' => $objective,
+            'testimony' => $testimony
         ]);
     }
 
@@ -59,8 +65,8 @@ class ReportController extends Controller
     public function fetch(Request $request)
     {   
         $isMappable = $request->query('mappable');
-        $pageSize = $request->query('size',10);
         $detailed = $request->query('detailed',false);
+        $pageSize = $request->query('size',10);
 
         $reports = Report::query();
         $reports->orderBy('created_at','DESC');
@@ -152,4 +158,43 @@ class ReportController extends Controller
         return response()->json(['message' => 'Not authorized'], 403);
     }
 
+    public function runToggleTestimony(Request $request, $reportId){
+        if(!$request->user()) {
+            abort(403, 'No autorizado');
+        }
+        $report = Report::findorfail($reportId);
+        $testimony = $report->userTestimony($request->user()->id)->first();
+        if($testimony){
+            $testimony->delete();
+        } else {
+            $testimony = new Testimony();
+            $testimony->user()->associate($request->user());
+            $testimony->report()->associate($report);
+            $testimony->value = true;
+            $testimony->save();
+        }
+        return response()->json(['message' => 'Agregado testimonio', 'value' => true], 200);
+
+    }
+    
+    public function formToggleTestimony(Request $request, $reportId){
+        if(!$request->user()) {
+            abort(403, 'No autorizado');
+        }
+        $report = Report::findorfail($reportId);
+        $testimony = $report->userTestimony($request->user()->id)->first();
+        if($testimony){
+            $testimony->delete();
+            $msg = 'Hemos quitado tu feedback correctamente';
+        } else {
+            $testimony = new Testimony();
+            $testimony->user()->associate($request->user());
+            $testimony->report()->associate($report);
+            $testimony->value = true;
+            $testimony->save();
+            $msg = '¡Hemos guardado tu feedback con exito, muchas gracias!';
+        }
+        return redirect()->route('reports.index', ['reportId' => $reportId])->with('success',$msg);
+
+    }
 }

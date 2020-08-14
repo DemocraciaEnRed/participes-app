@@ -100,11 +100,13 @@ class InitDB extends Migration
             $table->string('title',550);
             $table->text('content');
             $table->json('tags')->nullable();
-            $table->boolean('archived')->default(false);
-            $table->boolean('hidden')->default(true);
             $table->decimal('map_lat', 10, 8)->nullable();
             $table->decimal('map_long', 11, 8)->nullable();
             $table->decimal('map_zoom',4,2)->nullable();
+            $table->json('map_center')->nullable();
+            $table->json('map_geometries')->nullable();
+            $table->boolean('archived')->default(false);
+            $table->boolean('hidden')->default(true);
             $table->timestamps();
             $table->softDeletes('deleted_at', 0);
         });
@@ -127,6 +129,11 @@ class InitDB extends Migration
             $table->string('indicator_unit',550);
             $table->string('indicator_frequency',550)->nullable();
             $table->string('source',550)->nullable();
+            $table->decimal('map_lat', 10, 8)->nullable();
+            $table->decimal('map_long', 11, 8)->nullable();
+            $table->decimal('map_zoom',4,2)->nullable();
+            $table->json('map_center')->nullable();
+            $table->json('map_geometries')->nullable();
             $table->timestamps();
             $table->softDeletes('deleted_at', 0);
         });

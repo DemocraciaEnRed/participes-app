@@ -1,13 +1,65 @@
 // Dependencies
 @import '~animate.css/animate.min.css';
 @import '~vue-croppa/dist/vue-croppa.css';
-@import '~hooper/dist/hooper.css';
+@import '~swiper/css/swiper.css';
+// @import '~swiper/swiper-bundle.css';
 
-.hooper-list{
-  margin-bottom:30px;
+// .hooper-list{
+//   margin-bottom:30px;
+// }
+
+// .hooper-pagination{
+//   bottom: -25px;
+// }
+
+.swiper-pagination{
+  position:relative;
+}
+.swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets{
+  bottom: 0;
+  padding: 8px 0;
 }
 
-.hooper-pagination{
-  bottom: -25px;
-}
+.toasted.custom-toast {
+  // Primary
+  &.toasted-primary, .primary {
+    border-radius: 4px;
+    min-height: 37px;
+    line-height: 0;
+    background-color: $dark;
+    padding: 5px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    @media only screen and (max-width:600px) {
+    padding: 8px 20px;
+    min-height: 38px;
+    border-radius: 0;
+    }
+    &.success {
+      background: $success;
+    }
 
+    &.error {
+      background: $danger;
+    }
+
+    &.info {
+      background: $info;
+    }
+
+    .action {
+      color: #FFF;
+      font-weight: 800;
+      font-size: 1rem;
+      &:hover{
+        text-decoration: none;
+      }
+    }
+  }
+}
+.swiper-button-prev::after, .swiper-button-next::after{
+  text-shadow: 1px 2px 2px #000;
+  color: #FFF;
+}

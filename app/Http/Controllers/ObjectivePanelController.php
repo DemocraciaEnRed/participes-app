@@ -88,8 +88,8 @@ class ObjectivePanelController extends Controller
         'indicator_goal' => 'integer|min:1',
         'indicator_progress' => 'integer|min:0',
         'indicator_unit' => 'required|string|max:550',
-        'indicator_frequency' => 'string|max:550',
-        'source' => 'string|max:550',
+        'indicator_frequency' => 'nullable|string|max:550',
+        'source' => 'nullable|string|max:550',
         'milestones' => 'array',
         'milestones.*' => 'required|string|max:550',
       ];

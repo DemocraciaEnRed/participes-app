@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Goal;
 use App\Objective;
+use App\Report;
+use App\Http\Resources\Report as ReportResource;
 
 class GoalController extends Controller
 {
@@ -26,5 +28,36 @@ class GoalController extends Controller
             'goal' => $goal,
             'objective' => $objective
         ]);
+    }
+
+    public function fetchReports(Request $request, $goalId){
+        $pageSize = $request->query('size',10);
+        $orderBy = $request->query('order_by');
+        $detailed = $request->query('detailed');
+        $fetchAll = $request->query('all');
+        $onlyMappable = $request->query('mappable');
+        $reports = Report::query();
+        if(!is_null($orderBy)){
+            $orderByParams = explode(',',$orderBy);
+            $reports->orderBy($orderByParams[0],$orderByParams[1]);
+        }
+        $reports->where('goal_id',$goalId);
+        if($onlyMappable){
+            $reports->whereNotNull('map_long')->whereNotNull('map_lat')->whereNotNull('map_center');
+        }
+        // If "all=1" is not present
+        if($fetchAll){
+            // Paginate
+            $reports = $reports->get();
+        } else {
+            // Otherwise
+            // Get all
+            $reports = $reports->paginate($pageSize)->withQueryString();
+        }
+        if($detailed){
+            return ReportResource::collection($reports);
+        } else {
+            return SimpleReportResource::collection($reports);
+        }
     }
 }

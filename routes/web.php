@@ -109,18 +109,22 @@ Route::group([
     Route::post('/reports/{reportId}/comments/{commentId}/reply', 'ReportController@runCreateReply')->name('reports.comments.reply');
     Route::delete('/reports/{reportId}/comments/{commentId}/delete', 'ReportController@runDeleteComment')->name('reports.comments.delete');
     Route::delete('/reports/{reportId}/comments/{commentId}/reply/{replyId}/delete', 'ReportController@runDeleteReply')->name('reports.comments.reply.delete');
+    Route::post('/reports/{reportId}/testimony', 'ReportController@runToggleTestimony')->name('reports.testimonies.run');
     Route::get('/objectives', 'ObjectiveController@fetch')->name('objectives');
     Route::get('/objectives/{objectiveId}', 'ObjectiveController@fetchOne')->name('objectives.fetch');
-    Route::get('/objectives/{objectiveId}/reports', 'ObjectiveController@fetchObjectiveReports')->name('objectives.reports');
+    Route::get('/objectives/{objectiveId}/reports', 'ObjectiveController@fetchReports')->name('objectives.reports');
     Route::get('/objectives/{objectiveId}/stats', 'ObjectiveController@fetchStats')->name('objectives.stats');
+    Route::get('/goal/{goalId}/reports', 'GoalController@fetchReports')->name('goals.reports');
 
 
 
 });
 
 Route::get('/objetivos', 'ObjectiveController@viewList')->name('objectives');
+Route::post('/objetivos/{objectiveId}/subscribirse', 'ObjectiveController@formToggleSubscription')->name('objectives.subscribers.form');
 Route::get('/reportes', 'ReportController@viewList')->name('reports');
 Route::get('/reportes/{reportId}', 'ReportController@index')->name('reports.index');
+Route::post('/reportes/{reportId}/testimony', 'ReportController@formToggleTestimony')->name('reports.testimonies.form');
 Route::get('/metas/{goalId}', 'GoalController@index')->name('goals.index');
 
 Route::group([

@@ -16,8 +16,9 @@
 }
 
 .category-icon-container{
-  padding: 8px 6px 6px;
-  border-radius: 6px
+  padding: 8px 5px 5px;
+  border-radius: 6px;
+  width: 50px;
 }
 
 .objective-goals-list{
@@ -88,6 +89,13 @@
     }
   }
 }
+
+.goal-container{
+    .goal-percentage {
+       min-width: 30px;
+       text-align: center;
+    }
+  }
 
 #about {
   background-color: #FFF;

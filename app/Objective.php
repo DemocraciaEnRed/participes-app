@@ -72,6 +72,10 @@ class Objective extends Model
     {
         return $this->belongsToMany('App\User','objective_subscriber','objective_id','subscriber_id')->withTimestamps();
     }
+    public function isSubscriber($userId)
+    {
+        return $this->subscribers()->where('subscriber_id',$userId)->exists();
+    }
     public function hasGoal($goalId){
         return $this->goals()->where('id', $goalId)->exists();
     }

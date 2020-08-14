@@ -2,22 +2,27 @@
   <section v-if="!isLoading">
     <div class="row justify-content-md-center">
       <div class="col-lg-4 text-center align-self-center text-center">
-        <div class="row mb-3 mb-lg-0">
+        <div class="row mb-2">
           <div class="col-6">
-            <span class="h4 is-600"><i class="far fa-file text-primary"></i>&nbsp;&nbsp;{{reportsTotal}}</span><br><span class="text-smaller">Reportes</span>
+            <span class="h4 is-600"><i class="far fa-file"></i>&nbsp;&nbsp;{{reportsTotal}}</span><br><span class="text-smaller">Reportes</span>
             </div>
           <div class="col-6">
-            <span class="h4 is-600"><i class="fas fa-medal text-primary"></i>&nbsp;&nbsp;{{goalsTotal}}</span><br><span class="text-smaller">Metas</span>
+            <span class="h4 is-600"><i class="fas fa-medal"></i>&nbsp;&nbsp;{{goalsTotal}}</span><br><span class="text-smaller">Metas</span>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <span class="h4 is-600"><i class="fas fa-box"></i>&nbsp;&nbsp;{{filesTotal}}</span><br><span class="text-smaller">Archivos</span>
+            </div>
+          <div class="col-6">
+            <span class="h4 is-600"><i class="fas fa-binoculars"></i>&nbsp;&nbsp;{{subscribersTotal}}</span><br><span class="text-smaller">Suscriptores</span>
             </div>
         </div>
       </div>
-      <div class="col-md-6 col-lg-4">
-        <goals-doughnut :chartData="chartData" :styles="chartStyle" class="mb-3 mb-md-0"></goals-doughnut>
-      </div>
-      <div class="col-md-6 col-lg-4 text-center">
+      <div class="col-lg-4 text-center">
         <div class="row mb-2">
           <div class="col-6">
-            <span class="h4 is-600"><i class="far fa-dot-circle fa-fw text-reached"></i>&nbsp;{{goalsReached}}</span><br><span class="text-smaller">Alcanzados</span>
+            <span class="h4 is-600"><i class="far fa-dot-circle fa-fw text-reached"></i>&nbsp;{{goalsReached}}</span><br><span class="text-smaller">Alcanzadas</span>
             </div>
           <div class="col-6">
             <span class="h4 is-600"><i class="far fa-dot-circle fa-fw text-ongoing"></i>&nbsp;{{goalsOngoing}}</span><br><span class="text-smaller">En progreso</span>
@@ -25,14 +30,17 @@
         </div>
         <div class="row">
           <div class="col-6">
-            <span class="h4 is-600"><i class="far fa-dot-circle fa-fw text-delayed"></i>&nbsp;{{goalsDelayed}}</span><br><span class="text-smaller">Demorados</span>
+            <span class="h4 is-600"><i class="far fa-dot-circle fa-fw text-delayed"></i>&nbsp;{{goalsDelayed}}</span><br><span class="text-smaller">Demoradas</span>
             </div>
           <div class="col-6">
-            <span class="h4 is-600"><i class="far fa-dot-circle fa-fw text-inactive"></i>&nbsp;{{goalsInactive}}</span><br><span class="text-smaller">Inactivos</span>
+            <span class="h4 is-600"><i class="far fa-dot-circle fa-fw text-inactive"></i>&nbsp;{{goalsInactive}}</span><br><span class="text-smaller">Inactivas</span>
             </div>
           </div>
         </div>
+      <div class="col-lg-4">
+        <goals-doughnut :chartData="chartData" :styles="chartStyle" class="mb-3 mb-md-0"></goals-doughnut>
       </div>
+    </div>
   </section>
   <section v-else>
     <slot></slot>
@@ -60,6 +68,8 @@ export default {
       goalsDelayed: 0,
       goalsInactive: 0,
       reportsTotal: 0,
+      filesTotal: 0,
+      photosTotal: 0,
       // reportsData: [],
       styles: {
         height: '100',
@@ -80,7 +90,9 @@ export default {
         this.goalsOngoing = response.data.data.goals_ongoing
         this.goalsDelayed = response.data.data.goals_delayed
         this.goalsInactive = response.data.data.goals_inactive
-        // this.reportsTotal = response.data.data.reports_total
+        this.reportsTotal = response.data.data.reports_total
+        this.filesTotal = response.data.data.files_total
+        this.subscribersTotal = response.data.data.subscribers_total
         // this.reportsData = response.data.data.reports_data
       })
       .catch( error => {
