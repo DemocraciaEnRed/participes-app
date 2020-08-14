@@ -10,6 +10,7 @@ use App\Community;
 use App\Organization;
 use App\Objective;
 use App\Goal;
+use App\Report;
 use App\Milestone;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
