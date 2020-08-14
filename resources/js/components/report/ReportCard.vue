@@ -31,7 +31,7 @@
 import SimpleComment from './SimpleComment'
 
 export default {
-  props: ['report'],
+  props: ['report','loginUrl'],
   components: {
     SimpleComment
   },

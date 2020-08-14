@@ -6,7 +6,7 @@
         <div class="date-line"></div>
         <div class="last-one" v-if="index == reports.length - 1"></div>
       </div>
-      <report-card :report="report" @fetch-more="fetchMore"></report-card>
+      <report-card :report="report" @fetch-more="fetchMore" :login-url="loginUrl"></report-card>
     </div>
       <div class="text-center">
         <button @click="fetchMore" v-if="canFetchMore" :disabled="isLoading" class="btn btn-outline-dark">
