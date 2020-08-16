@@ -1,3 +1,0 @@
-@function remy($value, $base: 15px) {
-  @return ($value / $base) * 1rem;
-}
