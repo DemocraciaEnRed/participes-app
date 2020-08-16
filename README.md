@@ -27,7 +27,7 @@ So Look and configure the following env variables (others vars, dont worry)
 
 ```
 
-APP_NAME=Participes
+APP_NAME=Partícipes
 APP_ENV=local
 APP_KEY= # Run php artisan key:generate and use the output!
 APP_DEBUG=true

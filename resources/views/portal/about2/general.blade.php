@@ -7,7 +7,7 @@
 	<div id="about-one" class="container">
 		<div class="row justify-content-center">
 			<div class="col-lg-6 align-self-center column-text text-center text-lg-left">
-				<h3 class="text-primary mb-3 ml-3 is-600">¿Que es<br>participes digital?</h3>
+				<h3 class="text-primary mb-3 ml-3 is-600">¿Que es<br>partícipes digital?</h3>
 				<div class="bg-white pt-4 pb-4 px-3 custom-border">
 					Es una plataforma de monitoreo ciudadano que te permite hacer seguimiento de objetivos y metas de gobiernos.
 				</div>

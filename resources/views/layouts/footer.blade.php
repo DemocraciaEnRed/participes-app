@@ -8,8 +8,8 @@
       </p>
     </div>
     <div class="col-lg-2 mb-2 mb-lg-0">
-      <p class="mb-1 mb-lg-2"><b>Sobre participes</b></p>
-      <p class="mb-1"><a href="{{route('about.general')}}">¿Qué es participes?</a></p>
+      <p class="mb-1 mb-lg-2"><b>Sobre partícipes</b></p>
+      <p class="mb-1"><a href="{{route('about.general')}}">¿Qué es partícipes?</a></p>
       <p class="mb-1"><a href="{{route('about.faq')}}">Preguntas frecuentes</a></p>
     </div>
     <div class="col-lg-2 mb-2 mb-lg-0">

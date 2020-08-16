@@ -2,7 +2,7 @@
 
 @section('aboutContent')
 <section id="que-es" class="py-4">
-<h4 class="is-600 mb-4">¿Qué es Participes Digital?</h4>
+<h4 class="is-600 mb-4">¿Qué es Partícipes Digital?</h4>
 <p>Es una plataforma de monitoreo ciudadano que te permite hacer seguimiento de objetivos y metas de gobiernos.</p>
 </section>
 <hr>

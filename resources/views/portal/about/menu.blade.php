@@ -2,10 +2,11 @@
   $currentRoute = Route::currentRouteName();
 @endphp
 
+  <a href="{{route('home')}}" class="category"><i class="fas fa-home fa-fw"></i>&nbsp;Volver al inicio</a>
   <a href="{{route('about.general')}}" class="category {{ $currentRoute == 'about.general' ? 'text-primary' : null }}"><i class="fas fa-eye fa-fw"></i>&nbsp;Acerca de</a>
   @if($currentRoute == 'about.general')
   <scrollactive class="menu-link" active-class="is-active">
-    <a class="item-link scrollactive-item" href="#que-es">¿Que es participes?</a>
+    <a class="item-link scrollactive-item" href="#que-es">¿Que es partícipes?</a>
     <a class="item-link scrollactive-item" href="#quienes-somos">Quienes somos Partícipes Rosario?</a>
     <a class="item-link scrollactive-item" href="#como-participo">¿Cómo participo?</a>
     <a class="item-link scrollactive-item" href="#mas-alla">Más allá de nuestra ciudad</a>
