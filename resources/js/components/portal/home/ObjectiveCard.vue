@@ -73,7 +73,7 @@ export default {
   computed: {
     chartData: function(){
       return {
-        labels: ['Alcanzadas','En progreso','Demoradas','Inactivas'],
+        labels: ['Alcanzadas','En progreso','No cumplida','Inactivas'],
         data: [
           this.objective.goals_status.reached ?? 0,
           this.objective.goals_status.ongoing ?? 0,

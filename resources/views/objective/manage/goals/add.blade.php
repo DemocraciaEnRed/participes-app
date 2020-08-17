@@ -63,7 +63,7 @@
       <label>Estado inicial de la meta</label>
       <select class="custom-select" name="status">
         <option value="ongoing" selected>En progreso</option>
-        <option value="delayed" >Demorada</option>
+        <option value="delayed" >No cumplida</option>
         <option value="inactive" >Inactiva</option>
         <option value="reached" disabled>Alcanzada</option>
       </select>

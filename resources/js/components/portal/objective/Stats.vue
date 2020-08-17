@@ -30,7 +30,7 @@
         </div>
         <div class="row">
           <div class="col-6">
-            <span class="h4 is-600"><i class="far fa-dot-circle fa-fw text-delayed"></i>&nbsp;{{goalsDelayed}}</span><br><span class="text-smaller">Demoradas</span>
+            <span class="h4 is-600"><i class="far fa-dot-circle fa-fw text-delayed"></i>&nbsp;{{goalsDelayed}}</span><br><span class="text-smaller">No cumplidas</span>
             </div>
           <div class="col-6">
             <span class="h4 is-600"><i class="far fa-dot-circle fa-fw text-inactive"></i>&nbsp;{{goalsInactive}}</span><br><span class="text-smaller">Inactivas</span>
@@ -107,7 +107,7 @@ export default {
   computed: {
     chartData: function(){
       return {
-        labels: ['Alcanzadas','En progreso','Demoradas','Inactivas'],
+        labels: ['Alcanzadas','En progreso','No cumplidas','Inactivas'],
         data: [
           this.goalsReached,
           this.goalsOngoing,

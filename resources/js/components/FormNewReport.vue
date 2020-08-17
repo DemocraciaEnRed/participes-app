@@ -54,7 +54,7 @@
 								<select class="custom-select" name="status">
 										<option value="" selected>- Mantener estado "{{statusLabel}}" -</option>
 									 	<option v-if="goal.status != 'ongoing'" value="ongoing">En progreso</option>
-										<option v-if="goal.status != 'delayed'" value="delayed" >Demorada</option>
+										<option v-if="goal.status != 'delayed'" value="delayed" >No cumplida</option>
 										<option v-if="goal.status != 'inactive'" value="inactive" >Inactiva</option>
 										<option v-if="goal.status != 'reached'" value="reached" disabled>Alcanzada</option>
 								</select>
@@ -182,7 +182,7 @@ export default {
 				case 'ongoing':
 					return 'En progreso'
 				case 'delayed':
-					return 'Demorada'
+					return 'No cumplidas'
 				case 'inactive':
 					return 'Inactiva'
 				case 'reached':

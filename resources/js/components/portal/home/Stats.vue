@@ -8,7 +8,7 @@
           <p class=" text-center"><span class="h4 is-700"><i class="far fa-dot-circle fa-fw text-ongoing"></i>&nbsp;{{goalsOngoing}}</span><br><span class="text-smaller">En progreso</span></p>
           </div>
         <div class="col">
-          <p class=" text-center"><span class="h4 is-700"><i class="far fa-dot-circle fa-fw text-delayed"></i>&nbsp;{{goalsDelayed}}</span><br><span class="text-smaller">Demoradas</span></p>
+          <p class=" text-center"><span class="h4 is-700"><i class="far fa-dot-circle fa-fw text-delayed"></i>&nbsp;{{goalsDelayed}}</span><br><span class="text-smaller">No cumplidas</span></p>
           </div>
         <div class="col">
           <p class=" text-center"><span class="h4 is-700"><i class="far fa-dot-circle fa-fw text-inactive"></i>&nbsp;{{goalsInactive}}</span><br><span class="text-smaller">Inactivas</span></p>

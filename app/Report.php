@@ -102,7 +102,7 @@ class Report extends Model
                 return 'En progreso';
                 break;
             case 'delayed':
-                return 'Demorada';
+                return 'No cumplida';
                 break;
             case 'inactive':
                 return 'Inactiva';

@@ -9,7 +9,7 @@
   <p>La información es actualizada por referentes de diversas organizaciones que monitorean agendas de interés.</p>
   <h6 class="is-600 mb-3">¿Cómo funciona?</h5>
   <p>Referentes de organizaciones cargan objetivos y metas de políticas públicas locales de interés y se comprometen a hacer reportes informando el estado y los avances de estas políticas.</p>
-  <p>Hay cuatro estados para las metas: inactiva, en progreso, demorada y finalizada.</p>
+  <p>Hay cuatro estados para las metas: inactiva, en progreso, no cumplidas y finalizada.</p>
   <h6 class="is-600 mb-3">¿Puedo hacer monitoreos?</h5>
   <p>Si estás interesado en comprometerse y voluntariarte para hacer monitoreo escribinos a xxxx @xxxx </p>
   <h6 class="is-600 mb-3">¿Por qué es necesario Partícipes?</h5>
