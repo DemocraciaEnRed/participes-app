@@ -4,7 +4,7 @@
       <div class="align-self-center animate__animated animate__flipInX">
         <h4 class="is-700 m-0">Progreso declarado</h4>
         <p class="mb-0 mt-1">Unidad del indicador: {{$goal->indicator_unit}}</p>
-        <p class="mb-0 mt-1">Al momento de publicar el reporte, la meta pasó de {{$report->previous_progress}} a {{$report->previous_progress + $report->progress}}</p>
+        <p class="mb-0 mt-1">Al momento de publicar el reporte, la meta pasó de {{$report->previous_progress ?: 0}} a {{$report->previous_progress + $report->progress}}</p>
       </div>
       <h3 class="is-700 text-info ml-2 mb-0 align-self-center animate__animated animate__bounceIn animate__delay-1s">{{$report->progress}}</h3>
     </div>
