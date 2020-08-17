@@ -4,12 +4,17 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    {{-- ENABLE THIS TAG IF YOU DONT WANT ROBOTS TO INDEX YOUR WEB --}}
+    <meta name="robots" content="noindex">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-    @yield('metatags')
+    @hasSection('metatags')
+        @yield('metatags')
+    @else
+        @include('partials.metatags')
+    @endif
 
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
