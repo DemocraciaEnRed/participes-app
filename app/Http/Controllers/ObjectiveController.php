@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Objective;
 use App\Goal;
 use App\Report;
+use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Resources\Objective as ObjectiveResource;
 use App\Http\Resources\Report as ReportResource;
@@ -30,10 +31,10 @@ class ObjectiveController extends Controller
         return view('objective.view',['objective' => $objective,'reports' => $reports]);
     }
 
-     public function viewList(Request $request){
-       
+    public function viewList(Request $request){
+        $categories = Category::all();
         return view('portal.catalogs.objectives',[
-            
+            'categories' => $categories
         ]);
     }
 
@@ -42,14 +43,22 @@ class ObjectiveController extends Controller
         $pageSize = $request->query('size',10);
         $orderBy = $request->query('order_by');
         $hidden = $request->query('hidden',false);
+        $category = $request->query('category',null);
+        $title = $request->query('s',null);
         
         $objectives = Objective::query();
         if(!is_null($orderBy)){
             $orderByParams = explode(',',$orderBy);
             $objectives->orderBy($orderByParams[0],$orderByParams[1]);
         }
+        if(!is_null($category)){
+            $objectives->where('category_id',$category);
+        }
+        if(!is_null($title)){
+            $objectives->where('title', 'like', "%{$title}%")->orWhere('tags','like', "%{$title}%");
+        }
         $objectives->where('hidden',false);
-        $objectives = $objectives->paginate($pageSize);
+        $objectives = $objectives->paginate($pageSize)->withQueryString();
         return ObjectiveResource::collection($objectives);
     }
 

@@ -21,7 +21,7 @@ class UserController extends Controller
         $users = User::query();
         if($request->query('name')){
             $n = $request->query('name');
-            $users->where('name', 'like', "{$n}%");
+            $users->where('name', 'like', "%{$n}%");
         }
         $users = $users->paginate(10);
 

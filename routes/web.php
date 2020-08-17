@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/start', 'MiscController@start')->name('start');
+Route::get('/buscador', 'SearchController@index')->name('search');
 Route::post('/start', 'MiscController@startApp')->name('start.form');
 
 Route::group([

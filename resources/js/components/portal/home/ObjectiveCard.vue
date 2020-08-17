@@ -29,7 +29,7 @@
         <hr>
         <div class="row my-2">
           <div class="col-md-6 col-lg-8">
-            <b>Ultimas metas</b>
+            <b>últimas metas</b>
             <div class="my-1 d-flex justify-content-between align-items-center goal-container" v-for="goal in objective.latest_goals" :key="`goals_${goal.id}`">
               <span class="text-truncate w-100"><a :href="goal.url" class="text-dark">{{goal.title}}</a></span>
               <div class="progress my-0 mx-1'" style="height: 10px; width: 150px">
@@ -39,7 +39,7 @@
             </div>  
           </div>
           <div class="col-md-6 col-lg-4">
-            <b>Ultimos reportes</b>
+            <b>Últimos reportes</b>
             <div class="my-1 d-flex justify-content-between align-items-center report-container" v-for="report in objective.latest_reports" :key="`reports_${report.id}`">
               <span class="text-truncate w-100"><i class="far fa-file text-primary"></i>&nbsp;<a :href="report.url" class="text-dark w-100">&nbsp;{{report.title}}</a></span>
               <span class="report-icon text-smaller ml-1"><i :class="`fas ${getReportIcon(report.type)} text-primary`"></i></span>
