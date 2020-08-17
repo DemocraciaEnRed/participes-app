@@ -173,7 +173,9 @@ class InitDB extends Migration
             $table->text('content');
             $table->datetime('date');
             $table->json('tags')->nullable();
+            $table->string('previous_status')->nullable();
             $table->string('status')->nullable();
+            $table->integer('previous_progress')->nullable();
             $table->integer('progress')->nullable();
             $table->decimal('map_lat', 10, 8)->nullable();
             $table->decimal('map_long', 11, 8)->nullable();

@@ -33,6 +33,7 @@
     <div class="text-right">
       <h5 class="is-700 text-white">Si te gustó el reporte, ¡Dejanos tu feedback!</h5>
       <a href="{{route('login')}}" class="btn btn-success is-700"><i class="fas fa-check"></i> ¡Estoy de acuerdo!</a>
+      <a href="#comentarios" class="btn btn-light is-700"><i class="far fa-comment"></i> Dejar un comentario</a>
     </div>
   </div>
 </div>

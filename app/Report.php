@@ -112,6 +112,26 @@ class Report extends Model
                 return '???';
         }
     }
+    public function previousStatusLabel()
+    {
+        switch($this->previous_status){
+            case 'reached':
+                return 'Alcanzada';
+                break;
+            case 'ongoing':
+                return 'En progreso';
+                break;
+            case 'delayed':
+                return 'No cumplida';
+                break;
+            case 'inactive':
+                return 'Inactiva';
+                break;
+
+            default:
+                return '???';
+        }
+    }
     public function typeIcon()
     {
         switch($this->type){

@@ -120,6 +120,7 @@ class GoalPanelController extends Controller
       $report->date = $request->input('date');
       $report->tags = $request->input('tags');
       if(!empty($request->input('status'))){
+        $report->previous_status = $goal->status;
         $report->status = $request->input('status');
         $goal->status = $request->input('status');
         $goalDirty = true;
@@ -128,6 +129,7 @@ class GoalPanelController extends Controller
         case 'post':
           break;
         case 'progress':
+          $report->previous_progress = $goal->indicator_progress;
           $report->progress = $request->input('progress');
           $goal->indicator_progress += intval($request->input('progress'));
           $goalDirty = true;

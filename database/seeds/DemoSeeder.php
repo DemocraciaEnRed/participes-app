@@ -150,6 +150,7 @@ class DemoSeeder extends Seeder
                     $report->title = $faker->sentence();
                     $report->content = $faker->realText(450);
                     $newStatus = $faker->randomElement(['ongoing','delayed','inactive']);
+                    $report->previous_status = $goal->status;
                     $report->status = $newStatus;
                     $goal->status = $newStatus;
                     $goal->save();
@@ -160,6 +161,7 @@ class DemoSeeder extends Seeder
                             break;
                         case 'progress':
                             $reportProgress = $faker->numberBetween(0,$auxProgressRemaining);
+                            $report->previous_progress = $goal->indicator_progress;
                             $report->progress = $reportProgress;
                             $auxProgressRemaining -= $reportProgress;
                             $goal->indicator_progress += $reportProgress;
