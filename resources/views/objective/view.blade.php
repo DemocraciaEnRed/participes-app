@@ -24,7 +24,7 @@
 			<div class="card shadow-sm">
 				<div class="card-body">
 					<div class="d-flex align-items-center mb-3">
-						<div class="mr-3 category-icon-container" style="background-color: {{$objective->category->backgroundColor()}}">
+						<div class="mr-3 category-icon-container" style="background-color: {{$objective->category->background_color}}">
 							<i class="fa-2x fa-fw {{$objective->category->icon}}" style="color: {{$objective->category->color}}"></i>
 						</div>
 						<div class="w-100">
@@ -51,9 +51,9 @@
 									<div class="my-1 d-flex justify-content-between align-items-center goal-container">
 										<span class="text-truncate w-100">{{$goal->title}}</span>
 										<div class="progress my-0 mx-1" style="height: 10px; width: 150px">
-											<div class="progress-bar bg-{{$goal->status}}" role="progressbar" style="width: {{$goal->progressPercentage()}}%" aria-valuenow="{{$goal->progressPercentage()}}" aria-valuemin="0" aria-valuemax="100"></div>
+											<div class="progress-bar bg-{{$goal->status}}" role="progressbar" style="width: {{$goal->progress_percentage}}%" aria-valuenow="{{$goal->progress_percentage}}" aria-valuemin="0" aria-valuemax="100"></div>
 										</div>
-										<span class="goal-percentage text-smallest is-700 ml-1">{{$goal->progressPercentage()}}%</span>
+										<span class="goal-percentage text-smallest is-700 ml-1">{{$goal->progress_percentage}}%</span>
 									</div>
 								</div>
 								@empty
@@ -121,7 +121,7 @@
 					{{-- @forelse ($reports as $report)
 					<div class="card my-4 shadow-sm border-secondary">
 						<div class="card-body text-secondary">
-								<p class="mb-3 float-lg-right ml-lg-4  text-secondary text-right"><i class="{{$report->typeIcon()}} text-primary"></i>&nbsp;{{$report->typeLabel()}}</p>
+								<p class="mb-3 float-lg-right ml-lg-4  text-secondary text-right"><i class="{{$report->type_icon}} text-primary"></i>&nbsp;{{$report->type_label}}</p>
 								<h5 class="is-700 my-2"><a href="{{route('reports.index',['reportId' => $report->id])}}"class="text-secondary">{{$report->title}}</a></h5>
 								<p class="text-smaller mb-0">{{nl2br(e(Str::limit($objective->content, 280, $end=' [...]')))}}</p>
 								<p class="text-muted text-smaller my-2">Publicado {{$report->created_at->diffForHumans()}} por {{$report->author->name}} {{$report->author->surname}}</p>

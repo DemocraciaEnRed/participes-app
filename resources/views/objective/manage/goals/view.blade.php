@@ -20,7 +20,7 @@ $progress = round( ($goal->indicator_progress / $goal->indicator_goal)*100  );
     </div>
     <div class="col md-6">
          <h5 class="font-weight-bold">Estado</h6>
-          <p>{{$goal->statusLabel()}}</p>
+          <p>{{$goal->status_label}}</p>
     </div>
   </div>
   <div class="row">

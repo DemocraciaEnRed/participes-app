@@ -27,7 +27,7 @@
 							<i class="far fa-2x fa-fw fa-dot-circle text-{{$goal->status}}"></i>
 						</div>
 						<div class="w-100">
-							<span class="text-{{$goal->status}}">Meta {{$goal->statusLabel()}}</span>
+							<span class="text-{{$goal->status}}">Meta {{$goal->status_label}}</span>
 							<h4 class="is-700 m-0">
 								{{$goal->title}}
 							</h4>
@@ -42,9 +42,9 @@
 					    <h6 class="is-700">Progreso</h6>
 					   <div class="my-1 d-flex justify-content-between align-items-center goal-container">
 								<div class="progress my-0 mx-1 w-100" style="height: 10px;">
-									<div class="progress-bar bg-{{$goal->status}}" role="progressbar" style="width: {{$goal->progressPercentage()}}%" aria-valuenow="{{$goal->progressPercentage()}}" aria-valuemin="0" aria-valuemax="100"></div>
+									<div class="progress-bar bg-{{$goal->status}}" role="progressbar" style="width: {{$goal->progress_percentage}}%" aria-valuenow="{{$goal->progress_percentage}}" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
-								<span class="goal-percentage text-smallest is-700 ml-1">{{$goal->progressPercentage()}}%</span>
+								<span class="goal-percentage text-smallest is-700 ml-1">{{$goal->progress_percentage}}%</span>
 							</div>
             </div>
           </div>

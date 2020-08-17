@@ -12,6 +12,7 @@ class Goal extends Model
     protected $table = 'goals';
     public $incrementing = true; // if IDs are auto-incrementing.
     public $timestamps = true; // if the model should be timestamped.
+    protected $appends = ['progress_percentage','status_label'];
 
     public function author()
     {
@@ -36,7 +37,7 @@ class Goal extends Model
         return $this->reports()->where('id', $reportId)->exists();
     }
 
-    public function statusLabel()
+    public function getStatusLabelAttribute()
     {
         switch($this->status){
             case 'reached':
@@ -57,7 +58,7 @@ class Goal extends Model
         }
     }
     
-    public function progressPercentage(){
+    public function getProgressPercentageAttribute(){
         return round( ($this->indicator_progress / $this->indicator_goal)*100 );
     }
 }

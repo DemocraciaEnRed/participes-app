@@ -3,7 +3,7 @@
   <div class="row">
       <div class="col-md-6 my-2">
         <div class="d-flex align-items-center">
-          <div class="mr-3 category-icon-container" style="background-color: {{$objective->category->backgroundColor()}}">
+          <div class="mr-3 category-icon-container" style="background-color: {{$objective->category->background_color}}">
             <i class="fa-2x fa-fw {{$objective->category->icon}}" style="color: {{$objective->category->color}}"></i>
           </div>
           <div class="w-100">
@@ -18,10 +18,10 @@
         <div class="d-flex align-items-center">
           <div class="mr-3 category-icon-container text-center">
             <i class="far fa-2x fa-fw fa-dot-circle text-{{$goal->status}}"></i>
-            <span class="text-{{$goal->status}} rounded-circle is-700 text-smallest ">{{$goal->progressPercentage()}}%</span>
+            <span class="text-{{$goal->status}} rounded-circle is-700 text-smallest ">{{$goal->progress_percentage}}%</span>
           </div>
           <div class="w-100">
-            <span class="text-{{$goal->status}}">Meta {{$goal->statusLabel()}}</span>
+            <span class="text-{{$goal->status}}">Meta {{$goal->status_label}}</span>
             <h4 class="is-700 m-0">
               <a class="text-dark" href="{{route('goals.index',[$goal->id])}}">{{$goal->title}}</a>
             </h4>

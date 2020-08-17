@@ -21,7 +21,7 @@ class Category extends JsonResource
             'title' => $this->title,
             'icon' => $this->icon,
             'color' => $this->color,
-            'background_color' => $this->backgroundColor()
+            'background_color' => $this->background_color
         ];
         return $res;
     }

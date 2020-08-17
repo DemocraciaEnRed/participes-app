@@ -9,7 +9,7 @@
   @endif
   <div class="card-body pb-2">
     <div class="d-flex align-items-center mb-3">
-      <div class="mr-3 category-icon-container" style="background-color: {{$objective->category->backgroundColor()}}">
+      <div class="mr-3 category-icon-container" style="background-color: {{$objective->category->background_color}}">
         <i class="fa-2x fa-fw {{$objective->category->icon}}" style="color: {{$objective->category->color}}"></i>
       </div>
       <div class="w-100">

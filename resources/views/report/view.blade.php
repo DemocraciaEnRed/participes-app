@@ -17,8 +17,8 @@
   <div class="card shadow-sm mb-3">
     <div class="card-body p-3 p-lg-5">
       <div class="d-flex justify-content-between d-column">
-        <h5 class="text-muted align-self-end mb-2"><i class="{{$report->typeIcon()}} fa-lg text-primary"></i>&nbsp;&nbsp;Reporte de
-          {{$report->typeLabel()}}</h5>
+        <h5 class="text-muted align-self-end mb-2"><i class="{{$report->type_icon}} fa-lg text-primary"></i>&nbsp;&nbsp;Reporte de
+          {{$report->type_label}}</h5>
         @isMember($objective->id)
         <a href="{{route('objectives.manage.goals.reports.index',['objectiveId' => $objective->id, 'goalId' => $goal->id, 'reportId' => $report->id])}}"
           class="ml-2 mb-3 btn btn-sm btn-primary"><i class="fas fa-edit"></i>&nbsp;Editar</a>

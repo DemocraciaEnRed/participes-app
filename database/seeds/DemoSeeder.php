@@ -200,6 +200,7 @@ class DemoSeeder extends Seeder
                     $report->tags = $faker->words(3);
                     $report->title = $faker->sentence();
                     $report->content = $faker->realText(450);
+                    $report->previous_status = $goal->status;
                     $report->status = 'reached';
                     $report->progress = $goal->indicator_goal;
                     $report->date = $faker->date();

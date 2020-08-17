@@ -24,7 +24,7 @@ class Report extends JsonResource
             'author_id' => $this->author_id,
             'goal_id' => $this->goal_id,
             'type' => $this->type,
-            'type_label' => $this->typeLabel(),
+            'type_label' => $this->type_label,
             'title' => $this->title,
             'content' => $this->content,
             'date' => $this->date,

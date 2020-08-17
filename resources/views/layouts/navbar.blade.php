@@ -14,6 +14,9 @@
         <li class="nav-item">
           <a href="{{ route('about.general') }}" class="nav-link">¿Como funciona?</a>
         </li>
+        <li class="nav-item">
+          <a href="{{ route('objectives') }}" class="nav-link">Objetivos</a>
+        </li>
       </ul>
 
       <!-- Right Side Of Navbar -->
