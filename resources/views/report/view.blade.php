@@ -1,21 +1,3 @@
-@php
-  $icon = null;
-  switch($report->type){
-    case 'post':
-      $icon = 'fas fa-bullhorn';
-      break;
-    case 'progress':
-      $icon = 'fas fa-fast-forward';
-      break;
-    case 'milestone':
-      $icon = 'fas fa-medal';
-      break;
-    default:
-      $icon = 'fas fa-question';
-      break;
-  }
-@endphp
-
 @section('metatags')
   @include('report.metatags')
 @endsection
@@ -35,7 +17,7 @@
   <div class="card shadow-sm mb-3">
     <div class="card-body p-3 p-lg-5">
       <div class="d-flex justify-content-between d-column">
-        <h5 class="text-muted align-self-end mb-2"><i class="{{$icon}} fa-lg text-primary"></i>&nbsp;&nbsp;Reporte de
+        <h5 class="text-muted align-self-end mb-2"><i class="{{$report->typeIcon()}} fa-lg text-primary"></i>&nbsp;&nbsp;Reporte de
           {{$report->typeLabel()}}</h5>
         @isMember($objective->id)
         <a href="{{route('objectives.manage.goals.reports.index',['objectiveId' => $objective->id, 'goalId' => $goal->id, 'reportId' => $report->id])}}"
