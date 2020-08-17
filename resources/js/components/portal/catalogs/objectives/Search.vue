@@ -1,6 +1,6 @@
 <template>
   <section v-if="firstFetch">
-    <input type="text" v-model="nameToSearch" class="form-control form-control-lg shadow-sm">
+    <input type="text" v-model="nameToSearch" class="form-control form-control-lg shadow-sm" placeholder="Buscar por titulo o tags">
     <small class="form-text text-muted">{{status}}</small>
 
     <section class="my-2">

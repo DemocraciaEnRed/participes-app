@@ -12,10 +12,13 @@
       <!-- Left Side Of Navbar -->
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a href="{{ route('about.general') }}" class="nav-link">¿Como funciona?</a>
+          <a href="{{ route('about.general') }}" class="nav-link"><i class="fas fa-question-circle"></i> ¿Como funciona?</a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('objectives') }}" class="nav-link">Objetivos</a>
+          <a href="{{ route('objectives') }}" class="nav-link"><i class="fas fa-bullseye"></i> Objetivos</a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('reports') }}" class="nav-link"><i class="far fa-copy"></i> Reportes</a>
         </li>
       </ul>
 

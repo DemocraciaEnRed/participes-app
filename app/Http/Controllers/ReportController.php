@@ -65,15 +65,27 @@ class ReportController extends Controller
     public function fetch(Request $request)
     {   
         $isMappable = $request->query('mappable');
+        $orderBy = $request->query('order_by');
         $detailed = $request->query('detailed',false);
         $pageSize = $request->query('size',10);
+        $type = $request->query('type',null);
+        $title = $request->query('s',null);
 
         $reports = Report::query();
-        $reports->orderBy('created_at','DESC');
+        if(!is_null($orderBy)){
+            $orderByParams = explode(',',$orderBy);
+            $reports->orderBy($orderByParams[0],$orderByParams[1]);
+        }
         if($isMappable){
             $reports->whereNotNull('map_long')->whereNotNull('map_lat')->whereNotNull('map_center');
         }
-        $reports = $reports->paginate($pageSize);
+        if(!is_null($type)){
+            $reports->where('type',$type);
+        }
+        if(!is_null($title)){
+            $reports->where('title', 'like', "%{$title}%")->orWhere('tags','like', "%{$title}%");
+        }
+        $reports = $reports->paginate($pageSize)->withQueryString();
         if($detailed){
             return ReportResource::collection($reports);
         } else {

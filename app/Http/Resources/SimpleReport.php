@@ -24,6 +24,7 @@ class SimpleReport extends JsonResource
             'goal_id' => $this->goal_id,
             'type' => $this->type,
             'type_label' => $this->type_label,
+            'type_icon' => $this->type_icon,
             'title' => $this->title,
             'date' => $this->date,
             'when' => $this->date->diffForHumans(),

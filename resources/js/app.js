@@ -53,6 +53,7 @@ Vue.component('collapse', require('./components/utils/Collapse.vue').default);
 Vue.component('report-list', require('./components/report/ReportsList.vue').default);
 Vue.component('report-album', require('./components/report/Album.vue').default);
 Vue.component('search-objectives', require('./components/portal/catalogs/objectives/Search.vue').default);
+Vue.component('search-reports', require('./components/portal/catalogs/reports/Search.vue').default);
 
 
 Vue.prototype.$http = http
