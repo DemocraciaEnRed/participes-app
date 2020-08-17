@@ -24,9 +24,9 @@
           class="ml-2 mb-3 btn btn-sm btn-primary"><i class="fas fa-edit"></i>&nbsp;Editar</a>
         @endisMember
       </div>
-      <h2 class="is-600 text-primary">{{$report->title}}</h2>
-      <h6 class="text-muted mb-3">Fecha del reporte: @datetime($report->date)<br>Publicado el
-        @datetime($report->created_at)</h6>
+      <h2 class="is-600 my-2 text-primary">{{$report->title}}</h2>
+      <h6 class="text-muted my-2">Fecha del reporte: @justdate($report->date)</h6>
+      <h6 class="text-muted my-2">Publicado el @datetime($report->created_at)</h6>
 
       <div class="is-size-5 my-5">
         {{nl2br($report->content)}}
@@ -37,7 +37,7 @@
           <h5 class="is-700">Tags del reporte</h5>
           <ul class="list-inline mb-0">
             @forelse ($report->tags ?: [] as $tag)
-            <li class="list-inline-item"><span class="is-size-5">{{$tag}}</span></li>
+            <li class="list-inline-item">{{$tag}}</li>
             @empty
             <li class="list-inline-item text-muted">No hay tags</li>
             @endforelse
