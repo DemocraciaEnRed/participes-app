@@ -3,7 +3,8 @@
 @section('panelContent')
 
 <section>
-<h1 class="">Notificaciones pendientes</h1>
+<h3 class="is-700">Notificaciones pendientes</h3>
+<hr>
 {{-- <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In eius ad officia tempora, temporibus repudiandae id ipsum neque deserunt rerum esse delectus consectetur voluptates eveniet quaerat commodi ducimus mollitia dolorem.</p> --}}
 <ul class="list-group">
  @if(count($notifications) > 0)
@@ -16,9 +17,8 @@
    <li class="list-group-item">¡Ka-boom! ¡No tenes notificaciones sin leer!</li>
   @endif
 </ul>
-<br>
   {{ $notifications->links() }}
-   @if(count($notifications) > 0)
+   @if(!$notifications->isEmpty())
 
   <hr>
   <div class="card">

@@ -3,8 +3,8 @@
 @section('panelContent')
 
 <section>
-<h1 class="">Mis suscripciones</h1>
-<p>A continuación, podrás ver el listado de objetivos que estás monitoreando actualmente</p>
+<h3 class="is-700">Mis suscripciones</h3>
+<p class="lead">A continuación, podrás ver el listado de objetivos que estás monitoreando actualmente</p>
  @if(count($subscriptions) > 0)
     @foreach($subscriptions as $objective)
     <div class="card mb-3 shadow-sm">

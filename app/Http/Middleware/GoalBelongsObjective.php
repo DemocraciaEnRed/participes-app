@@ -18,7 +18,6 @@ class GoalBelongsObjective
         $goalId = $request->route()->parameter('goalId');
         if($request->objective->hasGoal($goalId)){
           return $next($request);
-
         } else {
           abort(404, 'La meta no pertenece al objetivo');
         }

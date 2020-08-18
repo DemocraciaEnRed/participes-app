@@ -151,6 +151,8 @@ Route::group([
         Route::get('/metas/nuevo', 'ObjectivePanelController@viewAddGoal')->name('goals.add');
         Route::post('/metas/nuevo', 'ObjectivePanelController@formAddGoal')->name('goals.add.form');
         Route::get('/metas/{goalId}', 'GoalPanelController@viewGoal')->name('goals.index');
+        Route::get('/metas/{goalId}/editar', 'GoalPanelController@viewEditGoal')->name('goals.edit');
+        Route::put('/metas/{goalId}/editar', 'GoalPanelController@formEditGoal')->name('goals.edit.form');
         // Hitos
         Route::get('/metas/{goalId}/hitos', 'GoalPanelController@viewListGoalMilestones')->name('goals.milestones');
         Route::get('/metas/{goalId}/hitos/nuevo', 'GoalPanelController@viewAddGoalMilestone')->name('goals.milestones.add');
@@ -179,8 +181,6 @@ Route::group([
         Route::post('/archivos', 'ObjectivePanelController@formObjectiveFile')->name('files.form');
         Route::get('/album', 'ObjectivePanelController@viewObjectiveAlbum')->name('album');
         Route::get('/mapa', 'ObjectivePanelController@viewObjectiveMap')->name('map');
-
     });
-
 });
 

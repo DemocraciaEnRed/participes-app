@@ -1,3 +1,10 @@
+@php
+  $countUnreadNotifications = 0;
+  if(Auth::user()){
+    $countUnreadNotifications = Auth::user()->unreadNotifications->count();
+  } 
+@endphp
+
 <nav class="navbar navbar-expand-md navbar-dark p-2 bg-primary">
   <div class="container">
     <a class="navbar-brand" href="{{ url('/') }}">
@@ -35,10 +42,15 @@
         </li>
         @endif
         @else
+        @if( $countUnreadNotifications > 0 )
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('panel.notifications.unread') }}"><i class="fas fa-bell"></i>&nbsp;<span class="badge badge-danger badge-pill">{{ $countUnreadNotifications }}</span></a>
+        </li>
+        @endif
         <li class="nav-item dropdown">
           <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-            @include('utils.avatar',['avatar' => Auth::user()->avatar, 'size' => 24]) {{ Auth::user()->name }} <span
+            @include('utils.avatar',['avatar' => Auth::user()->avatar, 'size' => 20]) {{ Auth::user()->name }} <span
               class="caret"></span>
           </a>
 

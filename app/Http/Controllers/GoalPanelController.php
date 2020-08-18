@@ -16,6 +16,7 @@ use App\Goal;
 use App\Milestone;
 use App\Report;
 use App\Notifications\NewReport;
+use App\Notifications\EditGoal;
 use Illuminate\Http\Request;
 
 class GoalPanelController extends Controller
@@ -44,6 +45,47 @@ class GoalPanelController extends Controller
 
     public function viewGoal(Request $request, $objectiveId, $goalId){    
       return view('objective.manage.goals.view',['objective' => $request->objective, 'goal' => $request->goal]);
+    }
+
+    public function viewEditGoal(Request $request, $objectiveId, $goalId){
+      $this->hasManagerPrivileges($request);
+      return view('objective.manage.goals.edit',['objective' => $request->objective, 'goal' => $request->goal]);
+    }
+
+    public function formEditGoal(Request $request, $objectiveId, $goalId){
+      $this->hasManagerPrivileges($request);
+
+      $rules = [
+        'title' => 'required|string|max:550',
+        'status' => 'required|string|in:ongoing,delayed,inactive,reached',
+        'indicator' => 'required|string|max:550',
+        'indicator_goal' => 'integer|min:1',
+        'indicator_progress' => 'integer|min:0',
+        'indicator_unit' => 'required|string|max:550',
+        'indicator_frequency' => 'nullable|string|max:550',
+        'source' => 'nullable|string|max:550',
+        'notify' => 'nullable|string|in:true',
+      ];
+
+      $request->validate($rules);
+      $goal = $request->goal;
+      $goal->title = $request->input('title');
+      $goal->status = $request->input('status');
+      $goal->indicator = $request->input('indicator');
+      $goal->indicator_goal = $request->input('indicator_goal');
+      $goal->indicator_progress = $request->input('indicator_progress');
+      $goal->indicator_unit = $request->input('indicator_unit');
+      $goal->indicator_frequency = $request->input('indicator_frequency');
+      $goal->source = $request->input('source');
+      $goal->save();
+      $request->objective->touch();
+      
+      $notifySubscriber = $request->boolean('notify');
+      if(!$request->objective->hidden && $notifySubscriber){
+        Notification::locale('es')->send($request->objective->subscribers, new EditGoal($request->objective, $goal));
+      }
+
+      return redirect()->route('objectives.manage.goals.index', ['objectiveId' => $request->objective->id, 'goalId' => $goal->id])->with('success','La meta ha sido editada correctamente');
     }
 
     public function viewListGoalMilestones(Request $request, $objectiveId, $goalId){

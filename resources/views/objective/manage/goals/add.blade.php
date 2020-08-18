@@ -18,7 +18,7 @@
   <form method="POST" action="{{ route('objectives.manage.goals.add.form',['objectiveId' => $objective->id]) }}">
     @csrf
     <div class="form-group">
-      <label>Meta</label>
+      <label>Título de la meta</label>
       <input type="text" class="form-control" name="title" placeholder="Escriba aquí">
     </div>
     <div class="form-group">
@@ -30,7 +30,7 @@
       <div class="col">
         <div class="form-group">
           <label>Valor de meta (100%) del indicador</label>
-          <input type="number" class="form-control" name="indicator_goal" placeholder="Ej: 100">
+          <input type="number" class="form-control" min="1" name="indicator_goal" placeholder="Ej: 100">
           <small class="form-text text-muted">¿A que valor hay que llegar? Este es valor que representa que se llego a completar la meta al 100%.</small>
         </div>
 
@@ -38,8 +38,8 @@
       <div class="col">
         <div class="form-group">
           <label>Valor inicial del indicador <small class="text-info">Opcional</small></label>
-          <input type="number" class="form-control" name="indicator_progress" placeholder="Ej: 0">
-          <small class="form-text text-muted">Es el valor con la que comenzará la meta. Los reportes de actualización irán agregando (o restando). El campo vacio sera 0 </small>
+          <input type="number" class="form-control" min="0" name="indicator_progress" placeholder="Ej: 0">
+          <small class="form-text text-muted">Es el valor con la que comenzará la meta. Los reportes de actualización irán agregando (o restando). El campo vacio será considerado como 0 </small>
         </div>
       </div>
     </div>

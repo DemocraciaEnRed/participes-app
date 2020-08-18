@@ -3,8 +3,8 @@
 @section('panelContent')
 
 <section>
-  <h1 class="">Mis objetivos</h1>
-  <p>Estos son los objetivos de los cuales formas parte del equipo.</p>
+  <h3 class="is-700">Mis objetivos</h1>
+  <p class="lead">Estos son los objetivos de los cuales formas parte del equipo.</p>
   @if(count($objectives) > 0)
   @foreach($objectives as $objective)
   <div class="card mb-3 shadow-sm">

@@ -117,8 +117,6 @@ class ObjectivePanelController extends Controller
       return redirect()->route('objectives.manage.goals.index', ['objectiveId' => $request->objective->id, 'goalId' => $goal->id])->with('success','Meta creada');
     }
 
-
-
     public function viewObjectiveConfiguration (Request $request){
       return view('objective.manage.configuration', ['objective' => $request->objective]);
     } 
