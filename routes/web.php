@@ -145,7 +145,7 @@ Route::group([
         Route::get('/equipo', 'ObjectivePanelController@viewListTeam')->name('team');
         Route::get('/equipo/agregar', 'ObjectivePanelController@viewAddTeam')->name('team.add');
         Route::post('/equipo/agregar', 'ObjectivePanelController@formAddTeam')->name('team.add.form');
-        Route::post('/equipo/{usrId}/eliminar', 'ObjectivePanelController@formRemoveTeam')->name('team.remove.form');
+        Route::delete('/equipo/{usrId}/eliminar', 'ObjectivePanelController@formRemoveTeam')->name('team.remove.form');
         // Metas
         Route::get('/metas', 'ObjectivePanelController@viewListGoals')->name('goals');
         Route::get('/metas/nuevo', 'ObjectivePanelController@viewAddGoal')->name('goals.add');

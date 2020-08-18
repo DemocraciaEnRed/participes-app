@@ -3,8 +3,8 @@
 @section('adminContent')
 
 <section>
-  <h1 class="">Crear categoria</h1>
-  <p>Para crear una nueva categoría, completá los campos a continuación:</p>
+  <h3 class="is-700">Crear categoria</h3>
+  <p class="lead">Para crear una nueva categoría, completá los campos a continuación:</p>
   <hr>
   @if ($errors->any())
     <div class="alert alert-danger">

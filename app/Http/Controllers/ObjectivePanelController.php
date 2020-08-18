@@ -64,9 +64,9 @@ class ObjectivePanelController extends Controller
       $request->objective->members()->attach($user, ['role' => $request->input('role')]);
       return redirect()->route('objectives.manage.team', ['objectiveId' => $request->objective->id])->with('success','Miembro agregado');
     }
-    public function formRemoveTeam(Request $request){
+    public function formRemoveTeam(Request $request, $objectiveId, $userId){
       $this->hasManagerPrivileges($request);
-      //TODO
+      $request->objective->members()->detach($userId);
       return redirect()->route('objectives.manage.team', ['objectiveId' => $request->objective->id])->with('success','Miembro eliminado');
     }
     public function viewListGoals(Request $request){

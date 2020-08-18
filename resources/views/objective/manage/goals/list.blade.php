@@ -3,19 +3,22 @@
 @section('panelContent')
 
 <section>
-  <h1 class="">Metas del objetivo</h1>
-  <p>A continuación, encontrarás todas las metas asociadas a tu objetivo</p>
+  <h3 class="is-700">Metas del objetivo</h3>
+  <p class="lead">A continuación, encontrarás todas las metas asociadas a tu objetivo</p>
+  <hr>
   @foreach ($objective->goals as $goal)
-  <div class="card mb-3 shadow-sm">
+  <div class="card my-3 shadow-sm">
     <div class="card-body d-flex justify-content-between align-items-center">
-    <div>
-      <h5 class="card-title font-weight-bold"><a href="{{ route('objectives.manage.goals.index', ['objectiveId' => $objective->id,'goalId' => $goal->id]) }}" class="text-primary">{{$goal->title}}</a></h5>
-      <h6 class="card-subtitle text-muted">{{$goal->indicator}}</h6>
-    </div>
-    <div class="text-center">
-      <h4 class="text-info font-weight-bold mb-0">{{round( ($goal->indicator_progress / $goal->indicator_goal)*100 )}}%</h4>
-      <h6 class="text-muted mt-0">Progreso</h6>
-    </div>
+      <div class="mr-3 category-icon-container text-center">
+        <i class="far fa-2x fa-fw fa-dot-circle text-{{$goal->status}}"></i>
+        <span class="text-{{$goal->status}} rounded-circle is-700 text-smallest ">{{$goal->progress_percentage}}%</span>
+      </div>
+      <div class="w-100">
+        <span class="text-{{$goal->status}}">Meta {{$goal->status_label}}</span>
+        <h5 class="is-700 m-0">
+          <a class="text-dark" href="{{ route('objectives.manage.goals.index', ['objectiveId' => $objective->id,'goalId' => $goal->id]) }}">{{$goal->title}}</a>
+        </h5>
+      </div>
     </div>
   </div>
   @endforeach

@@ -1,60 +1,48 @@
 <template>
   <section>
     <error-alert v-if="error" :error="error"></error-alert>
-    <div class="card mb-3">
-      <div class="card-header">Buscar usuario</div>
-      <div class="card-body">
-        <div class="form-group">
-          <label>Ingrese el nombre</label>
-          <input v-model="userInput" type="text" class="form-control" placeholder="Ej: José">
-          <small class="form-text text-muted">{{status}}</small>
-        </div>
-      </div>
+    <div class="form-group">
+      <label>Ingrese el nombre</label>
+      <input v-model="userInput" type="text" class="form-control" placeholder="Ej: José">
+      <small class="form-text text-muted">{{status}}</small>
     </div>
+    <!-- <div class="card my-3 shadow-sm">
+      <div class="card-body">
+      </div>
+    </div> -->
     <form :action="formUrl" ref="theForm" method="POST">
       <input type="hidden" name="_token" :value="crsfToken">
       <input type="hidden" name="userId" :value="userSelected">
       <input type="hidden" name="role" :value="roleSelected">
     </form>
-        <table class="table table-sm">
-          <thead>
-            <tr>
-              <th>Nombre y Apellido</th>
-              <th width="200" class="text-center">Acción</th>  
-            </tr>
-          </thead>
-          <tbody v-if="!isFetching">
-            <tr v-for="user in users" :key="user.id">
-              <td>
-                <p>{{user.name}}</p>
-              </td>
-              <td class="text-center">
-                <div class="dropdown">
-                  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="roleSelector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Seleccione rol
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="roleSelector">
-                    <a class="dropdown-item is-clickable" @click="submit(user.id, 'manager')">Coordinador</a>
-                    <a class="dropdown-item is-clickable" @click="submit(user.id, 'reporter')">Reportero</a>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr v-if="users.length == 0">
-              <td class="text-center" colspan="2">
-                <p><i>No se encontraron usuarios</i></p>
-              </td>
-            </tr>
-          </tbody>
-          <tbody v-else>
-            <tr>
-              <td class="text-center" colspan="2">
-                <p><i>Cargando...</i></p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <paginator v-if="paginatorData.links && !isFetching" :paginatorData="paginatorData" @updateData="updateData" />
+    <div class="alert alert-light my-3" v-if="isLoading">
+      <i class="fas fa-sync fa-spin"></i>&nbsp;Cargando...
+    </div>
+    <div class="card shadow-sm" v-if="users.length == 0">
+      <div class="card-body text-center">
+        <i class="far fa-surprise"></i>&nbsp;¡No se encontraron miembros del equipo!
+      </div>
+    </div>
+    <div class="card my-3 shadow-sm" v-for="user in users" :key="user.id">
+        <div class="card-body d-flex align-items-start">
+        <div class="w-100">
+          <h5 class="my-1 is-600">{{user.surname}}, {{user.name}}</h5>
+          <p class="my-1 text-smaller text-muted">Email: {{user.email}}</p>
+        </div>
+        <div class="ml-2">
+          <div class="dropdown">
+            <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="roleSelector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Seleccione el rol
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="roleSelector">
+              <a class="dropdown-item is-clickable" @click="submit(user.id, 'manager')">Coordina</a>
+              <a class="dropdown-item is-clickable" @click="submit(user.id, 'reporter')">Reporta</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <paginator v-if="paginatorData.links && !isLoading" :paginatorData="paginatorData" @updateData="updateData" />
   </section>
 
 </template>
@@ -66,7 +54,7 @@ export default {
   data() {
     return {
       userInput: null,
-      isFetching: false,
+      isLoading: false,
       status: 'Comience escribiendo el nombre',
       error: null,
       users: [],
@@ -87,7 +75,7 @@ export default {
       function() {
         this.users = [];
         this.error = null;
-        this.isFetching = true;
+        this.isLoading = true;
         this.$http
           .get(this.fetchUrl,{
             params: this.params
@@ -106,7 +94,7 @@ export default {
             console.error(error)
           })
           .finally(() => {
-            this.isFetching = false;
+            this.isLoading = false;
           });
       },
       // This is the number of milliseconds we wait for the

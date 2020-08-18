@@ -3,8 +3,8 @@
 @section('adminContent')
 
 <section>
-  <h1 class="">Crear objetivo</h1>
-  <p>Para crear un nuevo objetivo, completá los campos a continuación:</p>
+  <h3 class="is-700">Crear objetivo</h3>
+  <p class="lead">Para crear un nuevo objetivo, completá los campos a continuación:</p>
   <hr>
   @if ($errors->any())
     <div class="alert alert-danger">

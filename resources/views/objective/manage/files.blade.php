@@ -36,7 +36,7 @@
   <div class="card mb-3 shadow-sm">
     <div class="card-body">
         <div class="text-center">
-          <h6 class="card-title">No hay archivos cargados</h4>
+          <h6 class="card-title">No hay archivos cargados</h6>
           <p class="mb-0"> Puede subir archivos en el campo superior <i class="fas fa-arrow-up"></i></p>
         </div>
     </div>

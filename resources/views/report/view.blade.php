@@ -24,7 +24,7 @@
           class="ml-2 mb-3 btn btn-sm btn-primary"><i class="fas fa-edit"></i>&nbsp;Editar</a>
         @endisMember
       </div>
-      <h2 class="is-600 my-2 text-primary">{{$report->title}}</h2>
+      <h2 class="is-600 my-2">{{$report->title}}</h2>
       <h6 class="text-muted my-2">Fecha del reporte: @justdate($report->date)</h6>
       <h6 class="text-muted my-2">Publicado el @datetime($report->created_at)</h6>
 

@@ -3,8 +3,8 @@
 @section('panelContent')
 
 <section>
-  <h1 class="">Nueva meta del objetivo</h1>
-  <p>Para sumar una nueva a tu objetivo, completá los campos a continuación:</p>
+  <h3 class="is-700">Nueva meta del objetivo</h3>
+  <p class="lead">Para sumar una nueva a tu objetivo, completá los campos a continuación:</p>
   <hr>
     @if ($errors->any())
     <div class="alert alert-danger">
