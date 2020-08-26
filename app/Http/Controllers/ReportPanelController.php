@@ -64,7 +64,7 @@ class ReportPanelController extends Controller
         'date' => 'required|date',
         'previous_status' => 'nullable|string|max:550',
         'status' => 'nullable|string|max:550',
-        'previous_progress' => 'integer|min:1',
+        'previous_progress' => 'integer|min:0',
         'progress' => 'integer|min:0',
         'milestone_date' => 'nullable|date',
         'milestone' => 'integer',
