@@ -56,7 +56,7 @@
 									 	<option v-if="goal.status != 'ongoing'" value="ongoing">En progreso</option>
 										<option v-if="goal.status != 'delayed'" value="delayed" >No cumplida</option>
 										<option v-if="goal.status != 'inactive'" value="inactive" >Inactiva</option>
-										<option v-if="goal.status != 'reached'" value="reached" disabled>Alcanzada</option>
+										<option v-if="goal.status != 'reached'" value="reached">Alcanzada</option>
 								</select>
 	          	<small class="form-text text-muted">Si el reporte indica un nuevo estado de la meta, puede definirlo aqui, si la meta no cambia su estado, puede dejarlo en "Mantener el estado"</small>
 							</div>
