@@ -3,9 +3,8 @@
 @section('panelContent')
 
 <section>
-  <h1 class="">Comentarios</h1>
-  <p>Los comentarios</p>
-   <hr>
+  <h3 class="is-700">Comentarios</h3>
+  <hr>
   <report-comments fetch-url="{{ route('apiService.reports.comments',['reportId' => $report->id]) }}" comment-url="{{ route('apiService.reports.comments.create',['reportId' => $report->id]) }}" :user="{{ Auth::user() ?  Auth::user()->load(['avatar']) : null }}" />
 </section>
 

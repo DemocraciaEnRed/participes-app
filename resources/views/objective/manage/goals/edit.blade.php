@@ -5,15 +5,20 @@
 <section>
   <h3 class="is-700">Editar meta del objetivo</h3>
   <p class="lead">Podes editar la meta del objetivo aqui. Completá los campos a continuación:</p>
-  <hr>
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul class="mb-0">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+  @if ($errors->any())
+  <div class="alert alert-danger">
+      <ul class="mb-0">
+          @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+          @endforeach
+      </ul>
+  </div>
+  @endif
+  @if($goal->has('reports'))
+  <div class="alert alert-warning">
+    <h6 class="is-700"><i class="fas fa-exclamation-triangle"></i> Importante</h6>
+    El objetivo cuenta con reportes. Si alguno de los campos compromete alguna información con respecto a los reportes, recuerde hacer las ediciones correspondientes en los mismos.
+  </div>
   @endif
   <form method="POST" action="{{ route('objectives.manage.goals.edit.form',['objectiveId' => $objective->id, 'goalId' => $goal->id]) }}">
     @method('PUT')
@@ -78,7 +83,7 @@
       <label class="is-700 "><i class="fas fa-paper-plane"></i>&nbsp;Enviar notificacion a suscriptores</label>
       @if(!$objective->hidden)
       <div class="custom-control custom-switch">
-        <input type="checkbox" class="custom-control-input" name="notify" id="notify" checked value="true">
+        <input type="checkbox" class="custom-control-input" name="notify" id="notify" value="true">
         <label class="custom-control-label is-clickable" for="notify">Notificar a los suscriptores</label>
       </div>
       @else
@@ -87,7 +92,6 @@
       </div>
       @endif
       <small class="form-text text-muted">Se le enviará una notificación por email (si lo tienen habilitado) y por sistema, de que la meta ha sido editada invitandolos a verla.</small>
-
     </div>
     <br>
     <button type="submit" class="btn btn-primary">Editar</button>

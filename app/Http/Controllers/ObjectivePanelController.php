@@ -5,6 +5,7 @@ use Notification;
 use Image;
 use Storage;
 use Str;
+use Log;
 use App\Category;
 use App\Organization;
 use App\Role;
@@ -15,7 +16,9 @@ use App\Objective;
 use App\Goal;
 use App\Milestone;
 use App\Report;
-use App\Notifications\NewReport;
+use App\Notifications\EditObjective;
+use App\Notifications\JoinObjectiveTeam;
+use App\Rules\MatchOldPassword;
 use Illuminate\Http\Request;
 
 class ObjectivePanelController extends Controller
@@ -40,6 +43,44 @@ class ObjectivePanelController extends Controller
       return;
     }
 
+    public function viewEditObjective(Request $request){
+      $this->hasManagerPrivileges($request);
+      $categories = Category::all();
+      $organizations = Organization::all();
+      return view('objective.manage.edit',['objective' => $request->objective, 'categories' => $categories, 'organizations' => $organizations]);
+    }
+
+    public function formEditObjective(Request $request){
+      $this->hasManagerPrivileges($request);
+      $rules = [
+          'title' => 'required|string|max:550' ,
+          'content' => 'required|string|max:2000',
+          'category' => 'required' ,
+          'tags' => 'array' ,
+          'tags.*' => 'required|string|max:100' ,
+          'organizations' => 'array' ,
+          'organizations.*' => 'required|numeric' ,
+      ];
+      $request->validate($rules);
+
+      $category = Category::findOrFail($request->input('category'));
+      $objective = $request->objective;
+      $objective->title = $request->input('title');
+      $objective->content = $request->input('content');
+      $objective->tags = $request->input('tags');
+      $objective->category()->associate($category);
+      $objective->author()->associate($request->user());
+      $objective->save();
+      $objective->organizations()->sync($request->input('organizations'));
+
+      $notifySubscriber = $request->boolean('notify');
+      if(!$objective->hidden && $notifySubscriber){
+        Notification::locale('es')->send($objective->subscribers, new EditObjective($objective));
+      }
+
+      return redirect()->route('objectives.manage.index',['objectiveId' => $objective->id])->with('success','El objetivo ha sido editado correctamente');
+    }
+
     public function index(Request $request){
       return view('objective.manage.index', ['objective' => $request->objective]);
     }
@@ -61,13 +102,18 @@ class ObjectivePanelController extends Controller
     public function formAddTeam(Request $request){
       $this->hasManagerPrivileges($request);
       $user = User::findOrFail($request->input('userId'));
+      // Attach
       $request->objective->members()->attach($user, ['role' => $request->input('role')]);
-      return redirect()->route('objectives.manage.team', ['objectiveId' => $request->objective->id])->with('success','Miembro agregado');
+      // Subscribe
+      $request->objective->subscribers()->attach($user);
+      // Notify
+      $user->notify(new JoinObjectiveTeam($request->objective, $request->input('role')));
+      return redirect()->route('objectives.manage.team', ['objectiveId' => $request->objective->id])->with('success','Se ha agregado al nuevo miembro en el equipo y se lo ha notificado exitosamente');
     }
     public function formRemoveTeam(Request $request, $objectiveId, $userId){
       $this->hasManagerPrivileges($request);
       $request->objective->members()->detach($userId);
-      return redirect()->route('objectives.manage.team', ['objectiveId' => $request->objective->id])->with('success','Miembro eliminado');
+      return redirect()->route('objectives.manage.team', ['objectiveId' => $request->objective->id])->with('success','Se ha eliminado al miembro del equipo');
     }
     public function viewListGoals(Request $request){
       return view('objective.manage.goals.list',['objective' => $request->objective]);
@@ -290,7 +336,41 @@ class ObjectivePanelController extends Controller
       return view('objective.manage.map', ['objective' => $request->objective]);
     } 
 
-    // public function viewAlbumReport (Request $request){
-    //   return view('objective.manage.')
-    // } 
+    public function formDeleteObjective(Request $request){
+      $this->hasManagerPrivileges($request);
+
+      $rules = [
+        'password' =>  ['required', new MatchOldPassword],
+        'notify' => 'nullable|string|in:true',
+      ];
+
+      $request->validate($rules);
+
+      Log::channel('mysql')->debug("{$request->user()->fullname} el objetivo {$request->objective->title}", [
+        'objective' => $request->objective->id,
+        'objective_title' => $request->objective->title,
+        'user_id' => $request->user()->id,
+        'user_fullname' => $request->user()->fullname,
+        'email' => $request->user()->email
+        ]);
+
+      $goals = $request->objective->goals;
+      foreach ($goals as $goal) {
+        $reports = $goal->reports;
+        foreach ($reports as $report) {
+          $report->delete();
+        }
+        $goal->delete();
+      }
+      $request->objective->delete();
+      // Notify
+      // $notifySubscriber = $request->boolean('notify');
+      // if(!$request->objective->hidden && $notifySubscriber){
+      //   Notification::locale('es')->send($request->objective->subscribers, new EditReport($request->objective, $request->goal, $report));
+      // }
+
+
+      return redirect()->route('home')->with('success','Objetivo eliminado correctamente');
+
+    }
 }

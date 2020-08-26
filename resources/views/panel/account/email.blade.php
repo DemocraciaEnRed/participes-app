@@ -3,8 +3,8 @@
 @section('panelContent')
 
 <section>
-<h1 class="">Cambiar mi email</h1>
-<p>Si querés modificar tu dirección de email, podés confirmarla acá abajo:</p>
+<h3 class="is-700">Cambiar mi email</h3>
+<p class="lead">Si querés modificar tu dirección de email, podés confirmarla acá abajo:</p>
 <hr>
    @if ($errors->any())
     <div class="alert alert-danger">

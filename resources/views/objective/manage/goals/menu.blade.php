@@ -31,5 +31,6 @@ $currentRoute = Route::currentRouteName();
 <h6 class="category"><i class="fas fa-cog fa-fw"></i>&nbsp;Administrar</h6>
 <div class="menu-link">
 <a href="{{route('objectives.manage.goals.edit', ['objectiveId' => $objective->id, 'goalId' => $goal->id]) }}" class="item-link {{ $currentRoute == 'objectives.manage.goals.edit'  ? 'is-active' : null }}">Editar meta</a>
+<a href="{{route('objectives.manage.goals.configuration', ['objectiveId' => $objective->id, 'goalId' => $goal->id]) }}" class="item-link {{ $currentRoute == 'objectives.manage.goals.configurations'  ? 'is-active' : null }}">Configuración</a>
 </div>
 @endisManager

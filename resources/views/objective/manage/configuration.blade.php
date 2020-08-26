@@ -10,13 +10,11 @@
 <script src='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js'></script>
 @endsection
 
-
-
 @section('panelContent')
 
 <section>
-  <h1 class="">Configuración</h1>
-  <p>A continuación, encontrarás opciones para configurar la visibilidad del objetivo</p>
+  <h3 class="is-700">Configuración</h3>
+  <p class="lead">A continuación, encontrarás otras opciones de configuracion del objetivo</p>
   <hr>
    @if ($errors->any())
     <div class="alert alert-danger">
@@ -53,7 +51,37 @@
     @csrf
     <h5 class="font-weight-bold"><i class="far fa-eye"></i> Definir centro y zoom por defecto del mapa</h5>
     <p>Defina el centro y zoom por defecto del mapa, para asegurar que los reportes del objetivo se vean de forma contenida dentro del area del mapa</p>
-    <set-map-default access-token="{{config('services.mapbox.key')}}" map-style="{{config('services.mapbox.style')}}" :lat="{{$objective->map_lat ?: 'undefined'}}" :long="{{$objective->map_long ?: 'undefined'}}" :zoom="{{$objective->map_zoom ?: 'undefined'}}">
+    <set-map-default access-token="{{config('services.mapbox.key')}}" map-style="{{config('services.mapbox.style')}}" :lat="{{$objective->map_lat ?: 'undefined'}}" :long="{{$objective->map_long ?: 'undefined'}}" :zoom="{{$objective->map_zoom ?: 'undefined'}}"></set-map-default>
+  </form>
+  <hr>
+  <h5 class="is-700 has-text-danger"><i class="fas fa-trash"></i> Eliminar objetivo</h5>
+  <p>Al eliminar el objetivo, tenga en cuenta lo siguiente</p>
+  <ul>
+    <li>El objetivo deja de ser visible publicamente</li>
+  </ul>
+  <form action="{{ route('objectives.manage.delete.form',['objectiveId' => $objective->id]) }}" method="POST">
+    @method('DELETE')
+    @csrf
+    <div class="form-group">
+      <label class="is-700">Ingrese su contraseña</label>
+      <input type="password" class="form-control" name="password">
+      <small class="form-text text-muted">Para poder eliminar el objetivo, ingrese su contraseña para confirmar.</small>
+    </div>
+    <div class="form-group">
+     <label class="is-700 "><i class="fas fa-paper-plane"></i>&nbsp;Enviar notificación a suscriptores</label>
+      @if(!$objective->hidden)
+      <div class="custom-control custom-switch">
+        <input type="checkbox" class="custom-control-input" name="notify" id="notify" value="true">
+        <label class="custom-control-label is-clickable" for="notify">Notificar a los suscriptores</label>
+      </div>
+      @else
+      <div class="alert alert-warning">
+        <i class="fas fa-exclamation-triangle"></i>&nbsp;El objetivo se encuentra <i class="fas fa-eye-slash"></i> oculto, no se enviarán notificaciones a los usuarios.
+      </div>
+      @endif
+      <small class="form-text text-muted">Se le enviará una notificación por email (si lo tienen habilitado) y por sistema, de que el objetivo ha sido eliminado.</small>
+    </div>
+    <button type="submit" class="btn btn-danger">Eliminar</button>
   </form>
 </section>
 

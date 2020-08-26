@@ -27,24 +27,6 @@ class UserPanelController extends Controller
         $this->middleware('check_role:user');
     }
 
-    public function base64ExtractData($data,$types){
-        if (preg_match('/^data:image\/(\w+);base64,/', $data, $type)) {
-            $data = substr($data, strpos($data, ',') + 1);
-            $type = strtolower($type[1]); // jpg, png, gif
-
-            if (!in_array($type, $types)) {
-                abort(500,'Bad mime type');
-            }
-
-            if ($data === false) {
-                abort(500,'base64_decode failed');                
-            }
-            return $type;
-        } else {
-            abort(500,'did not match data URI with image data');                
-        }
-    }
-
     public function index(Request $request){
         return view('panel.index');
     }

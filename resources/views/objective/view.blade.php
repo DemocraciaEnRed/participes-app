@@ -41,7 +41,7 @@
 								</portal-objective-stats>
 							</div>
 						</div>
-					<p>{{nl2br(e($objective->content))}}</p>
+					<p>{!! nl2br(e($objective->content)) !!}</p>
 					<hr>
 					<div class="my-3">
 						<collapse>
@@ -115,52 +115,9 @@
 					</collapse>
 					<hr>
 					<h5 class="is-700 mt-2 mb-4">Reportes</h5>
-					<report-list fetch-url="{{route('apiService.objectives.reports',['objectiveId'=> $objective->id, 'size' => 3, 'with' =>'report_goal,report_latest_comments,report_actions', 'detailed' => true,  'order_by'=>'created_at,DESC'])}}" login-url="{{route('login')}}">
+					<report-list fetch-url="{{route('apiService.objectives.reports',['objectiveId'=> $objective->id, 'size' => 3, 'with' =>'report_goal,report_latest_comments,report_actions', 'detailed' => true,  'order_by'=>'date,DESC'])}}" login-url="{{route('login')}}">
 						@include('partials.loading')
 					</report-list>
-					{{-- @forelse ($reports as $report)
-					<div class="card my-4 shadow-sm border-secondary">
-						<div class="card-body text-secondary">
-								<p class="mb-3 float-lg-right ml-lg-4  text-secondary text-right"><i class="{{$report->type_icon}} text-primary"></i>&nbsp;{{$report->type_label}}</p>
-								<h5 class="is-700 my-2"><a href="{{route('reports.index',['reportId' => $report->id])}}"class="text-secondary">{{$report->title}}</a></h5>
-								<p class="text-smaller mb-0">{{nl2br(e(Str::limit($objective->content, 280, $end=' [...]')))}}</p>
-								<p class="text-muted text-smaller my-2">Publicado {{$report->created_at->diffForHumans()}} por {{$report->author->name}} {{$report->author->surname}}</p>
-								<div class="div d-flex justify-content-between mt-4">
-									<div class="div">
-										<a href="#" class="btn btn-outline-success btn-sm is-600">Estoy de acuerdo&nbsp;<i class="fas fa-check"></i>&nbsp;<span class="text-secondary is-700">{{$report->testimonies->count()}}</span></a>
-										<a href="#" class="btn btn-outline-info btn-sm is-600">Quiero sumar información&nbsp;<i class="far fa-comment"></i>&nbsp;<span class="text-secondary is-700">{{$report->comments->count()}}</span></a>
-									</div>
-									<div>
-										<a href="{{route('reports.index',['reportId' => $report->id])}}" class="btn btn-outline-primary btn-sm">Detalles&nbsp;<i class="fas fa-arrow-right"></i></a>
-									</div>
-								</div>
-						</div>
-					</div>
-					@empty
-					<p class="my-2 text-muted">No hay reportes del objetivo</p>
-					@endforelse
-					<div class="text-center">
-						{{$reports->links()}}
-					</div> --}}
-					{{-- @forelse ($objective->files as $file)
-					<div class="card mb-2 shadow-sm">
-						<div class="card-body p-2 pl-4 pr-4 d-flex">
-							<div class="mr-3 mt-2">
-								<i class="far fa-file fa-lg"></i>
-							</div>
-							<div class="flex-fill">
-								<p class="mb-0 text-smaller word-wrap-anywhere">{{ $file->name }}</p>
-								<p class="text-card text-smaller text-muted mb-0">{{ $file->mime }}</p>
-							</div>
-							<div class="ml-3 mt-2">
-								<a href="{{ asset($file->path) }}" class="card-link text-smaller"><i class="fas fa-download fa-lg"></i></a>
-							</div>
-						</div>
-					</div>
-					@empty
-					<p class="my-2 text-muted">No hay archivos adjuntos al objetivo</p>
-					@endforelse --}}
-
 				</div>
 			</div>
 		</div>

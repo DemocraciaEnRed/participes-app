@@ -38,6 +38,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    public function getFullnameAttribute(){
+        return $this->surname . ', ' . $this->name;
+    }
+
     public function roles()
     {
         return $this->belongsToMany('App\Role','role_user','user_id','role_id')->withTimestamps();

@@ -12209,28 +12209,29 @@ h6 {
   font-weight: 700;
 }
 
-#portal-sections-buttons {
-  background-color: #FFF;
+.goal-container .goal-percentage {
+  min-width: 30px;
+  text-align: center;
 }
 
-#portal-sections-buttons .buttons-container {
-  margin-top: -40px;
+#calendarHeader img {
+  max-width: 250px;
 }
 
-#portal-sections-buttons .section-button a {
+#calendarHeader #calendarButtons .section-button a {
   color: #343a40;
   text-decoration: none;
 }
 
-#portal-sections-buttons .section-button a:hover {
+#calendarHeader #calendarButtons .section-button a:hover {
   color: #2c59fb;
 }
 
-#portal-sections-buttons .section-button a:hover .liner {
+#calendarHeader #calendarButtons .section-button a:hover .liner {
   background-color: #2c59fb;
 }
 
-#portal-sections-buttons .section-button .liner {
+#calendarHeader #calendarButtons .section-button .liner {
   height: 2px;
   width: 90%;
   margin: 0 auto;
@@ -12240,143 +12241,93 @@ h6 {
 }
 
 @media (min-width: 576px) {
-  #portal-sections-buttons .section-button .liner {
+  #calendarHeader #calendarButtons .section-button .liner {
     width: 90%;
   }
 }
 
-#portal-sections-buttons .section-button.active {
+#calendarHeader #calendarButtons .section-button.active {
   color: #2c59fb;
 }
 
-#portal-sections-buttons .section-button.active a {
+#calendarHeader #calendarButtons .section-button.active a {
   color: #2c59fb;
 }
 
-#portal-sections-buttons .section-button.active a:hover {
+#calendarHeader #calendarButtons .section-button.active a:hover {
   color: #2c59fb;
 }
 
-#portal-sections-buttons .section-button.active .liner {
+#calendarHeader #calendarButtons .section-button.active .liner {
   background-color: #2c59fb;
 }
 
-.goal-container .goal-percentage {
-  min-width: 30px;
-  text-align: center;
-}
-
-#about {
-  background-color: #FFF;
-}
-
-#about .custom-border {
+#calendarList .custom-border {
   border-radius: 10px;
 }
 
-#about #about-one {
+#calendarList .layout-one {
   padding: 3rem 15px;
 }
 
-#about #about-one .column-picture img {
+#calendarList .layout-one .column-picture img {
+  max-height: 180px;
   max-width: 90%;
+  margin-bottom: 20px;
 }
 
-@media (min-width: 992px) {
-  #about #about-one .column-picture img {
+@media (min-width: 768px) {
+  #calendarList .layout-one .column-picture img {
+    margin-bottom: 0px;
     max-width: 100%;
+    max-height: 300px;
   }
 }
 
-@media (min-width: 992px) {
-  #about #about-one .column-text {
+@media (min-width: 768px) {
+  #calendarList .layout-one .column-text {
     z-index: 2;
   }
 
-  #about #about-one .column-picture {
+  #calendarList .layout-one .column-picture {
     margin-left: -80px;
     z-index: 1;
     max-width: none;
   }
 }
 
-#about #about-two {
+#calendarList .layout-two {
   padding: 0rem 15px 3rem;
 }
 
-#about #about-two .row {
-  flex-direction: column-reverse;
-}
-
-@media (min-width: 992px) {
-  #about #about-two .row {
-    flex-direction: row;
-  }
-}
-
-#about #about-two .column-picture img {
+#calendarList .layout-two .column-picture img {
+  max-height: 180px;
   max-width: 90%;
+  margin-bottom: 20px;
 }
 
-@media (min-width: 992px) {
-  #about #about-two .column-picture img {
+@media (min-width: 768px) {
+  #calendarList .layout-two .column-picture img {
+    max-height: 300px;
     max-width: 100%;
+    margin-bottom: 0px;
   }
 }
 
-@media (min-width: 992px) {
-  #about #about-two {
+@media (min-width: 768px) {
+  #calendarList .layout-two {
     padding-top: 3rem;
   }
 
-  #about #about-two .column-text {
+  #calendarList .layout-two .column-text {
     z-index: 2;
   }
 
-  #about #about-two .column-picture {
+  #calendarList .layout-two .column-picture {
     margin-right: -80px;
     z-index: 1;
     max-width: none;
   }
-}
-
-#about #about-three {
-  padding: 0rem 15px 3rem;
-}
-
-@media (min-width: 992px) {
-  #about #about-three {
-    padding-top: 3rem;
-  }
-}
-
-#final-about .custom-border {
-  border-radius: 10px;
-}
-
-#final-about .final-about-picture {
-  max-width: 90%;
-  margin: 0 auto 30px;
-}
-
-#final-about .first-container {
-  padding-top: 0rem;
-}
-
-@media (min-width: 992px) {
-  #final-about .first-container {
-    padding-top: 135px;
-  }
-}
-
-#final-about .second-container {
-  position: relative;
-}
-
-#final-about .second-container .picture-container {
-  position: absolute;
-  bottom: 0;
-  left: 0;
 }
 
 #footer {

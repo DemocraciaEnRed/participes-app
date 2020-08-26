@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 // use Auth;
+use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
@@ -78,12 +79,23 @@ class AppServiceProvider extends ServiceProvider
             return false;
         });
 
-         Blade::directive('datetime', function ($expression) {
+        Blade::directive('datetime', function ($expression) {
             return "<?php echo ($expression)->format('d/m/Y H:i'); ?>";
         });
-         Blade::directive('justdate', function ($expression) {
+        Blade::directive('dateInputFormat', function ($expression) {
+            return "<?php echo ($expression)->format('Y-m-d'); ?>";
+        });
+        Blade::directive('justdate', function ($expression) {
             return "<?php echo ($expression)->format('d/m/Y'); ?>";
         });
-
+        Blade::directive('justtime', function ($expression) {
+            return "<?php echo ($expression)->format('H:i'); ?>";
+        });
+        Blade::directive('justhour', function ($expression) {
+            return "<?php echo ($expression)->format('H'); ?>";
+        });
+        Blade::directive('justminute', function ($expression) {
+            return "<?php echo ($expression)->format('i'); ?>";
+        });
     }
 }

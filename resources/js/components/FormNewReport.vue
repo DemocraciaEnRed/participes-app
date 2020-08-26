@@ -23,7 +23,7 @@
 				</div>
 				<div>
 					<h5 class="">Un reporte de <span class="font-weight-bold">{{typeLabel}}</span></h5>
-					<strong>Heads up!</strong> This <a href="#" class="alert-link">alert needs your attention</a>, but it's not super important.
+					<strong>Aquí</strong> Iria una explicación de que significa esto.
 				</div>
 			</div>
 			<div class="form-group">

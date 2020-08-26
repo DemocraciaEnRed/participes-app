@@ -34,6 +34,7 @@ $currentRoute = Route::currentRouteName();
 @isManager($objective->id)
 <h6 class="category"><i class="fas fa-cog fa-fw"></i>&nbsp;Administrar</h6>
 <div class="menu-link">
+<a href="{{route('objectives.manage.edit', ['objectiveId' => $objective->id]) }}" class="item-link {{ $currentRoute == 'objective.manage.edit'  ? 'is-active' : null }}">Editar objetivo</a>
 <a href="{{route('objectives.manage.configuration', ['objectiveId' => $objective->id]) }}" class="item-link {{ $currentRoute == 'objective.manage.configuration'  ? 'is-active' : null }}">Configuración</a>
 <a href="{{route('objectives.manage.cover', ['objectiveId' => $objective->id]) }}" class="item-link {{ $currentRoute == 'objective.manage.cover'  ? 'is-active' : null }}">Imagen de portada</a>
 <a href="{{route('objectives.manage.files', ['objectiveId' => $objective->id]) }}" class="item-link {{ $currentRoute == 'objective.manage.files'  ? 'is-active' : null }}">Repositorio de archivos</a>

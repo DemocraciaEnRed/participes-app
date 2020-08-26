@@ -167,7 +167,7 @@ class InitDB extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
             $table->foreignId('author_id')->constrained('users');
-            $table->foreignId('goal_id')->constrained('goals');
+            $table->foreignId('goal_id')->constrained('goals')->onDelete('cascade');
             $table->string('type');
             $table->string('title',550);
             $table->text('content');
@@ -217,7 +217,6 @@ class InitDB extends Migration
             $table->id();
             $table->foreignId('event_id')->constrained('events')->onDelete('cascade');
             $table->foreignId('objective_id')->constrained('objectives')->onDelete('cascade');
-            $table->timestamps();
         });
         Schema::create('action_logs', function (Blueprint $table) {
             $table->id();

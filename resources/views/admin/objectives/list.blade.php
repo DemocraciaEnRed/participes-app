@@ -19,9 +19,6 @@
             </h4>
             <p class="text-muted text-smaller my-1">{{Str::limit($objective->content, 200, $end=' [...]')}}</p> 
           </div>
-        {{-- <h5 class="card-title font-weight-bold"><a class="text-primary" href="{{route('objectives.manage.index',['objectiveId' => $objective->id])}}">{{$objective->title}}</a></h5>
-        <h6 class="card-subtitle mb-2">{{count($objective->goals)}} Metas <small class="text-muted">Creado {{$objective->created_at->diffForHumans()}}</small></h6>
-            --}}
       </div>
     </div>
     @endforeach

@@ -75,10 +75,10 @@ class NewReport extends Notification implements ShouldQueue
         
         $url = url("/objective/{$this->objective->id}");
         return (new MailMessage)
+                    ->subject('Han creado un nuevo reporte en Participes')
                     ->greeting('Hola!')
-                    ->line("Acaban de crear un nuevo reporte de la meta {$this->goal->title} en el objetivo {$this->objective->title}")
+                    ->line("Acaban de crear un nuevo reporte de la meta \"{$this->goal->title}\" en el objetivo \"{$this->objective->title}\". ¡Te invitamos a que lo leas!")
                     ->action('Ver reporte', $url)
-                    ->line('Muchas gracias')
                     ->line('PD: Te llegan estas notificaciones porque estas suscripto a las notificaciones del objetivo.');
     }
 

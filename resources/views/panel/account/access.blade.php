@@ -3,8 +3,7 @@
 @section('panelContent')
 
 <section>
-  <h1 class="">Cambiar contraseña</h1>
-  <p></p>
+  <h3 class="is-700">Cambiar contraseña</h3>
   <hr>
    @if ($errors->any())
     <div class="alert alert-danger">

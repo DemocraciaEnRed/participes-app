@@ -105,7 +105,7 @@
 					</collapse>
           <hr>
 					<h5 class="is-700 mt-2 mb-4">Reportes</h5>
-					<report-list fetch-url="{{route('apiService.goals.reports',['goalId'=> $goal->id, 'size' => 3, 'with' =>'report_goal,report_latest_comments,report_actions', 'detailed' => true, 'order_by'=>'created_at,DESC'])}}" login-url="{{route('login')}}">
+					<report-list fetch-url="{{route('apiService.goals.reports',['goalId'=> $goal->id, 'size' => 3, 'with' =>'report_goal,report_latest_comments,report_actions', 'detailed' => true, 'order_by'=>'date,DESC'])}}" login-url="{{route('login')}}">
 						@include('partials.loading')
 					</report-list>
 				</div>

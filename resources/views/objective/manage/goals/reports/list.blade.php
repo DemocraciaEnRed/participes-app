@@ -3,8 +3,8 @@
 @section('panelContent')
 
 <section>
-  <h1 class="">Reportes</h1>
-  <p>A continuación encontrarás el listado de reportes asociados a la meta</p>
+  <h3 class="is-700">Reportes</h3>
+  <p class="lead">A continuación encontrarás el listado de reportes asociados a la meta</p>
   @if(count($reports) > 0)
     @foreach($reports as $report)
     <div class="card mb-3 shadow-sm">

@@ -5,6 +5,7 @@ use Notification;
 use Image;
 use Storage;
 use Str;
+use Log;
 use App\Category;
 use App\Organization;
 use App\Role;
@@ -17,6 +18,7 @@ use App\Milestone;
 use App\Report;
 use App\Notifications\NewReport;
 use App\Notifications\EditGoal;
+use App\Rules\MatchOldPassword;
 use Illuminate\Http\Request;
 
 class GoalPanelController extends Controller
@@ -220,8 +222,8 @@ class GoalPanelController extends Controller
           $photoName = 'photo-'.$report->id.'-'.$uniqueHash.'.'.$fileExtension;
           $photoNameThumbnail = 'photo-'.$report->id.'-'.$uniqueHash.'-thumbnail.'.$fileExtension;
           // Make the File path
-          $photoPath = 'storage/reports/photos/'.$photoName;
-          $photoPathThumbnail = 'storage/reports/photos/'.$photoNameThumbnail;
+          $photoPath = '/storage/reports/photos/'.$photoName;
+          $photoPathThumbnail = '/storage/reports/photos/'.$photoNameThumbnail;
           Storage::disk('reports')->put("photos/".$photoName, (string) $photo->encode($fileExtension));
           Storage::disk('reports')->put("photos/".$photoNameThumbnail, (string) $photoThumbnail->encode($fileExtension,80));
           $imageFile = new ImageFile();
@@ -244,7 +246,7 @@ class GoalPanelController extends Controller
           $saveFile->name = $file->getClientOriginalName();
           $saveFile->size = $file->getSize();
           $saveFile->mime = $file->getMimeType();
-          $saveFile->path = 'storage/reports/'.$filePath;
+          $saveFile->path = '/storage/reports/'.$filePath;
           $report->files()->save($saveFile);
         }
       }
@@ -255,6 +257,46 @@ class GoalPanelController extends Controller
       }
       
       return redirect()->route('objectives.manage.goals.reports.index', ['objectiveId' => $request->objective->id, 'goalId' => $goal->id,'reportId' => $report->id])->with('success','El reporte fue creado con exito');
+    }
+
+    public function viewGoalConfiguration(Request $request){
+      return view('objective.manage.goals.configuration',['objective' => $request->objective, 'goal' => $request->goal]);
+    }
+
+    public function formDeleteGoal(Request $request){
+      $this->hasManagerPrivileges($request);
+
+      $rules = [
+        'password' =>  ['required', new MatchOldPassword],
+        'notify' => 'nullable|string|in:true',
+      ];
+
+      $request->validate($rules);
+
+      Log::channel('mysql')->debug("{$request->user()->fullname} ha eliminado la meta {$request->goal->title} del objetivo {$request->objective->title}", [
+        'objective' => $request->objective->id,
+        'objective_title' => $request->objective->title,
+        'goal_title' => $request->goal->id,
+        'goal_title' => $request->goal->title,
+        'user_id' => $request->user()->id,
+        'user_fullname' => $request->user()->fullname,
+        'email' => $request->user()->email
+        ]);
+
+      $reports = $request->goal->reports;
+      foreach ($reports as $report) {
+        $report->delete();
+      }
+      $request->goal->delete();
+      // Notify
+      // $notifySubscriber = $request->boolean('notify');
+      // if(!$request->objective->hidden && $notifySubscriber){
+      //   Notification::locale('es')->send($request->objective->subscribers, new EditReport($request->objective, $request->goal, $report));
+      // }
+
+
+      return redirect()->route('objectives.manage.index', ['objectiveId' => $request->objective->id])->with('success','Meta eliminada correctamente');
+
     }
 
 }

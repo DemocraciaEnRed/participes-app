@@ -3,7 +3,7 @@
 @section('panelContent')
 
 <section>
-<h1 class="">Verificar mi cuenta</h1>
+<h3 class="is-700">Verificar mi cuenta</h3>
 @if(Auth::user()->hasVerifiedEmail())
 <div class="alert alert-success my-4">
   <i class="fas fa-check fa-fw"></i>&nbsp;¡Bien! ¡Tu cuenta se encuentra verificada!

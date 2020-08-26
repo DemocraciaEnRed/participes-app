@@ -21,8 +21,8 @@ $zoom = $report->map_zoom ?: ($objective->map_zoom ?: 'undefined');
 @section('panelContent')
 
 <section>
-  <h1 class="">Mapa</h1>
-  <p>Aqui puede crear puntos, areas, o lineas que tengan que ver con el reporte publicado</p>
+  <h3 class="is-700">Mapa</h3>
+  <p class="lead">Aqui puede crear puntos, areas, o lineas que tengan que ver con el reporte publicado</p>
    <hr />
     <form action="{{route('objectives.manage.goals.reports.map.form',['objectiveId' => $objective->id, 'goalId' => $goal->id, 'reportId' => $report->id])}}" method="POST">
       @method('PUT')

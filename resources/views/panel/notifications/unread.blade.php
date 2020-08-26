@@ -4,7 +4,6 @@
 
 <section>
 <h3 class="is-700">Notificaciones pendientes</h3>
-<hr>
 {{-- <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In eius ad officia tempora, temporibus repudiandae id ipsum neque deserunt rerum esse delectus consectetur voluptates eveniet quaerat commodi ducimus mollitia dolorem.</p> --}}
 <ul class="list-group">
  @if(count($notifications) > 0)
@@ -19,7 +18,6 @@
 </ul>
   {{ $notifications->links() }}
    @if(!$notifications->isEmpty())
-
   <hr>
   <div class="card">
     <div class="card-body d-flex justify-content-between">

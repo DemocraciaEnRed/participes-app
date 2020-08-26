@@ -12,6 +12,7 @@
 @endif
 @endif
 
+
 {{-- Intro Lines --}}
 @foreach ($introLines as $line)
 {{ $line }}
@@ -41,6 +42,8 @@
 
 @endforeach
 
+
+
 {{-- Salutation --}}
 @if (! empty($salutation))
 {{ $salutation }}
@@ -62,3 +65,4 @@
 @endslot
 @endisset
 @endcomponent
+

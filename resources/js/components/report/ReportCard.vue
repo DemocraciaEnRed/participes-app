@@ -1,5 +1,5 @@
 <template>
-  <div class="card shadow-sm border-secondary ml-0 ml-sm-3 mb-3">
+  <div class="card shadow-sm border-secondary w-100 ml-0 ml-sm-3 mb-3">
     <div class="card-body text-secondary">
       <p class="mb-3 float-lg-right ml-lg-4  text-secondary text-right"><i class="text-primary" :class="`fas ${getReportIcon(report.type)}`"></i>&nbsp;{{report.type_label}}</p>
       <p class="text-smaller my-2"><i :class="`far fa-dot-circle text-${report.goal.status}`"></i>&nbsp;<a :href="report.goal.url" class="text-secondary">{{report.goal.title}}</a></p>

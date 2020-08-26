@@ -3,8 +3,8 @@
 @section('panelContent')
 
 <section>
-  <h1 class="">Repositorio de archivos</h1>
-  <p>Aquí podrás encontrar y cargar todos los archivos vinculados a el reporte</p>
+  <h3 class="is-700">Repositorio de archivos</h3>
+  <p class="lead">Aquí podrás encontrar y cargar todos los archivos vinculados a el reporte</p>
    <hr>
   <h5 class="font-weight-bold"><i class="fas fa-upload"></i> Nuevo archivo</h5>
   <p>Cargue su archivo haciendo clic en el campo para poder seleccionar. Intente no subir archivos de mucho peso.</p>

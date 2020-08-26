@@ -7,34 +7,26 @@
 <p class="lead">A continuación, podrás ver el listado de objetivos que estás monitoreando actualmente</p>
  @if(count($subscriptions) > 0)
     @foreach($subscriptions as $objective)
-    <div class="card mb-3 shadow-sm">
-      <div class="card-body d-flex justify-content-between">
-        <div>
-        <p class="text-smaller text-muted mb-1">
-        @if($objective->hidden)
-        <span class="badge badge-warning align-middle"><i class="fas fa-eye-slash"></i>Oculto</span>&nbsp;&nbsp;
-        @endif
-        <i class="{{$objective->category->icon}}"></i> {{$objective->category->title}} -
-        {{$objective->goals()->count()}} Metas</p>
-      <h5 class="card-title font-weight-bold mb-1"><a class="text-primary"
-          href="{{route('objectives.index',['objectiveId' => $objective->id])}}">{{$objective->title}}</a></h5>
-      <p>
-        @foreach ($objective->tags as $tag)
-        <span class="badge badge-light align-middle">{{$tag}}</span>
-        @endforeach
-      </p>
-      <p class="text-muted text-smaller mb-0">{{Str::limit($objective->content, 200, $end=' [...]')}}</p>
-      <p class="text-info mb-0">Suscripto el @datetime($objective->pivot->created_at) </p>
-        </div>
-        <div>
-          <div class="mt-1 ml-2 text-center">
+    <div class="card my-3 shadow-sm">
+      <div class="card-body d-flex align-items-start">
+          <div class="mr-3 category-icon-container" style="background-color: {{$objective->category->background_color}}">
+            <i class="fa-2x fa-fw {{$objective->category->icon}}" style="color: {{$objective->category->color}}"></i>
+          </div>
+          <div class="w-100">
+            <span class="" style="color:{{$objective->category->color}}">{{$objective->category->title}}</span>
+            <h4 class="is-700 my-1">
+              <a href="{{route('objectives.manage.index',['objectiveId' => $objective->id])}}" class="text-dark">{{$objective->title}}</a>
+            </h4>
+            <p class="text-muted text-smaller my-1">{{Str::limit($objective->content, 200, $end=' [...]')}}</p> 
+            <p class="text-muted text-smaller mb-0">Suscripto el @datetime($objective->pivot->created_at)</p>
+          </div>
+          <div class="ml-3 text-center">
             <a onclick="event.preventDefault();document.getElementById('unsub{{$objective->id}}').submit();" class="text-dark is-clickable"><i class="fas fa-times fa-circle fa-2x"></i></a>
             <span class="text-smallest">Desuscribirse</span>
-          <form id="unsub{{$objective->id}}" action="{{route('panel.subscriptions.unsubscribe.form',['objectiveId' => $objective->id]) }}" method="POST" style="display: none;">
-            @csrf
-          </form>
+            <form id="unsub{{$objective->id}}" action="{{route('panel.subscriptions.unsubscribe.form',['objectiveId' => $objective->id]) }}" method="POST" style="display: none;">
+              @csrf
+            </form>
           </div>
-        </div>
       </div>
     </div>
     @endforeach

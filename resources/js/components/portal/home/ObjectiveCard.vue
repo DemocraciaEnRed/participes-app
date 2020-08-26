@@ -29,7 +29,7 @@
         <hr>
         <div class="row my-2">
           <div class="col-md-6 col-lg-8">
-            <b>últimas metas</b>
+            <b>Últimas metas</b>
             <div class="my-1 d-flex justify-content-between align-items-center goal-container" v-for="goal in objective.latest_goals" :key="`goals_${goal.id}`">
               <span class="text-truncate w-100"><a :href="goal.url" class="text-dark">{{goal.title}}</a></span>
               <div class="progress my-0 mx-1'" style="height: 10px; width: 150px">

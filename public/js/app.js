@@ -93071,7 +93071,7 @@ var render = function() {
                 "div",
                 { staticClass: "col-md-6 col-lg-8" },
                 [
-                  _c("b", [_vm._v("últimas metas")]),
+                  _c("b", [_vm._v("Últimas metas")]),
                   _vm._v(" "),
                   _vm._l(_vm.objective.latest_goals, function(goal) {
                     return _c(
@@ -93828,7 +93828,7 @@ var render = function() {
         _vm._l(_vm.photos, function(photo) {
           return _c("swiper-slide", {
             key: "thumb-" + photo.id,
-            style: "background-image: url(/" + photo.thumbnail_path + ")"
+            style: "background-image: url(" + photo.thumbnail_path + ")"
           })
         }),
         1
@@ -93844,10 +93844,10 @@ var render = function() {
         [
           _vm._l(_vm.photos, function(photo) {
             return _c("swiper-slide", { key: photo.id }, [
-              _c("a", { attrs: { href: "/" + photo.path, target: "_blank" } }, [
+              _c("a", { attrs: { href: "" + photo.path, target: "_blank" } }, [
                 _c("img", {
                   staticClass: "image mx-auto swiper-lazy",
-                  attrs: { "data-src": "/" + photo.path, alt: "" }
+                  attrs: { "data-src": "" + photo.path, alt: "" }
                 })
               ]),
               _vm._v(" "),
@@ -93899,7 +93899,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "card shadow-sm border-secondary ml-0 ml-sm-3 mb-3" },
+    { staticClass: "card shadow-sm border-secondary w-100 ml-0 ml-sm-3 mb-3" },
     [
       _c(
         "div",

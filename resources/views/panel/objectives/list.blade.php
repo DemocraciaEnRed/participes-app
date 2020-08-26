@@ -7,24 +7,20 @@
   <p class="lead">Estos son los objetivos de los cuales formas parte del equipo.</p>
   @if(count($objectives) > 0)
   @foreach($objectives as $objective)
-  <div class="card mb-3 shadow-sm">
-    <div class="card-body">
-      <p class="text-smaller text-muted mb-1">
-        @if($objective->hidden)
-        <span class="badge badge-warning align-middle"><i class="fas fa-eye-slash"></i>Oculto</span>&nbsp;&nbsp;
-        @endif
-        <i class="{{$objective->category->icon}}"></i> {{$objective->category->title}} -
-        {{$objective->goals()->count()}} Metas</p>
-      <h5 class="card-title font-weight-bold mb-1"><a class="text-primary"
-          href="{{route('objectives.manage.index',['objectiveId' => $objective->id])}}">{{$objective->title}}</a></h5>
-      <p>
-        @foreach ($objective->tags as $tag)
-        <span class="badge badge-light align-middle">{{$tag}}</span>
-        @endforeach
-      </p>
-      <p class="text-muted text-smaller mb-0">{{Str::limit($objective->content, 200, $end=' [...]')}}</p>
+  <div class="card my-3 shadow-sm">
+      <div class="card-body d-flex align-items-start">
+          <div class="mr-3 category-icon-container" style="background-color: {{$objective->category->background_color}}">
+            <i class="fa-2x fa-fw {{$objective->category->icon}}" style="color: {{$objective->category->color}}"></i>
+          </div>
+          <div class="w-100">
+            <span class="" style="color:{{$objective->category->color}}">{{$objective->category->title}}</span>
+            <h4 class="is-700 my-1">
+              <a href="{{route('objectives.manage.index',['objectiveId' => $objective->id])}}" class="text-dark">{{$objective->title}}</a>
+            </h4>
+            <p class="text-muted text-smaller my-1">{{Str::limit($objective->content, 200, $end=' [...]')}}</p> 
+          </div>
+      </div>
     </div>
-  </div>
   @endforeach
   @else
   <div class="card mb-3 shadow-sm">

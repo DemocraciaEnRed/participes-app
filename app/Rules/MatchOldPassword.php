@@ -26,6 +26,7 @@ class MatchOldPassword implements Rule
      */
     public function message()
     {
-        return 'The :attribute is not correct.';
+        // return 'El valor de :attribute no es correcta.';
+        return 'El valor de la contraseña no es correcto.';
     }
 }

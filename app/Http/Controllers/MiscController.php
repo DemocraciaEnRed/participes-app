@@ -7,6 +7,7 @@ use Hash;
 use Str;
 use App\User;
 use App\Role;
+use App\Objective;
 use Illuminate\Http\Request;
 
 class MiscController extends Controller
@@ -60,4 +61,14 @@ class MiscController extends Controller
 		}
 		return redirect()->route('home');
 	}    
+
+	public function testEmail(Request $request){
+
+		$objective = Objective::find(1);
+		$user = Objective::find(5);
+
+    return (new App\Notifications\EditObjective($objective))
+                ->toMail($user);
+	}
+
 }

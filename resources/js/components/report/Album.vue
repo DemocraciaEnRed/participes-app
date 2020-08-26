@@ -2,12 +2,12 @@
   <div class="thumb-example">
     <!-- swiper2 Thumbs -->
     <swiper class="swiper gallery-thumbs" :options="swiperOptionThumbs" ref="swiperThumbs">
-      <swiper-slide v-for="photo in photos" :key="`thumb-${photo.id}`" :style="`background-image: url(/${photo.thumbnail_path})`"></swiper-slide>
+      <swiper-slide v-for="photo in photos" :key="`thumb-${photo.id}`" :style="`background-image: url(${photo.thumbnail_path})`"></swiper-slide>
     </swiper>
     <!-- swiper1 -->
     <swiper class="swiper gallery-top" :options="swiperOptionTop" ref="swiperTop">
       <swiper-slide v-for="photo in photos" :key="photo.id">
-        <a :href="`/${photo.path}`" target="_blank"><img :data-src="`/${photo.path}`" class="image mx-auto swiper-lazy"  alt=""></a>
+        <a :href="`${photo.path}`" target="_blank"><img :data-src="`${photo.path}`" class="image mx-auto swiper-lazy"  alt=""></a>
         <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
       </swiper-slide>
       <div class="swiper-button-next swiper-button-black" slot="button-next"></div>

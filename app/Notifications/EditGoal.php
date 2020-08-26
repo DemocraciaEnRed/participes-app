@@ -72,10 +72,10 @@ class EditGoal extends Notification implements ShouldQueue
         
         $url = route("goals.index", ['goalId' => $this->goal->id]);
         return (new MailMessage)
-                    ->greeting('Hola!')
-                    ->line("Acaban de editar la meta \"{$this->goal->title}\" en el objetivo \"{$this->objective->title}\". ¡Te invitamos a que vuelvas a leerla!")
+                    ->subject('Han editado una meta que sigues en Participes')
+                    ->greeting('¡Hola!')
+                    ->line("Acaban de editar la meta \"{$this->goal->title}\" del objetivo \"{$this->objective->title}\". ¡Te invitamos a que lo a releas!")
                     ->action('Ver meta', $url)
-                    ->line('Muchas gracias')
                     ->line('PD: Te llegan estas notificaciones porque estas suscripto a las notificaciones del objetivo.');
     }
 

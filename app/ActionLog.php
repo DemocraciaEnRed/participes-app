@@ -14,5 +14,9 @@ class ActionLog extends Model
     //     'meta' => 'array',
     // ];
 
+    protected $dates = [
+        'record_datetime',
+    ];
+
     protected $fillable = ['message','context','level','level_name','channel','record_datetime','extra','formatted','remote_addr','user_agent','created_at'];
 }

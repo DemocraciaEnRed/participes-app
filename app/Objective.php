@@ -32,6 +32,10 @@ class Objective extends Model
     {
         return $this->belongsToMany('App\Organization','objective_organization','objective_id','organization_id');
     }
+    public function hasOrganization($organizationId)
+    {
+        return $this->organizations()->where('organization_id', $organizationId)->exists();
+    }
 
     public function goals()
     {

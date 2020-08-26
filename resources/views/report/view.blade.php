@@ -29,7 +29,7 @@
       <h6 class="text-muted my-2">Publicado el @datetime($report->created_at)</h6>
 
       <div class="is-size-5 my-5">
-        {{nl2br($report->content)}}
+        {!! nl2br(e($report->content)) !!}
       </div>
 
       <div class="row mb-2">
