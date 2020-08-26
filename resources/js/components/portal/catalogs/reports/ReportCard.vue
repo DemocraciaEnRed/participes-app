@@ -10,7 +10,8 @@
           <p class="mb-1 text-muted d-block d-md-none"><i  :class="`${report.type_icon} text-primary`"></i> {{report.type_label}}</p>
           <p class="my-1 text-smaller"><a :href="report.goal.url" class="text-dark"><i :class="`far fa-dot-circle text-${report.goal.status}`"></i> {{report.goal.title}}</a></p>
           <h5 class="my-1"><a :href="report.url" class="text-dark is-700">{{report.title}}</a></h5>
-          <p class="m-0 text-muted text-smaller" v-if="report.tags.length > 0">Tags: {{report.tags.join(' / ')}}</p>
+          <p class="m-0 text-muted text-smaller" v-if="report.tags && report.tags.length > 0">Tags: {{report.tags && report.tags.join(' / ')}}</p>
+          <p class="m-0 text-muted text-smaller" v-else>Tags: Sin tags cargados</p>
           <p class="m-0 text-muted text-smaller">Publicado {{report.published_at}}</p>
           </div>
         <div class="mx-1 d-flex flex-column flex-md-row">
