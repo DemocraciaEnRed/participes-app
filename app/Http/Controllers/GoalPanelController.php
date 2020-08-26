@@ -111,7 +111,12 @@ class GoalPanelController extends Controller
       $goal = $request->goal;
       $lastMilestone = Milestone::where('goal_id', $goalId)->orderBy('order', 'desc')->first();
       $milestone = new Milestone();
-      $milestone->order = $lastMilestone->order + 1;
+      if(!is_null($lastMilestone)){
+        // If not null..
+        $milestone->order = $lastMilestone->order + 1;
+      } else {
+        $milestone->order = 1;
+      }
       $milestone->title = $request->input('title');
       $milestone->goal()->associate($goal);
       $milestone->save();

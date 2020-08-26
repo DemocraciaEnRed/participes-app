@@ -141,7 +141,7 @@ class ObjectivePanelController extends Controller
       ];
 
       $request->validate($rules);
-      
+
       $goal = new Goal();
       $goal->title = $request->input('title');
       $goal->status = $request->input('status');
@@ -153,12 +153,15 @@ class ObjectivePanelController extends Controller
       $goal->source = $request->input('source');
       $goal->objective()->associate($request->objective);
       $goal->save();
-      foreach($request->input('milestones') as $key => $inputMilestone){
-        $milestone = new Milestone();
-        $milestone->order = $key + 1;
-        $milestone->title = $inputMilestone;
-        $milestone->goal()->associate($goal);
-        $milestone->save();
+      
+      if($request->input('milestones')){
+        foreach($request->input('milestones') as $key => $inputMilestone){
+          $milestone = new Milestone();
+          $milestone->order = $key + 1;
+          $milestone->title = $inputMilestone;
+          $milestone->goal()->associate($goal);
+          $milestone->save();
+        }
       }
       return redirect()->route('objectives.manage.goals.index', ['objectiveId' => $request->objective->id, 'goalId' => $goal->id])->with('success','Meta creada');
     }
