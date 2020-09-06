@@ -10,6 +10,10 @@
 
 @extends('layouts.app')
 
+@section('metatags')
+  @include('portal.events.metatags')
+@endsection
+
 @section('content')
 	@if ($event->photos->count() > 0)	
   <div class="app-portal-header has-background-image" style="background-image: url('{{asset($event->photos[0]->path)}}')">
