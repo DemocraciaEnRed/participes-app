@@ -23,7 +23,7 @@ class UserController extends Controller
             $n = $request->query('name');
             $users->where('name', 'like', "%{$n}%");
         }
-        $users = $users->paginate(10);
+        $users = $users->paginate(10)->withQueryString();
 
         return UserResource::collection($users);
     }

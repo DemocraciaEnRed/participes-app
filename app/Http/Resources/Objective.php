@@ -30,6 +30,7 @@ class Objective extends JsonResource
             'archived' => $this->archived,
             'hidden' => $this->hidden,
             'created_at' => $this->created_at,
+            'published_at' => $this->created_at->diffForHumans(),
             'updated_at' => $this->updated_at,
             'url' => route('objectives.index',['objectiveId' => $this->id])
         ];

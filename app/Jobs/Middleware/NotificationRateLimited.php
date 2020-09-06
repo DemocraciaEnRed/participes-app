@@ -20,14 +20,14 @@ class NotificationRateLimited
     if($job->queue == 'mailer'){
 
       Redis::throttle('mailer')
-        ->allow(1)->every(10)
+        ->allow(10)->every(15)
         ->then(function () use ($job, $next) {
           // Lock obtained...
           Log::channel('mysql')->info("Se envio un mail", ['type' => 'notifications', 'queue' => $job->queue, 'throttle' => true, 'connection'=> config('queue.default'), 'job' => $job->displayName(), 'user_id' => $job->notifiables[0]->id, 'email' => $job->notifiables[0]->email]);
           $next($job);
         }, function () use ($job) {
           // Could not obtain lock...
-          $job->release(5 + rand(1,5));
+          $job->release(5 + rand(15));
       });
 
     } else {

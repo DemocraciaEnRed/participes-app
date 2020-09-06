@@ -42,6 +42,10 @@ export default {
   },
   methods: {
     toggleLike: function(url, event){
+      if(!this.report.user_verified){
+        this.$toasted.info('Debe verificar su cuenta para poder participar', {icon: 'exclamation-triangle'})
+        return
+      }
       event.target.disabled = true;
       this.$http.post(url)
       .then( response => {

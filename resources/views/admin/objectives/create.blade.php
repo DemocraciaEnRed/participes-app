@@ -19,15 +19,16 @@
   <form method="POST" action="{{ route('admin.objectives.create.form') }}">
     @csrf
     <div class="form-group">
-      <label>Titulo del objetivo</label>
-      <input type="text" class="form-control" name="title" placeholder="Ingrese un nombre">
+      <label><b>Titulo del objetivo</b></label>
+      <input type="text" class="form-control" name="title" placeholder="Ingrese un nombre" maxlength="550">
+      <small class="text-muted">Hasta 550 caracteres.</small>
     </div>
     <div class="form-group">
-      <label>Descripción del objetivo</label>
+      <label><b>Descripción del objetivo</b></label>
       <textarea name="content" class="form-control" rows="4"></textarea>
     </div>
     <div class="form-group">
-      <label>Categoria del objetivo</label>
+      <label><b>Categoria del objetivo</b></label>
       <select class="custom-select" name="category">
         @foreach ($categories as $category)
         <option value="{{$category->id}}">{{$category->title}}</option>
@@ -57,7 +58,7 @@
   </form>
   @else
   <div class="alert alert-warning" role="alert">
-    No puede crear objetivos sin categorias. Debe ir al panel de <a href="{{ route('admin.categories') }}">Categorias</a>
+    No puede crear objetivos sin categorías. Debe ir al panel de <a href="{{ route('admin.categories') }}">Categorías</a>
   </div>
   @endif
 </section>

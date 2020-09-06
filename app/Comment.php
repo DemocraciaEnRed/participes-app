@@ -24,6 +24,11 @@ class Comment extends Model
         return $this->belongsTo('App\User','user_id');
     }
 
+    public function isAuthor($userId)
+    {
+        return $this->user_id == $userId;
+    }
+
     //Comment have many replies
     public function replies()
     {

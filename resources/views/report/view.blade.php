@@ -33,7 +33,7 @@
       </div>
 
       <div class="row mb-2">
-        <div class="col-sm-6 my-2">
+        <div class="col-md-4 my-2">
           <h5 class="is-700">Tags del reporte</h5>
           <ul class="list-inline mb-0">
             @forelse ($report->tags ?: [] as $tag)
@@ -43,10 +43,14 @@
             @endforelse
           </ul>
         </div>
-        <div class="col-sm-6 my-2">
+        <div class="col-md-4 my-2 text-left text-md-center">
           <h5 class="is-700">Autor del reporte</h5>
           @include('utils.avatar',['avatar' => $report->author->avatar, 'size' => 32, 'thumbnail' => true])
           {{$report->author->name}} {{$report->author->surname}}
+        </div>
+        <div class="col-md-4 my-2 text-left text-md-right">
+          <h5 class="is-700">Feedbacks</h5>
+          {{$report->positive_testimonies}} <i class="far fa-thumbs-up"></i>
         </div>
       </div>
     </div>
@@ -73,7 +77,7 @@
      <div class="card-body p-3 p-lg-5">
       <h4 class="is-700 mb-2">¡Seguí acompañandonos en nuestra comunidad!</h4>
       @foreach($objective->communities as $community)
-        <a href="{{$community->url}}" class="btn btn-outline-primary my-2 mx-2"><i class="{{$community->icon}} fa-fw"></i>{{$community->label}}</a>
+        <a href="{{$community->url}}" target="_blank" class="py-2 px-3 rounded d-inline-block my-1 mb-1" style="border: 2px solid {{$community->color}}; color: {{$community->color}}"><i class="{{$community->icon}}"></i>&nbsp;{{$community->label}}</a>
       @endforeach
      </div>
    </div>

@@ -44,57 +44,63 @@
 					<p>{!! nl2br(e($objective->content)) !!}</p>
 					<hr>
 					<div class="my-3">
-						<collapse>
-							<h5 slot="title" class="is-700 my-2">Estados de las metas</h5>
-								@forelse ($objective->goals as $goal)
-								<div slot="content">
-									<div class="my-1 d-flex justify-content-between align-items-center goal-container">
-										<span class="text-truncate w-100">{{$goal->title}}</span>
-										<div class="progress my-0 mx-1" style="height: 10px; width: 150px">
-											<div class="progress-bar bg-{{$goal->status}}" role="progressbar" style="width: {{$goal->progress_percentage}}%" aria-valuenow="{{$goal->progress_percentage}}" aria-valuemin="0" aria-valuemax="100"></div>
-										</div>
-										<span class="goal-percentage text-smallest is-700 ml-1">{{$goal->progress_percentage}}%</span>
+						<div class="clearfix is-clickable" data-toggle="collapse" data-target="#collapseGoalStatus">
+						<h5 class="is-700 h5 text-body my-2 float-left">Estados de las metas</h5>
+						<h5 class="is-700 h5 text-body my-2 float-right"><i class="fas fa-angle-down fa-lg"></i></h5>
+						</div>
+						<div id="collapseGoalStatus" class="collapse">
+							@forelse ($objective->goals as $goal)
+							<div slot="content">
+								<div class="my-1 d-flex justify-content-between align-items-center goal-container">
+									<span class="text-truncate w-100">{{$goal->title}}</span>
+									<div class="progress my-0 mx-1" style="height: 10px; width: 150px">
+										<div class="progress-bar bg-{{$goal->status}}" role="progressbar" style="width: {{$goal->progress_percentage}}%" aria-valuenow="{{$goal->progress_percentage}}" aria-valuemin="0" aria-valuemax="100"></div>
 									</div>
+									<span class="goal-percentage text-smallest is-700 ml-1">{{$goal->progress_percentage}}%</span>
 								</div>
-								@empty
-									<p slot="content" class="text-muted">No hay metas del objetivo</p>
-								@endforelse
-						</collapse>
+							</div>
+							@empty
+								<p slot="content" class="text-muted">No hay metas del objetivo</p>
+							@endforelse
+						</div>
 					</div>
-					@if(!empty($objective->organizations))
+					@if(!$objective->organizations->isEmpty())
 					<hr>
-						<collapse>
-								<h5 slot="title" class="is-700 my-2">Organizaciones</h5>
-								<div slot="content">
-									<objective-organizations-carrousel :slides='@json($objective->organizations)'>	
-									</objective-organizations-carrousel>
-								</div>
-						</collapse>
+					<div class="clearfix is-clickable" data-toggle="collapse" data-target="#collapseOrganizations">
+						<h5 class="is-700 h5 text-body my-2 float-left">Organizaciones</h5>
+						<h5 class="is-700 h5 text-body my-2 float-right"><i class="fas fa-angle-down fa-lg"></i></h5>
+					</div>
+					<div id="collapseOrganizations" class="collapse show">
+						<objective-organizations-carrousel :slides='@json($objective->organizations)'>	
+						</objective-organizations-carrousel>
+					</div>
 					@endif
 					@if(!empty($objective->members))
 					<hr>
-						<collapse>
-								<h5 slot="title" class="is-700 my-2">Miembros del equipo</h5>
-								<div slot="content">
-								<div class="my-1 row justify-content-center">
-									@foreach ($objective->members as $member)
-											
-									<div class="col-6 col-sm-4 col-md-3 text-center py-1">
-    								<p class="mb-1">@include('utils.avatar',['avatar' => $member->avatar, 'size' => 50, 'thumbnail' => true])</p>
-										<span class="is-700 text-smaller">{{$member->name}} {{$member->surname}}</span>
-										<br><span class="text-smaller text-muted">{{$member->pivot->role == 'reporter' ? 'Reporta' : 'Coordina'}}</span>
-									</div>
-									@endforeach
+					<div class="clearfix is-clickable" data-toggle="collapse" data-target="#collapseMembers">
+						<h5 class="is-700 h5 text-body my-2 float-left">Miembros del equipo</h5>
+						<h5 class="is-700 h5 text-body my-2 float-right"><i class="fas fa-angle-down fa-lg"></i></h5>
+					</div>
+					<div id="collapseMembers" class="collapse">
+						<div class="my-1 row justify-content-center">
+								@foreach ($objective->members as $member)
+								<div class="col-6 col-sm-4 col-md-3 text-center py-1">
+									<p class="mb-1">@include('utils.avatar',['avatar' => $member->avatar, 'size' => 50, 'thumbnail' => true])</p>
+									<span class="is-700 text-smaller">{{$member->name}} {{$member->surname}}</span>
+									<br><span class="text-smaller text-muted">{{$member->pivot->role == 'reporter' ? 'Reporta' : 'Coordina'}}</span>
 								</div>
-								</div>
-						</collapse>
+								@endforeach
+							</div>
+					</div>
 					@endif
 					<hr>
-					<collapse>
-						<h5 slot="title" class="is-700 my-2">Archivos</h5>
-						<div slot="content">
+					<div class="clearfix is-clickable" data-toggle="collapse" data-target="#collapseFiles">
+						<h5 class="is-700 h5 text-body my-2 float-left">Archivos</h5>
+						<h5 class="is-700 h5 text-body my-2 float-right"><i class="fas fa-angle-down fa-lg"></i></h5>
+					</div>
+					<div id="collapseFiles" class="collapse">
 							@forelse ($objective->files as $file)
-							<div class="card mb-2 shadow-sm">
+							<div class="card my-2 shadow-sm">
 								<div class="card-body p-2 pl-4 pr-4 d-flex">
 									<div class="mr-3 mt-2">
 										<i class="far fa-file fa-lg"></i>
@@ -111,8 +117,7 @@
 							@empty
 							<p class="my-2 text-muted">No hay archivos adjuntos al objetivo</p>
 							@endforelse
-						</div>
-					</collapse>
+					</div>
 					<hr>
 					<h5 class="is-700 mt-2 mb-4">Reportes</h5>
 					<report-list fetch-url="{{route('apiService.objectives.reports',['objectiveId'=> $objective->id, 'size' => 3, 'with' =>'report_goal,report_latest_comments,report_actions', 'detailed' => true,  'order_by'=>'date,DESC'])}}" login-url="{{route('login')}}">

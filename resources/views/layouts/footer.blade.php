@@ -14,7 +14,7 @@
     </div>
     <div class="col-lg-2 mb-2 mb-lg-0">
       <p class="mb-1 mb-lg-2"><b>Legales</b></p>
-      <p class="mb-1"><a href="{{route('about.legal')}}#terminos">Terminos y condiciones</a></p>
+      <p class="mb-1"><a href="{{route('about.legal')}}#términos">Términos y condiciones</a></p>
       <p class="mb-1"><a href="{{route('about.legal')}}#privacidad">Pólitica de privacidad</a></p>
     </div>
     <div class="col-lg-2 mb-2 mb-lg-0">

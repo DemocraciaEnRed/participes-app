@@ -61,6 +61,7 @@ class Report extends JsonResource
                 if($user){
                     $res['testimony'] = TestimonyResource::make($this->userTestimony($user->id)->first());
                     $res['testimony_url'] = route('apiService.reports.testimonies.run',$this->id);    
+                    $res['user_verified'] = $user->hasVerifiedEmail();    
                 }
                 break;
               case 'report_latest_comments':

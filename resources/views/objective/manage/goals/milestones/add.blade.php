@@ -18,8 +18,8 @@
   <form method="POST" action="{{ route('objectives.manage.goals.milestones.add.form',['objectiveId' => $objective->id, 'goalId' => $goal->id]) }}">
     @csrf
     <div class="form-group">
-      <label class="is-700">Defina el hito</label>
-      <input type="text" class="form-control" name="title" placeholder="Escriba aquí">
+      <label><b>Título del hito</b></label>
+      <input type="text" class="form-control" name="title" placeholder="Escriba aquí" maxlength="550">
     </div>
     <button type="submit" class="btn btn-primary">Crear</button>
   </form>

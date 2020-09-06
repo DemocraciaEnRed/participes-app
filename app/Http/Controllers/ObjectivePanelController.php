@@ -6,7 +6,11 @@ use Image;
 use Storage;
 use Str;
 use Log;
+use Excel;
+use Carbon\Carbon;
+use App\ActionLog;
 use App\Category;
+use App\Community;
 use App\Organization;
 use App\Role;
 use App\File;
@@ -16,8 +20,13 @@ use App\Objective;
 use App\Goal;
 use App\Milestone;
 use App\Report;
+use App\Exports\ObjectiveSubscribersExport;
+use App\Exports\ObjectiveGoalsExport;
+use App\Notifications\NewGoal;
 use App\Notifications\EditObjective;
+use App\Notifications\DeleteObjective;
 use App\Notifications\JoinObjectiveTeam;
+use App\Notifications\RemoveObjectiveTeam;
 use App\Rules\MatchOldPassword;
 use Illuminate\Http\Request;
 
@@ -32,6 +41,7 @@ class ObjectivePanelController extends Controller
     {
         // Forces to be authenticated.
         $this->middleware('auth');
+        $this->middleware('verified');
         $this->middleware('fetch_objective');
         $this->middleware('can_manage_objective');
     }
@@ -73,8 +83,16 @@ class ObjectivePanelController extends Controller
       $objective->save();
       $objective->organizations()->sync($request->input('organizations'));
 
-      $notifySubscriber = $request->boolean('notify');
-      if(!$objective->hidden && $notifySubscriber){
+      Log::channel('mysql')->info("[{$request->user()->fullname}] ha editado el objetivo [{$objective->title}]", [
+        'objective_id' => $objective->id,
+        'objective_title' => $objective->title,
+        'user_id' => $request->user()->id,
+        'user_fullname' => $request->user()->fullname,
+        'user_email' => $request->user()->email
+        ]);
+
+      $notifySubscribers = $request->boolean('notify');
+      if(!$objective->hidden && $notifySubscribers){
         Notification::locale('es')->send($objective->subscribers, new EditObjective($objective));
       }
 
@@ -83,6 +101,49 @@ class ObjectivePanelController extends Controller
 
     public function index(Request $request){
       return view('objective.manage.index', ['objective' => $request->objective]);
+    }
+
+    public function viewListCommunities(Request $request, $objectiveId)
+    {
+      $communities = $request->objective->communities()->paginate(10);
+      return view('objective.manage.communities.list', ['objective' => $request->objective, 'communities' => $communities]);
+    }
+
+    public function viewAddCommunities(Request $request, $objectiveId)
+    {
+      $this->hasManagerPrivileges($request);
+      return view('objective.manage.communities.add', ['objective' => $request->objective]);
+    }
+
+    public function formAddCommunities(Request $request, $objectiveId)
+    {
+      $this->hasManagerPrivileges($request);
+      $rules = [
+          'label' => 'required|string|max:225',
+          'icon' => 'required|string|max:100',
+          'color' => 'required|string|max:100',
+          'url' => 'required|string|max:550',
+      ];
+      $request->validate($rules);
+
+      $community = new Community();
+      $community->label = $request->input('label');
+      $community->icon = $request->input('icon');
+      $community->color = $request->input('color');
+      $community->url = $request->input('url');
+      $community->objective()->associate($request->objective);
+      $community->save();
+
+      return redirect()->route('objectives.manage.communities',['objectiveId' => $request->objective->id])->with('success','La comunidad ha sido agregada correctamente');
+    }
+    public function formRemoveCommunities(Request $request, $objectiveId, $communityId)
+    {
+      $this->hasManagerPrivileges($request);
+
+      $community = Community::findorfail($communityId);
+      $community->delete();
+
+      return redirect()->route('objectives.manage.communities',['objectiveId' => $request->objective->id])->with('success','La comunidad ha sido eliminada correctamente');
     }
 
     public function viewListTeam(Request $request){
@@ -94,6 +155,11 @@ class ObjectivePanelController extends Controller
       return view('objective.manage.subscribers.list', ['objective' => $request->objective, 'subscribers' => $subscribers]);
     }
 
+    public function downloadListSubscribers(Request $request, $objectiveId){      
+      $this->hasManagerPrivileges($request);
+      return Excel::download(new ObjectiveSubscribersExport($objectiveId), Carbon::now()->format('Ymd').'-subscriptores-objetivo-'.$objectiveId.'.xlsx');
+    }
+
     public function viewAddTeam(Request $request){
       $this->hasManagerPrivileges($request);
       return view('objective.manage.team.add', ['objective' => $request->objective]);
@@ -101,22 +167,59 @@ class ObjectivePanelController extends Controller
 
     public function formAddTeam(Request $request){
       $this->hasManagerPrivileges($request);
-      $user = User::findOrFail($request->input('userId'));
+      $user = User::findorfail($request->input('userId'));
       // Attach
       $request->objective->members()->attach($user, ['role' => $request->input('role')]);
       // Subscribe
-      $request->objective->subscribers()->attach($user);
+      $alreadySubscribed = $request->objective->subscribers->contains($user->id);
+      if(!$alreadySubscribed){
+        $request->objective->subscribers()->attach($user);
+      }
+      Log::channel('mysql')->info("[{$request->user()->fullname}] ha agregado a [{$user->fullname}] al equipo del objetivo [{$request->objective->title}]", [
+        'objective_id' => $request->objective->id,
+        'objective_title' => $request->objective->title,
+        'member_id' => $user->id,
+        'member_fullname' => $user->fullname,
+        'member_role' => $request->input('role'),
+        'user_id' => $request->user()->id,
+        'user_fullname' => $request->user()->fullname,
+        'user_email' => $request->user()->email
+        ]);
+
       // Notify
       $user->notify(new JoinObjectiveTeam($request->objective, $request->input('role')));
+
       return redirect()->route('objectives.manage.team', ['objectiveId' => $request->objective->id])->with('success','Se ha agregado al nuevo miembro en el equipo y se lo ha notificado exitosamente');
     }
     public function formRemoveTeam(Request $request, $objectiveId, $userId){
       $this->hasManagerPrivileges($request);
+      $user = $request->objective->members()->where('user_id', $userId)->first();
+
       $request->objective->members()->detach($userId);
-      return redirect()->route('objectives.manage.team', ['objectiveId' => $request->objective->id])->with('success','Se ha eliminado al miembro del equipo');
+
+      Log::channel('mysql')->info("[{$request->user()->fullname}] ha quitado a [{$user->fullname}] del equipo del objetivo [{$request->objective->title}]", [
+        'objective_id' => $request->objective->id,
+        'objective_title' => $request->objective->title,
+        'member_id' => $user->id,
+        'member_fullname' => $user->fullname,
+        'member_role' => $user->pivot->role,
+        'user_id' => $request->user()->id,
+        'user_fullname' => $request->user()->fullname,
+        'user_email' => $request->user()->email
+        ]);
+
+        // Notify
+      $user->notify(new RemoveObjectiveTeam($request->objective, $request->input('role')));
+
+      return redirect()->route('objectives.manage.team', ['objectiveId' => $request->objective->id])->with('success','Se ha quitado al miembro del equipo');
     }
     public function viewListGoals(Request $request){
       return view('objective.manage.goals.list',['objective' => $request->objective]);
+    }
+
+     public function downloadListGoals(Request $request, $objectiveId){      
+      $this->hasManagerPrivileges($request);
+      return Excel::download(new ObjectiveGoalsExport($objectiveId), Carbon::now()->format('Ymd').'-metas-objetivo-'.$objectiveId.'.xlsx');
     }
 
     public function viewAddGoal(Request $request){
@@ -138,6 +241,7 @@ class ObjectivePanelController extends Controller
         'source' => 'nullable|string|max:550',
         'milestones' => 'array',
         'milestones.*' => 'required|string|max:550',
+        'notify' => 'nullable|string|in:true',
       ];
 
       $request->validate($rules);
@@ -163,20 +267,56 @@ class ObjectivePanelController extends Controller
           $milestone->save();
         }
       }
-      return redirect()->route('objectives.manage.goals.index', ['objectiveId' => $request->objective->id, 'goalId' => $goal->id])->with('success','Meta creada');
+
+      Log::channel('mysql')->info("[{$request->user()->fullname}] ha creado la meta [{$goal->title}] del objetivo [{$request->objective->title}]", [
+            'objective_id' => $request->objective->id,
+            'objective_title' => $request->objective->title,
+            'goal_id' => $goal->id,
+            'goal_title' => $goal->title,
+            'user_id' => $request->user()->id,
+            'user_fullname' => $request->user()->fullname,
+            'user_email' => $request->user()->email
+            ]);
+
+      $notifySubscribers = $request->boolean('notify');
+      if(!$request->objective->hidden && $notifySubscribers){
+        Notification::send($request->objective->subscribers, new NewGoal($request->objective, $goal));
+      }
+
+      return redirect()->route('objectives.manage.goals.index', ['objectiveId' => $request->objective->id, 'goalId' => $goal->id])->with('success','Se ha credo la meta correctamente');
     }
 
-    public function viewObjectiveConfiguration (Request $request){
+    public function viewObjectiveConfiguration (Request $request, $objectiveId){
       return view('objective.manage.configuration', ['objective' => $request->objective]);
     } 
 
-    public function formObjectiveConfigurationHide (Request $request){
+    public function formObjectiveConfigurationHide (Request $request, $objectiveId){
       $rules = [
         'hidden' => 'nullable|string|in:true',
       ];
       $request->validate($rules);
-      $request->objective->hidden = $request->boolean('hidden');
+      $hide = $request->boolean('hidden',false);
+      $request->objective->hidden = $hide;
       $request->objective->save();
+
+      if($hide){
+         Log::channel('mysql')->info("[{$request->user()->fullname}] ha ocultado el objetivo [{$request->objective->title}]", [
+            'objective_id' => $request->objective->id,
+            'objective_title' => $request->objective->title,
+            'user_id' => $request->user()->id,
+            'user_fullname' => $request->user()->fullname,
+            'user_email' => $request->user()->email
+            ]);
+      } else {
+        Log::channel('mysql')->info("[{$request->user()->fullname}] ha hecho visible el objetivo [{$request->objective->title}]", [
+            'objective_id' => $request->objective->id,
+            'objective_title' => $request->objective->title,
+            'user_id' => $request->user()->id,
+            'user_fullname' => $request->user()->fullname,
+            'user_email' => $request->user()->email
+            ]);
+      }
+
       return redirect()->route('objectives.manage.configuration', ['objectiveId' => $request->objective->id])->with('success','Se actualizó el objetivo');
     }
     public function formObjectiveConfigurationMap (Request $request){
@@ -271,35 +411,6 @@ class ObjectivePanelController extends Controller
     public function formObjectiveFile (Request $request){
       $this->hasManagerPrivileges($request);
 
-      // FOR MULTIPLE FILES
-
-      // $rules = [
-      //     'files' => 'required|array',
-      //     'files.*' => 'required|file|max:102400'
-      // ];
-      // $request->validate($rules);
-
-      // foreach($request->file('files') as $file){
-      //   $fileName = 'objective-'.$request->objective->id.'-'.$file->getClientOriginalName();
-      //   $exists = Storage::disk('objectives')->exists('files/'.$fileName);
-      //   $filePath = $file->storeAs('files',$fileName, 'objectives');
-      //   if($exists){
-      //     $existingFile = File::where('name',$fileName)->first();
-      //     $existingFile->name = $file->getClientOriginalName();
-      //     $existingFile->size = $file->getSize();
-      //     $existingFile->mime = $file->getMimeType();
-      //     $existingFile->path = 'storage/objectives/'.$filePath;
-      //     $existingFile->save();
-      //   } else {
-      //     $saveFile = new File();
-      //     $saveFile->name = $file->getClientOriginalName();
-      //     $saveFile->size = $file->getSize();
-      //     $saveFile->mime = $file->getMimeType();
-      //     $saveFile->path = 'storage/objectives/'.$filePath;
-      //     $request->objective->files()->save($saveFile);
-      //   }
-      // }
-
       $rules = [
         'file' => 'required|file|max:102400'
       ];
@@ -327,12 +438,7 @@ class ObjectivePanelController extends Controller
           $request->objective->files()->save($saveFile);
         }
       }
-      
       return redirect()->route('objectives.manage.files', ['objectiveId' => $request->objective->id])->with('success','Se agrego el archivo al repositorio del objetivo');
-    } 
-
-    public function viewObjectiveAlbum (Request $request){
-      return view('objective.manage.album', ['objective' => $request->objective]);
     } 
 
     public function viewObjectiveMap (Request $request){
@@ -349,12 +455,12 @@ class ObjectivePanelController extends Controller
 
       $request->validate($rules);
 
-      Log::channel('mysql')->debug("{$request->user()->fullname} el objetivo {$request->objective->title}", [
-        'objective' => $request->objective->id,
+      Log::channel('mysql')->info("[{$request->user()->fullname}] ha eliminado el objetivo [{$request->objective->title}]", [
+        'objective_id' => $request->objective->id,
         'objective_title' => $request->objective->title,
         'user_id' => $request->user()->id,
         'user_fullname' => $request->user()->fullname,
-        'email' => $request->user()->email
+        'user_email' => $request->user()->email
         ]);
 
       $goals = $request->objective->goals;
@@ -367,13 +473,19 @@ class ObjectivePanelController extends Controller
       }
       $request->objective->delete();
       // Notify
-      // $notifySubscriber = $request->boolean('notify');
-      // if(!$request->objective->hidden && $notifySubscriber){
-      //   Notification::locale('es')->send($request->objective->subscribers, new EditReport($request->objective, $request->goal, $report));
-      // }
-
+      $notifySubscribers = $request->boolean('notify');
+      if(!$request->objective->hidden && $notifySubscribers){
+        Notification::send($request->objective->subscribers, new DeleteObjective($request->objective));
+      }
 
       return redirect()->route('home')->with('success','Objetivo eliminado correctamente');
 
+    }
+
+    public function viewObjectiveLogs(Request $request, $objectiveId)
+    {
+      $this->hasManagerPrivileges($request);
+      $logs = ActionLog::where('context->objective_id', $objectiveId)->orderBy('record_datetime','DESC')->paginate(25);
+      return view('objective.manage.logs',['objective' => $request->objective, 'logs' => $logs]);
     }
 }

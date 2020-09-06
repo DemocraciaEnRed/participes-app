@@ -34,7 +34,6 @@ class EditGoal extends Notification implements ShouldQueue
     public function viaQueues()
     {
         return [
-            'mail' => 'mailer',
             'database' => 'default',
         ];
     }
@@ -60,24 +59,6 @@ class EditGoal extends Notification implements ShouldQueue
     {
         return explode(',',$notifiable->notification_preferences);   
     }   
-
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
-    public function toMail($notifiable)
-    {   
-        
-        $url = route("goals.index", ['goalId' => $this->goal->id]);
-        return (new MailMessage)
-                    ->subject('Han editado una meta que sigues en Participes')
-                    ->greeting('¡Hola!')
-                    ->line("Acaban de editar la meta \"{$this->goal->title}\" del objetivo \"{$this->objective->title}\". ¡Te invitamos a que lo a releas!")
-                    ->action('Ver meta', $url)
-                    ->line('PD: Te llegan estas notificaciones porque estas suscripto a las notificaciones del objetivo.');
-    }
 
     /**
      * Get the database representation of the notification.

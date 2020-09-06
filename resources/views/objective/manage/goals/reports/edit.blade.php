@@ -55,6 +55,7 @@
           <label>Estado de la meta previo al reporte</label>
             <div class="form-group">
               <select class="custom-select" name="previous_status">
+                  <option value="" {{$report->status ?: 'selected'}}>- No aplica -</option>
                   <option value="ongoing" {{$report->previous_status == 'ongoing' ? 'selected' : null}}>En progreso</option>
                   <option value="delayed" {{$report->previous_status == 'delayed' ? 'selected' : null}}>No cumplida</option>
                   <option value="inactive" {{$report->previous_status == 'inactive' ? 'selected' : null}}>Inactiva</option>
@@ -70,13 +71,13 @@
           <label>Estado de la meta luego del reporte</label>
             <div class="form-group">
               <select class="custom-select" name="status">
-                  <option value="" {{$report->status ?: 'selected'}}>- Mantener el estado ({{$report->previous_status_label}}) -</option>
+                  <option value="" {{$report->status ?: 'selected'}}>- No aplica -</option>
                   <option value="ongoing" {{$report->status == 'ongoing' ? 'selected' : null}}>En progreso</option>
                   <option value="delayed" {{$report->status == 'delayed' ? 'selected' : null}}>No cumplida</option>
                   <option value="inactive" {{$report->status == 'inactive' ? 'selected' : null}}>Inactiva</option>
                   <option value="reached" {{$report->status == 'reached' ? 'selected' : null}}>Alcanzada</option>
               </select>
-            <small class="form-text text-muted">Si el reporte indica un nuevo estado de la meta, puede definirlo aqui, si la meta no cambia su estado, puede dejarlo en "Mantener el estado"</small>
+            <small class="form-text text-muted">Si cambió el estado de la meta, actualizalo acá. En caso de que se mantenga, selecciona "mantener estado"</small>
             </div>
           <small class="form-text text-muted"></small>
         </div>

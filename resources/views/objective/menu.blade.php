@@ -26,19 +26,27 @@
       <li class="list-inline-item text-muted">No hay tags</li>
       @endforelse
     </div>
-    @if(!empty($objective->communities()))
+    @if(!$objective->communities->isEmpty())
       <p class="text-smaller text-muted my-2">¡Unite a nuestra comunidad!</p>
       @foreach($objective->communities as $community)
-      <a href="{{$community->url}}" class="btn btn-outline-primary btn-sm"><i class="{{$community->icon}}"></i>&nbsp;{{$community->label}}</a>
+              <a href="{{$community->url}}" target="_blank" class="py-1 px-2 text-smallest rounded d-inline-block my-1 mb-1" style="border: 1px solid {{$community->color}}; color: {{$community->color}}"><i class="{{$community->icon}}"></i>&nbsp;{{$community->label}}</a>
       @endforeach
-      <hr>
     @endif
-    <p class="text-smaller text-muted mt-2 mb-0">Visualizar</p>
   </div>
+   @isManager($objective->id)
+  <hr>
+  <div class="pl-3">
+    <a href="{{route('objectives.manage.index',['objectiveId'=> $objective->id])}}" class="btn btn-link btn-sm"><i class="fas fa-external-link-alt"></i> Panel objetivo</a>
+    @if($currentRoute == 'goals.index')
+    <a href="{{route('objectives.manage.goals.index',['objectiveId'=> $objective->id, 'goalId' => $goal->id])}}" class="btn btn-link btn-sm"><i class="fas fa-external-link-alt"></i> Panel meta</a>
+    @endif
+  </div>
+  @endisManager
+  <hr>
   <ul class="list-unstyled objective-goals-list">
     <li class="list-item py-2 pl-4 pr-3 {{ $currentRoute == 'objectives.index' ? 'active' : null}} "><a href="{{route('objectives.index',['objectiveId' => $objective->id])}}">Vista general del objetivo</a></li>
-    @forelse ($objective->goals as $goal)
-    <li class="list-item py-2 pl-4 pr-3 {{ $currentRoute == 'goals.index' && $currentRouteGoalId == $goal->id ? 'active' : null }}"><i class="far fa-dot-circle fa-fw text-{{$goal->status}}"></i>&nbsp;<a href="{{route('goals.index',['goalId' => $goal->id])}}">{{$goal->title}}</a></li>
+    @forelse ($objective->goals as $goalAux)
+    <li class="list-item py-2 pl-4 pr-3 {{ $currentRoute == 'goals.index' && $currentRouteGoalId == $goalAux->id ? 'active' : null }}"><i class="far fa-dot-circle fa-fw text-{{$goalAux->status}}"></i>&nbsp;<a href="{{route('goals.index',['goalId' => $goalAux->id])}}">{{$goalAux->title}}</a></li>
     @empty
     <li class="list-item py-2 pl-4 pr-3 text-muted">No hay metas</li>
     @endforelse

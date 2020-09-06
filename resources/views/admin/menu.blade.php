@@ -2,8 +2,8 @@
 $currentRoute = Route::currentRouteName();
 @endphp
 
-<a href="{{ route('admin.index') }}" class="category {{ $currentRoute == 'objective.manage.goals.reports.index'  ? 'is-active' : null }}"><i class="fas fa-tachometer-alt fa-fw"></i>&nbsp;Dashboard</a>
-<h6 class="category"><i class="fas fa-tags fa-fw"></i>&nbsp;Categorias</h6>
+<a href="{{ route('admin.index') }}" class="category {{ $currentRoute == 'objective.manage.goals.reports.index'  ? 'is-active' : null }}"><i class="fas fa-tachometer-alt fa-fw"></i>&nbsp;Inicio</a>
+<h6 class="category"><i class="fas fa-tags fa-fw"></i>&nbsp;Categorías</h6>
 <div class="menu-link">
 <a href="{{ route('admin.categories.create') }}" class="item-link {{ $currentRoute == 'admin.categories.create' ? 'is-active' : null }}"><i class="fas fa-plus"></i>&nbsp;Crear</a>
 <a href="{{ route('admin.categories') }}" class="item-link {{ $currentRoute == 'admin.categories' ? 'is-active' : null }}">Listar</a>

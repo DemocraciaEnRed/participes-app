@@ -1,4 +1,4 @@
-@if(!$report->photos->isEmpty())
+@if(!$report->files->isEmpty())
   <div class="card shadow-sm my-3">
     <div class="card-body p-3 p-lg-5">
       <h3 class="is-600 mb-3">Archivos adjuntos</h3>

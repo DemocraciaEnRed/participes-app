@@ -15,9 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/start', 'MiscController@start')->name('start');
-Route::get('/buscador', 'SearchController@index')->name('search');
 Route::post('/start', 'MiscController@startApp')->name('start.form');
-// Route::get('/testmail', 'MiscController@testEmail')->name('misc.testEmail');
+Route::get('/testmail', 'MiscController@testEmail')->name('misc.testEmail');
 
 Route::group([
     'as' => 'about.', 
@@ -62,6 +61,7 @@ Route::group([
     Route::get('/notificaciones', 'UserPanelController@viewListNotifications')->name('notifications');
     Route::get('/notificaciones/pendientes', 'UserPanelController@viewListUnreadNotifications')->name('notifications.unread');
     Route::post('/notificaciones/pendientes/marcar', 'UserPanelController@formMarkAllUnreadNotifications')->name('notifications.mark.all.form');
+    Route::post('/notificaciones/eliminar', 'UserPanelController@formDeleteAllNotifications')->name('notifications.delete.all.form');
     // Mi cuenta
     Route::get('/preferencias/verificar', 'UserPanelController@viewVerifyAccount')->name('account.verify');
     Route::get('/preferencias/avatar', 'UserPanelController@viewAccountAvatar')->name('account.avatar');
@@ -84,21 +84,26 @@ Route::group([
     Route::get('/categorias', 'AdminPanelController@viewListCategories')->name('categories');
     Route::get('/categorias/nuevo', 'AdminPanelController@viewCreateCategory')->name('categories.create');
     Route::post('/categorias/nuevo', 'AdminPanelController@formCreateCategory')->name('categories.create.form');
-    Route::get('/categorias/{id}/editar', 'AdminPanelController@viewEditCategory')->name('categories.edit');
-    Route::put('/categorias/{id}/editar', 'AdminPanelController@formEditCategory')->name('categories.edit.form');
+    Route::get('/categorias/{categoryId}/editar', 'AdminPanelController@viewEditCategory')->name('categories.edit');
+    Route::put('/categorias/{categoryId}/editar', 'AdminPanelController@formEditCategory')->name('categories.edit.form');
+    Route::get('/categorias/{categoryId}/eliminar', 'AdminPanelController@viewDeleteCategory')->name('categories.delete');
+    Route::delete('/categorias/{categoryId}/eliminar', 'AdminPanelController@formDeleteCategory')->name('categories.delete.form');
     // Organizaciones
     Route::get('/organizaciones', 'AdminPanelController@viewListOrganizations')->name('organizations');
     Route::get('/organizaciones/nuevo', 'AdminPanelController@viewCreateOrganization')->name('organizations.create');
     Route::post('/organizaciones/nuevo', 'AdminPanelController@formCreateOrganization')->name('organizations.create.form');
-    Route::get('/organizaciones/{id}/editar', 'AdminPanelController@viewEditOrganization')->name('organizations.edit');
-    Route::put('/organizaciones/{id}/editar', 'AdminPanelController@formEditOrganization')->name('organizations.edit.form');
+    Route::get('/organizaciones/{organizationId}/editar', 'AdminPanelController@viewEditOrganization')->name('organizations.edit');
+    Route::put('/organizaciones/{organizationId}/editar', 'AdminPanelController@formEditOrganization')->name('organizations.edit.form');
+    Route::get('/organizaciones/{organizationId}/eliminar', 'AdminPanelController@viewDeleteOrganization')->name('organizations.delete');
+    Route::delete('/organizaciones/{organizationId}/eliminar', 'AdminPanelController@formDeleteOrganization')->name('organizations.delete.form');
     // Administradores
     Route::get('/administradores', 'AdminPanelController@viewListAdministrators')->name('administrators');
     Route::get('/administradores/nuevo', 'AdminPanelController@viewAddAdministrator')->name('administrators.add');
     Route::post('/administradores/nuevo', 'AdminPanelController@formAddAdministrator')->name('administrators.add.form');
-    Route::delete('/administradores/{id}/eliminar', 'AdminPanelController@formDeleteAdministrator')->name('administrators.delete.form');
+    Route::delete('/administradores/{adminId}/eliminar', 'AdminPanelController@formDeleteAdministrator')->name('administrators.delete.form');
     // Objectives
     Route::get('/objetivos', 'AdminPanelController@viewListObjectives')->name('objectives');
+    Route::get('/objetivos/descargar', 'AdminPanelController@downloadListObjectives')->name('objectives.download');
     Route::get('/objetivos/nuevo', 'AdminPanelController@viewCreateObjective')->name('objectives.create');
     Route::post('/objetivos/nuevo', 'AdminPanelController@formCreateObjective')->name('objectives.create.form');
     // Events
@@ -110,6 +115,7 @@ Route::group([
     Route::put('/eventos/{eventId}/editar', 'AdminPanelController@formEditEvent')->name('events.edit.form');
     Route::post('/eventos/{eventId}/fotos/agregar', 'AdminPanelController@formAddPictureEvent')->name('events.pictures.add');
     Route::delete('/eventos/{eventId}/fotos/{pictureId}/eliminar', 'AdminPanelController@formDeletePictureEvent')->name('events.pictures.delete');
+    Route::get('/eventos/{eventId}/eliminar', 'AdminPanelController@viewDeleteEvent')->name('events.delete');
     Route::delete('/eventos/{eventId}/eliminar', 'AdminPanelController@formDeleteEvent')->name('events.delete.form');
 });
 
@@ -128,8 +134,10 @@ Route::group([
     Route::get('/reports', 'ReportController@fetch')->name('reports');
     Route::get('/reports/{reportId}/comments', 'ReportController@fetchComments')->name('reports.comments');
     Route::post('/reports/{reportId}/comments', 'ReportController@runCreateComment')->name('reports.comments.create');
+    Route::put('/reports/{reportId}/comments/{commentId}/edit', 'ReportController@runEditComment')->name('reports.comments.edit');
     Route::post('/reports/{reportId}/comments/{commentId}/reply', 'ReportController@runCreateReply')->name('reports.comments.reply');
     Route::delete('/reports/{reportId}/comments/{commentId}/delete', 'ReportController@runDeleteComment')->name('reports.comments.delete');
+    Route::put('/reports/{reportId}/comments/{commentId}/reply/{replyId}/edit', 'ReportController@runEditReply')->name('reports.comments.reply.edit');
     Route::delete('/reports/{reportId}/comments/{commentId}/reply/{replyId}/delete', 'ReportController@runDeleteReply')->name('reports.comments.reply.delete');
     Route::post('/reports/{reportId}/testimony', 'ReportController@runToggleTestimony')->name('reports.testimonies.run');
     Route::get('/objectives', 'ObjectiveController@fetch')->name('objectives');
@@ -163,6 +171,7 @@ Route::group([
         Route::get('/editar', 'ObjectivePanelController@viewEditObjective')->name('edit');
         Route::put('/editar', 'ObjectivePanelController@formEditObjective')->name('edit.form');
         // Administracion
+        Route::get('/logs', 'ObjectivePanelController@viewObjectiveLogs')->name('logs');
         Route::get('/configuracion', 'ObjectivePanelController@viewObjectiveConfiguration')->name('configuration');
         Route::put('/configuracion/ocultar', 'ObjectivePanelController@formObjectiveConfigurationHide')->name('configuration.hide.form');
         Route::put('/configuracion/mapa', 'ObjectivePanelController@formObjectiveConfigurationMap')->name('configuration.map.form');
@@ -170,18 +179,24 @@ Route::group([
         Route::post('/portada', 'ObjectivePanelController@formObjectiveCover')->name('cover.form');
         Route::get('/archivos', 'ObjectivePanelController@viewObjectiveFiles')->name('files');
         Route::post('/archivos', 'ObjectivePanelController@formObjectiveFile')->name('files.form');
-        Route::get('/album', 'ObjectivePanelController@viewObjectiveAlbum')->name('album');
         Route::get('/mapa', 'ObjectivePanelController@viewObjectiveMap')->name('map');
         Route::delete('/eliminar', 'ObjectivePanelController@formDeleteObjective')->name('delete.form');
         // Suscriptores
         Route::get('/suscriptores', 'ObjectivePanelController@viewListSubscribers')->name('subscribers');
+        Route::get('/suscriptores/descargar', 'ObjectivePanelController@downloadListSubscribers')->name('subscribers.download');
         // Equipo
         Route::get('/equipo', 'ObjectivePanelController@viewListTeam')->name('team');
         Route::get('/equipo/agregar', 'ObjectivePanelController@viewAddTeam')->name('team.add');
         Route::post('/equipo/agregar', 'ObjectivePanelController@formAddTeam')->name('team.add.form');
         Route::delete('/equipo/{usrId}/eliminar', 'ObjectivePanelController@formRemoveTeam')->name('team.remove.form');
+        // Equipo
+        Route::get('/comunidades', 'ObjectivePanelController@viewListCommunities')->name('communities');
+        Route::get('/comunidades/agregar', 'ObjectivePanelController@viewAddCommunities')->name('communities.add');
+        Route::post('/comunidades/agregar', 'ObjectivePanelController@formAddCommunities')->name('communities.add.form');
+        Route::delete('/comunidades/{communityId}/eliminar', 'ObjectivePanelController@formRemoveCommunities')->name('communities.remove.form');
         // Metas
         Route::get('/metas', 'ObjectivePanelController@viewListGoals')->name('goals');
+        Route::get('/metas/descargar', 'ObjectivePanelController@downloadListGoals')->name('goals.download');
         Route::get('/metas/nuevo', 'ObjectivePanelController@viewAddGoal')->name('goals.add');
         Route::post('/metas/nuevo', 'ObjectivePanelController@formAddGoal')->name('goals.add.form');
         Route::get('/metas/{goalId}', 'GoalPanelController@viewGoal')->name('goals.index');
@@ -191,22 +206,29 @@ Route::group([
         Route::get('/metas/{goalId}/hitos', 'GoalPanelController@viewListGoalMilestones')->name('goals.milestones');
         Route::get('/metas/{goalId}/hitos/nuevo', 'GoalPanelController@viewAddGoalMilestone')->name('goals.milestones.add');
         Route::post('/metas/{goalId}/hitos/nuevo', 'GoalPanelController@formAddGoalMilestone')->name('goals.milestones.add.form');
+        Route::get('/metas/{goalId}/hitos/{milestoneId}/editar', 'GoalPanelController@viewEditGoalMilestone')->name('goals.milestones.edit');
+        Route::put('/metas/{goalId}/hitos/{milestoneId}/editar', 'GoalPanelController@formEditGoalMilestone')->name('goals.milestones.edit.form');
+        Route::get('/metas/{goalId}/hitos/{milestoneId}/eliminar', 'GoalPanelController@viewDeleteGoalMilestone')->name('goals.milestones.delete');
+        Route::delete('/metas/{goalId}/hitos/{milestoneId}/eliminar', 'GoalPanelController@formDeleteGoalMilestone')->name('goals.milestones.delete.form');
         Route::get('/metas/{goalId}/configuracion', 'GoalPanelController@viewGoalConfiguration')->name('goals.configuration');
         Route::delete('/metas/{goalId}/eliminar', 'GoalPanelController@formDeleteGoal')->name('goals.delete.form');
         // Reporte
         Route::get('/metas/{goalId}/reportes', 'GoalPanelController@viewListGoalReports')->name('goals.reports');
+        Route::get('/metas/{goalId}/reportes/descargar', 'GoalPanelController@downloadListGoalReports')->name('goals.reports.download');
         Route::get('/metas/{goalId}/reportes/nuevo', 'GoalPanelController@viewNewGoalReport')->name('goals.reports.add');
         Route::post('/metas/{goalId}/reportes/nuevo', 'GoalPanelController@formNewGoalReport')->name('goals.reports.add.form');
         Route::get('/metas/{goalId}/reportes/{reportId}', 'ReportPanelController@viewReport')->name('goals.reports.index');
         Route::get('/metas/{goalId}/reportes/{reportId}/editar', 'ReportPanelController@viewEditReport')->name('goals.reports.edit');
         Route::put('/metas/{goalId}/reportes/{reportId}/editar', 'ReportPanelController@formEditReport')->name('goals.reports.edit.form');
         Route::get('/metas/{goalId}/reportes/{reportId}/comentarios', 'ReportPanelController@viewReportComments')->name('goals.reports.comments');
-        Route::post('/metas/{goalId}/reportes/{reportId}/comentarios', 'ReportPanelController@formReportComment')->name('goals.reports.comments.form');
-        Route::post('/metas/{goalId}/reportes/{reportId}/comentarios/{commentId}/responder', 'ReportPanelController@formReportReplyComment')->name('goals.reports.comments.reply.form');
+        Route::get('/metas/{goalId}/reportes/{reportId}/comentarios/descargar', 'ReportPanelController@downloadReportComments')->name('goals.reports.comments.download');
+        Route::get('/metas/{goalId}/reportes/{reportId}/feedbacks', 'ReportPanelController@viewReportTestimonies')->name('goals.reports.testimonies');
+        Route::get('/metas/{goalId}/reportes/{reportId}/feedbacks/descargar', 'ReportPanelController@downloadReportTestimonies')->name('goals.reports.testimonies.download');
         Route::get('/metas/{goalId}/reportes/{reportId}/archivos', 'ReportPanelController@viewReportFiles')->name('goals.reports.files');
         Route::post('/metas/{goalId}/reportes/{reportId}/archivos', 'ReportPanelController@formReportFile')->name('goals.reports.files.form');
         Route::get('/metas/{goalId}/reportes/{reportId}/album', 'ReportPanelController@viewReportAlbum')->name('goals.reports.album');
         Route::post('/metas/{goalId}/reportes/{reportId}/album', 'ReportPanelController@formReportAlbum')->name('goals.reports.album.form');
+        Route::delete('/metas/{goalId}/reportes/{reportId}/album/{pictureId}/eliminar', 'ReportPanelController@formDeletePictureReport')->name('goals.reports.album.delete.form');
         Route::get('/metas/{goalId}/reportes/{reportId}/mapa', 'ReportPanelController@viewReportMap')->name('goals.reports.map');
         Route::put('/metas/{goalId}/reportes/{reportId}/mapa', 'ReportPanelController@formReportMap')->name('goals.reports.map.form');
         Route::get('/metas/{goalId}/reportes/{reportId}/configuracion', 'ReportPanelController@viewReportConfiguration')->name('goals.reports.configuration');

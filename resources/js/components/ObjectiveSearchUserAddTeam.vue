@@ -6,10 +6,6 @@
       <input v-model="userInput" type="text" class="form-control" placeholder="Ej: José">
       <small class="form-text text-muted">{{status}}</small>
     </div>
-    <!-- <div class="card my-3 shadow-sm">
-      <div class="card-body">
-      </div>
-    </div> -->
     <form :action="formUrl" ref="theForm" method="POST">
       <input type="hidden" name="_token" :value="crsfToken">
       <input type="hidden" name="userId" :value="userSelected">
@@ -27,7 +23,7 @@
         <div class="card-body d-flex align-items-start">
         <div class="w-100">
           <h5 class="my-1 is-600">{{user.surname}}, {{user.name}}</h5>
-          <p class="my-1 text-smaller text-muted">Email: {{user.email}}</p>
+          <p class="my-1 text-smaller text-muted">Email: {{user.email ? user.email : '- Oculto -'}}</p>
         </div>
         <div class="ml-2">
           <div class="dropdown">

@@ -10,13 +10,10 @@ class ActionLog extends Model
     public $incrementing = true; // if IDs are auto-incrementing.
     public $timestamps = false; // if the model should be timestamped.
 
-    // protected $casts = [
-    //     'meta' => 'array',
-    // ];
-
     protected $dates = [
         'record_datetime',
     ];
+
 
     protected $fillable = ['message','context','level','level_name','channel','record_datetime','extra','formatted','remote_addr','user_agent','created_at'];
 }

@@ -6,6 +6,11 @@ $currentRoute = Route::currentRouteName();
 	<h2 class="text-white is-700 text-center mb-4">
 		<i class="fas fa-calendar-alt"></i>&nbsp;Eventos
 	</h2>
+  @hasRole('admin')
+  <div class="my-4 text-center">
+    <a href="{{route('admin.events.create')}}" class="btn btn-secondary"><i class="fas fa-plus fa-fw"></i><i class="fas fa-calendar-alt"></i> Nuevo</a>
+  </div>
+  @endhasRole
 	<div id="calendarButtons" class="row justify-content-center">
       <div class="col-9 col-sm-8 col-lg-6">
         <div class="card shadow rounded">

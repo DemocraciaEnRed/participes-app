@@ -135,7 +135,7 @@
               <h4><i class="fas fa-info-circle"></i>&nbsp;Acerca de la demo</h4>
               <p class="">Puede comenzar una demo haciendo clic en <b>Con DEMO</b>. La misma cuenta con:</p>
               <ul class="mb-0">
-                <li>5 categorias</li>
+                <li>5 categorías</li>
                 <li>25 organizaciones</li>
                 <li>50 usuarios</li>
                 <li>20 objetivos</li>

@@ -20,16 +20,15 @@
         @method('PUT')
         @csrf
         <div class="form-group">
-          <label for="current_password">Contraseña actual</label>
+          <label for="current_password"><b>Contraseña actual</b><span class="text-danger">*</span></label>
           <input type="password" class="form-control" name="current_password" id="current_password">
-          <small class="form-text text-muted">Say goodbye to your old password...</small>
         </div>
         <div class="form-group">
-          <label for="new_password">Nueva contraseña</label>
+          <label for="new_password"><b>Nueva contraseña</b><span class="text-danger">*</span></label>
           <input type="password" class="form-control" name="new_password" id="new_password">
         </div>
         <div class="form-group">
-          <label for="repeat_password">Repita la nueva contraseña</label>
+          <label for="repeat_password"><b>Repita la nueva contraseña</b><span class="text-danger">*</span></label>
           <input type="password" class="form-control" name="repeat_password" id="repeat_password">
         </div>
         <button class="btn btn-primary">Guardar</button>

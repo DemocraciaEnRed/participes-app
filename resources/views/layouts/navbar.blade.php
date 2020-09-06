@@ -19,9 +19,6 @@
       <!-- Left Side Of Navbar -->
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a href="{{ route('about.general') }}" class="nav-link"><i class="fas fa-fw fa-question-circle"></i> ¿Como funciona?</a>
-        </li>
-        <li class="nav-item">
           <a href="{{ route('objectives') }}" class="nav-link"><i class="fas fa-fw fa-bullseye"></i> Objetivos</a>
         </li>
         <li class="nav-item">
@@ -29,6 +26,9 @@
         </li>
         <li class="nav-item">
           <a href="{{ route('events.upcoming') }}" class="nav-link"><i class="far fa-fw fa-calendar-alt"></i> Eventos</a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('about.general') }}" class="nav-link"><i class="fas fa-fw fa-question-circle"></i> ¿Cómo funciona?</a>
         </li>
       </ul>
 

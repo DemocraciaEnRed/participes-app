@@ -46,26 +46,22 @@ $saluditosIndex = array_rand($saluditos);
   <hr class="my-4">
 
   @if(!Auth::user()->hasVerifiedEmail())
-  <div class="alert alert-info my-3">
-      <h5 class=""><i class="fas fa-exclamation-triangle"></i>&nbsp;Debe verificar su cuenta</h5>
-      <p class="mb-0">Hacé <a href="{{ route('panel.account.verify') }}">click aquí <i class="fas fa-arrow-right"></i></a></p>
+  <div class="alert alert-warning my-3">
+      <h5 class="is-700"><i class="fas fa-exclamation-triangle"></i>&nbsp;Debe verificar su cuenta</h5>
+      Es importante que verifique su cuenta para comenzar a participar en la plataforma. Para hacerlo, haga <a href="{{ route('panel.account.verify') }}">click aquí<i class="fas fa-arrow-right fa-fw"></i></a>
   </div>
   @endif
   @if($countUnreadNotifications > 0)
-  <div class="card border-secondary my-3">
-    <div class="card-body text-dark">
-      <h5 class="card-title"><i class="far fa-bell"></i>&nbsp;Notificaciones sin leer</h5>
-      <p class="card-text">Hacé <a href="{{ route('panel.notifications.unread') }}">click aquí <i class="fas fa-arrow-right"></i></a></p>
-    </div>
-  </div>
+
+  <h5 class="is-700"><i class="far fa-bell"></i>&nbsp;Notificaciones sin leer</h5>
+  <p class="">Hacé <a href="{{ route('panel.notifications.unread') }}">click aquí <i class="fas fa-arrow-right"></i></a></p>
+
   @else
-  <div class="card border-secondary my-3">
-    <div class="card-body text-dark">
-      <h5 class="card-title"><i class="far fa-bell"></i>&nbsp;Mis nofiticaciones</h5>
-      <p class="card-text">Leelas haciendo <a href="{{ route('panel.notifications') }}">click aquí <i
-            class="fas fa-arrow-right"></i></a></p>
-    </div>
-  </div>
+ 
+  <h5 class="is-700"><i class="far fa-bell"></i>&nbsp;Mis nofiticaciones</h5>
+  <p>Leelas haciendo <a href="{{ route('panel.notifications') }}">click aquí <i
+        class="fas fa-arrow-right"></i></a></p>
+ 
   @endif
 </section>
 

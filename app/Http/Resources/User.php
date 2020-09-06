@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Auth;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class User extends JsonResource
@@ -15,12 +16,29 @@ class User extends JsonResource
     public function toArray($request)
     {
         // return parent::toArray($request);
-        return [
+        $res = [
             'id' => $this->id,
             'name' => $this->name,
             'surname' => $this->surname,
-            'email' => $this->email,
             'avatar' => $this->avatar
         ];
+
+        $user = Auth::user();
+        $with = $request->query('with');
+        if(!is_null($with)){
+          $withParams = explode(',',$with);
+          foreach ($withParams as $withParam) {
+            switch($withParam){
+              case 'user_email':
+                if($user && $user->hasRole('admin')){
+                    $res['email'] = $this->email;
+                }
+                break;
+              default:
+                break;
+            }
+          }
+        }
+        return $res;
     }
 }

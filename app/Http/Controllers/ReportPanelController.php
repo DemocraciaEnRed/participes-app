@@ -6,6 +6,8 @@ use Image;
 use Storage;
 use Str;
 use Log;
+use Excel;
+use Carbon\Carbon;
 use App\Category;
 use App\Organization;
 use App\Role;
@@ -17,7 +19,10 @@ use App\Goal;
 use App\Milestone;
 use App\Report;
 use App\Comment;
-use App\Notifications\NewReport;
+use App\Exports\ReportCommentsExport;
+use App\Exports\ReportTestimoniesExport;
+use App\Notifications\EditReport;
+use App\Notifications\DeleteReport;
 use App\Rules\MatchOldPassword;
 use Illuminate\Http\Request;
 
@@ -32,6 +37,7 @@ class ReportPanelController extends Controller
     {
         // Forces to be authenticated.
         $this->middleware('auth');
+        $this->middleware('verified');
         $this->middleware('fetch_objective');
         $this->middleware('goal_belongs_objective');
         $this->middleware('fetch_goal');
@@ -56,7 +62,7 @@ class ReportPanelController extends Controller
       return view('objective.manage.goals.reports.edit',['objective' => $request->objective, 'goal' => $request->goal, 'report' => $request->report]);
     }
 
-    public function formEditReport(Request $request, $objectiveId, $goalId){
+    public function formEditReport(Request $request, $objectiveId, $goalId, $reportId){
      
       $rules = [
         'title' => 'required|string|max:550',
@@ -114,60 +120,50 @@ class ReportPanelController extends Controller
           }
           break;
       }
-      Log::channel('mysql')->debug("{$request->user()->fullname} ha modificado un reporte de la meta {$request->goal->title} del objetivo {$request->objective->title}", [
-        'objective' => $request->objective->id,
-        'objective_title' => $request->objective->title,
-        'goal_title' => $request->goal->id,
-        'goal_title' => $request->goal->title,
-        'user_id' => $request->user()->id,
-        'user_fullname' => $request->user()->fullname,
-        'email' => $request->user()->email
-        ]);
 
       $report->save();
       
+      Log::channel('mysql')->info("[{$request->user()->fullname}] ha editado el reporte [{$report->title}] de la meta [{$request->goal->title}] del objetivo [{$request->objective->title}]", [
+        'objective_id' => $request->objective->id,
+        'objective_title' => $request->objective->title,
+        'goal_id' => $request->goal->id,
+        'goal_title' => $request->goal->title,
+        'report_id' => $report->id,
+        'report_title' => $report->title,
+        'user_id' => $request->user()->id,
+        'user_fullname' => $request->user()->fullname,
+        'user_email' => $request->user()->email
+        ]);
+
       // Notify
       $notifySubscriber = $request->boolean('notify');
       if(!$request->objective->hidden && $notifySubscriber){
-        Notification::locale('es')->send($request->objective->subscribers, new EditReport($request->objective, $request->goal, $report));
+        Notification::send($request->objective->subscribers, new EditReport($request->objective, $request->goal, $report));
       }
       
       return redirect()->route('objectives.manage.goals.reports.index', ['objectiveId' => $request->objective->id, 'goalId' => $goal->id,'reportId' => $report->id])->with('success','El reporte ha sido editado con exito');
     }
 
-     public function viewReportComments (Request $request){
+    public function viewReportComments (Request $request){
       $comments = $request->report->comments()->paginate(10);
       return view('objective.manage.goals.reports.comments', ['objective' => $request->objective, 'goal' => $request->goal, 'report' => $request->report, 'comments' => $comments]);
     } 
-    public function formReportComment (Request $request){
-      $rules = [
-        'content' => 'required|string|max:2000'
-      ];
 
-      $request->validate($rules);
-
-      $comment = new Comment();
-      $comment->content = $request->input('content');
-      $comment->user()->associate($request->user());
-      $request->report->comments()->save($comment);
-
-      return redirect()->route('objectives.manage.goals.reports.comments', ['objectiveId' => $request->objective->id, 'goalId' => $request->goal->id, 'reportId' => $request->report->id])->with('success','Se agrego un comentario al reporte');
-    }
-    public function formReportReplyComment (Request $request){
-      $rules = [
-        'content' => 'required|string|max:2000'
-      ];
-
-      $request->validate($rules);
-
-      $comment = new Comment();
-      $comment->content = $request->input('content');
-      $comment->user()->attach($request->user());
-      $request->report->comments()->save($comment);
-
-      return redirect()->route('objectives.manage.goals.reports.comments', ['objectiveId' => $request->objective->id, 'goalId' => $request->goal->id, 'reportId' => $request->report->id])->with('success','Se agrego un comentario al reporte');
+    public function downloadReportComments (Request $request, $objectiveId, $goalId, $reportId){
+      $this->hasManagerPrivileges($request);
+      return Excel::download(new ReportCommentsExport($reportId), Carbon::now()->format('Ymd').'-comentarios-reporte-'.$reportId.'.xlsx');
     }
 
+    public function viewReportTestimonies (Request $request){
+      $testimonies = $request->report->testimonies()->paginate(10);
+      return view('objective.manage.goals.reports.testimonies', ['objective' => $request->objective, 'goal' => $request->goal, 'report' => $request->report, 'testimonies' => $testimonies]);
+    } 
+
+    public function downloadReportTestimonies (Request $request, $objectiveId, $goalId, $reportId){
+      $this->hasManagerPrivileges($request);
+      return Excel::download(new ReportTestimoniesExport($reportId), Carbon::now()->format('Ymd').'-feedbacks-reporte-'.$reportId.'.xlsx');
+    } 
+    
      public function viewReportAlbum (Request $request){
       $photos = $request->report->photos()->paginate(10);
       return view('objective.manage.goals.reports.album', ['objective' => $request->objective, 'goal' => $request->goal, 'report' => $request->report, 'photos' => $photos]);
@@ -216,6 +212,16 @@ class ReportPanelController extends Controller
       }
 
       return redirect()->route('objectives.manage.goals.reports.album', ['objectiveId' => $request->objective->id, 'goalId' => $request->goal->id, 'reportId' => $request->report->id])->with('success','Se agrego la foto al album del reporte');
+    }
+
+    public function formDeletePictureReport(Request $request, $objectiveId, $goalId, $reportId, $pictureId)
+    {
+        $report = Report::findorfail($reportId);
+        $picture = ImageFile::findorfail($pictureId);
+        Storage::disk('reports')->delete("photos/".$picture->name);
+        Storage::disk('reports')->delete("photos/".$picture->thumbnail_name);
+        $picture->delete();
+        return redirect()->route('objectives.manage.goals.reports.album', ['objectiveId' => $request->objective->id, 'goalId' => $request->goal->id, 'reportId' => $request->report->id])->with('success','Se elimino la foto del album del reporte');
     }
 
     public function viewReportFiles (Request $request){
@@ -293,8 +299,8 @@ class ReportPanelController extends Controller
 
       $request->validate($rules);
 
-      Log::channel('mysql')->debug("{$request->user()->fullname} ha eliminado un reporte de la meta {$request->goal->title} del objetivo {$request->objective->title}", [
-        'objective' => $request->objective->id,
+      Log::channel('mysql')->info("[{$request->user()->fullname}] ha eliminado el reporte [{$request->report->title}] de la meta [{$request->goal->title}] del objetivo [{$request->objective->title}]", [
+        'objective_id' => $request->objective->id,
         'objective_title' => $request->objective->title,
         'goal_title' => $request->goal->id,
         'goal_title' => $request->goal->title,
@@ -302,16 +308,16 @@ class ReportPanelController extends Controller
         'report_title' => $request->report->title,
         'user_id' => $request->user()->id,
         'user_fullname' => $request->user()->fullname,
-        'email' => $request->user()->email
+        'user_email' => $request->user()->email
         ]);
 
       $request->report->delete();
       
       // Notify
-      // $notifySubscriber = $request->boolean('notify');
-      // if(!$request->objective->hidden && $notifySubscriber){
-      //   Notification::locale('es')->send($request->objective->subscribers, new EditReport($request->objective, $request->goal, $report));
-      // }
+      $notifySubscribers = $request->boolean('notify');
+      if(!$request->objective->hidden && $notifySubscribers){
+        Notification::send($request->objective->subscribers, new DeleteReport($request->objective, $request->goal, $request->report));
+      }
 
 
       return redirect()->route('objectives.manage.goals.index', ['objectiveId' => $request->objective->id, 'goalId' => $request->goal->id])->with('success','Reporte eliminado correctamente');

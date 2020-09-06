@@ -5,6 +5,12 @@
 <section>
   <h3 class="is-700">Mis objetivos</h1>
   <p class="lead">Estos son los objetivos de los cuales formas parte del equipo.</p>
+  @if(!Auth::user()->hasVerifiedEmail())
+  <div class="alert alert-warning">
+    <h5 class="is-700"><i class="fas fa-exclamation-triangle"></i>&nbsp;¡Debe verificar su cuenta para poder ingresar a los paneles de administracion de los objetivos!</h5>
+    <span>Aún no has verificado tu cuenta. Para hacerlo, ingresar en tu <a href="/panel">panel de control<i class="fas fa-arrow-right fa-fw"></i></a></span>
+  </div>
+  @endif
   @if(count($objectives) > 0)
   @foreach($objectives as $objective)
   <div class="card my-3 shadow-sm">
@@ -18,6 +24,9 @@
               <a href="{{route('objectives.manage.index',['objectiveId' => $objective->id])}}" class="text-dark">{{$objective->title}}</a>
             </h4>
             <p class="text-muted text-smaller my-1">{{Str::limit($objective->content, 200, $end=' [...]')}}</p> 
+          </div>
+          <div class="text-center">
+            <span class="text-smaller text-info"><i class="fas fa-{{$objective->pivot->role == 'manager' ? 'user-shield' : 'user-edit'}}"></i> {{$objective->pivot->role == 'manager' ? 'Coordina' : 'Reporta'}}</span>
           </div>
       </div>
     </div>

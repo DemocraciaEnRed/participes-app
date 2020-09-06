@@ -18,10 +18,11 @@
         <div class="input-group-prepend">
           <button class="btn" :class="selectedType == 'solid' ? 'btn-primary' : 'btn-outline-secondary'" @click.prevent="changeType('solid')">Solid</button>
           <button class="btn" :class="selectedType == 'regular' ? 'btn-primary' : 'btn-outline-secondary'" @click.prevent="changeType('regular')">Regular</button>
+          <button class="btn" :class="selectedType == 'brands' ? 'btn-primary' : 'btn-outline-secondary'" @click.prevent="changeType('brands')">Brands</button>
         </div>
         <input type="text" class="form-control" v-model="iconInput" placeholder="Comience escribiendo que busca en ingles. Ej: 'building' o 'user' o 'tree'...">
       </div>
-      <small class="form-text text-muted">La plataforma utiliza <a href="https://fontawesome.com/icons?d=gallery&m=free">Font Awesome 5</a> para usar sus iconos. Puede ver la galeria entranado en la web. No se pueden seleccionar iconos de marcas.</small>
+      <small class="form-text text-muted">La plataforma utiliza <a href="https://fontawesome.com/icons?d=gallery&m=free">Font Awesome 5</a> para usar sus iconos. Puede ver la galeria entranado en la web.</small>
       <small class="form-text text-muted">{{status}}</small>
       <p class="icon-select d-inline-block my-1 mr-2 text-smaller" @click="selected = icon" v-for="(icon,i) in filteredList" :key="`icon${i}`"><i :class="`${icon} fa-fw fa-lg`"></i> {{icon}}</p>
       </div>
@@ -53,6 +54,9 @@ export default {
       showIconSearch: false,
       status: null
     }
+  },
+  mounted: function(){
+    if(this.value != null) this.selected = this.value
   },
   methods: {
     searchIcon: debounce(

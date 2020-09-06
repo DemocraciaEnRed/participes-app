@@ -72,11 +72,21 @@ class Report extends Model
     {
         return $this->testimonies()->where('value', false);
     }
+    public function getPositiveTestimoniesAttribute()
+    {
+        return $this->testimonies()->where('value', true)->count();
+    }
+
+    public function getNegativeTestimoniesAttribute()
+    {
+        return $this->testimonies()->where('value', false)->count();
+    }
 
     public function userTestimony($userId)
     {
         return $this->testimonies()->where('user_id', $userId);
     }
+    
     public function getTypeLabelAttribute()
     {
         switch($this->type){
@@ -108,7 +118,6 @@ class Report extends Model
             case 'inactive':
                 return 'Inactiva';
                 break;
-
             default:
                 return '???';
         }
@@ -128,7 +137,6 @@ class Report extends Model
             case 'inactive':
                 return 'Inactiva';
                 break;
-
             default:
                 return '???';
         }

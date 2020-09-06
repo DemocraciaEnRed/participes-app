@@ -28,15 +28,6 @@
               Asignar
             </button>
           </form>
-          <!-- <div class="dropdown">
-            <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="roleSelector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Seleccione el rol
-            </button>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="roleSelector">
-              <a class="dropdown-item is-clickable" @click="submit(user.id, 'manager')">Coordina</a>
-              <a class="dropdown-item is-clickable" @click="submit(user.id, 'reporter')">Reporta</a>
-            </div>
-          </div> -->
         </div>
       </div>
     </div>

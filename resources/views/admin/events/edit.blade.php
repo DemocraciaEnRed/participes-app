@@ -15,6 +15,16 @@
     </div>
   @endif
   <hr>
+  <h5 class="is-700 has-text-danger"><i class="fas fa-plus"></i> <i class="far fa-image"></i> Agregar foto reporte</h5>
+  <p>Debe ser una imagen JPG o JPEG , hasta 8 MB. Si el ancho de la imagen es mayor a 1366px, sera ajustada a estetamaño.</p>  
+    <form action="{{route('admin.events.pictures.add',['eventId' => $event->id])}}" method="POST" enctype="multipart/form-data">
+      @csrf
+      <input-file name="photo" accept="image/*"></input-file>
+      <div class="form-group">
+        <button class="btn btn-primary btn-sm" type="submit"><i class="fas fa-upload"></i> Subir imagen</button>
+      </div>
+    </form>
+  <hr>
   <h5 class="is-700 has-text-danger mb-3"><i class="far fa-images"></i> Fotos del evento</h5>
   @forelse($event->photos as $photo)
   <div class="d-inline-block mr-2 my-1">
@@ -29,32 +39,23 @@
   <p class="text-muted">No hay fotos cargadas en el evento</p>
   @endforelse
   <hr>
-  <h5 class="is-700 has-text-danger"><i class="fas fa-plus"></i> <i class="far fa-image"></i> Agregar foto reporte</h5>
-  <p>Debe ser una imagen JPG o JPEG , hasta 8 MB. Si el ancho de la imagen es mayor a 1366px, sera ajustada a estetamaño.</p>  
-    <form action="{{route('admin.events.pictures.add',['eventId' => $event->id])}}" method="POST" enctype="multipart/form-data">
-      @csrf
-      <input-file name="photo" accept="image/*"></input-file>
-      <div class="form-group">
-        <button class="btn btn-primary" type="submit">Subir imagen</button>
-      </div>
-    </form>
-  <hr>
   <h5 class="is-700 has-text-danger"><i class="fas fa-edit"></i> Editar información</h5>
   <form method="POST" action="{{ route('admin.events.edit.form',['eventId' => $event->id]) }}" >
     @method('PUT')
     @csrf
     <div class="form-group">
-      <label class="is-700">Título del evento</label>
+      <label><b>Título del evento</b><span class="text-danger">*</span></label>
       <input type="text" class="form-control" name="title" value="{{$event->title}}" placeholder="Ingrese aquí...">
+      <small class="form-text text-muted">Hasta 550 caracteres.</small>
     </div>
     <div class="form-group">
-      <label class="is-700">Descripción del evento</label>
+      <label><b>Descripción del evento</b><span class="text-danger">*</span></label>
       <textarea name="content" class="form-control" rows="4" placeholder="Ingrese aquí...">{{$event->content}}</textarea>
     </div>
     <div class="form-group">
       <div class="form-row">
         <div class="col-sm-4">
-          <label class="is-700">Dia del evento</label>
+          <label><b>Dia del evento</b><span class="text-danger">*</span></label>
           <div class="input-group">
             <div class="input-group-prepend">
               <span class="input-group-text">Dia</span>
@@ -63,7 +64,7 @@
           </div>
         </div>
         <div class="col-sm-4">
-          <label class="is-700">Hora</label>
+          <label><b>Hora</b><span class="text-danger">*</span></label>
           <div class="input-group">
             <select name="hour" class="custom-select">
               @for ($i = 0; $i < 24; $i++)
@@ -76,7 +77,7 @@
           </div>
         </div>
         <div class="col-sm-4">
-          <label class="is-700">Minutos</label>
+          <label><b>Minutos</b><span class="text-danger">*</span></label>
           <div class="input-group">
             <select name="minute" class="custom-select">
               @for ($i = 0; $i < 60; $i += 5)
@@ -92,15 +93,16 @@
       <small class="form-text text-muted">Fecha en que ocurre el reporte. Elija el dia, la hora y minuto del mismo</small>
     </div>
     <div class="form-group">
-      <label class="is-700">Dirección</label>
+      <label><b>Dirección</b><span class="text-danger">*</span></label>
       <input type="text" class="form-control" name="address" placeholder="Ingrese aquí..." value="{{$event->address}}">
+      <small class="form-text text-muted">Hasta 550 caracteres.</small>
     </div>
      <div class="form-group">
-      <label class="is-700">Links asociados</label>
+      <label><b>Links asociados</b>&nbsp;<span class="text-smallest text-info">(Opcional)</span></label>
       <input-urls name="urls" :urls='@json($event->urls)'></input-urls>
     </div>
     <div class="form-group">
-      <label><b>Objetivos relacionados</b>&nbsp;<span class="text-smallest text-primary">(Opcional)</span></label>
+      <label><b>Objetivos relacionados</b>&nbsp;<span class="text-smallest text-info">(Opcional)</span></label>
       <div>
         @foreach($objectives as $objective)
           <div class="custom-control custom-checkbox form-check-inline">
@@ -120,38 +122,6 @@
     </div>
     <br>
     <button type="submit" class="btn btn-primary">Editar</button>
-  </form>
-  <hr>
-  <form action="{{ route('admin.events.delete.form',['eventId' => $event->id]) }}" method="POST">
-    @method('DELETE')
-    @csrf
-    <h5 class="is-700 has-text-danger"><i class="fas fa-trash"></i> Eliminar evento</h5>
-    <p>Al eliminar el evento, tenga en cuenta lo siguiente</p>
-    <ul>
-      <li>Dejará de ser accesible, haciendo que todos los links que se hayan compartido, se pierdan.</li>
-      <li>Se eliminarán todas las imagenes cargadas</li>
-      <li>No se podrá recuperar, debera crear otro.</li>
-    </ul>
-    <div class="form-group">
-      <label class="is-700">Ingrese su contraseña</label>
-      <input type="password" class="form-control" name="password">
-      <small class="form-text text-muted">Para poder eliminar el evento, ingrese su contraseña para confirmar.</small>
-    </div>
-    <div class="form-group">
-     <label class="is-700 "><i class="fas fa-paper-plane"></i>&nbsp;Enviar notificación a suscriptores</label>
-      @if(!$objective->hidden)
-      <div class="custom-control custom-switch">
-        <input type="checkbox" class="custom-control-input" name="notify" id="notify" value="true">
-        <label class="custom-control-label is-clickable" for="notify">Notificar a los suscriptores</label>
-      </div>
-      @else
-      <div class="alert alert-warning">
-        <i class="fas fa-exclamation-triangle"></i>&nbsp;El objetivo se encuentra <i class="fas fa-eye-slash"></i> oculto, no se enviarán notificaciones a los usuarios.
-      </div>
-      @endif
-      <small class="form-text text-muted">Se le enviará una notificación por email (si lo tienen habilitado) y por sistema, de que el reporte ha sido editado invitandolos a verla.</small>
-    </div>
-    <button type="submit" class="btn btn-danger">Eliminar</button>
   </form>
 </section>
 

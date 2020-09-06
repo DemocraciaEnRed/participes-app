@@ -22,6 +22,7 @@ class InitDB extends Migration
             $table->string('surname');
             $table->string('notification_preferences')->default('database,mail');
             $table->string('password');
+            $table->text('trace')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
@@ -107,6 +108,7 @@ class InitDB extends Migration
             $table->json('map_geometries')->nullable();
             $table->boolean('archived')->default(false);
             $table->boolean('hidden')->default(true);
+            $table->text('trace')->nullable();
             $table->timestamps();
             $table->softDeletes('deleted_at', 0);
         });
@@ -134,6 +136,7 @@ class InitDB extends Migration
             $table->decimal('map_zoom',4,2)->nullable();
             $table->json('map_center')->nullable();
             $table->json('map_geometries')->nullable();
+            $table->text('trace')->nullable();
             $table->timestamps();
             $table->softDeletes('deleted_at', 0);
         });
@@ -148,8 +151,8 @@ class InitDB extends Migration
         });
         Schema::create('objective_organization', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('objective_id')->constrained('objectives');
-            $table->foreignId('organization_id')->constrained('organizations');
+            $table->foreignId('objective_id')->constrained('objectives')->onDelete('cascade');
+            $table->foreignId('organization_id')->constrained('organizations')->onDelete('cascade');
         });
         Schema::create('objective_user', function (Blueprint $table) {
             $table->id();
@@ -183,6 +186,7 @@ class InitDB extends Migration
             $table->json('map_center')->nullable();
             $table->json('map_geometries')->nullable();
             $table->foreignId('milestone_achieved')->nullable()->constrained('milestones');
+            $table->text('trace')->nullable();
             $table->timestamps();
             $table->softDeletes('deleted_at', 0);
         });
@@ -192,6 +196,7 @@ class InitDB extends Migration
             $table->text('content');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->nullableMorphs('commentable'); 
+            $table->boolean('edited')->default(false);
             $table->timestamps();
             $table->softDeletes('deleted_at', 0);
         });
@@ -221,7 +226,7 @@ class InitDB extends Migration
         Schema::create('action_logs', function (Blueprint $table) {
             $table->id();
             $table->longText('message');
-            $table->longText('context');
+            $table->json('context');
             $table->string('level')->index();
             $table->string('level_name');
             $table->string('channel')->index();

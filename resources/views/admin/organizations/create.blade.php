@@ -17,19 +17,21 @@
   <form method="POST" action="{{ route('admin.organizations.create.form') }}" enctype="multipart/form-data">
     @csrf
     <div class="form-group">
-      <label>Nombre</label>
-      <input type="text" class="form-control" name="name" placeholder="Ingrese un nombre">
+      <label><b>Nombre</b> <small class="text-danger">*</small></label>
+      <input type="text" class="form-control" name="name" placeholder="Ingrese un nombre" maxlength="225">
+      <small class="text-muted">Hasta 225 caracteres.</small>
     </div>
     <div class="form-group">
-      <label>Descripción</label>
-      <textarea name="description" class="form-control" rows="4"></textarea>
+      <label><b>Descripción</b> <small class="text-danger">*</small></label>
+      <textarea name="description" class="form-control" rows="4" maxlength="550"></textarea>
+      <small class="text-muted">Hasta 550 caracteres.</small>
     </div>
     <div class="form-group">
-      <label>Logo</label>
-      <input type="file" class="form-control-file" name="logo">
-      <small id="emailHelp" class="form-text text-muted">Se recomienda que no exceda 2MB y que sea PNG con fondo transparente.</small>
+      <label><b>Logo</b> <small class="text-info">Opcional</small></label>
+      <input-file name="logo" accept="image/*"></input-file>
+      <small class="text-muted">Se recomienda que no exceda 2MB y que sea PNG con fondo transparente.</small>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Crear</button>
   </form>
 </section>
 

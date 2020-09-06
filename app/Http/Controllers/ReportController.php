@@ -3,12 +3,17 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use Log;
+use Notification;
 use App\Comment;
 use App\Report;
 use App\Goal;
 use App\Testimony;
 use App\Objective;
 use Illuminate\Http\Request;
+use App\Notifications\NewCommentReportForAuthor;
+use App\Notifications\NewCommentReportForTeamObjective;
+use App\Notifications\NewReplyReport;
 use App\Http\Resources\Comment as CommentResource;
 use App\Http\Resources\Report as ReportResource;
 use App\Http\Resources\SimpleReport as SimpleReportResource;
@@ -126,11 +131,116 @@ class ReportController extends Controller
         $comment->user()->associate($request->user());
         $report->comments()->save($comment);
 
+        if($report->author->id != $request->user()->id ){
+            $report->author->notify(new NewCommentReportForAuthor($report, $comment));
+        }
+        
+        $teamMembersToNotify = $report->goal->objective->members->except([$report->author->id, $request->user()->id]);
+        Notification::send($teamMembersToNotify, new NewCommentReportForTeamObjective($report, $comment));
+
         return response()->json(['message' => 'Se ha creado el comentario'], 200);
 
     }
 
+    public function runEditComment(Request $request, $reportId, $commentId){
+        $report = Report::findorfail($reportId);
+        $comment = Comment::findorfail($commentId);
+
+        if(!$request->user()){
+            return response()->json(['message' => 'Not authorized'], 403);
+        }
+
+        $isTheOwner = $comment->user_id == $request->user()->id;
+        $isVerified = $request->user()->hasVerifiedEmail();
+        
+         $rules = [
+            'content' => 'required|string|max:2000'
+        ];
+        $request->validate($rules);
+
+        if($isTheOwner && $isVerified){
+            $comment->content = $request->input('content');
+            $comment->edited = true;
+            $comment->save();
+            
+            return response()->json(['message' => 'El comentario ha sido editado'], 200);
+        }
+        
+        // Not the author and not a member of the objective
+        
+        return response()->json(['message' => 'Not authorized'], 403);
+    }
+
+    public function runDeleteComment(Request $request, $reportId, $commentId){
+        $report = Report::findorfail($reportId);
+        $comment = Comment::findorfail($commentId);
+        
+        if(!$request->user()){
+            return response()->json(['message' => 'Not authorized'], 403);
+        }
+
+        $isTheOwner = $comment->user_id == $request->user()->id;
+        $isVerified = $request->user()->hasVerifiedEmail();
+
+        if($isTheOwner && $isVerified){
+            $comment->delete();
+            return response()->json(['message' => 'El comentario ha sido borrado'], 200);
+        }
+        
+        $isUserObjectiveMember = $request->user()->isMemberObjective($report->objective->id);
+        if($isUserObjectiveMember  && $isVerified){
+            Log::channel('mysql')->info("[{$request->user()->fullname}] (Miembro del equipo) ha eliminado el comentario de [{$comment->user->fullname}] hecho en el reporte [{$report->title}], de la meta [{$report->goal->title}] del objetivo [{$report->objective->title}]", [
+                'report_id' => $report->id,
+                'report_title' => $report->title,
+                'goal_id' => $report->goal->id,
+                'goal_title' => $report->goal->title,
+                'objective_id' => $report->objective->id,
+                'objective_title' => $report->objective->title,
+                'comment_id' => $comment->id,
+                'comment_author_id' => $comment->user->id,
+                'comment_author_fullname' => $comment->user->fullname,
+                'comment_author_email' => $comment->user->email,
+                'user_id' => $request->user()->id,
+                'user_fullname' => $request->user()->fullname,
+                'user_email' => $request->user()->email
+            ]);
+            $comment->delete();
+            return response()->json(['message' => 'El comentario ha sido borrado'], 200);
+        }
+        
+        $isUserAdmin = $request->user()->hasRole('admin');
+        if($isUserAdmin && $isVerified){
+             Log::channel('mysql')->info("[{$request->user()->fullname}] (Admin) ha eliminado el comentario de [{$comment->user->fullname}] hecho en el reporte [{$report->title}] de la meta [{$report->goal->title}] del objetivo [{$report->objective->title}]", [
+                'report_id' => $report->id,
+                'report_title' => $report->title,
+                'goal_id' => $report->goal->id,
+                'goal_title' => $report->goal->title,
+                'objective_id' => $report->objective->id,
+                'objective_title' => $report->objective->title,
+                'comment_id' => $comment->id,
+                'comment_author_id' => $comment->user->id,
+                'comment_author_fullname' => $comment->user->fullname,
+                'comment_author_email' => $comment->user->email,
+                'user_id' => $request->user()->id,
+                'user_fullname' => $request->user()->fullname,
+                'user_email' => $request->user()->email
+            ]);
+            $comment->delete();
+            return response()->json(['message' => 'El comentario ha sido borrado'], 200);
+        }
+
+        // Not the author and not a member of the objective
+        
+        return response()->json(['message' => 'Not authorized'], 403);
+    }
+
     public function runCreateReply(Request $request, $reportId, $commentId){
+        
+        if(!$request->user()){
+            return response()->json(['message' => 'Not authorized'], 403);
+        }
+        
+        $isVerified = $request->user()->hasVerifiedEmail();
         if(!$request->user()){
             return response()->json(['message' => 'Not authorized'], 403);
         }
@@ -146,25 +256,106 @@ class ReportController extends Controller
         $comment->content = $request->input('content');
         $comment->user()->associate($request->user());
         $parentComment->replies()->save($comment);
+        
+        $parentComment->user->notify(new NewReplyReport($parentComment->commentable, $comment));
 
         return response()->json(['message' => 'Se ha creado la respuesta'], 200);
     }
 
-    public function runDeleteComment(Request $request, $reportId, $commentId){
+    public function runEditReply(Request $request, $reportId, $commentId, $replyId){
         $report = Report::findorfail($reportId);
-        $comment = Comment::findorfail($commentId);
+        $comment = Comment::findorfail($replyId);
+        if($comment->parent_id != $commentId){
+            return response()->json(['message' => 'Not found'], 404);
+        }
+
+        if(!$request->user()){
+            return response()->json(['message' => 'Not authorized'], 403);
+        }
+
         $isTheOwner = $comment->user_id == $request->user()->id;
-        if($isTheOwner){
+        $isVerified = $request->user()->hasVerifiedEmail();
+        
+         $rules = [
+            'content' => 'required|string|max:2000'
+        ];
+        $request->validate($rules);
+
+        if($isTheOwner && $isVerified){
+            $comment->content = $request->input('content');
+            $comment->edited = true;
+            $comment->save();
+            return response()->json(['message' => 'La respuesta ha sido editada'], 200);
+        }
+        
+        // Not the author and not a member of the objective
+        
+        return response()->json(['message' => 'Not authorized'], 403);
+    }
+
+    public function runDeleteReply(Request $request, $reportId, $commentId, $replyId){
+        $report = Report::findorfail($reportId);
+        $comment = Comment::findorfail($replyId);
+        if($comment->parent_id != $commentId){
+            return response()->json(['message' => 'Not found'], 404);
+        }
+
+        if(!$request->user()){
+            return response()->json(['message' => 'Not authorized'], 403);
+        }
+
+        $isTheOwner = $comment->user_id == $request->user()->id;
+        $isVerified = $request->user()->hasVerifiedEmail();
+
+        if($isTheOwner && $isVerified){
             $comment->delete();
             return response()->json(['message' => 'El comentario ha sido borrado'], 200);
         }
         
         $isUserObjectiveMember = $request->user()->isMemberObjective($report->objective->id);
-        if($isUserObjectiveMember){
+        if($isUserObjectiveMember  && $isVerified){
+            Log::channel('mysql')->info("[{$request->user()->fullname}] (Miembro del equipo) ha eliminado la respuesta de [{$comment->user->fullname}] hecho en un comentario del reporte [{$report->title}], de la meta [{$report->goal->title}] del objetivo [{$report->objective->title}]", [
+                'report_id' => $report->id,
+                'report_title' => $report->title,
+                'goal_id' => $report->goal->id,
+                'goal_title' => $report->goal->title,
+                'objective_id' => $report->objective->id,
+                'objective_title' => $report->objective->title,
+                'comment_id' => $comment->id,
+                'comment_parent_id' => $comment->parent_id,
+                'comment_author_id' => $comment->user->id,
+                'comment_author_fullname' => $comment->user->fullname,
+                'comment_author_email' => $comment->user->email,
+                'user_id' => $request->user()->id,
+                'user_fullname' => $request->user()->fullname,
+                'user_email' => $request->user()->email
+            ]);
             $comment->delete();
             return response()->json(['message' => 'El comentario ha sido borrado'], 200);
         }
         
+        $isUserAdmin = $request->user()->hasRole('admin');
+        if($isUserAdmin && $isVerified){
+            $comment->delete();
+             Log::channel('mysql')->info("[{$request->user()->fullname}] (Admin) ha eliminado la respuesta de [{$comment->user->fullname}] hecho en un comentario del reporte [{$report->title}], de la meta [{$report->goal->title}] del objetivo [{$report->objective->title}] ", [
+                'report_id' => $report->id,
+                'report_title' => $report->title,
+                'goal_id' => $report->goal->id,
+                'goal_title' => $report->goal->title,
+                'objective_id' => $report->objective->id,
+                'objective_title' => $report->objective->title,
+                'comment_id' => $comment->id,
+                'comment_parent_id' => $comment->parent_id,
+                'comment_author_id' => $comment->user->id,
+                'comment_author_fullname' => $comment->user->fullname,
+                'comment_author_email' => $comment->user->email,
+                'user_id' => $request->user()->id,
+                'user_fullname' => $request->user()->fullname,
+                'user_email' => $request->user()->email
+            ]);
+            return response()->json(['message' => 'El comentario ha sido borrado'], 200);
+        }
+
         // Not the author and not a member of the objective
         
         return response()->json(['message' => 'Not authorized'], 403);

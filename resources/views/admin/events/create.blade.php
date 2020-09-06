@@ -17,17 +17,18 @@
   <form method="POST" action="{{ route('admin.events.create.form') }}" enctype="multipart/form-data">
     @csrf
     <div class="form-group">
-      <label class="is-700">Título del evento</label>
-      <input type="text" class="form-control" name="title" value="{{old('title')}}" placeholder="Ingrese aquí...">
+      <label>Título del evento</label>
+      <input type="text" class="form-control" name="title" value="{{old('title')}}" placeholder="Ingrese aquí..." maxlength="550">
+      <small class="form-text text-muted">Hasta 550 caracteres.</small>
     </div>
     <div class="form-group">
-      <label class="is-700">Descripción del evento</label>
+      <label>Descripción del evento</label>
       <textarea name="content" class="form-control" rows="4" placeholder="Ingrese aquí...">{{old('content')}}</textarea>
     </div>
     <div class="form-group">
       <div class="form-row">
         <div class="col-sm-4">
-          <label class="is-700">Dia del evento</label>
+          <label>Dia del evento</label>
           <div class="input-group">
             <div class="input-group-prepend">
               <span class="input-group-text">Dia</span>
@@ -36,7 +37,7 @@
           </div>
         </div>
         <div class="col-sm-4">
-          <label class="is-700">Hora</label>
+          <label>Hora</label>
           <div class="input-group">
             <select name="hour"  class="custom-select">
               @for ($i = 0; $i < 24; $i++)
@@ -49,7 +50,7 @@
           </div>
         </div>
         <div class="col-sm-4">
-          <label class="is-700">Minutos</label>
+          <label>Minutos</label>
           <div class="input-group">
             <select name="minute" class="custom-select">
               @for ($i = 0; $i < 60; $i += 5)
@@ -65,15 +66,15 @@
       <small class="form-text text-muted">Fecha en que ocurre el reporte. Elija el dia, la hora y minuto del mismo</small>
     </div>
     <div class="form-group">
-      <label class="is-700">Dirección</label>
+      <label>Dirección</label>
       <input type="text" class="form-control" name="address" placeholder="Ingrese aquí...">
     </div>
      <div class="form-group">
-      <label class="is-700">Links asociados</label>
+      <label>Links asociados</label>
       <input-urls name="urls"></input-urls>
     </div>
     <div class="form-group">
-				<label class="is-700">Album de fotos</label>
+				<label>Album de fotos</label>
 				<p class="form-text text-muted">Las fotos se verán en formato de album. En el reporte, tendran su previsualización. Ingrese solamente archivos en formato .JPG, .JPEG o .PNG, </p>
 				<input-file name="photos[]" multiple accept="image/*"></input-file>
 			</div>
@@ -97,7 +98,7 @@
       <small class="form-text text-muted">Se le enviará una notificación por email (si lo tienen habilitado) y por sistema a los suscriptores de los objetivos seleccionados, de la creacion del evento invitandolos a verla.</small>
     </div>
     <br>
-    <button type="submit" class="btn btn-primary">Crear evento</button>
+    <button type="submit" class="btn btn-primary">Crear</button>
   </form>
 </section>
 

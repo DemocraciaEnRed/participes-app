@@ -5,7 +5,6 @@
 <section>
   <h3 class="is-700">Album de fotos</h3>
   <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe culpa odio cumque eaque fuga dolor beatae ullam, voluptate corrupti quam facere quisquam a dolore rerum atque molestiae qui minus nam!</p>
-   <hr>
   <h5 class="font-weight-bold"><i class="fas fa-upload"></i> Nueva imagen</h5>
   <p>Debe ser una imagen JPG o JPEG , hasta 8 MB. Si el ancho de la imagen es mayor a 1366px, sera ajustada a este
     tamaño.</p>  
@@ -17,17 +16,17 @@
     </div>
   </form>
   <hr>
-  @forelse($photos as $photo)
-  <p class="d-inline"><a href="{{asset($photo->path)}}" target="_blank"><img src="{{asset($photo->thumbnail_path)}}" height="120" class="img rounded mb-1" alt=""></a></p>
-  @empty
-  <div class="card mb-3 shadow-sm">
-    <div class="card-body">
-        <div class="text-center">
-          <h6 class="card-title">No hay fotos cargadas en el album</h4>
-          <p class="mb-0"> Puede subir una nueva foto en el campo superior <i class="fas fa-arrow-up"></i></p>
-        </div>
-    </div>
+ @forelse($report->photos as $photo)
+  <div class="d-inline-block mr-2 my-1">
+    <a href="{{asset($photo->path)}}" target="_blank"><img src="{{asset($photo->thumbnail_path)}}" height="80" class="img rounded mb-1 align-top" alt=""></a> 
+    <a class="is-clickable text-danger" onclick="event.preventDefault();document.getElementById('delete-photo-{{$photo->id}}').submit();"><i class="fas fa-times fa-lg fa-fw"></i></a>
+    <form id="delete-photo-{{$photo->id}}" action="{{route('objectives.manage.goals.reports.album.delete.form',['objectiveId' => $objective->id, 'goalId' => $goal->id, 'reportId' => $report->id, 'pictureId' => $photo->id]) }}" method="POST" style="display: none;">
+        @method('DELETE')
+        @csrf
+    </form>
   </div>
+  @empty
+  <p class="text-muted">No hay fotos cargadas en el evento</p>
   @endforelse
   {{ $photos->links() }}
 </section>

@@ -36,7 +36,6 @@ class EditReport extends Notification implements ShouldQueue
     public function viaQueues()
     {
         return [
-            'mail' => 'mailer',
             'database' => 'default',
         ];
     }
@@ -64,25 +63,6 @@ class EditReport extends Notification implements ShouldQueue
         return explode(',',$notifiable->notification_preferences);   
     }   
 
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
-    public function toMail($notifiable)
-    {   
-        
-        $url = route('reports.index',['reportId' => $this->report->id]);
-        return (new MailMessage)
-              ->subject('Han editado un reporte que sigues en Participes')
-              ->greeting('¡Hola!')
-              ->line("Acaban de editar el reporte \"{$this->report->title}\" de la meta \"{$this->goal->title}\" del objetivo \"{$this->objective->title}\". ¡Te invitamos a que lo releas!")
-              ->action('Ver reporte', $url)
-              ->line('PD: Te llegan estas notificaciones porque estas suscripto a las notificaciones del objetivo.');
-    }
-
-
 
     /**
      * Get the database representation of the notification.
@@ -93,7 +73,7 @@ class EditReport extends Notification implements ShouldQueue
     public function toDatabase($notifiable)
     {
         return [
-            'type' => 'new-report',
+            'type' => 'edit-report',
             'objective' => [
                 'id' => $this->objective->id,
                 'title' => $this->objective->title
@@ -105,7 +85,9 @@ class EditReport extends Notification implements ShouldQueue
             'report' => [
                 'id' => $this->report->id,
                 'title' => $this->report->title,
-                'type' => $this->report->type
+                'type' => $this->report->type,
+                'icon' => $this->report->type_icon,
+                'label' => $this->report->type_label
             ]
         ];
     }

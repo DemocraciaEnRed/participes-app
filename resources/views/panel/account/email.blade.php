@@ -4,7 +4,7 @@
 
 <section>
 <h3 class="is-700">Cambiar mi email</h3>
-<p class="lead">Si querés modificar tu dirección de email, podés confirmarla acá abajo:</p>
+<p class="lead">Si querés modificar tu dirección de email, podés hacerlo completando los siguientes campos:</p>
 <hr>
    @if ($errors->any())
     <div class="alert alert-danger">
@@ -21,9 +21,19 @@
         @method('PUT')
         @csrf
         <div class="form-group">
-          <label for="current_password">Nuevo email</label>
-          <input type="email" class="form-control" name="email" id="current_password">
-          <small class="form-text text-muted">La proxima vez que ingrese, debera verificar su cuenta.</small>
+          <label><b>Ingrese el email actual</b></label>
+          <input type="email" class="form-control" name="old_email">
+          <small class="form-text text-muted">Este es el email que usa actualmente para iniciar sesión, y que dejará de usar.</small>
+        </div>
+        <div class="form-group">
+          <label><b>Ingrese su nuevo email</b></label>
+          <input type="email" class="form-control" name="new_email">
+          <small class="form-text text-muted">El nuevo email que usará para iniciar sesión. Asi mismo, debera verificar este email.</small>
+        </div>
+        <div class="form-group">
+          <label><b>Ingrese su contraseña</b><span class="text-danger">*</span></label>
+          <input type="password" class="form-control" name="password">
+          <small class="form-text text-muted">Complete con su contraseña</small>
         </div>
         <button class="btn btn-primary">Guardar</button>
        </form>

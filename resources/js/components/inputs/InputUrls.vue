@@ -6,7 +6,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">Etiqueta</span>
           </div>
-          <input type="text"  class="form-control" v-model="inputLabel" @keyup.enter="addUrl">
+          <input type="text"  class="form-control" v-model="inputLabel">
         </div>
         
       </div>
@@ -15,7 +15,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">https://</span>
           </div>
-          <input type="text" class="form-control" v-model="inputUrl" @keyup.enter="addUrl">
+          <input type="text" class="form-control" v-model="inputUrl">
         </div>
       </div>
       <div class="col-auto">
@@ -23,7 +23,6 @@
       </div>
     </div>
     <input type="hidden" :name="`${name}[${label}]`" v-for="(url,label,i) in urlList" :key="`tag${i}`" :value="url">
-    <small class="form-text text-muted mt-2">Escriba su tag y presione <kbd>ENTER</kbd></small>
     <div class="url-list mt-3 mb-3">
     <span class="url badge badge-primary" v-for="(url,label,i) in urlList" :key="`url${i}`">
       <span><i class="fas fa-link"></i>&nbsp;<a :href="url" class="text-white" target="_blank">{{label}}</a></span>

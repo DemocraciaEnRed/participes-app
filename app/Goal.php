@@ -14,18 +14,14 @@ class Goal extends Model
     public $timestamps = true; // if the model should be timestamped.
     protected $appends = ['progress_percentage','status_label'];
 
-    public function author()
-    {
-        return $this->belongsTo('App\User', 'author_id');
-    }
-
     public function objective()
     {
         return $this->belongsTo('App\Objective');
     }
+    
     public function milestones()
     {
-        return $this->hasMany('App\Milestone','goal_id');
+        return $this->hasMany('App\Milestone','goal_id')->orderBy('order','ASC');
     }
 
     public function reports()

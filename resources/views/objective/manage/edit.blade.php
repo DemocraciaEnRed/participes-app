@@ -25,27 +25,27 @@
     @method('PUT')
     @csrf
     <div class="form-group">
-      <label class="is-700">Titulo del objetivo</label>
+      <label>Titulo del objetivo</label>
       <input type="text" class="form-control" name="title" value="{{$objective->title}}" placeholder="Ingrese un nombre">
     </div>
     <div class="form-group">
-      <label class="is-700">Descripción del objetivo</label>
+      <label>Descripción del objetivo</label>
       <textarea name="content" class="form-control" rows="4">{{$objective->content}}</textarea>
     </div>
     <div class="form-group">
-      <label class="is-700">Categoria del objetivo</label>
+      <label>Categoria del objetivo</label>
       <select class="custom-select" name="category">
         @foreach ($categories as $category)
-        <option value="{{$category->id}}" {{$category->id == $objective->id ? 'selected' : null}}>{{$category->title}}</option>
+        <option value="{{$category->id}}" {{$category->id == $objective->category->id ? 'selected' : null}}>{{$category->title}}</option>
         @endforeach
       </select>
     </div>
     <div class="form-group">
-      <label class="is-700">Tags</label>
+      <label>Tags</label>
       <input-tags name="tags" :tags='@json($objective->tags)'></input-tags>
     </div>
     <div class="form-group">
-      <label class="is-700">Organizaciones relacionadas con el objetivo</label>
+      <label>Organizaciones relacionadas con el objetivo</label>
       <div>
         @foreach($organizations as $organization)
           <div class="custom-control custom-checkbox form-check-inline">
@@ -74,7 +74,7 @@
   </form>
   @else
   <div class="alert alert-warning" role="alert">
-    No puede crear objetivos sin categorias. Debe ir al panel de <a href="{{ route('admin.categories') }}">Categorias</a>
+    No puede crear objetivos sin categorías. Debe ir al panel de <a href="{{ route('admin.categories') }}">Categorías</a>
   </div>
   @endif
 </section>

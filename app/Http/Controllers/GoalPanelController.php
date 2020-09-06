@@ -6,6 +6,8 @@ use Image;
 use Storage;
 use Str;
 use Log;
+use Excel;
+use Carbon\Carbon;
 use App\Category;
 use App\Organization;
 use App\Role;
@@ -16,8 +18,11 @@ use App\Objective;
 use App\Goal;
 use App\Milestone;
 use App\Report;
+use App\Exports\GoalReportsExport;
 use App\Notifications\NewReport;
+use App\Notifications\NewGoal;
 use App\Notifications\EditGoal;
+use App\Notifications\DeleteGoal;
 use App\Rules\MatchOldPassword;
 use Illuminate\Http\Request;
 
@@ -32,6 +37,7 @@ class GoalPanelController extends Controller
     {
         // Forces to be authenticated.
         $this->middleware('auth');
+        $this->middleware('verified');
         $this->middleware('fetch_objective');
         $this->middleware('goal_belongs_objective');
         $this->middleware('fetch_goal');
@@ -82,9 +88,20 @@ class GoalPanelController extends Controller
       $goal->save();
       $request->objective->touch();
       
-      $notifySubscriber = $request->boolean('notify');
-      if(!$request->objective->hidden && $notifySubscriber){
-        Notification::locale('es')->send($request->objective->subscribers, new EditGoal($request->objective, $goal));
+      Log::channel('mysql')->info("[{$request->user()->fullname}] ha editado la meta [{$goal->title}] del objetivo [{$request->objective->title}]", [
+        'objective_id' => $request->objective->id,
+        'objective_title' => $request->objective->title,
+        'goal_id' => $goal->id,
+        'goal_title' => $goal->title,
+        'user_id' => $request->user()->id,
+        'user_fullname' => $request->user()->fullname,
+        'user_email' => $request->user()->email
+        ]);
+
+
+      $notifySubscribers = $request->boolean('notify');
+      if(!$request->objective->hidden && $notifySubscribers){
+        Notification::send($request->objective->subscribers, new EditGoal($request->objective, $goal));
       }
 
       return redirect()->route('objectives.manage.goals.index', ['objectiveId' => $request->objective->id, 'goalId' => $goal->id])->with('success','La meta ha sido editada correctamente');
@@ -121,13 +138,80 @@ class GoalPanelController extends Controller
       $milestone->goal()->associate($goal);
       $milestone->save();
       
-      return redirect()->route('objectives.manage.goals.milestones', ['objectiveId' => $request->objective->id, 'goalId' => $goal->id])->with('success','Hito creado');
+      return redirect()->route('objectives.manage.goals.milestones', ['objectiveId' => $request->objective->id, 'goalId' => $goal->id])->with('success','El hito ha sido creado');
+    }
+
+    public function viewEditGoalMilestone(Request $request, $objectiveId, $goalId, $milestoneId){
+      $this->hasManagerPrivileges($request);
+      $milestone = Milestone::findorfail($milestoneId);
+
+      return view('objective.manage.goals.milestones.edit',['objective' => $request->objective, 'goal' => $request->goal, 'milestone' => $milestone]);
+    }
+
+    public function formEditGoalMilestone(Request $request, $objectiveId, $goalId, $milestoneId){
+      $this->hasManagerPrivileges($request);
+
+      $rules = [
+        'title' => 'required|string|max:550',
+        'order' => 'required|numeric|min:1'
+      ];
+
+      $request->validate($rules);
+
+      $milestone = Milestone::findorfail($milestoneId);
+      $milestone->title = $request->input('title');
+      $milestone->order = $request->input('order');
+      $milestone->save();
+      
+      return redirect()->route('objectives.manage.goals.milestones', ['objectiveId' => $request->objective->id, 'goalId' => $request->goal->id])->with('success','El hito ha sido actualizado');
+    }
+
+    public function viewDeleteGoalMilestone(Request $request, $objectiveId, $goalId, $milestoneId){
+      $this->hasManagerPrivileges($request);
+      $milestone = Milestone::findorfail($milestoneId);
+
+      if(!is_null($milestone->completed)){
+        return redirect()->route('objectives.manage.goals.milestones', ['objectiveId' => $request->objective->id, 'goalId' => $request->goal->id])->with('warning','No puede eliminar un objetivo sin antes eliminar el reporte que informa que se ha completado el hito');
+      }
+      return view('objective.manage.goals.milestones.delete',['objective' => $request->objective, 'goal' => $request->goal, 'milestone' => $milestone]);
+    }
+
+    public function formDeleteGoalMilestone(Request $request, $objectiveId, $goalId, $milestoneId){
+      $this->hasManagerPrivileges($request);
+
+      $rules = [
+        'password' =>  ['required', new MatchOldPassword],
+      ];
+
+      $request->validate($rules);
+      $milestone = Milestone::findorfail($milestoneId);
+
+      Log::channel('mysql')->info("[{$request->user()->fullname}] ha eliminado el hito [{$milestone->title}] de la meta [{$request->goal->title}] del objetivo [{$request->objective->title}]", [
+        'objective_id' => $request->objective->id,
+        'objective_title' => $request->objective->title,
+        'goal_id' => $request->goal->id,
+        'goal_title' => $request->goal->title,
+        'milestone' => $milestone->id,
+        'milestone_title' => $milestone->title,
+        'user_id' => $request->user()->id,
+        'user_fullname' => $request->user()->fullname,
+        'user_email' => $request->user()->email
+        ]);
+
+      $milestone->delete();
+      
+      return redirect()->route('objectives.manage.goals.milestones', ['objectiveId' => $request->objective->id, 'goalId' => $request->goal->id])->with('success','El hito ha sido eliminado');
     }
 
     public function viewListGoalReports(Request $request, $objectiveId, $goalId){
       $goal = $request->goal;
       $reports = Report::where('goal_id',$goalId)->orderBy('date','DESC')->paginate(10);
       return view('objective.manage.goals.reports.list',['objective' => $request->objective, 'goal' => $request->goal, 'reports' => $reports]);
+    }
+
+    public function downloadListGoalReports(Request $request, $objectiveId, $goalId){
+      $this->hasManagerPrivileges($request);
+      return Excel::download(new GoalReportsExport($goalId), Carbon::now()->format('Ymd').'-reportes-meta-'.$goalId.'-objetivo-'.$objectiveId.'.xlsx');
     }
 
     public function viewNewGoalReport(Request $request, $objectiveId, $goalId){
@@ -256,9 +340,21 @@ class GoalPanelController extends Controller
         }
       }
 
+      Log::channel('mysql')->info("[{$request->user()->fullname}] ha creado un reporte [{$report->title}] de la meta [{$request->goal->title}] del objetivo [{$request->objective->title}]", [
+        'objective_id' => $request->objective->id,
+        'objective_title' => $request->objective->title,
+        'goal_id' => $request->goal->id,
+        'goal_title' => $request->goal->title,
+        'report_id' => $report->id,
+        'report_title' => $report->title,
+        'user_id' => $request->user()->id,
+        'user_fullname' => $request->user()->fullname,
+        'user_email' => $request->user()->email
+        ]);
+
       // Notify
       if(!$request->objective->hidden){
-        Notification::locale('es')->send($request->objective->subscribers, new NewReport($request->objective, $goal, $report));
+        Notification::send($request->objective->subscribers, new NewReport($request->objective, $goal, $report));
       }
       
       return redirect()->route('objectives.manage.goals.reports.index', ['objectiveId' => $request->objective->id, 'goalId' => $goal->id,'reportId' => $report->id])->with('success','El reporte fue creado con exito');
@@ -278,14 +374,14 @@ class GoalPanelController extends Controller
 
       $request->validate($rules);
 
-      Log::channel('mysql')->debug("{$request->user()->fullname} ha eliminado la meta {$request->goal->title} del objetivo {$request->objective->title}", [
-        'objective' => $request->objective->id,
+      Log::channel('mysql')->info("[{$request->user()->fullname}] ha eliminado la meta [{$request->goal->title}] del objetivo [{$request->objective->title}]", [
+        'objective_id' => $request->objective->id,
         'objective_title' => $request->objective->title,
         'goal_title' => $request->goal->id,
         'goal_title' => $request->goal->title,
         'user_id' => $request->user()->id,
         'user_fullname' => $request->user()->fullname,
-        'email' => $request->user()->email
+        'user_email' => $request->user()->email
         ]);
 
       $reports = $request->goal->reports;
@@ -293,11 +389,12 @@ class GoalPanelController extends Controller
         $report->delete();
       }
       $request->goal->delete();
-      // Notify
-      // $notifySubscriber = $request->boolean('notify');
-      // if(!$request->objective->hidden && $notifySubscriber){
-      //   Notification::locale('es')->send($request->objective->subscribers, new EditReport($request->objective, $request->goal, $report));
-      // }
+      
+      //Notify
+      $notifySubscribers = $request->boolean('notify');
+      if(!$request->objective->hidden && $notifySubscribers){
+        Notification::send($request->objective->subscribers, new DeleteGoal($request->objective, $request->goal));
+      }
 
 
       return redirect()->route('objectives.manage.index', ['objectiveId' => $request->objective->id])->with('success','Meta eliminada correctamente');

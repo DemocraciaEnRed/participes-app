@@ -4,7 +4,7 @@
 <div class="container push-to-header">
   @if($objective->hidden)
   <div class="alert alert-info">
-    <i class="fas fa-info-circle"></i>&nbsp;Nota: El objetivo se encuentra <b>oculto</b>
+    <i class="fas fa-info-circle"></i>&nbsp;Nota: El objetivo se encuentra <b>oculto</b>. <a href="{{route('objectives.manage.configuration', ['objectiveId' => $objective->id]) }}">Cambiar<i class="fas fa-arrow-right fa-fw"></i></a>
   </div>
   @endif
   <div class="row">

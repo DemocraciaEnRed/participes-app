@@ -14,6 +14,7 @@
       <p class="text-muted text-smaller my-1">{{Str::limit($event->content, 200, $end=' [...]')}}</p>
       <div class="text-right">
       <a href="{{route('admin.events.edit',['eventId' => $event->id])}}" class="btn btn-link btn-sm"><i class="fas fa-edit fa-fw"></i>Editar</a>
+      <a href="{{route('admin.events.delete',['eventId' => $event->id])}}" class="btn btn-link btn-sm"><i class="fas fa-trash fa-fw"></i>Eliminar</a>
       </div>
     </div>
   </div>

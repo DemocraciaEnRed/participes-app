@@ -12,7 +12,7 @@
 
 @section('content')
 	@if ($event->photos->count() > 0)	
-  <div class="app-portal-header has-background-image" style="background-image: url('{{asset($event->photos[0]->thumbnail_path)}}')">
+  <div class="app-portal-header has-background-image" style="background-image: url('{{asset($event->photos[0]->path)}}')">
   @else
   <div class="app-portal-header">
   @endif
@@ -25,6 +25,11 @@
         <span class="text-white h2 is-700 mb-0">
           {{$event->title}}
         </span>
+        @hasRole('admin')
+        <div class="mt-3">
+          <a href="{{route('admin.events.edit',['eventId'=> $event->id])}}" class="btn btn-secondary"><i class="fas fa-edit"></i> Editar</a>
+        </div>
+        @endhasRole
       </div>
     </div>
   </div>
@@ -47,19 +52,23 @@
       </div>
       <div class="card my-3 p-4">
         <div class="card-body">
-          <div class="row">
-            <div class="col text-center">
+          <div class="row mb-3">
+            <div class="col">
               <h5 class="is-700">Fecha</h5>
               <h3 class="text-primary is-400">@justdate($event->date)</h3>
             </div>
-            <div class="col text-center">
+            <div class="col">
               <h5 class="is-700">Hora</h5>
               <h3 class="text-primary is-400">@justtime($event->date)</h3>
             </div>
           </div>
+          <div class="">
+          <h5 class="is-700">Dirección</h5>
+              <h5 class="text-primary is-400">{{$event->address}}</h5>
+          </div>
         </div>
       </div>
-          <a class="btn btn-block btn-primary btn-lg my-3" href="https://calendar.google.com/calendar/r/eventedit?action=TEMPLATE&text={{$titleEncode}}&details={{$descriptionEncode}}&location={{$locationEncode}}&dates={{$start}}/{{$end}}&ctz={{$ctz}}">
+          <a class="btn btn-block btn-primary btn-lg my-3" target="_blank" href="https://calendar.google.com/calendar/r/eventedit?action=TEMPLATE&text={{$titleEncode}}&details={{$descriptionEncode}}&location={{$locationEncode}}&dates={{$start}}/{{$end}}&ctz={{$ctz}}">
           <i class="fab fa-google fa-fw"></i><i class="fas fa-calendar-plus fa-fw"></i> Agregar a Google Calendar</a>
       @include('portal.events.album')
       @include('portal.events.objectives')

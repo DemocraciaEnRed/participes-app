@@ -7,7 +7,7 @@
 </section>
 <hr>
 <section id="quienes-somos" class="py-4">
-<h4 class="is-600 mb-4">¿Quíenes somos Partícipes Rosario?</h4>
+<h4 class="is-600 mb-4">¿Quíenes somos Partícipes?</h4>
 <p>Somos una red de organizaciones que creemos en la importancia de un gobierno abierto. Es por eso que relevamos políticas públicas en nuestra ciudad, apoyados en reportes constantes y organizados.</p>
 </section>
 <hr>

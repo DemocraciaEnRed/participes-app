@@ -1,38 +1,41 @@
 <template>
   <div class="card rounded shadow-sm objective-card">
     <div class="card-body">
-      <div class="d-flex align-items-center is-clickable" @click="showMore = !showMore">
-        <div class="mr-4 category-icon-container" :style="`background-color: ${objective.category.background_color}`">
-          <i class="fa-lg fa-fw" :class="objective.category.icon" :style="`color: ${objective.category.color}`"></i>
+      <div class="d-flex align-items-center flex-column flex-sm-row is-clickable" @click="showMore = !showMore">
+        <div class="d-flex align-items-center mb-3 mb-sm-0 w-100">
+          <div class="mr-4 category-icon-container" :style="`background-color: ${objective.category.background_color}`">
+            <i class="fa-lg fa-fw" :class="objective.category.icon" :style="`color: ${objective.category.color}`"></i>
+          </div>
+          <div class="w-100">
+            <span class="text-smallest" :style="`color:${objective.category.color}`">{{objective.category.title}}</span><br>
+            <span class="text-dark h5 is-700">{{objective.title}}</span>
+          </div>
         </div>
-        <div class="w-100">
-          <span class="text-smallest" :style="`color:${objective.category.color}`">{{objective.category.title}}</span><br>
-          <span class="text-dark is-700">{{objective.title}}</span>
+        <div class="d-flex align-items-center w-auto">
+          <div class="mx-1 d-flex">
+            <div class="text-center mx-2">
+              <span class="is-700 is-size-5"><i class="fas fa-medal fa-fw text-primary"></i>{{objective.goals_count}}</span><br><span class="text-smaller">metas</span>
+            </div>
+            <div class="mx-2">
+            <goals-doughnut :chartData="chartData" :styles="chartStyle"></goals-doughnut>
+            </div>
+            <div class="text-center mx-2">
+              <span class="is-700 is-size-5"><i class="far fa-file fa-fw text-primary"></i>{{objective.reports_count}}</span><br><span class="text-smaller">reportes</span>
+            </div>
           </div>
-        <div class="mx-1 d-flex">
-          <div class="text-center mx-2">
-            <span class="is-700 is-size-5"><i class="far fa-file fa-fw text-primary"></i>{{objective.reports_count}}</span><br><span class="text-smaller">reportes</span>
+          <div class="ml-1">
+            <span class="text-primary"><i class="fas fa-lg fa-fw" :class="{'fa-chevron-up': showMore, 'fa-chevron-down': !showMore}"></i></span>
           </div>
-          <div class="mx-2">
-          <goals-doughnut :chartData="chartData" :styles="chartStyle"></goals-doughnut>
-          </div>
-          <div class="text-center mx-2">
-            <span class="is-700 is-size-5"><i class="fas fa-medal fa-fw text-primary"></i>{{objective.goals_count}}</span><br><span class="text-smaller">metas</span>
-          </div>
-
-        </div>
-        <div class="ml-1">
-          <span class="text-primary"><i class="fas fa-lg fa-fw" :class="{'fa-chevron-up': showMore, 'fa-chevron-down': !showMore}"></i></span>
         </div>
       </div>
       <div v-if="showMore">
         <hr>
         <div class="row my-2">
           <div class="col-md-6 col-lg-8">
-            <b>Últimas metas</b>
+            <b>Últimas metas actualizadas</b>
             <div class="my-1 d-flex justify-content-between align-items-center goal-container" v-for="goal in objective.latest_goals" :key="`goals_${goal.id}`">
-              <span class="text-truncate w-100"><a :href="goal.url" class="text-dark">{{goal.title}}</a></span>
-              <div class="progress my-0 mx-1'" style="height: 10px; width: 150px">
+              <span class="text-truncate w-100"><a :href="goal.url" class="text-dark">{{goal.title}}</a> <span :class="`text-${goal.status} text-smallest is-700`">({{goal.status_label}})</span></span>
+              <div class="progress my-0 mx-1'" style="height: 10px; width: 150px" :title="goal.status_label">
                 <div class="progress-bar" :class="`bg-${goal.status}`" role="progressbar" :style="`width:${goal.progress_percentage}%`" :aria-valuenow="goal.progress_percentage" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
               <span class="goal-percentage text-smallest is-700 ml-1">{{goal.progress_percentage}}%</span>
@@ -42,7 +45,7 @@
             <b>Últimos reportes</b>
             <div class="my-1 d-flex justify-content-between align-items-center report-container" v-for="report in objective.latest_reports" :key="`reports_${report.id}`">
               <span class="text-truncate w-100"><i class="far fa-file text-primary"></i>&nbsp;<a :href="report.url" class="text-dark w-100">&nbsp;{{report.title}}</a></span>
-              <span class="report-icon text-smaller ml-1"><i :class="`fas ${getReportIcon(report.type)} text-primary`"></i></span>
+              <span class="report-icon text-smaller ml-1" :title="report.type_label"><i :class="`${report.type_icon} text-primary`"></i></span>
             </div>  
           </div>
         </div>
@@ -108,6 +111,8 @@ export default {
        text-align: center;
     }
   }
-
+  .progress:hover, .report-icon:hover{
+    cursor: help;
+  }
 }
 </style>

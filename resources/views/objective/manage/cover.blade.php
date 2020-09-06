@@ -5,7 +5,6 @@
 <section>
   <h1 class="">Imagen de portada</h1>
   <p>Podés seleccionar una imagen desde tu computadora, para agregarla como portada del objetivo</p>
-  <hr>
   <h5 class="font-weight-bold"><i class="fas fa-upload"></i> Nueva imagen</h5>
   <p>Debe ser una imagen JPG o JPEG , hasta 8 MB. Si el ancho de la imagen es mayor a 1366px, sera ajustada a este
     tamaño.</p>

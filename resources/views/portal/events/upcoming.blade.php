@@ -3,7 +3,7 @@
 @section('content')
 @include('portal.events.header')
 <div id="calendarList">
-	@foreach($events as $event)
+	@forelse($events as $event)
 	@if($loop->odd)
 	<div class="layout-one container">
 		<div class="row justify-content-center align-items-center flex-column-reverse flex-md-row">
@@ -60,7 +60,12 @@
 		</div>
 	</div>
 	@endif
-	@endforeach
+	@empty
+	<div class="pt-5">
+		<p class="text-center mb-1"><i class="far fa-surprise fa-2x"></i></p>
+		<p class="text-center">No hay próximos eventos anunciados</p>
+	</div>
+	@endforelse
 </div>
 <div class="container">
 		{{$events->links()}}

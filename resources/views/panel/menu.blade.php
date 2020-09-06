@@ -22,5 +22,5 @@ $countUnreadNotifications = count(Auth::user()->unreadNotifications)
 <a href="{{route('panel.account.email') }}" class="item-link {{ $currentRoute == 'panel.account.email' ? 'is-active' : null }}">Cambiar mi email</a>
 <a href="{{route('panel.account.avatar') }}" class="item-link {{ $currentRoute == 'panel.account.avatar' ? 'is-active' : null }}">Cambiar mi avatar</a>
 <a href="{{route('panel.account.access') }}" class="item-link {{ $currentRoute == 'panel.account.access' ? 'is-active' : null }}">Cambiar contraseña</a>
-<a href="{{route('panel.account.notifications') }}" class="item-link {{ $currentRoute == 'panel.account.notifications' ? 'is-active' : null }}">Preferencias de envio</a>
+<a href="{{route('panel.account.notifications') }}" class="item-link {{ $currentRoute == 'panel.account.notifications' ? 'is-active' : null }}">Preferencias de envío</a>
 </div>

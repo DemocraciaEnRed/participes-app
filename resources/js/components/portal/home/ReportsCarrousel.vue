@@ -1,6 +1,8 @@
 <template>
   <div class="section" v-if="!isLoading">
-    <swiper ref="mySwiper" :options="swiperOptions" v-if="reports.length > 0">
+    <div class="d-flex align-items-center" v-if="reports.length > 0">
+      <div class="is-clickable" @click="previousSlide"><i class="fas fa-chevron-left fa-2x text-primary pr-3"></i></div>
+    <swiper ref="mySwiper" :options="swiperOptions" class="w-100">
       <swiper-slide  v-for="report in reports" :key="`report-${report.id}`">
         <div class="report-card-carrousel card shadow-sm">
           <div class="card-body d-flex align-start flex-column">
@@ -22,9 +24,11 @@
       </swiper-slide>
       <div class="swiper-pagination" slot="pagination"></div>
     </swiper>
+      <div class="is-clickable" @click="nextSlide"><i class="fas fa-chevron-right fa-2x text-primary pl-3"></i></div>
+    </div>
     <section class="p-5 text-center" v-else>
-        <i class="fas fa-info-circle"></i>&nbsp; No hay reportes cargados en la plataforma
-      </section>
+      <i class="fas fa-info-circle"></i>&nbsp; No hay reportes cargados en la plataforma
+    </section>
   </div>
   <section class="p-5 text-center" v-else>
     <i class="fas fa-sync fa-spin"></i> Cargando...
@@ -106,6 +110,12 @@ export default {
       .finally( () => {
         this.isLoading = false
       })
+    },
+    previousSlide: function(){
+      this.$refs.mySwiper.$swiper.slidePrev()
+    },
+    nextSlide: function(){
+      this.$refs.mySwiper.$swiper.slideNext()
     },
     getDate: function(date){
       let theDate = new Date(date);

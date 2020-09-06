@@ -109,18 +109,10 @@ class ObjectiveController extends Controller
         $countGoalsOngoin = Goal::where('objective_id',$objectiveId)->where('status','ongoing')->count();
         $countGoalsDelayed = Goal::where('objective_id',$objectiveId)->where('status','delayed')->count();
         $countGoalsInactive = Goal::where('objective_id',$objectiveId)->where('status','inactive')->count();
-        $countGoalsInactive = Goal::where('objective_id',$objectiveId)->where('status','inactive')->count();
         $reportsTotal =$objective->reports()->count(); 
         $filesTotal =$objective->files()->count(); 
         $subscribersTotal =$objective->subscribers()->count(); 
-        // $reportsTotal = Report::->where('objective_id',$objectiveId)->where('created_at','>=',Carbon::now()->subdays(15))->count();
-        // $reportsData = Report::->where('objective_id',$objectiveId)->where('created_at', '>=', Carbon::now()->subdays(15))
-        //                     ->groupBy(DB::raw('DATE(created_at)'))
-        //                     ->orderBy('date', 'ASC')
-        //                     ->get(array(
-        //                         DB::raw('DATE(created_at) as "date"'),
-        //                         DB::raw('COUNT(*) as "count"')
-        //                     ));
+
         return response()->json([
             'message' => 'Ok',
             'data' => [

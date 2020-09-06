@@ -6,6 +6,7 @@ use Artisan;
 use Hash;
 use Str;
 use App\User;
+use App\Event;
 use App\Role;
 use App\Objective;
 use Illuminate\Http\Request;
@@ -65,9 +66,12 @@ class MiscController extends Controller
 	public function testEmail(Request $request){
 
 		$objective = Objective::find(1);
-		$user = Objective::find(5);
+		$event = Event::find(1);
+		$user = User::find(5);
 
-    return (new App\Notifications\EditObjective($objective))
+    // return (new App\Notifications\EditObjective($objective))
+    //             ->toMail($user);
+    return (new App\Notifications\DeleteEvent($event))
                 ->toMail($user);
 	}
 

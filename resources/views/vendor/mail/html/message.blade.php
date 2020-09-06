@@ -23,7 +23,7 @@
 {{-- Footer --}}
 @slot('footer')
 @component('mail::footer')
-© {{ date('Y') }} {{ config('app.name') }}.<br>@lang('All rights reserved.').
+© {{ date('Y') }} {{ config('app.name') }}
 @endcomponent
 @endslot
 @endcomponent

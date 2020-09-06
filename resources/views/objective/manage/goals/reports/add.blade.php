@@ -4,7 +4,7 @@
 
 <section>
   <h3 class="is-700">Nuevo reporte</h3>
-  <p class="lead">Podés hacer reportes sobre la meta. Tené en cuenta que existen tres tipos: el de avance (implica un aumento en el valor del indicador), el de hito (implica el cumplimiento de un acontecimiento importante) y el de novedad (utilizado para contar noticias generales,  relacionadas a la meta)</p>
+  <p class="lead">Podés hacer reportes sobre la meta. Comenzá eligiendo el tipo de reporte, recordá que hay 3 tipos de reportes.</p>
   <hr>
   @if ($errors->any())
     <div class="alert alert-danger">

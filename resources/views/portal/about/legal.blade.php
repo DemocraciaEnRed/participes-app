@@ -1,8 +1,8 @@
 @extends('portal.about.master')
 
 @section('aboutContent')
-    <section id="terminos" class="py-4">
-    <h4 class="is-600 mb-5">Terminos y condiciones</h4>
+    <section id="términos" class="py-4">
+    <h4 class="is-600 mb-5">Términos y condiciones</h4>
     <h6 class="is-600 mb-3">Descripción</h5>
     <p>Los siguientes Términos y Condiciones regulan el uso de la Plataforma [Nombre de la plataforma] donde se brinda información sobre [Intención de la plataforma]</p>
     <p>El registro y uso de la plataforma por parte de los usuarios indica la aceptación absoluta de los Términos y Condiciones presentes y de la Política de Privacidad.</p>

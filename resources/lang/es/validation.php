@@ -185,5 +185,9 @@ return [
         'title'                 => 'título',
         'username'              => 'usuario',
         'year'                  => 'año',
+        'icon'                  => 'icono',
+        'progress'              => 'avance',
+        'category'              => 'categoria',
+        'organizations'         => 'organizaciones',
     ],
 ];

@@ -22,8 +22,10 @@
 					<i v-show="type == 'milestone'" class="mt-1 animate__animated animate__rubberBand fas fa-medal fa-2x fa-fw"></i>
 				</div>
 				<div>
-					<h5 class="">Un reporte de <span class="font-weight-bold">{{typeLabel}}</span></h5>
-					<strong>Aquí</strong> Iria una explicación de que significa esto.
+					<h5 class="">Acerca del reporte de <span class="font-weight-bold">{{typeLabel}}</span></h5>
+					<span v-show="type == 'post'">Un reporte el de novedad utilizado para contar noticias generales, relacionadas a la meta. Es el reporte mas simple. <b>Importante:</b> No utilice este tipo de reporte si quiere especificar que la meta progresa en su indicador o que se completo un hito.</span>
+					<span v-show="type == 'progress'">Un reporte de avance implica un aumento en el valor del indicador. Al realizar un reporte de avance, automaticamente la meta aumenta su valor de indicador especificado en el reporte.</span>
+					<span v-show="type == 'milestone'">Un reporte de hito implica que se ha cumplido uno de los hitos que han sido cargados en la meta. <b>Importante:</b> El hito que se completa debe haber sido cargado en la meta previamente. No puede crear un reporte de hito sin asociar el hito que se completa</span>
 				</div>
 			</div>
 			<div class="form-group">
@@ -43,7 +45,7 @@
       	<div class="col">
 					<div class="form-group">
 						<label>Fecha del reporte</label>
-						<input name="date" type="date" class="form-control" />
+						<input name="date" type="date" class="form-control" :value="today"/>
           	<small class="form-text text-muted">Fecha en que ocurre el reporte. No puede ser una fecha futura.</small>
 					</div>
 				</div>
@@ -58,7 +60,7 @@
 										<option v-if="goal.status != 'inactive'" value="inactive" >Inactiva</option>
 										<option v-if="goal.status != 'reached'" value="reached">Alcanzada</option>
 								</select>
-	          	<small class="form-text text-muted">Si el reporte indica un nuevo estado de la meta, puede definirlo aqui, si la meta no cambia su estado, puede dejarlo en "Mantener el estado"</small>
+	          	<small class="form-text text-muted">Si cambió el estado de la meta, actualizalo acá. En caso de que se mantenga, selecciona "mantener estado"</small>
 							</div>
           	<small class="form-text text-muted"></small>
 					</div>
@@ -113,7 +115,7 @@
 			<section v-if="type == 'milestone'">
 				<div class="form-group">
 					<label>¿En que fecha se alcanzó el hito?</label>
-						<input name="milestone_date" type="date" class="form-control" />
+						<input name="milestone_date" type="date" class="form-control" :value="today" />
           	<small class="form-text text-muted">Si la fecha en que el hito se alcanzó es distinta a la fecha del reporte, por favor, ingrese la fecha aquí. De no definirla, se define la fecha de hito alcanzado la misma fecha que el reporte.</small>
 				</div>
 				<div class="form-group">
@@ -137,7 +139,7 @@
 			<br>
 			<div class="form-group">
 				<input type="hidden" name="_token" :value="crsfToken" />
-				<button type="submit" class="btn btn-sm btn-primary">Crear reporte</button>
+				<button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Crear reporte</button>
 			</div>
 		</section>
   </form>
@@ -182,7 +184,7 @@ export default {
 				case 'ongoing':
 					return 'En progreso'
 				case 'delayed':
-					return 'No cumplidas'
+					return 'No cumplida'
 				case 'inactive':
 					return 'Inactiva'
 				case 'reached':
@@ -199,7 +201,21 @@ export default {
 		progressTotal: function(){
 			if(this.rangeInput <= 0) return this.progressNow
 			return (((this.goal.indicator_progress + this.rangeInput) / this.goal.indicator_goal)*100).toFixed()
-		}
+		},
+		today: function(){
+			var d = new Date(),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+			if (month.length < 2) 
+					month = '0' + month;
+			if (day.length < 2) 
+					day = '0' + day;
+
+			return [year, month, day].join('-');
+
+			}
 	},
   watch: {}
 };

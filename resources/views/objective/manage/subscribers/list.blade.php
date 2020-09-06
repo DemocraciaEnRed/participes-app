@@ -3,32 +3,38 @@
 @section('panelContent')
 
 <section>
-  <h1 class="">Subscriptores</h1>
-  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. In eius ad officia tempora, temporibus repudiandae id
-    ipsum neque deserunt rerum esse delectus consectetur voluptates eveniet quaerat commodi ducimus mollitia dolorem.
-  </p>
-  <table class="table">
-    <thead class="thead">
-      <tr>
-        <th scope="col">Nombre y apellido</th>
-        <th class="text-center" scope="col">Email</th>
-        <th class="text-center" scope="col">Fecha Subscripción</th>
-      </tr>
-    </thead>
-    <tbody>
-      @forelse($subscribers as $subscriber)
-        <tr>
-          <td>@include('utils.avatar',['avatar' => $subscriber->avatar, 'size' => 32, 'thumbnail' => true]){{$subscriber->name}} {{$subscriber->surname}}</td>
-          <td class="text-center">{{$subscriber->email}}</td>
-          <td class="text-center">@datetime($subscriber->pivot->created_at)</td>
-        </tr>
-      @empty
-        <tr>
-          <td colspan="4">No hay organizaciones</td>
-        </tr>
-      @endforelse
-    </tbody>
-  </table>
+  <h3 class="is-700">Subscriptores</h3>
+  <p class="lead">Aqui encontrará a los usuarios suscripto a las notificaciones del objetivo</p>
+  @isManager($objective->id)
+  @if(!$subscribers->isEmpty())
+  <div class="my-3">
+    <a href="{{route('objectives.manage.subscribers.download', ['objectiveId' => $objective->id])}}" class="btn btn-link btn-sm"><i class="fas fa-download fa-fw"></i><i class="far fa-file-excel fa-fw"></i>Descargar .xlsx</a>
+  </div>
+  @endif
+  @endisManager
+  @forelse($subscribers as $subscriber)
+      <div class="card my-2 shadow-sm">
+    <div class="card-body py-2 d-flex align-items-center">
+      <div class="mr-3 text-center">
+      @include('utils.avatar',['avatar' => $subscriber->avatar, 'size' => 36, 'thumbnail' => true])
+      </div>
+      <div class="w-100">
+        <h6 class="is-600 m-0">{{$subscriber->surname}}, {{$subscriber->name}}</h6>
+        <span class="text-smaller text-muted">
+        @isManager($objective->id)
+          Email: {{$subscriber->email}} - 
+        @endisManager
+          Suscripto el @datetime($subscriber->pivot->created_at)</span>
+      </div>
+    </div>
+  </div>
+  @empty
+    <div class="card shadow-sm my-3">
+      <div class="card-body text-center">
+        <i class="far fa-surprise"></i>&nbsp;¡No hay suscriptores del objetivo!
+      </div>
+    </div>
+  @endforelse
   {{ $subscribers->links() }}
 </section>
 

@@ -24,7 +24,7 @@
     @method('DELETE')
     @csrf
     <div class="form-group">
-      <label class="is-700">Ingrese su contraseña</label>
+      <label>Ingrese su contraseña</label>
       <input type="password" class="form-control" name="password">
       <small class="form-text text-muted">Para poder eliminar la meta, ingrese su contraseña para confirmar.</small>
     </div>

@@ -33,7 +33,7 @@
   @else
     <div class="card mb-3 shadow-sm">
       <div class="card-body text-center">
-        <h6 class="card-title mb-2"><i class="far fa-surprise"></i>&nbsp;No estas suscripto a ningun objetivo</h6>
+        <h6 class="card-title mb-2"><i class="far fa-surprise"></i>&nbsp;No estás suscripto a ningun objetivo</h6>
         <p class="text-smaller mb-0">¡Suscribite a tus objetivos favoritos y recibi notificaciones!</p>
       </div>
     </div>

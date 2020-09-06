@@ -7,7 +7,6 @@ use App\Report;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-// use Illuminate\Queue\SerializesModels;
 use Illuminate\Notifications\Notification;
 use App\Jobs\Middleware\NotificationRateLimited;
 
@@ -17,7 +16,7 @@ class NewReport extends Notification implements ShouldQueue
 
     // public $connection = 'redis';
     // public $delay = 60;
-    public $tries = 3;
+    public $tries = 5;
     public $timeout = 3600;
     
     protected $objective;
@@ -72,17 +71,11 @@ class NewReport extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {   
-        
-        $url = url("/objective/{$this->objective->id}");
         return (new MailMessage)
-                    ->subject('Han creado un nuevo reporte en Participes')
-                    ->greeting('Hola!')
-                    ->line("Acaban de crear un nuevo reporte de la meta \"{$this->goal->title}\" en el objetivo \"{$this->objective->title}\". ¡Te invitamos a que lo leas!")
-                    ->action('Ver reporte', $url)
-                    ->line('PD: Te llegan estas notificaciones porque estas suscripto a las notificaciones del objetivo.');
+                ->subject("¡Nuevo reporte de {$this->report->type_label} en Participes!")
+                ->markdown('mail.reports.new', ['user' => $notifiable, 'objective' => $this->objective, 'goal' => $this->goal, 'report' => $this->report]);
+
     }
-
-
 
     /**
      * Get the database representation of the notification.
@@ -105,7 +98,9 @@ class NewReport extends Notification implements ShouldQueue
             'report' => [
                 'id' => $this->report->id,
                 'title' => $this->report->title,
-                'type' => $this->report->type
+                'type' => $this->report->type,
+                'icon' => $this->report->type_icon,
+                'label' => $this->report->type_label
             ]
         ];
     }

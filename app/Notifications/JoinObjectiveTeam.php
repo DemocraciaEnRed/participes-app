@@ -70,20 +70,10 @@ class JoinObjectiveTeam extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {   
         
-        $url = route("panel.objectives");
-        $mail = (new MailMessage)
-              ->subject('Te han agregado al equipo')
-              ->greeting('¡Hola!')
-              ->line("¡Felicidades! Acaban de agregarte al equipo del objetivo \"{$this->objective->title}\".");
-        if($this->role == 'manager'){
-          $mail->line("Tu nuevo rol en el equipo es de coordinardor/a.");
-        } else {
-          $mail->line("Tu nuevo rol en el equipo es de reportero/a.");
-        }
-        $mail->line("Podrás acceder al panel de administracion del objetivo entrando a \"Mi Panel / Mis objetivos\", o haciendo clic en el siguiente botón")
-          ->action('Ver mis objetivos', $url)
-          ->line('Por último, te comentamos que automaticamente te hemos suscripto a las notificaciones del objetivo.');
-        return $mail;
+        return (new MailMessage)
+                    ->subject('¡Te han agregado al equipo de un objetivo en Participes!')
+                    ->markdown('mail.objectives.join', ['user' => $notifiable, 'objective' => $this->objective, 'role' => ($this->role == 'manager' ? 'coordinardor/a' : 'reportero/a')]);
+        
     }
 
     /**
@@ -98,7 +88,8 @@ class JoinObjectiveTeam extends Notification implements ShouldQueue
             'type' => 'join-team-objective',
             'objective' => [
                 'id' => $this->objective->id,
-                'title' => $this->objective->title
+                'title' => $this->objective->title,
+                'role' => $this->role
             ],
         ];
     }
