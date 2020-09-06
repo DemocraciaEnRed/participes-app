@@ -20,8 +20,13 @@ class UserController extends Controller
     public function fetch(Request $request){
         $users = User::query();
         if($request->query('name')){
-            $n = $request->query('name');
-            $users->where('name', 'like', "%{$n}%");
+            $keywords = $request->query('name');
+            $keywords = explode(' ', $keywords);
+            $users->where(function ($query) use ($keywords) {
+                foreach ($keywords as $keyword) {
+                    $query->orWhere('trace', 'like', "%{$keyword}%");
+                }
+            });
         }
         $users = $users->paginate(10)->withQueryString();
 

@@ -55,7 +55,12 @@ class ObjectiveController extends Controller
             $objectives->where('category_id',$category);
         }
         if(!is_null($title)){
-            $objectives->where('title', 'like', "%{$title}%")->orWhere('tags','like', "%{$title}%");
+            $titleExploded = explode(' ', $title);
+            $objectives->where(function ($query) use ($titleExploded) {
+                foreach ($titleExploded as $keyword) {
+                $query->orWhere('trace', 'like', "%{$keyword}%");
+                }
+            });
         }
         $objectives->where('hidden',false);
         $objectives = $objectives->paginate($pageSize)->withQueryString();
