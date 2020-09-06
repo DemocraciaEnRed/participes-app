@@ -137,7 +137,7 @@
         <i class="fas fa-exclamation-triangle"></i>&nbsp;El objetivo se encuentra <i class="fas fa-eye-slash"></i> oculto, no se enviarán notificaciones a los usuarios.
       </div>
       @endif
-      <small class="form-text text-muted">Se le enviará una notificación por email (si lo tienen habilitado) y por sistema, de que el reporte ha sido editado invitandolos a verla.</small>
+      <small class="form-text text-muted">Se le enviará una notificación por sistema, de que el reporte ha sido editado invitandolos a verla.</small>
     </div>
     <br>
     <button type="submit" class="btn btn-primary">Editar</button>
