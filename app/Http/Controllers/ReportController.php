@@ -87,8 +87,16 @@ class ReportController extends Controller
         if(!is_null($type)){
             $reports->where('type',$type);
         }
+        // if(!is_null($title)){
+        //     $reports->where('title', 'like', "%{$title}%")->orWhere('tags','like', "%{$title}%");
+        // }
         if(!is_null($title)){
-            $reports->where('title', 'like', "%{$title}%")->orWhere('tags','like', "%{$title}%");
+            $titleExploded = explode(' ', $title);
+            $reports->where(function ($query) use ($titleExploded) {
+                foreach ($titleExploded as $keyword) {
+                $query->orWhere('trace', 'like', "%{$keyword}%");
+                }
+            });
         }
         $reports = $reports->paginate($pageSize)->withQueryString();
         if($detailed){

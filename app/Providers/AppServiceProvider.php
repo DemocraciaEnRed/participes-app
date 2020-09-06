@@ -3,6 +3,15 @@
 namespace App\Providers;
 
 // use Auth;
+use App\User;
+use App\Objective;
+use App\Goal;
+use App\Report;
+use App\Observers\UserObserver;
+use App\Observers\ObjectiveObserver;
+use App\Observers\GoalObserver;
+use App\Observers\ReportObserver;
+
 use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
@@ -27,6 +36,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        User::observe(UserObserver::class);
+        Objective::observe(ObjectiveObserver::class);
+        Goal::observe(GoalObserver::class);
+        Report::observe(ReportObserver::class);
+        
         //
         Blade::if('hasRole', function ($roles) {
             $user = auth()->user();

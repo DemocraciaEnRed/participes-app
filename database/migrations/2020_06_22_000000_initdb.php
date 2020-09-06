@@ -246,24 +246,26 @@ class InitDB extends Migration
     {
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_resets');
+        Schema::dropIfExists('notifications');
         Schema::dropIfExists('roles');
         Schema::dropIfExists('role_user');
         Schema::dropIfExists('failed_jobs');
-        Schema::dropIfExists('notifications');
         Schema::dropIfExists('organizations');
-        Schema::dropIfExists('organization_users');
         Schema::dropIfExists('categories');
         Schema::dropIfExists('files');
-        Schema::dropIfExists('images');
-        Schema::dropIfExists('milestones');
-        Schema::dropIfExists('goals');
+        Schema::dropIfExists('image_files');
         Schema::dropIfExists('objectives');
-        Schema::dropIfExists('objective_goal');
-        Schema::dropIfExists('objective_milestone');
+        Schema::dropIfExists('communities');
+        Schema::dropIfExists('goals');
+        Schema::dropIfExists('milestones');
+        Schema::dropIfExists('objective_organization');
+        Schema::dropIfExists('objective_user');
         Schema::dropIfExists('objective_subscriber');
         Schema::dropIfExists('reports');
+        Schema::dropIfExists('comments');
         Schema::dropIfExists('testimonies');
+        Schema::dropIfExists('events');
+        Schema::dropIfExists('event_objective');
         Schema::dropIfExists('action_logs');
-
     }
 }
