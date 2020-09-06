@@ -3,13 +3,14 @@
 namespace App\Notifications;
 use App\Objective;
 use App\Goal;
+use App\Report;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Jobs\Middleware\NotificationRateLimited;
 
-class CompleteGoal extends Notification implements ShouldQueue
+class CompletedGoal extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -20,6 +21,7 @@ class CompleteGoal extends Notification implements ShouldQueue
     
     protected $objective;
     protected $goal;
+    protected $report;
     
     public function middleware(){
         return [new NotificationRateLimited];
@@ -43,10 +45,11 @@ class CompleteGoal extends Notification implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(Objective $objective, Goal $goal)
+    public function __construct(Objective $objective, Goal $goal, Report $report)
     {
         $this->objective = $objective;
         $this->goal = $goal;
+        $this->report = $report;
     }
 
     /**
@@ -70,8 +73,8 @@ class CompleteGoal extends Notification implements ShouldQueue
     {   
         
         return (new MailMessage)
-                    ->subject('¡Una meta llego a su 1005 en Partícipes!')
-                    ->markdown('mail.goals.completed', ['user' => $notifiable, 'objective' => $this->objective, 'goal' => $this->goal]);
+                    ->subject('¡Una meta llego a su 100% en Partícipes!')
+                    ->markdown('mail.reports.completed', ['user' => $notifiable, 'objective' => $this->objective, 'goal' => $this->goal, 'report' => $this->report]);
     }
 
     /**
@@ -83,7 +86,7 @@ class CompleteGoal extends Notification implements ShouldQueue
     public function toDatabase($notifiable)
     {
         return [
-            'type' => 'completed-goal',
+            'type' => 'completed-goal-report',
             'objective' => [
                 'id' => $this->objective->id,
                 'title' => $this->objective->title
@@ -91,6 +94,13 @@ class CompleteGoal extends Notification implements ShouldQueue
             'goal' => [
                 'id' => $this->goal->id,
                 'title' => $this->goal->title
+            ],
+            'report' => [
+                'id' => $this->report->id,
+                'title' => $this->report->title,
+                'type' => $this->report->type,
+                'icon' => $this->report->type_icon,
+                'label' => $this->report->type_label
             ]
         ];
     }

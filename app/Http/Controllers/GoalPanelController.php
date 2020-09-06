@@ -20,6 +20,7 @@ use App\Milestone;
 use App\Report;
 use App\Exports\GoalReportsExport;
 use App\Notifications\NewReport;
+use App\Notifications\CompletedGoal;
 use App\Notifications\NewGoal;
 use App\Notifications\EditGoal;
 use App\Notifications\DeleteGoal;
@@ -237,7 +238,8 @@ class GoalPanelController extends Controller
         'photos' => 'array',
         'photos.*' => 'required|file|max:102400',
         'files' => 'array',
-        'files.*' => 'required|file|max:102400'
+        'files.*' => 'required|file|max:102400',
+        'notify' => 'nullable|string|in:true',
       ];
 
       $request->validate($rules);
@@ -352,9 +354,17 @@ class GoalPanelController extends Controller
         'user_email' => $request->user()->email
         ]);
 
+
       // Notify
-      if(!$request->objective->hidden){
-        Notification::send($request->objective->subscribers, new NewReport($request->objective, $goal, $report));
+      $notifySubscribers = $request->boolean('notify');
+      if(!$request->objective->hidden && $notifySubscribers){
+        // Goal at 100%?
+        if($request->input('type') == 'progress' && ($goal->indicator_progress >= $goal->indicator_goal)){
+          Notification::send($request->objective->subscribers, new CompletedGoal($request->objective, $goal, $report));
+        } else {
+        // Send normal notification
+          Notification::send($request->objective->subscribers, new NewReport($request->objective, $goal, $report));
+        }
       }
       
       return redirect()->route('objectives.manage.goals.reports.index', ['objectiveId' => $request->objective->id, 'goalId' => $goal->id,'reportId' => $report->id])->with('success','El reporte fue creado con exito');

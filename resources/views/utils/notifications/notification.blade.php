@@ -47,8 +47,8 @@
   @case('new-reply-report')
     @include('utils.notifications.newReplyReport', ['notification' => $notification])
     @break
-  @case('goal-completed')
-    @include('utils.notifications.goalCompleted', ['notification' => $notification])
+  @case('completed-goal-report')
+    @include('utils.notifications.completedGoalReport', ['notification' => $notification])
     @break
   @default
     <p>-Error-</p>

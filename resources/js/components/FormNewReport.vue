@@ -108,7 +108,7 @@
 					<div class="alert alert-warning" v-if="rangeInput <= 0">
 						<i class="fas fa-exclamation-triangle fa-fw"></i>&nbsp;¡No puede crear un reporte de avance y que el avance sea 0 o negativo!
 					</div>
-					<div class="alert alert-info" v-if="progressTotal > 100">
+					<div class="alert alert-info" v-if="over100">
 						<i class="fas fa-info-circle fa-fw"></i>&nbsp;<b>¡Atencion!</b> Esta por sobrepasar el 100% de la meta. Esté seguro que es lo que desea.
 					</div>
 			</section>
@@ -136,6 +136,21 @@
 				<p class="form-text text-muted">Nota: A diferencia de las fotos del reporte, estas no se presentan con previsualizaciones.</p>
 				<input-file name="files[]" multiple></input-file>
 			</div>
+			<div class="form-group">
+				<div class="card">
+					<div class="card-body">
+						<label class="is-700 "><i class="fas fa-paper-plane"></i>&nbsp;Enviar notificación a suscriptores</label>
+						<div class="custom-control custom-switch" v-if="!objective.hidden">
+							<input type="checkbox" class="custom-control-input" name="notify" id="notify" value="true">
+							<label class="custom-control-label is-clickable" for="notify">Notificar a los suscriptores</label>
+						</div>
+						<div class="alert alert-warning" v-else>
+							<i class="fas fa-exclamation-triangle"></i>&nbsp;El objetivo se encuentra <i class="fas fa-eye-slash"></i> oculto, no se enviarán notificaciones a los usuarios.
+						</div>
+						<small class="form-text text-muted">Se le enviará una notificación por email (si lo tienen habilitado) y por sistema, de que hay un nuevo reporte.</small>
+					</div>
+					</div>
+				</div>
 			<br>
 			<div class="form-group">
 				<input type="hidden" name="_token" :value="crsfToken" />
@@ -202,6 +217,10 @@ export default {
 			if(this.rangeInput <= 0) return this.progressNow
 			return (((this.goal.indicator_progress + this.rangeInput) / this.goal.indicator_goal)*100).toFixed()
 		},
+		over100: function(){
+			return ((this.rangeInput + this.goal.indicator_progress) > this.goal.indicator_goal)
+		},
+		
 		today: function(){
 			var d = new Date(),
         month = '' + (d.getMonth() + 1),

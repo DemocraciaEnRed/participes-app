@@ -4071,6 +4071,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // import debounce from "lodash/debounce";
 // import TextEditor from "./inputs/TextEditor.vue"
 
@@ -4132,6 +4147,9 @@ __webpack_require__.r(__webpack_exports__);
     progressTotal: function progressTotal() {
       if (this.rangeInput <= 0) return this.progressNow;
       return ((this.goal.indicator_progress + this.rangeInput) / this.goal.indicator_goal * 100).toFixed();
+    },
+    over100: function over100() {
+      return this.rangeInput + this.goal.indicator_progress > this.goal.indicator_goal;
     },
     today: function today() {
       var d = new Date(),
@@ -81694,7 +81712,7 @@ var render = function() {
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.progressTotal > 100
+                  _vm.over100
                     ? _c("div", { staticClass: "alert alert-info" }, [
                         _c("i", { staticClass: "fas fa-info-circle fa-fw" }),
                         _vm._v(" "),
@@ -81826,6 +81844,54 @@ var render = function() {
               1
             ),
             _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("div", { staticClass: "card" }, [
+                _c("div", { staticClass: "card-body" }, [
+                  _vm._m(2),
+                  _vm._v(" "),
+                  !_vm.objective.hidden
+                    ? _c(
+                        "div",
+                        { staticClass: "custom-control custom-switch" },
+                        [
+                          _c("input", {
+                            staticClass: "custom-control-input",
+                            attrs: {
+                              type: "checkbox",
+                              name: "notify",
+                              id: "notify",
+                              value: "true"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-control-label is-clickable",
+                              attrs: { for: "notify" }
+                            },
+                            [_vm._v("Notificar a los suscriptores")]
+                          )
+                        ]
+                      )
+                    : _c("div", { staticClass: "alert alert-warning" }, [
+                        _c("i", { staticClass: "fas fa-exclamation-triangle" }),
+                        _vm._v(" El objetivo se encuentra "),
+                        _c("i", { staticClass: "fas fa-eye-slash" }),
+                        _vm._v(
+                          " oculto, no se enviarán notificaciones a los usuarios.\n\t\t\t\t\t\t"
+                        )
+                      ]),
+                  _vm._v(" "),
+                  _c("small", { staticClass: "form-text text-muted" }, [
+                    _vm._v(
+                      "Se le enviará una notificación por email (si lo tienen habilitado) y por sistema, de que hay un nuevo reporte."
+                    )
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
             _c("br"),
             _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
@@ -81834,7 +81900,7 @@ var render = function() {
                 domProps: { value: _vm.crsfToken }
               }),
               _vm._v(" "),
-              _vm._m(2)
+              _vm._m(3)
             ])
           ])
         : _vm._e()
@@ -81866,6 +81932,15 @@ var staticRenderFns = [
         staticClass: "form-control",
         attrs: { name: "content", rows: "4" }
       })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "is-700 " }, [
+      _c("i", { staticClass: "fas fa-paper-plane" }),
+      _vm._v(" Enviar notificación a suscriptores")
     ])
   },
   function() {
