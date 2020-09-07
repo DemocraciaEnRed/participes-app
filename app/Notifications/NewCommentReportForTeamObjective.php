@@ -62,7 +62,7 @@ class NewCommentReportForTeamObjective extends Notification implements ShouldQue
      */
     public function via($notifiable)
     {
-        return explode(',',$notifiable->notification_preferences);   
+        return ['database'];   
     }   
 
     /**

@@ -60,7 +60,7 @@ class EditReport extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return explode(',',$notifiable->notification_preferences);   
+        return ['database'];   
     }   
 
 
