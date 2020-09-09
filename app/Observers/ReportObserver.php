@@ -16,7 +16,7 @@ class ReportObserver
     public function saving(Report $report)
     {
         $trace = Str::of($report->title)
-            ->append(implode('',$report->tags))
+            ->append(implode('',($report->tags ?? array())))
             ->replace(' ', '')
             ->lower();
         $report->trace = $trace;

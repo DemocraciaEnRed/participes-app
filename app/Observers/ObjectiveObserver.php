@@ -16,7 +16,7 @@ class ObjectiveObserver
     public function saving(Objective $objective)
     {
         $trace = Str::of($objective->title)
-            ->append(implode('',$objective->tags))
+            ->append(implode('',($objective->tags ?? array())))
             ->replace(' ', '')
             ->lower();
         $objective->trace = $trace;
