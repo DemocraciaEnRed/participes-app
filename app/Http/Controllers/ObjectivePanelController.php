@@ -93,7 +93,7 @@ class ObjectivePanelController extends Controller
 
       $notifySubscribers = $request->boolean('notify');
       if(!$objective->hidden && $notifySubscribers){
-        Notification::locale('es')->send($objective->subscribers, new EditObjective($objective));
+        Notification::send($objective->subscribers, new EditObjective($objective));
       }
 
       return redirect()->route('objectives.manage.index',['objectiveId' => $objective->id])->with('success','El objetivo ha sido editado correctamente');
