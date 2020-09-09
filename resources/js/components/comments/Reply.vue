@@ -2,7 +2,7 @@
     <div class="media pl-3 mb-3 pr-3" style="margin-left: 80px;">
       <img :src="reply.user.avatar ? reply.user.avatar.thumbnail_path : '/img/default-avatar.png'" alt="" class="align-self-start mr-3 rounded-circle" style="width: 32px">
       <div class="media-body">
-        <p class="text-smaller mb-0"><b>{{`${reply.user.name} ${reply.user.surname}`}}</b><span v-if="reply.author_member_objective" class="text-info">&nbsp;&nbsp;&nbsp;<i class="fas fa-shield-alt"></i> Equipo</span></p>
+        <p class="text-smaller mb-0"><b>{{`${reply.user.name} ${reply.user.surname}`}}</b><span v-if="reply.author_member_objective" class="text-info">&nbsp;&nbsp;&nbsp;<i class="fas fa-shield-alt"></i> Equipo</span><span v-if="reply.user.organization"><br><span class="text-primary text-smallest"><i class="fas fa-house-user"></i> {{reply.user.organization}}</span></span></p>
         <div class="animate__animated animate__flash mb-2" v-if="showConfirmDelete">
           <p class="mb-2 text-smaller">¿Esta seguro que quiere eliminar el comentario?</p>
           <button class="btn btn-outline-danger btn-sm" @click="deleteReply"><i class="fas fa-trash"></i>&nbsp;Eliminar</button>
@@ -58,9 +58,9 @@ export default {
       })
     },
     submitEdit: function(){
+      if(!this.commentText || !this.user) return
       this.isLoading = true;
       this.sent = false
-      if(!this.commentText || !this.user) return
       this.$http.put(this.reply.edit_url,{
         content: this.commentText
       })

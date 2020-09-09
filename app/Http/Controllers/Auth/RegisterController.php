@@ -55,6 +55,7 @@ class RegisterController extends Controller
             'surname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'organization' => ['nullable', 'string', 'max:550'],
             'g-recaptcha-response' => 'required|captcha'
         ]);
     }
@@ -72,6 +73,7 @@ class RegisterController extends Controller
             'surname' => $data['surname'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'organization' => $data['organization'],
         ]);
         
         $user->roles()->attach(Role::where('name', 'user')->first());

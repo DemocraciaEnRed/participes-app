@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/start', 'MiscController@start')->name('start');
 Route::post('/start', 'MiscController@startApp')->name('start.form');
-Route::get('/testmail', 'MiscController@testEmail')->name('misc.testEmail');
+// Route::get('/testmail', 'MiscController@testEmail')->name('misc.testEmail');
 
 Route::group([
     'as' => 'about.', 
@@ -64,6 +64,8 @@ Route::group([
     Route::post('/notificaciones/eliminar', 'UserPanelController@formDeleteAllNotifications')->name('notifications.delete.all.form');
     // Mi cuenta
     Route::get('/preferencias/verificar', 'UserPanelController@viewVerifyAccount')->name('account.verify');
+    Route::get('/preferencias/datos', 'UserPanelController@viewAccountData')->name('account.data');
+    Route::put('/preferencias/datos', 'UserPanelController@formAccountData')->name('account.data.form');
     Route::get('/preferencias/avatar', 'UserPanelController@viewAccountAvatar')->name('account.avatar');
     Route::post('/preferencias/avatar', 'UserPanelController@formAccountAvatar')->name('account.avatar.form');
     Route::get('/preferencias/acceso', 'UserPanelController@viewAccountAccess')->name('account.access');

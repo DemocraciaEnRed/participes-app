@@ -22,6 +22,7 @@ class InitDB extends Migration
             $table->string('surname');
             $table->string('notification_preferences')->default('database,mail');
             $table->string('password');
+            $table->string('organization',550)->nullable();
             $table->text('trace')->nullable();
             $table->rememberToken();
             $table->timestamps();

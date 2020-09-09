@@ -3,7 +3,7 @@
     <div class="media pl-3 mb-3 pr-3">
       <img :src="comment.user.avatar ? comment.user.avatar.thumbnail_path : '/img/default-avatar.png'" alt="" class="align-self-start mr-3 rounded-circle" style="width: 64px">
       <div class="media-body">
-        <p class="text-smaller mb-0"><b>{{`${comment.user.name} ${comment.user.surname}`}}</b><span v-if="comment.author_member_objective" class="text-info">&nbsp;&nbsp;&nbsp;<i class="fas fa-shield-alt"></i> Equipo</span></p>
+        <p class="text-smaller mb-0"><b>{{`${comment.user.name} ${comment.user.surname}`}}</b><span v-if="comment.author_member_objective" class="text-info">&nbsp;&nbsp;&nbsp;<i class="fas fa-shield-alt"></i> Equipo</span><span v-if="comment.user.organization"><br><span class="text-primary text-smallest"><i class="fas fa-house-user"></i> {{comment.user.organization}}</span></span></p>
         <div class="animate__animated animate__flash mb-2" v-if="showConfirmDelete">
           <p class="mb-2 text-smaller">¿Esta seguro que quiere eliminar el comentario?</p>
           <button class="btn btn-outline-danger btn-sm" @click="deleteComment"><i class="fas fa-trash"></i>&nbsp;Eliminar</button>
@@ -91,8 +91,8 @@ export default {
       })
     },
     submitEdit: function(){
-      this.isLoading = true;
       if(!this.commentText || !this.user) return
+      this.isLoading = true;
       this.$http.put(this.comment.edit_url,{
         content: this.commentText
       })

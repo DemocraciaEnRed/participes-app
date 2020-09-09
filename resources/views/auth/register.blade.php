@@ -67,6 +67,22 @@
 								@enderror
 							</div>
 						</div>
+						<div class="form-group row">
+							<label for="organization" class="col-md-4 col-form-label text-md-right">Organización</label>
+
+							<div class="col-md-6">
+								<input id="organization" type="text" class="form-control @error('organization') is-invalid @enderror"
+									name="organization" value="{{ old('organization') }}" maxlength="550">
+								<small class="form-text text-muted"><span class="text-info">(Opcional)</span> Si desea, puede escribir a que organización pertenece</small>
+
+
+								@error('organization')
+								<span class="invalid-feedback" role="alert">
+									<strong>{{ $message }}</strong>
+								</span>
+								@enderror
+							</div>
+						</div>
 
 						<div class="form-group row">
 							<label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
@@ -74,6 +90,7 @@
 							<div class="col-md-6">
 								<input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
 									name="password" required>
+								<small class="form-text text-muted">La contraseña debe tener al menos <span class="text-info">8 caracteres</span></small>
 
 								@error('password')
 								<span class="invalid-feedback" role="alert">

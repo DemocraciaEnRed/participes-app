@@ -19,6 +19,7 @@ $countUnreadNotifications = count(Auth::user()->unreadNotifications)
 </div>
 <h6 class="category"><i class="fas fa-user fa-fw"></i>&nbsp;Mi cuenta</h6>
 <div class="menu-link">
+<a href="{{route('panel.account.data') }}" class="item-link {{ $currentRoute == 'panel.account.data' ? 'is-active' : null }}">Cambiar mis datos</a>
 <a href="{{route('panel.account.email') }}" class="item-link {{ $currentRoute == 'panel.account.email' ? 'is-active' : null }}">Cambiar mi email</a>
 <a href="{{route('panel.account.avatar') }}" class="item-link {{ $currentRoute == 'panel.account.avatar' ? 'is-active' : null }}">Cambiar mi avatar</a>
 <a href="{{route('panel.account.access') }}" class="item-link {{ $currentRoute == 'panel.account.access' ? 'is-active' : null }}">Cambiar contraseña</a>
