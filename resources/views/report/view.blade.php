@@ -27,11 +27,9 @@
       <h2 class="is-600 my-2">{{$report->title}}</h2>
       <h6 class="text-muted my-2">Fecha del reporte: @justdate($report->date)</h6>
       <h6 class="text-muted my-2">Publicado el @datetime($report->created_at)</h6>
-
       <div class="is-size-5 my-5">
         {!! nl2br(e($report->content)) !!}
       </div>
-
       <div class="row mb-2">
         <div class="col-md-4 my-2">
           <h5 class="is-700">Tags del reporte</h5>
@@ -63,24 +61,7 @@
   @include('report.files')
   @include('report.album')
   @include('report.map')
-  <div class="card shadow-sm mb-3" id="comentarios">
-    <div class="card-body p-3 p-lg-5">
-      <report-comments fetch-url="{{ route('apiService.reports.comments',['reportId' => $report->id]) }}"
-        comment-url="{{ route('apiService.reports.comments.create',['reportId' => $report->id]) }}"
-        :user="{{ Auth::user() ?  Auth::user()->load(['avatar']) : 'null' }}">
-        @include('partials.loading')
-      </report-comments>
-    </div>
-  </div>
-  @if(!empty($objective->communities()))
-   <div class="card shadow-sm text-center my-3">
-     <div class="card-body p-3 p-lg-5">
-      <h4 class="is-700 mb-2">¡Seguí acompañandonos en nuestra comunidad!</h4>
-      @foreach($objective->communities as $community)
-        <a href="{{$community->url}}" target="_blank" class="py-2 px-3 rounded d-inline-block my-1 mb-1" style="border: 2px solid {{$community->color}}; color: {{$community->color}}"><i class="{{$community->icon}}"></i>&nbsp;{{$community->label}}</a>
-      @endforeach
-     </div>
-   </div>
-  @endif
+  @include('report.comments')
+  @include('report.communities')
 </div>
 @endsection
