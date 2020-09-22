@@ -5,7 +5,7 @@
 	<div class="row justify-content-center">
 		<div class="col-md-10 col-lg-8">
 			<div class="text-center">
-				<img src="{{asset('img/participes-white.svg')}}" width="300" class="img-fluid mb-5 mt-2"
+				<img src="{{asset(app_setting('app_logo_white','img/default-logo-white.svg'))}}" class="img-fluid logo-home-smaller mb-5 mt-2"
 					alt="{{ config('app.name', 'Laravel') }}">
 			</div>
 			@if ($errors->any())
@@ -55,11 +55,11 @@
 
 						<div class="form-group row">
 							<div class="col-md-6 offset-md-4">
-								<div class="form-check">
-									<input class="form-check-input" type="checkbox" name="remember" id="remember"
+								<div class="custom-control custom-checkbox">
+									<input class="custom-control-input" type="checkbox" name="remember" id="remember"
 										{{ old('remember') ? 'checked' : '' }}>
 
-									<label class="form-check-label" for="remember">
+									<label class="custom-control-label" for="remember">
 										{{ __('Remember Me') }}
 									</label>
 								</div>

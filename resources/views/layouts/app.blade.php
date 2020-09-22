@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {{-- ENABLE THIS TAG IF YOU DONT WANT ROBOTS TO INDEX YOUR WEB --}}
     <meta name="robots" content="noindex">
-    <link rel="icon" type="image/png" sizes="250x250" href="/favicon.png">
+    <link rel="icon" type="image/png" sizes="250x250" href="{{asset(app_setting('app_favicon','/favicon.png'))}}">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @hasSection('metatags')

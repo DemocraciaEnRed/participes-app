@@ -17,6 +17,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/start', 'MiscController@start')->name('start');
 Route::post('/start', 'MiscController@startApp')->name('start.form');
 // Route::get('/testmail', 'MiscController@testEmail')->name('misc.testEmail');
+Route::get('/testing', 'MiscController@testing')->name('testing');
 
 Route::group([
     'as' => 'about.', 
@@ -82,6 +83,11 @@ Route::group([
     ],function () {
     Route::get('/', 'AdminPanelController@index')->name('index');
     Route::get('/bitacora', 'AdminPanelController@viewLogs')->name('logs');
+    // Settings
+    Route::get('/configuracion/editar', 'AdminPanelController@viewEditSettings')->name('settings');
+    Route::put('/configuracion/editar', 'AdminPanelController@formEditSetting')->name('settings.form');
+    Route::put('/configuracion/editar/file', 'AdminPanelController@formEditFileSetting')->name('settings.form.file');
+    Route::post('/configuracion/cache', 'AdminPanelController@clearCacheSettings')->name('settings.cache');
     // Categorias
     Route::get('/categorias', 'AdminPanelController@viewListCategories')->name('categories');
     Route::get('/categorias/nuevo', 'AdminPanelController@viewCreateCategory')->name('categories.create');
@@ -119,6 +125,14 @@ Route::group([
     Route::delete('/eventos/{eventId}/fotos/{pictureId}/eliminar', 'AdminPanelController@formDeletePictureEvent')->name('events.pictures.delete');
     Route::get('/eventos/{eventId}/eliminar', 'AdminPanelController@viewDeleteEvent')->name('events.delete');
     Route::delete('/eventos/{eventId}/eliminar', 'AdminPanelController@formDeleteEvent')->name('events.delete.form');
+    // Preguntas Frecuentes
+    Route::get('/preguntas-frecuentes', 'AdminPanelController@viewListFaqs')->name('faqs');
+    Route::get('/preguntas-frecuentes/nuevo', 'AdminPanelController@viewCreateFaq')->name('faqs.create');
+    Route::post('/preguntas-frecuentes/nuevo', 'AdminPanelController@formCreateFaq')->name('faqs.create.form');
+    Route::get('/preguntas-frecuentes/{faqId}/editar', 'AdminPanelController@viewEditFaq')->name('faqs.edit');
+    Route::put('/preguntas-frecuentes/{faqId}/editar', 'AdminPanelController@formEditFaq')->name('faqs.edit.form');
+    Route::get('/preguntas-frecuentes/{faqId}/eliminar', 'AdminPanelController@viewDeleteFaq')->name('faqs.delete');
+    Route::delete('/preguntas-frecuentes/{faqId}/eliminar', 'AdminPanelController@formDeleteFaq')->name('faqs.delete.form');
 });
 
 Route::group([

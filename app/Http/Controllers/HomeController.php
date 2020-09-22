@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Objective;
 use App\Goal;
 use App\Report;
+use App\Faq;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -40,28 +41,21 @@ class HomeController extends Controller
     
     public function viewAboutGeneral()
     {
-        return view('portal.about.general');
+        $faqs = Faq::select(['section','id','title'])->orderBy('order','ASC')->get()->groupBy('section')->toArray();
+        $questions = Faq::where('section','general')->orderBy('order','ASC')->get();
+        return view('portal.about.general', ['faqs' => $faqs, 'questions' => $questions]);
     }
     public function viewAboutQuestions()
     {
-        return view('portal.about.faq');
+        $faqs = Faq::select(['section','id','title'])->orderBy('order','ASC')->get()->groupBy('section')->toArray();
+        $questions = Faq::where('section','faq')->orderBy('order','ASC')->get();
+        return view('portal.about.faq', ['faqs' => $faqs, 'questions' => $questions]);
     }
     public function viewAboutLegals()
     {
-        return view('portal.about.legal');
-    }
-    // --------------------------
-    public function viewAboutGeneralTwo()
-    {
-        return view('portal.about2.general');
-    }
-    public function viewAboutQuestionsTwo()
-    {
-        return view('portal.about2.faq');
-    }
-    public function viewAboutLegalsTwo()
-    {
-        return view('portal.about2.legal');
+        $faqs = Faq::select(['section','id','title'])->orderBy('order','ASC')->get()->groupBy('section')->toArray();
+        $questions = Faq::where('section','legal')->orderBy('order','ASC')->get();
+        return view('portal.about.legal', ['faqs' => $faqs, 'questions' => $questions]);
     }
     // --------------------------------
 

@@ -47,108 +47,14 @@
     }
   }
 
-// #about {
-//   background-color: #FFF;
-
-//   .custom-border {
-//     border-radius: 10px;
-//   }
-
-//   #about-one {
-//     padding: 3rem 15px;
-
-//     .column-picture img {
-//       max-width: 90%;
-
-//       @include media-breakpoint-up(lg) {
-//         max-width: 100%;
-//       }
-//     }
-
-//     @include media-breakpoint-up(lg) {
-//       .column-text {
-//         z-index: 2;
-//       }
-
-//       .column-picture {
-//         margin-left: -80px;
-//         z-index: 1;
-//         max-width: none;
-//       }
-//     }
-//   }
-
-//   #about-two {
-//     padding: 0rem 15px 3rem;
-
-//     .row {
-//       flex-direction: column-reverse;
-
-//       @include media-breakpoint-up(lg) {
-//         flex-direction: row;
-//       }
-//     }
-
-//     .column-picture img {
-//       max-width: 90%;
-
-//       @include media-breakpoint-up(lg) {
-//         max-width: 100%;
-//       }
-//     }
-
-//     @include media-breakpoint-up(lg) {
-//       padding-top: 3rem;
-
-//       .column-text {
-//         z-index: 2;
-//       }
-
-//       .column-picture {
-//         margin-right: -80px;
-//         z-index: 1;
-//         max-width: none;
-//       }
-//     }
-//   }
-
-//   #about-three {
-//     padding: 0rem 15px 3rem;
-
-//     @include media-breakpoint-up(lg) {
-//       padding-top: 3rem;
-//     }
-//   }
-// }
-
-// #final-about {
-//   .custom-border {
-//     border-radius: 10px;
-//   }
-
-//   .final-about-picture {
-//     max-width: 90%;
-//     margin: 0 auto 30px;
-//   }
-
-//   .first-container {
-//     padding-top: 0rem;
-
-//     @include media-breakpoint-up(lg) {
-//       padding-top: 135px;
-//     }
-//   }
-
-//   .second-container {
-//     position: relative;
-
-//     .picture-container {
-//       position: absolute;
-//       bottom: 0;
-//       left: 0;
-//     }
-//   }
-// }
+.logo-home{
+  max-height: 120px;
+  max-width: 300px;
+}
+.logo-home-smaller{
+  max-height: 60px;
+  max-width: 300px;
+}
 
 #calendarHeader{
   img{
@@ -267,7 +173,8 @@
 
   .footer-logo {
     margin-bottom: 15px;
-    width: 130px;
+    max-height: 60px;
+    max-width: 110px;
   }
 }
 

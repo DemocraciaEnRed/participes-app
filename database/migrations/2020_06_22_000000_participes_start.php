@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Query\Expression;
 
-class InitDB extends Migration
+class ParticipesStart extends Migration
 {
     /**
      * Run the migrations.
@@ -59,6 +59,22 @@ class InitDB extends Migration
             $table->longText('payload');
             $table->longText('exception');
             $table->timestamp('failed_at')->useCurrent();
+        });
+        Schema::create('faqs', function (Blueprint $table) {
+            $table->id();
+            $table->string('section');
+            $table->smallInteger('order')->default(0);
+            $table->string('title',550);
+            $table->text('content');
+            $table->timestamps();
+        });
+        Schema::create('settings', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->text('value')->nullable();
+            $table->char('type', 20)->default('string');
+            $table->boolean('cached')->default(true);
+            $table->timestamps();
         });
         Schema::create('organizations', function (Blueprint $table) {
             $table->id();
@@ -251,6 +267,8 @@ class InitDB extends Migration
         Schema::dropIfExists('roles');
         Schema::dropIfExists('role_user');
         Schema::dropIfExists('failed_jobs');
+        Schema::dropIfExists('faqs');
+        Schema::dropIfExists('settings');
         Schema::dropIfExists('organizations');
         Schema::dropIfExists('categories');
         Schema::dropIfExists('files');

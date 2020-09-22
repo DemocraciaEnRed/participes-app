@@ -45,6 +45,7 @@ class MiscController extends Controller
 			$request->validate($rules);
 			Artisan::call('migrate:fresh');
 			Artisan::call("db:seed", ['--class' => "RoleTableSeeder"]);
+			Artisan::call("db:seed", ['--class' => "FaqTableSeeder"]);
 			$admin = new User();
 			$admin->name = $request->input('name');
 			$admin->surname = $request->input('surname');
@@ -73,6 +74,12 @@ class MiscController extends Controller
     //             ->toMail($user);
     return (new App\Notifications\DeleteEvent($event))
                 ->toMail($user);
+	}
+
+	public function testing(Request $request){
+
+			return view('testing');
+	
 	}
 
 }

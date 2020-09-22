@@ -12468,6 +12468,16 @@ h6 {
   text-align: center;
 }
 
+.logo-home {
+  max-height: 120px;
+  max-width: 300px;
+}
+
+.logo-home-smaller {
+  max-height: 60px;
+  max-width: 300px;
+}
+
 #calendarHeader img {
   max-width: 250px;
 }
@@ -12597,7 +12607,8 @@ h6 {
 
 #footer .footer-logo {
   margin-bottom: 15px;
-  width: 130px;
+  max-height: 60px;
+  max-width: 110px;
 }
 
 .about-portal-header {
