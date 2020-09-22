@@ -24,6 +24,7 @@ class SettingTableSeeder extends Seeder
         $setting->type = 'string';
         $setting->cached = true;
         $setting->save();
+        $setting = new Setting();
         $setting->name = 'app_logo_footer';
         $setting->value = null;
         $setting->type = 'string';
