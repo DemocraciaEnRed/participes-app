@@ -44,8 +44,9 @@ class MiscController extends Controller
 
 			$request->validate($rules);
 			Artisan::call('migrate:fresh');
-			Artisan::call("db:seed", ['--class' => "RoleTableSeeder"]);
+			Artisan::call("db:seed", ['--class' => "SettingTableSeeder"]);
 			Artisan::call("db:seed", ['--class' => "FaqTableSeeder"]);
+			Artisan::call("db:seed", ['--class' => "RoleTableSeeder"]);
 			$admin = new User();
 			$admin->name = $request->input('name');
 			$admin->surname = $request->input('surname');
