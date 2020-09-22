@@ -263,7 +263,7 @@ class AdminPanelController extends Controller
     // ====================================
 
     public function viewListFaqs(Request $request){
-      $faqs = Faq::paginate(10);
+      $faqs = Faq::orderBy('section','ASC')->orderBy('order','ASC')->paginate(10);
       return view('admin.faqs.list',['faqs' => $faqs]);
     }
     public function viewCreateFaq(Request $request){
@@ -273,14 +273,16 @@ class AdminPanelController extends Controller
         $rules = [
             'section' => 'required|string|max:225',
             'title' => 'required|string|max:550',
+            'order' => 'required|integer|min:0',
             'content' => 'required|string',
         ];
         $request->validate($rules);
         
         // Handle data
         $faq = new Faq();
-        $faq->section = $request->input('section');
         $faq->title = $request->input('title');
+        $faq->order = $request->input('order');
+        $faq->section = $request->input('section');
         $faq->content = $request->input('content');
         $faq->save();
         
@@ -294,14 +296,16 @@ class AdminPanelController extends Controller
         $rules = [
             'section' => 'required|string|max:225',
             'title' => 'required|string|max:225',
+            'order' => 'required|integer|min:0',
             'content' => 'required|string',
         ];
 
         $request->validate($rules);
         
         $faq = Faq::findOrFail($faqId);
-        $faq->section = $request->input('section');
         $faq->title = $request->input('title');
+        $faq->order = $request->input('order');
+        $faq->section = $request->input('section');
         $faq->content = $request->input('content');
         $faq->save();
        

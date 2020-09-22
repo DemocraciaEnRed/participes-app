@@ -17,7 +17,7 @@
         </div> --}}
         <div class="w-100">
           <h5 class="is-700">{{ $faq->title }}</h5>
-          <span class="text-smaller text-muted">Sección: {{ $faq->section_label }}</span>
+          <span class="text-smaller text-muted">Sección: {{ $faq->section_label }} / Orden: {{ $faq->order}}</span>
         </div>
         <div class="text-right">
           <a href="{{ route('admin.faqs.edit', ['faqId' => $faq->id]) }}" class="btn btn-link btn-sm"><i class="fas fa-pencil-alt fa-fw"></i>Editar</a>

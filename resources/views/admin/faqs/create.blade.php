@@ -21,13 +21,23 @@
       <input type="text" class="form-control" name="title" placeholder="Ingrese aquí" maxlength="255" >
       <small class="form-text text-muted">Hasta 550 caracteres</small>
     </div>
-     <div class="form-group">
-      <label><b>Sección</b></label>
-      <select class="custom-select" name="section">
-        <option value="general">Acerca De</option>
-        <option value="faq">Ayuda</option>
-        <option value="legal">Información Legal</option>
-      </select>
+    <div class="form-row">
+      <div class="col">
+        <div class="form-group">
+          <label><b>Sección</b></label>
+          <select class="custom-select" name="section">
+            <option value="general">Acerca De</option>
+            <option value="faq">Ayuda</option>
+            <option value="legal">Información Legal</option>
+          </select>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label><b>Orden</b></label>
+          <input type="number" class="form-control" name="order" value="0" placeholder="Ingrese aquí" min="0" max="100">
+        </div>
+      </div>
     </div>
     <div class="form-group">
       <label><b>Texto</b></label>
