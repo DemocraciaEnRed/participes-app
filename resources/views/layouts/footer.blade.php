@@ -18,7 +18,8 @@
       <p>{!! nl2br(e(app_setting('app_footer_contact_info'))) !!}</p>
     </div>
     <div class="col-lg-2 mb-0">
-      Desarrollado con <i class="far fa-heart text-danger"></i> por Democracia en Red
+      <a href="https://democraciaenred.org" target="_blank"><img src="{{asset('img/der-black.svg')}}" class="footer-logo" alt="Democracia en Red"></a>
+      <br>Desarrollado con <i class="far fa-heart text-danger"></i> por Democracia en Red
     </div>
   </div>
 </div>
