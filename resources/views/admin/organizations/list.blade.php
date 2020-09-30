@@ -30,7 +30,7 @@
   @empty
   <div class="card my-3 shadow-sm">
       <div class="card-body text-center">
-        <h6>No hay objetivos creados</h6>
+        <h6>No hay organizaciones creadas</h6>
       </div>
     </div>
   @endforelse
