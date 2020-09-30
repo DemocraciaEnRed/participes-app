@@ -15,6 +15,8 @@ use App\ImageFile;
 use App\User;
 use App\Event;
 use App\Objective;
+use App\Goal;
+use App\Report;
 use App\ActionLog;
 use App\Faq;
 use App\Setting;
@@ -43,8 +45,22 @@ class AdminPanelController extends Controller
     }
 
     public function index(Request $request){
-        return view('admin.index');
+        $countUsers = User::count();
+        $countUsersNotVerified = User::where('email_verified_at')->count();
+        $countObjectives = Objective::count();
+        $countGoals = Goal::count();
+        $countReports = Report::count();
+        $logs = ActionLog::orderBy('record_datetime','DESC')->take(15)->get();
+        return view('admin.index', [
+            'users_registered_count' => $countUsers,
+            'users_unverified_count' => $countUsersNotVerified,
+            'objectives_count' => $countObjectives,
+            'goals_count' => $countGoals,
+            'reports_count' => $countReports,
+            'logs' => $logs
+        ]);
     }
+
 
     // ====================================
     // Admin - Categories
