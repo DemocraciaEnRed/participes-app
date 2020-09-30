@@ -53,24 +53,46 @@
           </span>
           <span
             class="menububble__button"
+            :class="{ 'is-active': isActive.bullet_list() }"
+            @click="commands.bullet_list"
+          >
+            <i class="fas fa-list-ul fa-fw"></i>
+          </span>
+          <span
+            class="menububble__button"
             :class="{ 'is-active': isActive.link() }"
             @click="showLinkMenu(getMarkAttrs('link'))"
           >
             <span style="font-size:10px;">{{ isActive.link() ? 'Cambiar ' : ''}}</span>
             <i class="fas fa-link fa-fw"></i>
           </span>
+          <span
+            class="menububble__button"
+            :class="{ 'is-active': isActive.heading({ level: 4 }) }"
+            @click="commands.heading({ level: 4 })"
+          >
+            <i class="fas fa-heading fa-fw fa-lg"></i>
+          </span>
+           <span
+            class="menububble__button"
+            :class="{ 'is-active': isActive.heading({ level: 5 }) }"
+            @click="commands.heading({ level: 5 })"
+          >
+            <i class="fas fa-heading fa-fw"></i>
+          </span>
+          
         </template>
       </div>
     </editor-menu-bubble>
     <editor-content class="tiptap-editor-content" :editor="editor" />
   	<small class="form-text text-muted"><span class="text-info"><i class="far fa-lightbulb"></i>&nbsp; ¡Este campo soporta formato!</span> Para agregar formato al texto, seleccione la porción a aplicar formato y un pop-up aparecerá sobre el mismo con las opciones disponibles.</small>
-    <input type="hidden" :name="name" :value="json">
+    <input type="hidden" :name="name" :value="inputValue">
   </div>
 </template>
 
 <script>
 import { Editor, EditorContent, EditorMenuBubble } from "tiptap";
-import { Bold, Italic, Underline, Link } from "tiptap-extensions";
+import { Bold, Italic, Underline, Link, Heading, BulletList, ListItem } from "tiptap-extensions";
 
 export default {
   props: {
@@ -82,8 +104,12 @@ export default {
       type: Boolean,
       default: false
     },
+    format: {
+      type: String,
+      default: 'json'
+    },
     content: {
-      type: Object,
+      type: [String, Object],
       default: () => ({
         type: "doc",
         content: [
@@ -146,7 +172,7 @@ export default {
       html: '<p>Error</p>',
       editor: new Editor({
         editable: !this.disabled,
-        extensions: [new Link(), new Bold(), new Italic(), new Underline()],
+        extensions: [new Link(), new Bold(), new Italic(), new Underline(), new ListItem(), new BulletList(), new Heading({levels: [4, 5]})],
         content: this.content,
         onUpdate: ({ getJSON, getHTML }) => {
           this.json = JSON.stringify(getJSON())
@@ -156,6 +182,13 @@ export default {
       linkUrl: null,
       linkMenuIsActive: false
     };
+  },
+  mounted: function(){
+    setTimeout(() => {
+      this.json = JSON.stringify(this.editor.getJSON())
+      this.html = this.editor.getHTML()
+      console.log('Editor ---- Updated Input')
+    }, 800)
   },
   beforeDestroy() {
     this.editor.destroy();
@@ -175,6 +208,13 @@ export default {
     setLinkUrl(command, url) {
       command({ href: url });
       this.hideLinkMenu();
+    }
+  },
+  computed: {
+    inputValue: function(){
+      if(this.format == 'html') return this.html
+      if(this.format == 'json') return this.json
+      return this.json
     }
   }
 };

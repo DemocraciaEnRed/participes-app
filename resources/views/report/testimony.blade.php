@@ -9,6 +9,7 @@
             <form action="{{route('reports.testimonies.form',['reportId' => $report->id])}}" method="POST">
             @csrf
             <button class="btn btn-dark is-700"><i class="fas fa-times"></i> Quitar mi feedback</button>
+            <a href="#comentarios" class="btn btn-light is-700"><i class="far fa-comment"></i> Dejar un comentario</a>
           </form>
         </div>
       </div>
@@ -22,6 +23,7 @@
           <form action="{{route('reports.testimonies.form',['reportId' => $report->id])}}" method="POST">
             @csrf
             <button class="btn btn-success is-700"><i class="fas fa-check"></i> ¡Estoy de acuerdo!</button>
+            <a href="#comentarios" class="btn btn-light is-700"><i class="far fa-comment"></i> Dejar un comentario</a>
           </form>
         </div>
       </div>
@@ -45,7 +47,7 @@
     <div class="text-right">
       <h5 class="is-700 text-white">Si te gustó el reporte, ¡Dejanos tu feedback!</h5>
       <a href="{{route('login')}}" class="btn btn-success is-700"><i class="fas fa-check"></i> ¡Estoy de acuerdo!</a>
-      <a href="#comentarios" class="btn btn-light is-700"><i class="far fa-comment"></i> Dejar un comentario</a>
+      <a href="{{route('login')}}" class="btn btn-light is-700"><i class="far fa-comment"></i> Dejar un comentario</a>
     </div>
   </div>
 </div>

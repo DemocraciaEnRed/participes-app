@@ -7,10 +7,12 @@ use App\User;
 use App\Objective;
 use App\Goal;
 use App\Report;
+use App\Setting;
 use App\Observers\UserObserver;
 use App\Observers\ObjectiveObserver;
 use App\Observers\GoalObserver;
 use App\Observers\ReportObserver;
+use App\Observers\SettingObserver;
 
 use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
@@ -40,6 +42,7 @@ class AppServiceProvider extends ServiceProvider
         Objective::observe(ObjectiveObserver::class);
         Goal::observe(GoalObserver::class);
         Report::observe(ReportObserver::class);
+        Setting::observe(SettingObserver::class);
         
         //
         Blade::if('hasRole', function ($roles) {

@@ -7,7 +7,7 @@
         <div class="form-group mb-2">
         <textarea v-model="comment" rows="2" class="form-control text-smaller" placeholder="Deje aquí su respuesta..." v-if="!sent" :disabled="isLoading"></textarea>
         </div>
-        <button class="btn btn-outline-primary text-smallest btn-sm" @click="submit" v-if="!isLoading && !sent"><i class="fas fa-paper-plane"></i>&nbsp;Guardar</button>
+        <button class="btn btn-outline-primary text-smallest btn-sm" @click="submit" v-if="!isLoading && !sent && this.comment"><i class="fas fa-paper-plane"></i>&nbsp;Enviar</button>
         <p class="text-smaller mb-0 animate__animated animate__flash animate__infinite text-primary" v-if="isLoading && !sent"><i class="fas fa-spin fa-sync"></i>&nbsp;Enviando respuesta...</p>
     </div>
   </div>
@@ -27,8 +27,8 @@ export default {
   },
   methods: {
     submit: function(){
-      this.isLoading = true;
       if(!this.comment || !this.user) return
+      this.isLoading = true;
       this.$http.post(this.url, {
         content: this.comment
       })

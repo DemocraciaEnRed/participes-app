@@ -29,8 +29,14 @@ $currentRoute = Route::currentRouteName();
 <a href="{{ route('admin.administrators.add') }}" class="item-link {{ $currentRoute == 'admin.administrators.add' ? 'is-active' : null }}"><i class="fas fa-plus"></i>&nbsp;Agregar</a>
   <a href="{{ route('admin.administrators') }}" class="item-link {{ $currentRoute == 'admin.administrators' ? 'is-active' : null }}">Listar</a>
 </div>
+<h6 class="category"><i class="fas fa-question-circle fa-fw"></i>&nbsp;Preguntas Frecuentes</h6>
+<div class="menu-link">
+<a href="{{ route('admin.faqs.create') }}" class="item-link {{ $currentRoute == 'admin.faqs.create' ? 'is-active' : null }}"><i class="fas fa-plus"></i>&nbsp;Agregar</a>
+  <a href="{{ route('admin.faqs') }}" class="item-link {{ $currentRoute == 'admin.faqs' ? 'is-active' : null }}">Listar</a>
+</div>
 <h6 class="category"><i class="fas fa-cog fa-fw"></i>&nbsp;Administrar</h6>
 <div class="menu-link">
 <a href="{{ route('admin.logs') }}" class="item-link {{ $currentRoute == 'admin.logs'  ? 'is-active' : null }}">Bitacora de eventos</a>
+<a href="{{ route('admin.settings') }}" class="item-link {{ $currentRoute == 'admin.settings'  ? 'is-active' : null }}">Configuración</a>
 
 </div>

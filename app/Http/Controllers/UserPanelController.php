@@ -67,6 +67,24 @@ class UserPanelController extends Controller
         $notifications = $request->user()->notifications()->paginate(10);
         return view('panel.notifications.list', ['notifications' => $notifications]);
     }
+
+    public function viewAccountData(Request $request){
+
+        return view('panel.account.data');
+    }
+
+    public function formAccountData(Request $request){
+        $rules = [
+            'organization' => 'nullable|string|max:550',
+        ];
+        $request->validate($rules);
+        
+        $user = User::find(auth()->user()->id);
+        $user->organization = $request->input('organization');
+        $user->save();
+        return redirect()->route('panel.account.data')->with('success','Se han actualizado los datos');
+    }
+
     public function viewAccountAvatar(Request $request){
         return view('panel.account.avatar');
 

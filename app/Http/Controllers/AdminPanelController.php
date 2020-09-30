@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Cache;
 use Storage;
 use Image;
 use Log;
@@ -14,7 +15,11 @@ use App\ImageFile;
 use App\User;
 use App\Event;
 use App\Objective;
+use App\Goal;
+use App\Report;
 use App\ActionLog;
+use App\Faq;
+use App\Setting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Exports\ObjectivesExport;
@@ -40,8 +45,22 @@ class AdminPanelController extends Controller
     }
 
     public function index(Request $request){
-        return view('admin.index');
+        $countUsers = User::count();
+        $countUsersNotVerified = User::where('email_verified_at')->count();
+        $countObjectives = Objective::count();
+        $countGoals = Goal::count();
+        $countReports = Report::count();
+        $logs = ActionLog::orderBy('record_datetime','DESC')->take(15)->get();
+        return view('admin.index', [
+            'users_registered_count' => $countUsers,
+            'users_unverified_count' => $countUsersNotVerified,
+            'objectives_count' => $countObjectives,
+            'goals_count' => $countGoals,
+            'reports_count' => $countReports,
+            'logs' => $logs
+        ]);
     }
+
 
     // ====================================
     // Admin - Categories
@@ -254,6 +273,76 @@ class AdminPanelController extends Controller
         $organization = Organization::findOrFail($organizationId);
         $organization->delete();
         return redirect()->route('admin.organizations')->with('success','La organizacion ha sido eliminada correctamente');
+    }
+    // ====================================
+    // Admin FAQS
+    // ====================================
+
+    public function viewListFaqs(Request $request){
+      $faqs = Faq::orderBy('section','ASC')->orderBy('order','ASC')->paginate(10);
+      return view('admin.faqs.list',['faqs' => $faqs]);
+    }
+    public function viewCreateFaq(Request $request){
+        return view('admin.faqs.create');
+    }
+    public function formCreateFaq(Request $request){
+        $rules = [
+            'section' => 'required|string|max:225',
+            'title' => 'required|string|max:550',
+            'order' => 'required|integer|min:0',
+            'content' => 'required|string',
+        ];
+        $request->validate($rules);
+        
+        // Handle data
+        $faq = new Faq();
+        $faq->title = $request->input('title');
+        $faq->order = $request->input('order');
+        $faq->section = $request->input('section');
+        $faq->content = $request->input('content');
+        $faq->save();
+        
+        return redirect()->route('admin.faqs')->with('success','La pregunta frecuente ha sido creada correctamente');
+    }
+    public function viewEditFaq(Request $request, $faqId){
+        $faq = Faq::findOrFail($faqId);
+        return view('admin.faqs.edit',['faq' => $faq]);
+    }
+    public function formEditFaq(Request $request, $faqId){
+        $rules = [
+            'section' => 'required|string|max:225',
+            'title' => 'required|string|max:225',
+            'order' => 'required|integer|min:0',
+            'content' => 'required|string',
+        ];
+
+        $request->validate($rules);
+        
+        $faq = Faq::findOrFail($faqId);
+        $faq->title = $request->input('title');
+        $faq->order = $request->input('order');
+        $faq->section = $request->input('section');
+        $faq->content = $request->input('content');
+        $faq->save();
+       
+        return redirect()->route('admin.faqs')->with('success','La pregunta frecuente ha sido editada correctamente');
+    }
+    public function viewDeleteFaq(Request $request, $faqId){
+        $faq = Faq::findOrFail($faqId);
+        return view('admin.faqs.delete',['faq' => $faq]);
+    }
+
+    public function formDeleteFaq(Request $request, $faqId){
+        $rules = [
+            'password' =>  ['required', new MatchOldPassword],
+        ];
+
+        $request->validate($rules);
+
+        $faq = Faq::findOrFail($faqId);
+        $faq->delete();
+
+        return redirect()->route('admin.faqs')->with('success','La pregunta frecuente ha sido eliminada correctamente');
     }
     // ====================================
     // Admin Administrators
@@ -631,6 +720,67 @@ class AdminPanelController extends Controller
 
         
         return redirect()->route('admin.events')->with('success','El evento ha sido eliminado correctamente');
+    }
+
+    public function viewEditSettings(Request $request)
+    {
+        $settings = Setting::all()->keyBy('name');
+        return view('admin.settings.edit',['settings' => $settings]);
+    }
+    public function formEditSetting(Request $request)
+    {
+        $rules = [
+            'name' =>  'required|string',
+            'type' =>  'required|string',
+            'value' => 'nullable|string',
+        ];
+
+        $request->validate($rules);
+
+        $setting = Setting::where('name', $request->input('name'))->first();
+        $setting->name = $request->input('name');
+        $setting->type = $request->input('type');
+        $setting->value = $request->input('value');
+        $setting->cached = $request->boolean('cached');
+        $setting->save();
+        return redirect()->route('admin.settings')->with('success','Configuración guardada');
+
+    }
+    public function formEditFileSetting(Request $request)
+    {
+        $rules = [
+            'name' =>  'required|string',
+            'type' =>  'required|string',
+            'file' => 'required|file|max:102400',
+        ];
+
+        $request->validate($rules);
+
+        $setting = Setting::where('name', $request->input('name'))->first();
+        $setting->name = $request->input('name');
+        $setting->type = $request->input('type');
+        $setting->cached = $request->boolean('cached');
+        if($request->hasFile('file')){
+            $file = $request->file('file');
+            // Get Extension
+            $fileExtension = strtolower($file->getClientOriginalExtension());
+            $uniqueHash = substr(uniqid(),-5);
+            $fileName = $setting->name.'-'.$uniqueHash.'.'.$fileExtension;
+            $filePath = '/storage/settings/'.$fileName;
+            $file->storeAs('/',$fileName,'settings');
+            $setting->value = $filePath;
+        }
+        $setting->save();
+        return redirect()->route('admin.settings')->with('success','Configuración guardada');
+
+    }
+    public function clearCacheSettings(Request $request)
+    {
+        $settings = Setting::all();
+        foreach ($settings as $setting) {
+            Cache::put($setting->name, $setting->value);
+        }
+        return view('admin.events.delete',['event' => $event]);
     }
 
 }

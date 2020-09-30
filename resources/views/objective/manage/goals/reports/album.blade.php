@@ -4,7 +4,7 @@
 
 <section>
   <h3 class="is-700">Album de fotos</h3>
-  <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe culpa odio cumque eaque fuga dolor beatae ullam, voluptate corrupti quam facere quisquam a dolore rerum atque molestiae qui minus nam!</p>
+  <p class="lead">En esta sección encontrarás todas las fotos asociadas al reporte</p>
   <h5 class="font-weight-bold"><i class="fas fa-upload"></i> Nueva imagen</h5>
   <p>Debe ser una imagen JPG o JPEG , hasta 8 MB. Si el ancho de la imagen es mayor a 1366px, sera ajustada a este
     tamaño.</p>  
@@ -26,7 +26,7 @@
     </form>
   </div>
   @empty
-  <p class="text-muted">No hay fotos cargadas en el evento</p>
+  <p class="text-muted">No hay fotos cargadas en el reporte</p>
   @endforelse
   {{ $photos->links() }}
 </section>

@@ -20,7 +20,8 @@ class User extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'surname' => $this->surname,
-            'avatar' => $this->avatar
+            'organization' => $this->organization,
+            'avatar' => $this->avatar,
         ];
 
         $user = Auth::user();

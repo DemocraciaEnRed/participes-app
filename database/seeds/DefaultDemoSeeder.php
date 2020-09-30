@@ -12,6 +12,7 @@ use App\Community;
 use App\Report;
 use App\Goal;
 use App\Milestone;
+use App\Setting;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;

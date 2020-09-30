@@ -6,8 +6,8 @@
       @map-init="mapInitialized"
       @map-load="mapLoaded"
     />
-    <div class="alert alert-info my-3" v-if="currentMarkers.length == 0 && !isLoading">
-      <i class="fas fa-exclamation-triangle"></i>&nbsp;¡No hay reportes geolocalizados!
+    <div class="alert alert-dark my-3" v-if="currentMarkers.length == 0 && !isLoading">
+      <i class="fas fa-info-circle"></i>&nbsp; No hay reportes geolocalizados
     </div>
     <paginator class="mt-3" v-if="paginatorData.meta && paginatorData.meta.last_page > 1 && paginated" :paginatorData="paginatorData" @updateData="updateData" />
   </section>
@@ -111,11 +111,6 @@ export default {
         let marker = new mapboxgl.Marker(el).setLngLat([report.map_long,report.map_lat]).setPopup(popup).addTo(this.map)
         return marker
       })
-      if(this.reports.length == 0){
-        this.$toasted.show('El objetivo no cuenta con reportes geolocalizados', {icon: 'exclamation-triangle'})
-      } else {
-        // this.$toasted.success('¡Se cargaron los marcadores!',{icon: 'map-marker-alt', duration: 2000})
-      }
     },
     updateData: function(data){
       this.reports = data.data

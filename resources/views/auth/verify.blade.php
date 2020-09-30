@@ -5,7 +5,7 @@
 	<div class="row justify-content-center">
 		<div class="col-md-8 text-center">
 				<div class="text-center">
-				<img src="{{asset('img/participes-white.svg')}}" width="300" class="img-fluid mb-5 mt-2"
+				<img src="{{asset(app_setting('app_logo_white','img/default-logo-white.svg'))}}" class="img-fluid mb-5 logo-home-smaller mt-2"
 					alt="{{ config('app.name', 'Laravel') }}">
 			</div>
 			<div class="card shadow-sm">
