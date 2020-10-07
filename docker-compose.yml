@@ -27,6 +27,8 @@ services:
       - 'mysql'
       - 'redis'
     restart: unless-stopped
+    networks:
+      - participes
 
   nginx:
     image: nginx
@@ -43,10 +45,12 @@ services:
         source: ./docker/nginx/conf.d/app.conf
         target: /etc/nginx/conf.d/default.conf
     restart: unless-stopped
+    networks:
+      - participes
 
   queue:
     image: democraciaenred/participes-app:testing
-    depends_on: 
+    depends_on:
       - 'app'
     environment:
       APP_ENV: local
@@ -55,6 +59,8 @@ services:
       SESSION_DRIVER: redis
       QUEUE_DRIVER: redis
       REDIS_HOST: redis
+    networks:
+      - participes
 
   redis:
     image: redis
@@ -62,6 +68,8 @@ services:
       - 6379:6379
     volumes:
       - redis:/data
+    networks:
+      - participes
 
   mysql:
     image: mysql:5.7
@@ -71,7 +79,13 @@ services:
       MYSQL_USER: laravel
       MYSQL_PASSWORD: laravel
     restart: unless-stopped
+    networks:
+      - participes
 
 volumes:
   public_dir:
   redis:
+
+networks:
+  participes:
+    driver: bridge
