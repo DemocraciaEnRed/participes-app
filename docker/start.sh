@@ -2,6 +2,10 @@
 
 set -e
 
+if [ -f .env ]; then
+   rm .env
+fi
+
 app_name=${APP_NAME:-example}
 app_env=${APP_ENV:-app}
 app_key=$(openssl rand -base64 32)
