@@ -7,6 +7,10 @@ app_env=${APP_ENV:-app}
 app_key=$(openssl rand -base64 32)
 app_debug=${APP_DEBUG:-false}
 app_url=${APP_URL:-http://localhost}
+nocaptcha_secret=${NOCAPTCHA_SECRET}
+nocaptcha_sitekey=${NOCAPTCHA_SITEKEY}
+mapbox_api_key=${MAPBOX_API_KEY}
+mapbox_map_style=${MAPBOX_MAP_STYLE}
 log_channel=${LOG_CHANNEL:-stack}
 db_connection=${DB_CONNECTION:-mysql}
 db_host=${DB_HOST:-localhost}
@@ -45,6 +49,10 @@ echo "APP_ENV=$app_env" >> .env
 echo "APP_KEY=base64:$app_key" >> .env
 echo "APP_DEBUG=$app_debug" >> .env
 echo "APP_URL=$app_url" >> .env
+echo "NOCAPTCHA_SECRET=$nocaptcha_secret" >> .env
+echo "NOCAPTCHA_SITEKEY=$nocaptcha_sitekey" >> .env
+echo "MAPBOX_API_KEY=$mapbox_api_key" >> .env
+echo "MAPBOX_MAP_STYLE=$mapbox_map_style" >> .env
 echo "LOG_CHANNEL=$log_channel" >> .env
 echo "DB_CONNECTION=$db_connection" >> .env
 echo "DB_HOST=$db_host" >> .env
@@ -89,7 +97,7 @@ role=${CONTAINER_ROLE:-app}
 
 if [ "$app_env" != "local" ]; then
     echo "Caching configuration..."
-    su www -p -c 'php artisan config:cache && php artisan view:cache'
+    su www -p -c 'php artisan clear-compiled && php artisan config:cache && php artisan view:cache && php artisan optimize && php artisan storage:link'
 fi
 
 if [ "$role" = "app" ]; then
