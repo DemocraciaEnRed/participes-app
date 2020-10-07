@@ -32,7 +32,7 @@ RUN pecl install -o -f redis && rm -rf /tmp/pear && docker-php-ext-enable redis
 # Install composer and setup dependencies
 COPY --chown=www:www . .
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-RUN composer install -vvv && chown -R www:www .
+RUN composer install && chown -R www:www .
 
 # Setup entrypoint (including development script)
 RUN cp docker/start.sh /usr/local/bin/start && chmod +x /usr/local/bin/start

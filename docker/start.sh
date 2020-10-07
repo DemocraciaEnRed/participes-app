@@ -101,7 +101,9 @@ role=${CONTAINER_ROLE:-app}
 
 if [ "$app_env" != "local" ]; then
     echo "Caching configuration..."
-    su www -p -c 'php artisan clear-compiled && php artisan config:cache && php artisan view:cache && php artisan optimize && php artisan storage:link'
+    su www -p -c 'php artisan clear-compiled && php artisan config:cache && php artisan view:cache && php artisan optimize'
+    echo "Creating symbolic link..."
+    su www -p -c 'rm ./public/storage && php artisan storage:link'
 fi
 
 if [ "$role" = "app" ]; then
