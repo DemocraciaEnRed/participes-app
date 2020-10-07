@@ -3,10 +3,14 @@ services:
   app:
     image: democraciaenred/participes-app:testing
     environment:
-      APP_ENV: production
+      APP_ENV: staging
       APP_NAME: Participes
       APP_DEBUG: 'true'
       APP_URL: http://localhost
+      NOCAPTCHA_SECRET: 
+      NOCAPTCHA_SITEKEY: 
+      MAPBOX_API_KEY: 
+      MAPBOX_MAP_STYLE: 
       CONTAINER_ROLE: app
       DB_CONNECTION: mysql
       DB_HOST: mysql
@@ -14,8 +18,19 @@ services:
       DB_DATABASE: laravel
       DB_USERNAME: laravel
       DB_PASSWORD: laravel
+      QUEUE_CONNECTION: redis
+      REDIS_CLIENT: predis
       REDIS_HOST: redis
       REDIS_PORT: 6379
+      REDIS_QUEUE: mailer,default
+      MAIL_MAILER: smtp
+      MAIL_HOST: 
+      MAIL_PORT: 
+      MAIL_USERNAME:
+      MAIL_PASSWORD: 
+      MAIL_ENCRYPTION: 
+      MAIL_FROM_ADDRESS:
+      MAIL_FROM_NAME: 
     volumes:
       - public_dir:/var/www/html
       - ./docker/php/php.ini:/usr/local/etc/php/php.ini
