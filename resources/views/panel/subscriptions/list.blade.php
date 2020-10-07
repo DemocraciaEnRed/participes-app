@@ -15,7 +15,7 @@
           <div class="w-100">
             <span class="" style="color:{{$objective->category->color}}">{{$objective->category->title}}</span>
             <h4 class="is-700 my-1">
-              <a href="{{route('objectives.manage.index',['objectiveId' => $objective->id])}}" class="text-dark">{{$objective->title}}</a>
+              <a href="{{route('objectives.index',['objectiveId' => $objective->id])}}" class="text-dark">{{$objective->title}}</a>
             </h4>
             <p class="text-muted text-smaller my-1">{{Str::limit($objective->content, 200, $end=' [...]')}}</p> 
             <p class="text-muted text-smaller mb-0">Suscripto el @datetime($objective->pivot->created_at)</p>
