@@ -70,6 +70,7 @@ class ObjectivePanelController extends Controller
           'tags.*' => 'required|string|max:100' ,
           'organizations' => 'array' ,
           'organizations.*' => 'required|numeric' ,
+          'notify' => 'nullable|string|in:true',
       ];
       $request->validate($rules);
 
