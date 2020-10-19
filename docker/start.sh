@@ -111,8 +111,15 @@ fi
 if [ "$role" = "app" ]; then
     echo "Migration..."
     su www -p -c 'php artisan migrate --force'
+
+    echo "Checking if link exists..."
+    if [ -L ./public/storage ]; then
+        echo "Removing storage link..."
+        rm ./public/storage
+    fi
+
     echo "Creating symbolic link..."
-    su www -p -c 'rm ./public/storage && php artisan storage:link'
+    su www -p -c 'php artisan storage:link'
 
     php-fpm
 
