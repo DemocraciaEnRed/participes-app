@@ -86,6 +86,7 @@ Route::group([
     // Settings
     Route::get('/configuracion/editar', 'AdminPanelController@viewEditSettings')->name('settings');
     Route::put('/configuracion/editar', 'AdminPanelController@formEditSetting')->name('settings.form');
+    Route::put('/configuracion/editar/map', 'AdminPanelController@formEditMapSetting')->name('settings.form.map');
     Route::put('/configuracion/editar/file', 'AdminPanelController@formEditFileSetting')->name('settings.form.file');
     Route::post('/configuracion/cache', 'AdminPanelController@clearCacheSettings')->name('settings.cache');
     // Categorias

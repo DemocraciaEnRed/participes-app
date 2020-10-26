@@ -49,7 +49,7 @@ Vue.component('input-file', require('./components/inputs/InputFile.vue').default
 Vue.component('input-add-milestones-create-goal', require('./components/inputs/InputAddMilestonesCreateGoal.vue').default);
 Vue.component('text-editor', require('./components/inputs/TextEditor.vue').default);
 Vue.component('report-comments', require('./components/comments/ReportComments.vue').default);
-Vue.component('mapita', require('./components/maps/Mapita.vue').default);
+// Vue.component('mapita', require('./components/maps/Mapita.vue').default);
 Vue.component('set-map-default', require('./components/maps/SetMapDefault.vue').default);
 Vue.component('draw-map', require('./components/maps/DrawMap.vue').default);
 Vue.component('map-reports', require('./components/maps/MapReports.vue').default);

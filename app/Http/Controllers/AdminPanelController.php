@@ -746,6 +746,32 @@ class AdminPanelController extends Controller
         return redirect()->route('admin.settings')->with('success','Configuración guardada');
 
     }
+
+    public function formEditMapSetting(Request $request)
+    {
+        $rules = [
+            'map_lat' => 'nullable|numeric',
+            'map_long' => 'nullable|numeric',
+            'map_zoom' => 'nullable|numeric',
+        ];
+        $request->validate($rules);
+
+        $settingLat = Setting::where('name', 'app_map_lat_default')->first();
+        $settingLong = Setting::where('name', 'app_map_long_default')->first();
+        $settingZoom = Setting::where('name', 'app_map_zoom_default')->first();
+
+        if ($request->has(['map_lat', 'map_long', 'map_zoom'])) {
+            $settingLat->value = $request->input('map_lat');
+            $settingLong->value = $request->input('map_long');
+            $settingZoom->value = $request->input('map_zoom');
+        }
+        $settingLat->save();
+        $settingLong->save();
+        $settingZoom->save();
+        
+        return redirect()->route('admin.settings')->with('success','Configuración guardada');
+    }
+    
     public function formEditFileSetting(Request $request)
     {
         $rules = [

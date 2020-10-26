@@ -1,5 +1,13 @@
 @extends('admin.master')
 
+@section('stylesheets')
+<link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' />
+@endsection
+
+@section('headscripts')
+<script src='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js'></script>
+@endsection
+
 @section('adminContent')
 
 <section>
@@ -23,6 +31,8 @@
   @include('admin.settings.app_logo_footer')
   <hr>
   @include('admin.settings.app_favicon')
+  <hr>
+  @include('admin.settings.app_map_default')
   <hr>
   @include('admin.settings.app_home_subtitle')
   <hr>
