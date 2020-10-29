@@ -69,11 +69,29 @@ services:
       - 'app'
     environment:
       APP_ENV: local
+      APP_NAME: Participes
+      APP_DEBUG: 'true'
+      APP_URL: http://localhost
       CONTAINER_ROLE: queue
-      CACHE_DRIVER: redis
-      SESSION_DRIVER: redis
-      QUEUE_DRIVER: redis
+      DB_CONNECTION: mysql
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: laravel
+      DB_USERNAME: laravel
+      DB_PASSWORD: laravel
+      QUEUE_CONNECTION: redis
+      REDIS_CLIENT: predis
       REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_QUEUE: mailer,default
+      MAIL_MAILER: smtp
+      MAIL_HOST: 
+      MAIL_PORT: 
+      MAIL_USERNAME: 
+      MAIL_PASSWORD: 
+      MAIL_ENCRYPTION: 
+      MAIL_FROM_ADDRESS: 
+      MAIL_FROM_NAME: 
     networks:
       - participes
 
