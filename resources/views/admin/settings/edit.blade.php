@@ -22,7 +22,7 @@
         </ul>
     </div>
   @endif
-  {{-- <form method="POST" action="{{ route('admin.settings.form') }}" enctype="multipart/form-data"> --}}
+  @include('admin.settings.reset_cache')
   <hr>
   @include('admin.settings.app_logo_color')
   <hr>

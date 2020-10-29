@@ -17,7 +17,7 @@ class SettingObserver
     public function saving(Setting $setting)
     {
       if($setting->cached){
-        Cache::put($setting->name, $setting->value);
+        Cache::put($setting->name, $setting->casted_value);
       }
     }
 }

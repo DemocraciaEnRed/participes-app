@@ -1,8 +1,8 @@
 @php
 $geometry = $report->map_geometries ?: 'undefined';
-$lat = $report->map_lat ?: ($objective->map_lat ?: 'undefined');
-$long = $report->map_long ?: ($objective->map_long ?: 'undefined');
-$zoom = $report->map_zoom ?: ($objective->map_zoom ?: 'undefined');
+$lat = $report->map_lat ?: ($objective->map_lat ?: app_setting('app_map_zoom_default'));
+$long = $report->map_long ?: ($objective->map_long ?: app_setting('app_map_zoom_default'));
+$zoom = $report->map_zoom ?: ($objective->map_zoom ?: app_setting('app_map_zoom_default'));
 @endphp
 
 @extends('objective.manage.goals.reports.master')

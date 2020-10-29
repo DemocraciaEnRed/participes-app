@@ -804,7 +804,7 @@ class AdminPanelController extends Controller
     {
         $settings = Setting::all();
         foreach ($settings as $setting) {
-            Cache::put($setting->name, $setting->value);
+            Cache::put($setting->name, $setting->casted_value);
         }
         return view('admin.events.delete',['event' => $event]);
     }
