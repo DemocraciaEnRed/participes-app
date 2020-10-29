@@ -12,18 +12,18 @@
   @yield('metatags')
 
   <!-- Styles -->
-  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  <link href="{{ mix('css/app.css') }}" rel="stylesheet">
   @yield('stylesheets')
   @yield('headscripts')
 
   <!-- Scripts -->
-  <script src="{{ asset('js/app.js') }}" defer></script>
+  <script src="{{ mix('js/app.js') }}" defer></script>
   <script src="https://kit.fontawesome.com/8da8f66b21.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-  <div id="app">
-    <main class="py-4">
+  <div id="app" class="pb-0">
+    <main class="py-5 bg-white">
       <div class="container">
         @include('partials.flashMessage')
         <h1>Start app</h1>
@@ -38,6 +38,29 @@
     </div>
   @endif
         <div class="row">
+          <div class="col-md-6">
+            <div class="alert alert-warning mb-3">
+              <h4><i class="fas fa-info-circle"></i>&nbsp;Si la aplicación fue iniciada, va a limpiar toda la base de
+                datos</h4>
+              <p class="mb-0">Puede comenzar una demo haciendo clic en <b>Con DEMO</b> </p>
+            </div>
+            <div class="alert alert-light mb-3">
+              <h4><i class="fas fa-info-circle"></i>&nbsp;Acerca de la demo</h4>
+              <p class="">Puede comenzar una demo haciendo clic en <b>Con DEMO</b>. La misma cuenta con:</p>
+              <ul class="mb-0">
+                <li>5 categorías</li>
+                <li>25 organizaciones</li>
+                <li>50 usuarios</li>
+                <li>20 objetivos</li>
+                <li>7 metas por objetivos</li>
+                <li>6 usuarios miembros del equipo de cada objetivo</li>
+                <li>4 usuarios suscriptos por cada objetivo</li>
+                <li>Entre 1 y 9 reportes por meta, siendo, al azar, que sean, de novedad, progreso, o hito.</li>
+                <li>Un 60% de que el reporte sea geolocalizado</li>
+                <li>Un 40% de que haya un reporte que cambie el estado de la meta a completada</li>
+              </ul>
+            </div>
+          </div>
           <div class="col-md-6">
             <form action="{{route('start.form')}}" method="POST">
               @csrf
@@ -124,29 +147,6 @@
               <h4>¿Arrancar aplicación?</h4>
               <button type="submit" class="btn btn-primary">Arrancar</button>
             </form>
-          </div>
-          <div class="col-md-6">
-            <div class="alert alert-warning mb-3">
-              <h4><i class="fas fa-info-circle"></i>&nbsp;Si la aplicación fue iniciada, va a limpiar toda la base de
-                datos</h4>
-              <p class="mb-0">Puede comenzar una demo haciendo clic en <b>Con DEMO</b> </p>
-            </div>
-            <div class="alert alert-light mb-3">
-              <h4><i class="fas fa-info-circle"></i>&nbsp;Acerca de la demo</h4>
-              <p class="">Puede comenzar una demo haciendo clic en <b>Con DEMO</b>. La misma cuenta con:</p>
-              <ul class="mb-0">
-                <li>5 categorías</li>
-                <li>25 organizaciones</li>
-                <li>50 usuarios</li>
-                <li>20 objetivos</li>
-                <li>7 metas por objetivos</li>
-                <li>6 usuarios miembros del equipo de cada objetivo</li>
-                <li>4 usuarios suscriptos por cada objetivo</li>
-                <li>Entre 1 y 9 reportes por meta, siendo, al azar, que sean, de novedad, progreso, o hito.</li>
-                <li>Un 60% de que el reporte sea geolocalizado</li>
-                <li>Un 40% de que haya un reporte que cambie el estado de la meta a completada</li>
-              </ul>
-            </div>
           </div>
         </div>
       </div>
