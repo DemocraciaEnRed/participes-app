@@ -95,7 +95,7 @@
         <input type="checkbox" class="custom-control-input" name="notify" id="notify" value="true">
         <label class="custom-control-label is-clickable" for="notify">Notificar a los suscriptores</label>
       </div>
-      <small class="form-text text-muted">Se le enviará una notificación por email (si lo tienen habilitado) y por sistema a los suscriptores de los objetivos seleccionados, de la creacion del evento invitandolos a verla.</small>
+      <small class="form-text text-muted">Se le enviará una notificación por email (si lo tienen habilitado) y por sistema a los suscriptores de los objetivos seleccionados, de la creacion del evento invitandolos a verlo.</small>
     </div>
     <br>
     <button type="submit" class="btn btn-primary">Crear</button>

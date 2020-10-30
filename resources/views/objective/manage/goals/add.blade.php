@@ -4,7 +4,7 @@
 
 <section>
   <h3 class="is-700">Nueva meta del objetivo</h3>
-  <p class="lead">Para sumar una nueva a tu objetivo, completá los campos a continuación:</p>
+  <p class="lead">Para sumar una nueva meta a tu objetivo, completá los campos a continuación:</p>
   <hr>
     @if ($errors->any())
     <div class="alert alert-danger">
