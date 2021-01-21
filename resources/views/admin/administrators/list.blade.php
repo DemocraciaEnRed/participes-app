@@ -29,7 +29,7 @@
   @empty
   <div class="card shadow-sm my-3">
     <div class="card-body text-center">
-      <i class="far fa-surprise"></i>&nbsp;Ehhh..... no deberias de estar viendo esto vacio... de ser asi.. llama al administrador de sistemas urgentemente.
+      <i class="far fa-surprise"></i>&nbsp;Ehhh... no deberias de estar viendo esto vacio... de ser asi.. llama al administrador de sistemas urgentemente.
     </div>
   </div>
   @endforelse

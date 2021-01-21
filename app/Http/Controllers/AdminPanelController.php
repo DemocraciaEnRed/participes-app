@@ -50,7 +50,7 @@ class AdminPanelController extends Controller
         $countObjectives = Objective::count();
         $countGoals = Goal::count();
         $countReports = Report::count();
-        $logs = ActionLog::orderBy('record_datetime','DESC')->take(15)->get();
+        $logs = ActionLog::where('context->type','!=','notifications')->orWhereNull('context->type')->orderBy('record_datetime','DESC')->take(15)->get();
         return view('admin.index', [
             'users_registered_count' => $countUsers,
             'users_unverified_count' => $countUsersNotVerified,
@@ -442,7 +442,7 @@ class AdminPanelController extends Controller
 
     public function viewLogs(Request $request)
     {
-      $logs = ActionLog::orderBy('record_datetime','DESC')->paginate(25);
+      $logs = ActionLog::where('context->type','!=','notifications')->orWhereNull('context->type')->orderBy('record_datetime','DESC')->paginate(25);
       return view('admin.logs.list',['logs' => $logs]);
     }
 

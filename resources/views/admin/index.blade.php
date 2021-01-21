@@ -3,12 +3,12 @@
 @section('adminContent')
 
 <section>
-  <div class="text-center">
+  <div>
 
   <h1><i class="fas fa-cog fa-fw fa-spin"></i> Administración</h1>
   <p class="lead">Este es el panel de administración de la plataforma Partícipes.</p>
   <hr class="my-4">
-  <div class="card border-light my-3">
+  <div class="card border-light my-3 text-center">
     <div class="card-body py-4 row justify-content-between">
       <div class="col text-center">
         <h6 class="font-weight-bold">Verificados</h6>
