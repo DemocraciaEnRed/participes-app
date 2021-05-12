@@ -28,7 +28,7 @@
         "@turf/center": "^6.0.1",
         "@turf/center-of-mass": "^6.0.1",
         "animate.css": "^4.1.0",
-        "chart.js": "^2.9.3",
+        "chart.js": "^2.9.4",
         "hooper": "^0.3.4",
         "mapbox-gl-vue": "^2.0.4",
         "swiper": "5.4.5",
