@@ -29,9 +29,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $countObjectives = Objective::count();
-        $countGoals = Goal::count();
-        $countGoalsCompleted = Goal::where('status','reached')->count();
+        $countObjectives = Objective::where('hidden',false)->count();
+        $countGoals = Goal::whereHas('objective', function($q) {
+            $q->where('hidden', false);
+        })->count();
+        $countGoalsCompleted = Goal::where('status','reached')->whereHas('objective', function($q) {
+            $q->where('hidden', false);
+        })->count();
         return view('portal.home',[
             'countObjectives' => $countObjectives,
             'countGoals' => $countGoals,
@@ -60,19 +64,37 @@ class HomeController extends Controller
     // --------------------------------
 
     public function fetchStats(Request $request){
-        $countGoals = Goal::count();
-        $countGoalsCompleted = Goal::where('status','reached')->count();
-        $countGoalsOngoin = Goal::where('status','ongoing')->count();
-        $countGoalsDelayed = Goal::where('status','delayed')->count();
-        $countGoalsInactive = Goal::where('status','inactive')->count();
-        $reportsTotal = Report::where('created_at','>=',Carbon::now()->subdays(15))->count();
-        $reportsData = Report::where('created_at', '>=', Carbon::now()->subdays(15))
-                            ->groupBy(DB::raw('DATE(created_at)'))
-                            ->orderBy('date', 'ASC')
-                            ->get(array(
-                                DB::raw('DATE(created_at) as "date"'),
-                                DB::raw('COUNT(*) as "count"')
-                            ));
+        $countGoals = Goal::whereHas('objective', function($q) {
+            $q->where('hidden', false);
+        })->count();
+        $countGoalsCompleted = Goal::whereHas('objective', function($q) {
+            $q->where('hidden', false);
+        })->where('status','reached')->count();
+        $countGoalsOngoin = Goal::whereHas('objective', function($q) {
+            $q->where('hidden', false);
+        })->where('status','ongoing')->count();
+        $countGoalsDelayed = Goal::whereHas('objective', function($q) {
+            $q->where('hidden', false);
+        })->where('status','delayed')->count();
+        $countGoalsInactive = Goal::whereHas('objective', function($q) {
+            $q->where('hidden', false);
+        })->where('status','inactive')->count();
+        $reportsTotal = Report::whereHas('goal', function($q) {
+            $q->whereHas('objective', function($q2) {
+                $q2->where('hidden', false);
+            });
+        })->where('created_at','>=',Carbon::now()->subdays(15))->count();
+        $reportsData = Report::whereHas('goal', function($q) {
+            $q->whereHas('objective', function($q2) {
+                $q2->where('hidden', false);
+            });
+        })->where('created_at', '>=', Carbon::now()->subdays(15))
+            ->groupBy(DB::raw('DATE(created_at)'))
+            ->orderBy('date', 'ASC')
+            ->get(array(
+                DB::raw('DATE(created_at) as "date"'),
+                DB::raw('COUNT(*) as "count"')
+            ));
         return response()->json([
             'message' => 'Ok',
             'data' => [
