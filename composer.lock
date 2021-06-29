@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "673af0126f077ef1f16919ae5d904416",
+    "content-hash": "bcbda0a1185107e1e91b4adc62a3301e",
     "packages": [
         {
             "name": "anhskohbo/no-captcha",
@@ -828,6 +828,69 @@
                 "watermark"
             ],
             "time": "2019-11-02T09:15:47+00:00"
+        },
+        {
+            "name": "ipunkt/laravel-analytics",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ipunkt/laravel-analytics.git",
+                "reference": "0937acbfeb4a9b8781341e087e7c014a44e3798d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ipunkt/laravel-analytics/zipball/0937acbfeb4a9b8781341e087e7c014a44e3798d",
+                "reference": "0937acbfeb4a9b8781341e087e7c014a44e3798d",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": "~5.0 || ^6.0 || ^7.0",
+                "illuminate/session": "~5.0 || ^6.0 || ^7.0",
+                "illuminate/support": "~5.0 || ^6.0 || ^7.0",
+                "php": "^7.2"
+            },
+            "require-dev": {
+                "laravel/framework": "~5.0 || ^6.0 || ^7.0"
+            },
+            "suggest": {
+                "martijnc/php-csp": "For handling Content Security Policy matters"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Ipunkt\\LaravelAnalytics\\AnalyticsServiceProvider"
+                    ],
+                    "aliases": {
+                        "Analytics": "Ipunkt\\LaravelAnalytics\\AnalyticsFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Ipunkt\\LaravelAnalytics\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Robert Kummer",
+                    "email": "r.kummer@ipunkt.biz"
+                }
+            ],
+            "description": "Analytics tracking for Laravel",
+            "keywords": [
+                "analytics",
+                "google analytics",
+                "javascript",
+                "laravel",
+                "php",
+                "statistics"
+            ],
+            "time": "2020-03-17T06:49:57+00:00"
         },
         {
             "name": "laravel/framework",
@@ -5168,6 +5231,7 @@
                 "faker",
                 "fixtures"
             ],
+            "abandoned": true,
             "time": "2019-12-12T13:22:17+00:00"
         },
         {
@@ -6894,12 +6958,12 @@
             "version": "1.9.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/webmozart/assert.git",
+                "url": "https://github.com/webmozarts/assert.git",
                 "reference": "bafc69caeb4d49c39fd0779086c03a3738cbb389"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozart/assert/zipball/bafc69caeb4d49c39fd0779086c03a3738cbb389",
+                "url": "https://api.github.com/repos/webmozarts/assert/zipball/bafc69caeb4d49c39fd0779086c03a3738cbb389",
                 "reference": "bafc69caeb4d49c39fd0779086c03a3738cbb389",
                 "shasum": ""
             },
