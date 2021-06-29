@@ -20,7 +20,7 @@
       </div>
     </div>
       <div class="my-3">
-        @forelse (($objective->tags ?: [] as $tag)
+        @forelse ($objective->tags ?: [] as $tag)
         <li class="list-inline-item"><span class="text-muted text-smallest">{{$tag}}</span></li>
         @empty
         <li class="list-inline-item text-muted">No hay tags</li>
