@@ -19,13 +19,13 @@
         </h6>
       </div>
     </div>
-    <div class="my-3">
-      @forelse ($objective->tags as $tag)
-      <li class="list-inline-item"><span class="text-muted text-smallest">{{$tag}}</span></li>
-      @empty
-      <li class="list-inline-item text-muted">No hay tags</li>
-      @endforelse
-    </div>
+      <div class="my-3">
+        @forelse (($objective->tags ?: [] as $tag)
+        <li class="list-inline-item"><span class="text-muted text-smallest">{{$tag}}</span></li>
+        @empty
+        <li class="list-inline-item text-muted">No hay tags</li>
+        @endforelse
+      </div>
     @if(!$objective->communities->isEmpty())
       <p class="text-smaller text-muted my-2">¡Unite a nuestra comunidad!</p>
       @foreach($objective->communities as $community)

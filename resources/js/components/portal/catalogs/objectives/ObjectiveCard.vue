@@ -8,7 +8,7 @@
         <div class="w-100">
           <p class="my-1 text-smaller" :style="`color:${objective.category.color}`"><i class="fa-fw d-inline-block d-md-none" :class="objective.category.icon" :style="`color: ${objective.category.color}`"></i> {{objective.category.title}}</p>
           <h5 class="my-1"><a :href="objective.url" class="text-dark is-700">{{objective.title}}</a></h5>
-          <p class="m-0 text-muted text-smaller" v-if="objective.tags.length > 0">Tags: {{objective.tags.join(' / ')}}</p>
+          <p class="m-0 text-muted text-smaller" v-if="objective.tags && objective.tags.length > 0">Tags: {{objective.tags.join(' / ')}}</p>
           <p class="m-0 text-muted text-smaller" v-else>Tags: Sin tags cargados</p>
           <p class="m-0 text-muted text-smaller">Publicado {{objective.published_at}}</p>
           </div>
