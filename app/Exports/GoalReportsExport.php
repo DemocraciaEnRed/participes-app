@@ -58,7 +58,7 @@ class GoalReportsExport implements FromCollection, WithMapping, WithHeadings
             implode(', ', $report->tags),
             $report->map_geometries ? 'Si' : 'No',
             (string) $report->comments->count(),
-            (string) $report->positiveTestimonies->count(),
+            (string) $report->positiveTestimonies,
             $report->previous_status_label ?? '-',
             $report->status_label ?? '-',
             $report->previous_progress ? (string) $report->previous_progress : '-',
