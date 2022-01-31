@@ -40,7 +40,7 @@
         <i class="fas fa-exclamation-triangle"></i>&nbsp;El objetivo se encuentra <i class="fas fa-eye-slash"></i> oculto, no se enviarán notificaciones a los usuarios.
       </div>
       @endif
-      <small class="form-text text-muted">Se le enviará una notificación por sistema, de que la meta ha eliminada.</small>
+      <small class="form-text text-muted">Se le enviará una notificación por sistema, de que la meta ha sido eliminada.</small>
     </div>
     <button type="submit" class="btn btn-danger">Eliminar</button>
   </form>
