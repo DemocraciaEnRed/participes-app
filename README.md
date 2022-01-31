@@ -149,7 +149,7 @@ REDIS_QUEUE=mailer,default
 Now in another terminal, run the following in the root directory:
 
 ```
-$ php artisan queue:work redis --queue:mailer,default
+$ php artisan queue:work redis --queue=mailer,default
 ```
 
 Here, one process will work both queues at the same time.
@@ -157,11 +157,11 @@ If you prefer to have two different processes for each job queue, you can open t
 
 ```
 // Terminal 1
-$ php artisan queue:work redis --queue:mailer
+$ php artisan queue:work redis --queue=mailer
 ```
 ```
 // Terminal 2
-$ php artisan queue:work redis --queue:default
+$ php artisan queue:work redis --queue=default
 ```
 
 ## Files - Storage Link
@@ -171,6 +171,13 @@ Run the following command
 ```
 php artisan storage:link
 ```
+
+## Run PHP Server
+
+```
+php artisan server:run
+```
+
 
 ## Build JS and CSS
 
