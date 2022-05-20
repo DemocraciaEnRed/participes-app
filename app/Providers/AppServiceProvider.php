@@ -38,6 +38,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if(config('app.database_1071_specified_key_fix')){
+            Schema::defaultStringLength(191);
+        }
+
+        if(config('app.force_https')){
+            URL::forceScheme('https');
+            // if($this->app->environment('production')){
+            //     \URL::forceScheme('https');
+            // }
+        }
+
         User::observe(UserObserver::class);
         Objective::observe(ObjectiveObserver::class);
         Goal::observe(GoalObserver::class);
