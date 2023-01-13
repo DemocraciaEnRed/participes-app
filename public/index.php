@@ -11,6 +11,30 @@ define('LARAVEL_START', microtime(true));
 
 /*
 |--------------------------------------------------------------------------
+| Maintenance Mode
+|--------------------------------------------------------------------------
+|
+| If the application is in maintenance mode, we will automatically send
+| the response back to the user so they can see the maintenance message
+| instead of having to deal with the errors. This check just makes
+| that simple and works without having to modify the front controller.
+|
+| This comes from updating to Laravel 8
+| https://laravel.com/docs/8.x/upgrade#maintenance-mode
+| The maintenance mode feature of Laravel has been improved in Laravel 8.x.
+| Pre-rendering the maintenance mode template is now supported and eliminates
+| the chances of end users encountering errors during maintenance mode. However,
+| to support this, the following lines must be added to your public/index.php file.
+| These lines should be placed directly under the existing LARAVEL_START constant
+| definition:
+*/
+
+if (file_exists(__DIR__.'/../storage/framework/maintenance.php')) {
+    require __DIR__.'/../storage/framework/maintenance.php';
+}
+
+/*
+|--------------------------------------------------------------------------
 | Register The Auto Loader
 |--------------------------------------------------------------------------
 |

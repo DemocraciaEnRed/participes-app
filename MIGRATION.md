@@ -18,8 +18,23 @@ We manually added the js code to the view and its available by activating it on 
 
 According to the [Laravel 8 Upgrade Guide](https://laravel.com/docs/8.x/upgrade#seeder-and-factory-namespace), the namespace of the seeder and factory classes has changed.
 
-- Changed the folder database/seeds to database/seeders
-- Added namespace Database\Seeders to all the seeder Classes
-- Added namespace Database\Factories to all the factory Classes
-- Changed in composer.json file, removed classmap block from the autoload section and added the new namespaced class directory mappings in the psr-4 block
-- Updated UserFactory with the new structure (https://laravel.com/docs/8.x/database-testing#defining-model-factories)
+- Changed the folder `database/seeds` to `database/seeders`
+- Added namespace `Database\Seeders` to all the seeder Classes
+- Added namespace `Database\Factories` to all the factory Classes
+- Changed in `composer.json` file, removed classmap block from the autoload section and added the new namespaced class directory mappings in the psr-4 block
+- Updated `UserFactory` with the new structure (https://laravel.com/docs/8.x/database-testing#defining-model-factories)
+
+#### Framework changes
+
+- Maintenantce mode update: Changed in `public/index.php`. Read more at: https://laravel.com/docs/8.x/upgrade#maintenance-mode-updates.
+
+#### Queue
+
+- Changed in config/queue.php, "the `failed.driver` configuration option within your `queue` configuration file should be updated to `database-uuids`"
+- Created new migration file for failed_jobs table with uuids and updated the failed_jobs table with the new structure
+```
+
+'driver' => env('QUEUE_FAILED_DRIVER', 'database'),
+(to...)
+'driver' => env('QUEUE_FAILED_DRIVER', 'database-uuids'),
+```
