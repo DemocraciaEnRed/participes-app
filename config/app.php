@@ -194,7 +194,6 @@ return [
          */
         Intervention\Image\ImageServiceProvider::class,
         Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
-        Ipunkt\LaravelAnalytics\AnalyticsServiceProvider::class,
         /*
          * Application Service Providers...
          */
