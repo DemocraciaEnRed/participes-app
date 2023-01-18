@@ -14,10 +14,9 @@ define('LARAVEL_START', microtime(true));
 | Maintenance Mode
 |--------------------------------------------------------------------------
 |
-| If the application is in maintenance mode, we will automatically send
-| the response back to the user so they can see the maintenance message
-| instead of having to deal with the errors. This check just makes
-| that simple and works without having to modify the front controller.
+| If the application is in maintenance / demo mode via the "down" command
+| we will load this file so that any pre-rendered content can be shown
+| instead of starting the framework, which could cause an exception.
 |
 | This comes from updating to Laravel 8
 | https://laravel.com/docs/8.x/upgrade#maintenance-mode

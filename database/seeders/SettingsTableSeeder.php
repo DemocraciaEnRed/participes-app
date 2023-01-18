@@ -92,5 +92,11 @@ class SettingTableSeeder extends Seeder
         $setting->type = 'string';
         $setting->cached = true;
         $setting->save();
+        $setting = new Setting();
+        $setting->name = 'app_google_analytics_4_id';
+        $setting->value = null;
+        $setting->type = 'string';
+        $setting->cached = true;
+        $setting->save();
     }
 }

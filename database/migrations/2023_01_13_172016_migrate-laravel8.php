@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
+use App\Setting;
 
 class MigrateLaravel8 extends Migration
 {
@@ -14,11 +15,12 @@ class MigrateLaravel8 extends Migration
      */
     public function up()
     {
-        //
+        // Needed for Migrating Laravel 7 to 8
         Schema::table('failed_jobs', function (Blueprint $table) {
             $table->string('uuid')->after('id')->nullable()->unique();
         });
 
+        // Populate the uuid column
         DB::table('failed_jobs')->whereNull('uuid')->cursor()->each(function ($job) {
             DB::table('failed_jobs')
                 ->where('id', $job->id)
@@ -33,6 +35,9 @@ class MigrateLaravel8 extends Migration
      */
     public function down()
     {
-        //
+        // Reverse Migrating Laravel 7 to 8
+        Schema::table('failed_jobs', function (Blueprint $table) {
+            $table->dropColumn('uuid');
+        });
     }
 }

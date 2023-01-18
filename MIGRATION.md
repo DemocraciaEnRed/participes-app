@@ -58,3 +58,9 @@ Route::get('/users', 'App\Http\Controllers\UserController@index');
 // TODO
 
 https://laravel.com/docs/8.x/upgrade#automatic-controller-namespace-prefixing
+
+#### Removed fzaninotto/faker dependency
+
+- Removed the package from composer.json because it dropped support.
+- Installed the new package `fakerphp/faker` and updated the code to use the new namespace.
+- Nothing should change in the code because it uses the same namespace.
