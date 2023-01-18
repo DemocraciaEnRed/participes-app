@@ -22,6 +22,14 @@ First, make sure you have instaled:
 - MySQL
 - Node + NPM (For local development and building)
 
+You can use phpbrew to install PHP and composer to install the dependencies.
+```
+phpbrew install 7.3 +default +mysql
+phpbrew use 7.3
+phpbrew ext install gd
+phpbrew ext install imagick
+```
+
 Clone the Repo.
 
 Open a terminal in the root of the project:
