@@ -28,7 +28,7 @@ class DemoSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker\Factory::create('es_AR');
+        $faker = \Faker\Factory::create('es_AR');
         
         $category = new Category();
         $category->title = 'Educacion';
