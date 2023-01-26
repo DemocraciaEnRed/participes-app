@@ -25,7 +25,9 @@
     <script src="{{ mix('js/vendor.js') }}" defer></script>
     <script src="{{ mix('js/manifest.js') }}" defer></script>
     <script src="{{ mix('js/app.js') }}" defer></script>
-    <!-- TODO: Add Google Analytics -->
+    @if (app_setting('app_google_analytics_4_id'))
+       @include('layouts.googleAnalytics')
+    @endif
 </head>
 
 <body>
