@@ -47,8 +47,8 @@ $saluditosIndex = array_rand($saluditos);
 
   @if(!Auth::user()->hasVerifiedEmail())
   <div class="alert alert-warning my-3">
-      <h5 class="is-700"><i class="fas fa-exclamation-triangle"></i>&nbsp;Debe verificar su cuenta</h5>
-      Es importante que verifique su cuenta para comenzar a participar en la plataforma. Para hacerlo, haga <a href="{{ route('panel.account.verify') }}">click aquí<i class="fas fa-arrow-right fa-fw"></i></a>
+    <h5 class="is-700"><i class="fas fa-exclamation-triangle"></i>&nbsp;Debe verificar su cuenta</h5>
+    Es importante que verifique su cuenta para comenzar a participar en la plataforma. Para hacerlo, haga <a href="{{ route('panel.account.verify') }}">click aquí<i class="fas fa-arrow-right fa-fw"></i></a>
   </div>
   @endif
   @if($countUnreadNotifications > 0)
@@ -58,7 +58,7 @@ $saluditosIndex = array_rand($saluditos);
 
   @else
  
-  <h5 class="is-700"><i class="far fa-bell"></i>&nbsp;Mis nofiticaciones</h5>
+  <h5 class="is-700"><i class="far fa-bell"></i>&nbsp;Mis notificaciones</h5>
   <p>Leelas haciendo <a href="{{ route('panel.notifications') }}">click aquí <i
         class="fas fa-arrow-right"></i></a></p>
  
