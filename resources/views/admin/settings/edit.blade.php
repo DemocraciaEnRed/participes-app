@@ -45,6 +45,8 @@
   @include('admin.settings.app_footer_contact_info')
   <hr>
   @include('admin.settings.app_footer_description')
+  <hr>
+  @include('admin.settings.app_google_analytics_4_id')
   {{-- @include('admin.settings.app_social_image') --}}
 
 </section>

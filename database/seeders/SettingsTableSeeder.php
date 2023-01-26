@@ -1,9 +1,11 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Setting;
 use Illuminate\Database\Seeder;
 
-class SettingTableSeeder extends Seeder
+class SettingsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -86,6 +88,12 @@ class SettingTableSeeder extends Seeder
         $setting->save();
         $setting = new Setting();
         $setting->name = 'app_social_image';
+        $setting->value = null;
+        $setting->type = 'string';
+        $setting->cached = true;
+        $setting->save();
+        $setting = new Setting();
+        $setting->name = 'app_google_analytics_4_id';
         $setting->value = null;
         $setting->type = 'string';
         $setting->cached = true;

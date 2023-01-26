@@ -1,15 +1,34 @@
 # Participes
 
-> In development.
+
+
+## Changelog
+
+#### 2023-01-18
+
+* The env vars `ANALYTICS_PROVIDER`, `ANALYTICS_PROVIDER`, `ANALYTICS_TRACKING_ID` are no longer required in the .env file. From now on you can use the admin panel to set up Google Analytics 4 by inserting the tracking ID.
+* Participes has been updated to Laravel 8. It requires PHP 7.4 or higher.
+* New migrations are being added for the new Laravel version. If you installed Participes before 2023, you should run the new migrations. You can do this by running `php artisan migrate` in the root directory of the project. In production you should run `php artisan migrate --force` to avoid any errors.
+* As always, we recommend you to make a backup of your database before running the migrations.
+* Removed fzaninotto/faker dependency for the sake of Laravel 8. Faker 
+
 
 ## Start developing
 
 First, make sure you have instaled:
 
-- PHP +7.2
+- PHP +7.4
 - Imagemagick
 - MySQL
 - Node + NPM (For local development and building)
+
+You can use phpbrew to install PHP and composer to install the dependencies.
+```
+phpbrew install 7.3 +default +mysql
+phpbrew use 7.3
+phpbrew ext install gd
+phpbrew ext install imagick
+```
 
 Clone the Repo.
 
@@ -53,8 +72,6 @@ QUEUE_CONNECTION=sync
 
 NOCAPTCHA_SECRET=
 NOCAPTCHA_SITEKEY=
-ANALYTICS_PROVIDER=GoogleAnalytics
-ANALYTICS_TRACKING_ID=your-tracking-id
 
 MAPBOX_API_KEY=
 MAPBOX_MAP_STYLE=mapbox://styles/mapbox/light-v10
