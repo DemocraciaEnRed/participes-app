@@ -1,6 +1,8 @@
 # Participes
 
+Plataforma digital para gobiernos e instituciones que permite la publicación de metas y compromisos, facilitando el seguimiento de avances y la transparencia activa.
 
+![image](https://user-images.githubusercontent.com/8771166/215751657-244b7d63-0345-4432-900d-d7843795e3e5.png)
 
 ## Changelog
 
@@ -21,6 +23,7 @@
 * The env vars `ANALYTICS_PROVIDER`, `ANALYTICS_PROVIDER`, `ANALYTICS_TRACKING_ID` are no longer required in the .env file. From now on you can use the admin panel to set up Google Analytics 4 by inserting the tracking ID.
 * Removed fzaninotto/faker dependency for the sake of Laravel 8. Faker 
 
+---
 
 ## Start developing
 
