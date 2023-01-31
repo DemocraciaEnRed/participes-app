@@ -3,11 +3,11 @@
 @extends('objective.manage.master')
 
 @section('stylesheets')
-<link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' />
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
 @endsection
 
 @section('headscripts')
-<script src='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js'></script>
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
 @endsection
 
 @section('panelContent')
@@ -51,7 +51,7 @@
     @csrf
     <h5 class="font-weight-bold"><i class="far fa-eye"></i> Definir centro y zoom por defecto del mapa</h5>
     <p>Defina el centro y zoom por defecto del mapa, para asegurar que los reportes del objetivo se vean de forma contenida dentro del area del mapa</p>
-    <set-map-default access-token="{{config('services.mapbox.key')}}" map-style="{{config('services.mapbox.style')}}" :lat="{{$objective->map_lat ?: 'undefined'}}" :long="{{$objective->map_long ?: 'undefined'}}" :zoom="{{$objective->map_zoom ?: 'undefined'}}"></set-map-default>
+    <set-map-default access-token="{{app_setting('app_mapbox_api_key')}}" map-style="{{app_setting('app_mapbox_style')}}" :lat="{{$objective->map_lat ?: 'undefined'}}" :long="{{$objective->map_long ?: 'undefined'}}" :zoom="{{$objective->map_zoom ?: 'undefined'}}"></set-map-default>
   </form>
   <hr>
   <h5 class="is-700 has-text-danger"><i class="fas fa-trash"></i> Eliminar objetivo</h5>

@@ -1,11 +1,11 @@
 @extends('admin.master')
 
 @section('stylesheets')
-<link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' />
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
 @endsection
 
 @section('headscripts')
-<script src='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js'></script>
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
 @endsection
 
 @section('adminContent')
@@ -14,7 +14,7 @@
 <h3 class="is-700">Mapas y Georeferencia</h3>
 
   <div class="alert alert-dark">
-    <i class="fas fa-info-circle"></i> Mapas y georeferencias utiliza mapbox-gl-js/v1.11.1 
+    <i class="fas fa-info-circle"></i> Mapas y georeferencias utiliza mapbox-gl-js/v2.9.1 
   </div>
 
  <p class="lead">Los siguientes son campos para habilitar y configurar mapas y georeferencias en la plataforma</p>

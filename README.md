@@ -6,6 +6,14 @@ Plataforma digital para gobiernos e instituciones que permite la publicación de
 
 ## Changelog
 
+### v2.2 (2023-02-01)
+
+* No migrations in this version
+* Major update in mapbox GL JS from 1.11.1 to 2.4.1, with this update we are able to use the new mapbox styles and the new mapbox studio.
+* Updated mapbox-gl-draw plugin from 1.0.9 to 1.4.0.
+* NOTE: You should use the Style URL mapbox://styles/mapbox/light-v11 instead of the old style url mapbox://styles/mapbox/light-v10
+* Fixed some maps not getting the Mapbox API Key
+
 ### v2.1 (2023-02-01)
 
 * There is a new migration with this version, make sure to run it. You can do this by running `php artisan migrate` in the root directory of the project. In production you should run `php artisan migrate --force` to avoid any errors.
