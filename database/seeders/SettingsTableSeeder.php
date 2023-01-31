@@ -98,5 +98,29 @@ class SettingsTableSeeder extends Seeder
         $setting->type = 'string';
         $setting->cached = true;
         $setting->save();
+        $setting = new Setting();
+        $setting->name = 'app_map_enabled';
+        $setting->value = true;
+        $setting->type = 'boolean';
+        $setting->cached = true;
+        $setting->save();
+        $setting = new Setting();
+        $setting->name = 'app_homepage_show_map';
+        $setting->value = true;
+        $setting->type = 'boolean';
+        $setting->cached = true;
+        $setting->save();
+        $setting = new Setting();
+        $setting->name = 'app_mapbox_api_key';
+        $setting->value = null;
+        $setting->type = 'string';
+        $setting->cached = true;
+        $setting->save();
+        $setting = new Setting();
+        $setting->name = 'app_mapbox_style';
+        $setting->value = null;
+        $setting->type = 'string';
+        $setting->cached = true;
+        $setting->save();
     }
 }

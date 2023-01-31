@@ -743,8 +743,15 @@ class AdminPanelController extends Controller
         $setting->value = $request->input('value');
         $setting->cached = $request->boolean('cached');
         $setting->save();
-        return redirect()->route('admin.settings')->with('success','Configuración guardada');
 
+        return redirect()->back()->with('success','Configuración guardada');
+    }
+
+    public function viewEditMapSettings(Request $request)
+    {
+        $settings = Setting::all()->keyBy('name');
+        
+        return view('admin.settings.map.edit',['settings' => $settings]);
     }
 
     public function formEditMapSetting(Request $request)
@@ -769,7 +776,10 @@ class AdminPanelController extends Controller
         $settingLong->save();
         $settingZoom->save();
         
-        return redirect()->route('admin.settings')->with('success','Configuración guardada');
+        // return redirect()->route('admin.settings')->with('success','Configuración guardada');
+        // Redirect::back()->with('message','Operation Successful !');
+        return redirect()->back()->with('success','Configuración guardada');
+
     }
     
     public function formEditFileSetting(Request $request)

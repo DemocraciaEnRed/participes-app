@@ -27,7 +27,7 @@ $zoom = $report->map_zoom ?: ($objective->map_zoom ?: app_setting('app_map_zoom_
     <form action="{{route('objectives.manage.goals.reports.map.form',['objectiveId' => $objective->id, 'goalId' => $goal->id, 'reportId' => $report->id])}}" method="POST">
       @method('PUT')
       @csrf
-      <draw-map access-token="{{config('services.mapbox.key')}}" map-style="{{config('services.mapbox.style')}}" :lat="{{$lat}}" :long="{{$long}}" :zoom="{{$zoom}}" :init-collection="{{$geometry}}" />
+      <draw-map access-token="{{app_setting('app_mapbox_api_key')}}" map-style="{{app_setting('app_mapbox_style')}}" :lat="{{$lat}}" :long="{{$long}}" :zoom="{{$zoom}}" :init-collection="{{$geometry}}" />
     </form>
 </section>
 

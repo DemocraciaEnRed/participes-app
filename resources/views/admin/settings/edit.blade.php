@@ -32,8 +32,6 @@
   <hr>
   @include('admin.settings.app_favicon')
   <hr>
-  @include('admin.settings.app_map_default')
-  <hr>
   @include('admin.settings.app_home_subtitle')
   <hr>
   @include('admin.settings.app_social_title')

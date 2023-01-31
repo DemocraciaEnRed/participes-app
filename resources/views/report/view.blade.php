@@ -60,7 +60,9 @@
   @include('report.data')
   @include('report.files')
   @include('report.album')
-  @include('report.map')
+  @if(app_setting('app_map_enabled'))
+    @include('report.map')
+  @endif
   @include('report.comments')
   @include('report.communities')
 </div>

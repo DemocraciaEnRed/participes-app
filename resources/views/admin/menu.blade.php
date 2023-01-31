@@ -36,7 +36,7 @@ $currentRoute = Route::currentRouteName();
 </div>
 <h6 class="category"><i class="fas fa-cog fa-fw"></i>&nbsp;Administrar</h6>
 <div class="menu-link">
-<a href="{{ route('admin.logs') }}" class="item-link {{ $currentRoute == 'admin.logs'  ? 'is-active' : null }}">Bitacora de eventos</a>
-<a href="{{ route('admin.settings') }}" class="item-link {{ $currentRoute == 'admin.settings'  ? 'is-active' : null }}">Configuración</a>
-
+  <a href="{{ route('admin.settings') }}" class="item-link {{ $currentRoute == 'admin.settings'  ? 'is-active' : null }}">Configuración</a>
+  <a href="{{ route('admin.settings.map') }}" class="item-link {{ $currentRoute == 'admin.settings.map'  ? 'is-active' : null }}">Mapas y Georeferencia</a>
+  <a href="{{ route('admin.logs') }}" class="item-link {{ $currentRoute == 'admin.logs'  ? 'is-active' : null }}">Bitacora de eventos</a>
 </div>

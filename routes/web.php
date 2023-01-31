@@ -99,9 +99,11 @@ Route::group([
     Route::get('/bitacora', [AdminPanelController::class, 'viewLogs'])->name('logs');
     // Settings
     Route::get('/configuracion/editar', [AdminPanelController::class, 'viewEditSettings'])->name('settings');
+    Route::get('/configuracion/editar', [AdminPanelController::class, 'viewEditSettings'])->name('settings');
     Route::put('/configuracion/editar', [AdminPanelController::class, 'formEditSetting'])->name('settings.form');
-    Route::put('/configuracion/editar/map', [AdminPanelController::class, 'formEditMapSetting'])->name('settings.form.map');
     Route::put('/configuracion/editar/file', [AdminPanelController::class, 'formEditFileSetting'])->name('settings.form.file');
+    Route::get('/configuracion/editar/map', [AdminPanelController::class, 'viewEditMapSettings'])->name('settings.map');
+    Route::put('/configuracion/editar/map/default', [AdminPanelController::class, 'formEditMapSetting'])->name('settings.map.form');
     Route::post('/configuracion/cache', [AdminPanelController::class, 'clearCacheSettings'])->name('settings.cache');
     // Categorias
     Route::get('/categorias', [AdminPanelController::class, 'viewListCategories'])->name('categories');
