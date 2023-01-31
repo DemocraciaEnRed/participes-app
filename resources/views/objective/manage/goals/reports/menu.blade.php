@@ -34,5 +34,7 @@ $currentRoute = Route::currentRouteName();
 <a href="{{ route('objectives.manage.goals.reports.testimonies', ['objectiveId' => $objective->id, 'goalId' => $goal->id, 'reportId' => $report->id]) }}" class="item-link {{ $currentRoute == 'objectives.manage.goals.reports.testimonies'  ? 'is-active' : null }}">Feedbacks</a>
 <a href="{{ route('objectives.manage.goals.reports.album', ['objectiveId' => $objective->id, 'goalId' => $goal->id, 'reportId' => $report->id]) }}" class="item-link {{ $currentRoute == 'objectives.manage.goals.reports.album'  ? 'is-active' : null }}">Album de fotos</a>
 <a href="{{ route('objectives.manage.goals.reports.files', ['objectiveId' => $objective->id, 'goalId' => $goal->id, 'reportId' => $report->id]) }}" class="item-link {{ $currentRoute == 'objectives.manage.goals.reports.files'  ? 'is-active' : null }}">Repositorio de archivos</a>
+@if(app_setting('app_map_enabled'))
 <a href="{{ route('objectives.manage.goals.reports.map', ['objectiveId' => $objective->id, 'goalId' => $goal->id, 'reportId' => $report->id]) }}" class="item-link {{ $currentRoute == 'objectives.manage.goals.reports.map'  ? 'is-active' : null }}">Mapa</a>
+@endif
 </div>

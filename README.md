@@ -4,12 +4,21 @@
 
 ## Changelog
 
-#### 2023-01-18
+### v2.1 (2023-02-01)
 
-* The env vars `ANALYTICS_PROVIDER`, `ANALYTICS_PROVIDER`, `ANALYTICS_TRACKING_ID` are no longer required in the .env file. From now on you can use the admin panel to set up Google Analytics 4 by inserting the tracking ID.
-* Participes has been updated to Laravel 8. It requires PHP 7.4 or higher.
+* There is a new migration with this version, make sure to run it. You can do this by running `php artisan migrate` in the root directory of the project. In production you should run `php artisan migrate --force` to avoid any errors.
+* As always, we recommend you to make a backup of your database before running the migrations.
+* Added Map & Georeference admin to the admin panel. Now instead of setting the map and georeference in the .env file, you can do it in the admin panel.
+* The env vars `MAPBOX_API_KEY` & `MAPBOX_MAP_STYLE` are no longer required in the .env file. If you are planning to update to this version, make sure that after the update you set the api key and map style in the admin panel.
+* You can also hide the map from the homepage
+* If maps & georeference are disabled, the map will not be shown in the homepage and reports wont have a map. The report panel also wont show the "Map" option in the menu.
+
+#### v2.0 (2023-01-18)
+
 * New migrations are being added for the new Laravel version. If you installed Participes before 2023, you should run the new migrations. You can do this by running `php artisan migrate` in the root directory of the project. In production you should run `php artisan migrate --force` to avoid any errors.
 * As always, we recommend you to make a backup of your database before running the migrations.
+* Participes has been updated to Laravel 8. It requires PHP 7.4 or higher.
+* The env vars `ANALYTICS_PROVIDER`, `ANALYTICS_PROVIDER`, `ANALYTICS_TRACKING_ID` are no longer required in the .env file. From now on you can use the admin panel to set up Google Analytics 4 by inserting the tracking ID.
 * Removed fzaninotto/faker dependency for the sake of Laravel 8. Faker 
 
 

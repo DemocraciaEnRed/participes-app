@@ -10,7 +10,7 @@
       <div class="d-inline-block bg-white py-2 px-4 my-1 border rounded shadow-sm mr-2 is-clickable" :class="{'type-active': typeSelected == type.id}" v-for="type in types" :key="`type-${type.id}`" @click="changeType(type.id)">
         <i :class="`${type.icon} text-primary`"></i>&nbsp;{{type.title}}
         </div>
-      <div class="d-inline-block bg-white py-2 px-4 my-1 border rounded shadow-sm mr-2 is-clickable" :class="{'mappeable-active': mappableReports == true}" @click="mappableReports = !mappableReports">
+      <div class="d-inline-block bg-white py-2 px-4 my-1 border rounded shadow-sm mr-2 is-clickable" v-if="mapEnabled" :class="{'mappeable-active': mappableReports == true}" @click="mappableReports = !mappableReports">
         <i class="fas fa-map-marked-alt text-primary"></i>&nbsp;Mapeable
       </div>
     </section>
@@ -43,7 +43,7 @@
 import debounce from "lodash/debounce";
 import ReportCard from './ReportCard'
 export default {
-  props: ['fetchUrl','categories','querystring'],
+  props: ['fetchUrl','categories','querystring', 'mapEnabled'],
   components: {
     ReportCard
   },
