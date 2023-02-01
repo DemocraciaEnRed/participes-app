@@ -57,7 +57,7 @@ class SettingsTableSeeder extends Seeder
         $setting->cached = true;
         $setting->save();
         $setting = new Setting();
-        $setting->name = 'app_home_subtitle';
+        $setting->name = 'app_homepage_subtitle';
         $setting->value = 'Canal de monitoreo ciudadano, para hacer seguimiento de objetivos y metas de gobierno';
         $setting->type = 'string';
         $setting->cached = true;
@@ -92,21 +92,23 @@ class SettingsTableSeeder extends Seeder
         $setting->type = 'string';
         $setting->cached = true;
         $setting->save();
+        // migration 2023_01_18_170414_add_google_analytics4
         $setting = new Setting();
         $setting->name = 'app_google_analytics_4_id';
         $setting->value = null;
         $setting->type = 'string';
         $setting->cached = true;
         $setting->save();
+        // migration 2023_01_26_192207_add_mapbox_variables
         $setting = new Setting();
         $setting->name = 'app_map_enabled';
-        $setting->value = true;
+        $setting->value = 'true';
         $setting->type = 'boolean';
         $setting->cached = true;
         $setting->save();
         $setting = new Setting();
         $setting->name = 'app_homepage_show_map';
-        $setting->value = true;
+        $setting->value = 'true';
         $setting->type = 'boolean';
         $setting->cached = true;
         $setting->save();
@@ -120,6 +122,31 @@ class SettingsTableSeeder extends Seeder
         $setting->name = 'app_mapbox_style';
         $setting->value = null;
         $setting->type = 'string';
+        $setting->cached = true;
+        $setting->save();
+        // migration 2023_01_31_105115_homepage-settings
+        $setting = new Setting();
+        $setting->name = 'app_homepage_show_graph_last_reports';
+        $setting->value = true;
+        $setting->type = 'boolean';
+        $setting->cached = true;
+        $setting->save();
+        $setting = new Setting();
+        $setting->name = 'app_homepage_show_latest_reports';
+        $setting->value = true;
+        $setting->type = 'boolean';
+        $setting->cached = true;
+        $setting->save();
+        $setting = new Setting();
+        $setting->name = 'app_homepage_latest_reports_at_the_end';
+        $setting->value = false;
+        $setting->type = 'boolean';
+        $setting->cached = true;
+        $setting->save();
+        $setting = new Setting();
+        $setting->name = 'app_homepage_show_categories_selector';
+        $setting->value = true;
+        $setting->type = 'boolean';
         $setting->cached = true;
         $setting->save();
     }

@@ -104,6 +104,8 @@ Route::group([
     Route::put('/configuracion/editar/file', [AdminPanelController::class, 'formEditFileSetting'])->name('settings.form.file');
     Route::get('/configuracion/editar/map', [AdminPanelController::class, 'viewEditMapSettings'])->name('settings.map');
     Route::put('/configuracion/editar/map/default', [AdminPanelController::class, 'formEditMapSetting'])->name('settings.map.form');
+    Route::get('/configuracion/editar/homepage', [AdminPanelController::class, 'viewEditHomepageSettings'])->name('settings.homepage');
+    Route::get('/configuracion/editar/seo', [AdminPanelController::class, 'viewEditSeoSettings'])->name('settings.seo');
     Route::post('/configuracion/cache', [AdminPanelController::class, 'clearCacheSettings'])->name('settings.cache');
     // Categorias
     Route::get('/categorias', [AdminPanelController::class, 'viewListCategories'])->name('categories');

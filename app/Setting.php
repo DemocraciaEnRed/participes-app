@@ -12,20 +12,20 @@ class Setting extends Model
     public $timestamps = true; // if the model should be timestamped.
 
     public function getCastedValueAttribute()
-      {
-          switch ($this->type) {
-              case 'int':
-              case 'integer':
-                  return intval($this->value);
-                  break;
+    {
+    switch ($this->type) {
+        case 'int':
+        case 'integer':
+            return intval($this->value);
+            break;
 
-              case 'bool':
-              case 'boolean':
-                  return boolval($this->value);
-                  break;
+        case 'bool':
+        case 'boolean':
+            return boolval($this->value);
+            break;
 
-              default:
-                  return $this->value;
-          }
-      }
+        default:
+            return $this->value;
+        }
+    }
 }

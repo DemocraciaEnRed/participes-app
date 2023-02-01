@@ -20,7 +20,7 @@
         <div class="progress-bar bg-delayed" role="progressbar" :style="`width: ${goalsDelayedPercent}%`" :aria-valuenow="goalsDelayed" aria-valuemin="0" aria-valuemax="100">{{goalsDelayedPercent}}%</div>
         <div class="progress-bar bg-inactive" role="progressbar" :style="`width: ${goalsInactivePercent}%`" :aria-valuenow="goalsInactive" aria-valuemin="0" aria-valuemax="100">{{goalsInactivePercent}}%</div>
       </div>
-      <div class="row">
+      <div class="row" v-if="showReportsGraph">
         <div class="col-sm-4 align-self-center text-center">
           <p class="mb-2 mb-sm-0"><span class="h5 is-700"><i class="far fa-file text-primary"></i>&nbsp;&nbsp;{{reportsTotal}}</span><br class="d-none d-sm-block"><span class="d-sm-none">&nbsp;&nbsp;</span><span class="text-smaller">Reportes en los<br class="d-none d-sm-block"><span class="d-sm-none">&nbsp;</span>últimos 15 dias</span></p>
         </div>
@@ -41,6 +41,10 @@ export default {
     fetchUrl: {
       type: String,
       required: true
+    },
+    showReportsGraph: {
+      type: Boolean
+      
     }
   },
   components: {
