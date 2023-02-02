@@ -11,7 +11,7 @@
 @section('adminContent')
 
 <section>
-<h3 class="is-700">Editar configuracion</h3>
+<h3 class="is-700">Configuración general</h3>
  <p class="lead">Las siguientes son campos para la configuración de la aplicación</p>
   @if ($errors->any())
     <div class="alert alert-danger">

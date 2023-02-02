@@ -74,6 +74,7 @@
 					    <p>{{$goal->source}}</p>
           </div>
 					@endif
+					@if(!$goal->milestones->isEmpty())
           <hr>
 					<div class="clearfix is-clickable" data-toggle="collapse" data-target="#collapseMilestones">
 						<h5 class="is-700 h5 text-body my-2 float-left">Hitos de la meta</h5>
@@ -98,6 +99,7 @@
 							<p class="my-2 text-muted">No hay hitos asociados</p>
 							@endforelse
 					</div>
+					@endif
           <hr>
 					<div class="clearfix mt-2 mb-4">
 						<h5 class="is-700 float-left">Reportes</h5>

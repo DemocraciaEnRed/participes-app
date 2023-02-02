@@ -5,10 +5,9 @@
     <div class="col">
       <div class="form-group">
         <label><b>Logo App - Footer</b></label>
-        <div class="alert alert-light">
-          <i class="fas fa-exclamation-triangle"></i> <b>Importante!</b><br>
-          Se aceptan SVG o PNG. De ser SVG, recomendamos que la dimensiones del archivo tenga una relacion 2:1 o 3:1 (Ancho mas largo que el alto). De ser un archivo PNG, recomendamos con fondo transparente y tambien dimensiones de relacion 2:1 o 3:1 (Ancho mas largo que el alto)
-        </div>
+        <p class="text-muted text-smaller">
+          <i class="fas fa-exclamation-triangle"></i> <b>Importante!</b> Se aceptan SVG o PNG. De ser SVG, recomendamos que la dimensiones del archivo tenga una relacion 2:1 o 3:1 (Ancho mas largo que el alto). De ser un archivo PNG, recomendamos con fondo transparente y tambien dimensiones de relacion 2:1 o 3:1 (Ancho mas largo que el alto)
+        </p>
         <input type="hidden"  name="name" value="app_logo_footer" >
         <input type="hidden"  name="type" value="string" >
         <input type="hidden"  name="cached" value="true" >

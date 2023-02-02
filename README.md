@@ -21,7 +21,10 @@ Plataforma digital para gobiernos e instituciones que permite la publicación de
 * Fixed "Limpiar cache" button in the admin panel. Now it works as expected.
 * Fixed some "boolean" casts in the Settings model.
 * New component "Category selector" which is a carrousel component of the categories of the system. When you click in a category, it takes you to the catalog of objectives.
-* TODO: Hide Hitos when no hitos are available
+* Some changes in some views:
+  * In the objective view, if the following attributes are empty, they wont be shown: "Miembros del equipo", "Organizciones", "Metas"
+  * In the goal view, if the following attributes are empty, they wont be shown: "Hitos"
+* Some secondary fixes (Demo data had a bug when creating generic organizations)
 
 
 ### v2.2 (2023-02-01)
