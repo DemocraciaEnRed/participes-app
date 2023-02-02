@@ -2,6 +2,10 @@
   @method('PUT')
   @csrf
   <div class="form-group">
+  <div class="alert alert-dark">
+    <i class="fas fa-info-circle"></i> Es requerido tener una cuenta en Google y una propiedad de Google Analytics 4 poder utilizar la funcionalidad de analytics.
+  </div>
+
     <label><b>Google Analytics 4 - Tag ID</b></label>
     <p class="text-muted text-smaller">Si quiere activar el tracking de Google Analytics, ingresá el Tag ID de Google Analytics 4. Nota: Debe tener una cuenta de Google Analytics 4 para poder usar esta funcionalidad, una propiedad y un tag comenzando con "G-########".</p>
     <p class="text-muted text-smaller">El campo vacio desactiva el plugin de Google Analytics</p>

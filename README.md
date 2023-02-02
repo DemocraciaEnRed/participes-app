@@ -6,6 +6,27 @@ Plataforma digital para gobiernos e instituciones que permite la publicación de
 
 ## Changelog
 
+### v2.3 (2023-02-01)
+
+* There is a new migration with this version, make sure to run it. You can do this by running `php artisan migrate` in the root directory of the project. In production you should run `php artisan migrate --force` to avoid any errors.
+* As always, we recommend you to make a backup of your database before running the migrations.
+* Fixed some bugs with the admin panel for maps (nothing critical)
+* New "homepage" admin panel. Now you have in one place all the customizations you can do to the homepage. Inside we included a few ones:
+  * You can show/hide the latest published reports
+  * You can show/hide the graph of reports published in the last 15 days
+  * You can "move" the latest published reports after the "latest objectives updated"
+  * You can show/hide the categories selector.
+  * Moved the "subtitle" of the homepage to the admin panel
+* New "SEO & Analytics" admin panel. Nothing new, but all the cusotmizations you can do to the SEO and Analytics are now in one place.
+* Fixed "Limpiar cache" button in the admin panel. Now it works as expected.
+* Fixed some "boolean" casts in the Settings model.
+* New component "Category selector" which is a carrousel component of the categories of the system. When you click in a category, it takes you to the catalog of objectives.
+* Some changes in some views:
+  * In the objective view, if the following attributes are empty, they wont be shown: "Miembros del equipo", "Organizciones", "Metas"
+  * In the goal view, if the following attributes are empty, they wont be shown: "Hitos"
+* Some secondary fixes (Demo data had a bug when creating generic organizations)
+
+
 ### v2.2 (2023-02-01)
 
 * No migrations in this version

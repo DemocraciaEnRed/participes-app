@@ -16,7 +16,7 @@
 <div class="container push-to-header" style="margin-top: -250px">
   <div class="row justify-content-between align-items-center mb-3 mb-md-5 flex-column-reverse flex-md-row">
     <div class="col-md-5 text-center text-md-left mb-3 mb-md-0">
-      <h5 class="text-white">{{app_setting('app_home_subtitle')}}</h5>
+      <h5 class="text-white">{{app_setting('app_homepage_subtitle')}}</h5>
       <a href="{{route('about.general')}}" class="btn btn-info">Más información <i class="fas fa-arrow-right"></i></a>
     </div>
     <div class="col-md-5">
@@ -45,19 +45,32 @@
       <div class="card rounded shadow-sm">
         <div class="card-body">
           <p><b>Estado de las metas</b></p>
-          <portal-home-stats fetch-url="{{route('apiService.home.stats')}}">
+          <portal-home-stats fetch-url="{{route('apiService.home.stats')}}" :show-reports-graph="{{app_setting('app_homepage_show_graph_last_reports') ? 'true' : 'false'}}">
             @include('partials.loading')
           </portal-home-stats>
         </div>
       </div>
     </div>
   </div>
+  @if(app_setting('app_homepage_show_categories_selector'))
+  <h4 class="is-400 mb-3">Explorá las categorias de los objetivos</h4>
+  <portal-home-categories :categories='@json($categories)'></portal-home-categories>
+  @endif
+  
+
+  @if(app_setting('app_homepage_show_latest_reports') && !app_setting('app_homepage_latest_reports_at_the_end'))
   <h4 class="is-400 mb-3">Ultimos reportes publicados</h4>
   <portal-home-reports-carrousel fetch-url="{{route('apiService.reports',['order_by'=>'updated_at,DESC'])}}"></portal-home-reports-carrousel>
   <p class="mb-4 text-right"><a href="{{route('reports')}}" class="btn btn-outline-primary">Ver más reportes <i class="fas fa-arrow-right"></i></a></p>
+  @endif
   <h4 class="is-400 mb-3">Ultimos objetivos actualizados</h4> 
   <portal-last-objectives fetch-url="{{route('apiService.objectives',['order_by'=>'updated_at,DESC','with'=>'objective_latest_goals,objective_latest_reports,objective_stats,','size' => 5])}}"></portal-last-objectives>
   <p class="mb-4 text-right"><a href="{{route('objectives')}}" class="btn btn-outline-primary">Ver más objetivos <i class="fas fa-arrow-right"></i></a></p>
+  @if(app_setting('app_homepage_show_latest_reports') && app_setting('app_homepage_latest_reports_at_the_end'))
+  <h4 class="is-400 mb-3">Ultimos reportes publicados</h4>
+  <portal-home-reports-carrousel fetch-url="{{route('apiService.reports',['order_by'=>'updated_at,DESC'])}}"></portal-home-reports-carrousel>
+  <p class="mb-4 text-right"><a href="{{route('reports')}}" class="btn btn-outline-primary">Ver más reportes <i class="fas fa-arrow-right"></i></a></p>
+  @endif
   @if(app_setting('app_map_enabled') && app_setting('app_homepage_show_map'))
     <h4 class="is-400 mb-3">Ultimos 15 reportes geolocalizados</h4>
     <map-reports fetch-url="{{route('apiService.reports',['mappable' => true, 'order_by'=>'updated_at,DESC', 'size'=> 15])}}" :paginated="false" access-token="{{app_setting('app_mapbox_api_key')}}" map-style="{{app_setting('app_mapbox_style')}}" :lat="{{app_setting('app_map_lat_default') ?: 'undefined'}}" :long="{{app_setting('app_map_long_default') ?: 'undefined'}}" :zoom="{{app_setting('app_map_zoom_default') ?: 'undefined'}}">

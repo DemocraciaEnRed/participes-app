@@ -10,8 +10,8 @@
       <input type="hidden"  name="name" value="app_homepage_show_map" >
       <input type="hidden"  name="type" value="boolean" >
       <input type="hidden"  name="cached" value="true" >
-      <input id="enable_map" type="checkbox" class="custom-control-input" name="value" placeholder="Mapbox Api Key" value="{{$settings['app_homepage_show_map']->value ? 'false' : 'true'}}" {{$settings['app_homepage_show_map']->value ? 'checked' : ''}}>
-      <label for="enable_map" class="custom-control-label">Mostrar mapa en la homepage</label>
+      <input id="app_homepage_show_map" type="checkbox" class="custom-control-input" name="value" value="true" {{$settings['app_homepage_show_map']->value ? 'checked' : ''}}>
+      <label for="app_homepage_show_map" class="custom-control-label">Mostrar mapa en la homepage</label>
     </div>
   </div>
   <button type="submit" class="btn btn-sm btn-primary">Editar</button>

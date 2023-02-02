@@ -3,6 +3,7 @@
   @csrf
   <div class="form-group">
     <label><b>Social Share - Descripción de la web</b></label>
+    <p class="text-muted text-smaller">Esta es la descripción que se mostrará en las redes sociales, buscadores y en la aplicación.</p>
     <input type="hidden"  name="name" value="app_social_description" >
     <input type="hidden"  name="type" value="string" >
     <input type="hidden"  name="cached" value="true" >

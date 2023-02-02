@@ -43,6 +43,7 @@ Vue.component('input-file', require('./components/inputs/InputFile.vue').default
 Vue.component('input-user-avatar', require('./components/inputs/InputUserAvatar.vue').default);
 Vue.component('portal-home-reports-carrousel', require('./components/portal/home/ReportsCarrousel.vue').default);
 Vue.component('portal-home-stats', require('./components/portal/home/Stats.vue').default);
+Vue.component('portal-home-categories', require('./components/portal/home/Categories.vue').default);
 Vue.component('report-comments', require('./components/comments/ReportComments.vue').default);
 Vue.component('portal-report-map', require('./components/portal/report/Map.vue').default);
 Vue.component('portal-objective-stats', require('./components/portal/objective/Stats.vue').default);
