@@ -6,6 +6,10 @@ Plataforma digital para gobiernos e instituciones que permite la publicación de
 
 ## Changelog
 
+### (2023-02-03)
+* No new version. Just a small fix in the README.md file.
+* Added DEPLOY.md file with instructions to deploy the project in a LAMP server.
+
 ### v2.2 (2023-02-01)
 
 * No migrations in this version
@@ -31,9 +35,14 @@ Plataforma digital para gobiernos e instituciones que permite la publicación de
 * The env vars `ANALYTICS_PROVIDER`, `ANALYTICS_PROVIDER`, `ANALYTICS_TRACKING_ID` are no longer required in the .env file. From now on you can use the admin panel to set up Google Analytics 4 by inserting the tracking ID.
 * Removed fzaninotto/faker dependency for the sake of Laravel 8. Faker 
 
+
+## Deployment instructions 
+
+Please check out [DEPLOY.md](DEPLOY.md) file
+
 ---
 
-## Start developing
+## Development
 
 First, make sure you have instaled:
 
@@ -44,8 +53,8 @@ First, make sure you have instaled:
 
 You can use phpbrew to install PHP and composer to install the dependencies.
 ```
-phpbrew install 7.3 +default +mysql
-phpbrew use 7.3
+phpbrew install 7.4 +default +mysql
+phpbrew use 7.4
 phpbrew ext install gd
 phpbrew ext install imagick
 ```
