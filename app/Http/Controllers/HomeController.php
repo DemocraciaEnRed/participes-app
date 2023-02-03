@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use DB;
 use Carbon\Carbon;
 use App\Objective;
+use App\Category;
 use App\Goal;
 use App\Report;
 use App\Faq;
@@ -30,6 +31,7 @@ class HomeController extends Controller
     public function index()
     {
         $countObjectives = Objective::where('hidden',false)->count();
+        $categories = Category::all();
         $countGoals = Goal::whereHas('objective', function($q) {
             $q->where('hidden', false);
         })->count();
@@ -39,7 +41,8 @@ class HomeController extends Controller
         return view('portal.home',[
             'countObjectives' => $countObjectives,
             'countGoals' => $countGoals,
-            'countGoalsCompleted' => $countGoalsCompleted
+            'countGoalsCompleted' => $countGoalsCompleted,
+            'categories' => $categories,
         ]);
     }
     

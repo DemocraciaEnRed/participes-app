@@ -89,7 +89,7 @@ class DemoSeeder extends Seeder
             $picture->name = 'default-organization.png';
             $picture->size = '100';
             $picture->mime = 'image/png';
-            $picture->path = 'img/default-organization.png';
+            $picture->path = '/img/default-organization.png';
             $organization = new Organization();
             $organization->name = $faker->company;
             $organization->description = $faker->text;
