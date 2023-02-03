@@ -272,8 +272,10 @@ According to the official documentation for Laravel 8:
 We will create a new file in the `/etc/nginx/sites-available` folder.
 
 ```bash
-democracyos@sumen2021:/etc/nginx/sites-available$ sudo nano sumen.conf
+ubuntu:/etc/nginx/sites-available$ sudo nano participes.conf
 ```
+
+`participes.conf`
 
 ```nginx
 server {
@@ -426,14 +428,14 @@ With `APP_ENV=local` we can access the `/start` route from the browser to make t
 Let's generate the key for the application that will be added to the `.env` file automatically.
 
 ```bash
-democracyos@sumen2021:/var/www/participes-app$ sudo php artisan key:generate
+ubuntu:/var/www/participes-app$ sudo php artisan key:generate
 Application key set successfully.
 ```
 
 Now we will do a symlink for the storage folder and the public folder.
 
 ```bash
-democracyos@sumen2021:/var/www/participes-app$ sudo php artisan storage:link
+ubuntu:/var/www/participes-app$ sudo php artisan storage:link
 The [/var/www/participes-app/public/storage] link has been connected to [/var/www/participes-app/storage/app/public].
 The links have been created.
 ```
@@ -461,10 +463,10 @@ We will configure Supervisor to manage the processes that take the queued emails
 
 Lets create the config files for the processes.
 
-`ubuntu:/etc/supervisor/conf.d# nano sumen-database.conf`
+`ubuntu:/etc/supervisor/conf.d# nano participes-database.conf`
 
 ```bash
-[program:sumen-database]
+[program:participes-database]
 command=php artisan queue:work redis --queue=database
 redirect_stderr=true
 autostart=true
@@ -477,10 +479,10 @@ stderr_logfile=/var/log/participes-database.err.log
 stdout_logfile=/var/log/participes-database.out.log
 ```
 
-`ubuntu:/etc/supervisor/conf.d# nano sumen-mailer.conf`
+`ubuntu:/etc/supervisor/conf.d# nano participes-mailer.conf`
 
 ```
-[program:sumen-mailer]
+[program:participes-mailer]
 command=php artisan queue:work redis --queue=mailer
 redirect_stderr=true
 autostart=true
