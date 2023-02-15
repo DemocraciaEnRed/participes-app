@@ -7,7 +7,7 @@ if [ -f .env ]; then
 fi
 
 app_name=${APP_NAME:-example}
-app_env=${APP_ENV:-local}
+app_env=${APP_ENV:-app}
 app_key=$(openssl rand -base64 32)
 app_debug=${APP_DEBUG:-false}
 app_url=${APP_URL:-http://localhost}
@@ -50,18 +50,18 @@ mail_encryption=${MAIL_ENCRYPTION}
 mail_from_address=${MAIL_FROM_ADDRESS}
 mail_from_name=${MAIL_FROM_NAME}
 
-# aws_access_key_id=${AWS_ACCESS_KEY_ID}
-# aws_secret_key_id=${AWS_SECRET_KEY_ID}
-# aws_default_region=${AWS_DEFAULT_REGION}
-# aws_bucket=${AWS_BUCKET}
-# 
-# pusher_app_id=${PUSHER_APP_ID}
-# pusher_app_key=${PUSHER_APP_KEY}
-# pusher_app_secret=${PUSHER_APP_SECRET}
-# pusher_app_cluster=${PUSHER_APP_CLUSTER}
-# 
-# mix_pusher_app_key=${MIX_PUSHER_APP_KEY}
-# mix_pusher_app_cluster=${MIX_PUSHER_APP_CLUSTER}
+aws_access_key_id=${AWS_ACCESS_KEY_ID}
+aws_secret_key_id=${AWS_SECRET_KEY_ID}
+aws_default_region=${AWS_DEFAULT_REGION}
+aws_bucket=${AWS_BUCKET}
+
+pusher_app_id=${PUSHER_APP_ID}
+pusher_app_key=${PUSHER_APP_KEY}
+pusher_app_secret=${PUSHER_APP_SECRET}
+pusher_app_cluster=${PUSHER_APP_CLUSTER}
+
+mix_pusher_app_key=${MIX_PUSHER_APP_KEY}
+mix_pusher_app_cluster=${MIX_PUSHER_APP_CLUSTER}
 
 echo "APP_NAME=$app_name" >> .env
 echo "APP_ENV=$app_env" >> .env
@@ -105,48 +105,36 @@ echo "MAIL_ENCRYPTION=$mail_encryption" >> .env
 echo "MAIL_FROM_ADDRESS=$mail_from_address" >> .env
 echo "MAIL_FROM_NAME=$mail_from_name" >> .env
 
-# echo "AWS_ACCESS_KEY_ID=$aws_access_key_id" >> .env
-# echo "AWS_SECRET_KEY_ID=$aws_secret_key_id" >> .env
-# echo "AWS_DEFAULT_REGION=$aws_default_region" >> .env
-# echo "AWS_BUCKET=$aws_bucket" >> .env
-# 
-# echo "PUSHER_APP_ID=$pusher_app_id" >> .env
-# echo "PUSHER_APP_KEY=$pusher_app_key" >> .env
-# echo "PUSHER_APP_SECRET=$pusher_app_secret" >> .env
-# echo "PUSHER_APP_CLUSTER=$pusher_app_cluster" >> .env
-# 
-# echo "MIX_PUSHER_APP_KEY=$mix_pusher_app_key" >> .env
-# echo "MIX_PUSHER_APP_CLUSTER=$mix_pusher_app_cluster" >> .env
- 
+echo "AWS_ACCESS_KEY_ID=$aws_access_key_id" >> .env
+echo "AWS_SECRET_KEY_ID=$aws_secret_key_id" >> .env
+echo "AWS_DEFAULT_REGION=$aws_default_region" >> .env
+echo "AWS_BUCKET=$aws_bucket" >> .env
+
+echo "PUSHER_APP_ID=$pusher_app_id" >> .env
+echo "PUSHER_APP_KEY=$pusher_app_key" >> .env
+echo "PUSHER_APP_SECRET=$pusher_app_secret" >> .env
+echo "PUSHER_APP_CLUSTER=$pusher_app_cluster" >> .env
+
+echo "MIX_PUSHER_APP_KEY=$mix_pusher_app_key" >> .env
+echo "MIX_PUSHER_APP_CLUSTER=$mix_pusher_app_cluster" >> .env
+
 echo "Chmod .env"
 chmod 666 .env
-
 echo "Chmod Storage dir"
 chmod -R 775 storage
-
 echo "Chmod bootstrap/cache dir"
 chmod -R 775 bootstrap/cache
 
 role=${CONTAINER_ROLE:-app}
 
-if [ "$app_env" == "production" ]; then
-    echo "Production mode!"
+if [ "$app_env" != "local" ]; then
     echo "Caching configuration..."
-    su laravel -p -c 'cd /var/www/html && php artisan clear-compiled && php artisan config:cache && php artisan route:cache && php artisan view:cache && php artisan optimize'
+    su www -p -c 'php artisan clear-compiled && php artisan config:cache && php artisan view:cache && php artisan optimize'
 fi
 
 if [ "$role" = "app" ]; then
-
-    # Loop until the database is ready
-    echo "Waiting for database..."
-    while ! mysqladmin ping -h"$db_host" --silent; do
-        sleep 1
-    done
-
-    echo "Database ready"
-
     echo "Migration..."
-    su laravel -p -c 'php artisan migrate --force'
+    su www -p -c 'php artisan migrate --force'
 
     echo "Checking if link exists..."
     if [ -L ./public/storage ]; then
@@ -155,19 +143,14 @@ if [ "$role" = "app" ]; then
     fi
 
     echo "Creating symbolic link..."
-    su laravel -p -c 'php artisan storage:link'
-    echo "Executing PHP FPM"
-    exec php-fpm
-elif [ "$role" = "scheduler" ]; then
-    echo "Queue role"
-    while [ true ]
-    do
-      su laravel -p -c "php /var/www/artisan schedule:run --verbose --no-interaction &"
-      sleep 60
-    done
+    su www -p -c 'php artisan storage:link'
+
+    php-fpm
+
 elif [ "$role" = "queue" ]; then
-    echo "Running the queue..." 
-    /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
+    echo "Running the queue..."
+    su www -p -c 'php /var/www/html/artisan queue:work --verbose --tries=3 --timeout=90'
+
 else
     echo "Could not match the container role \"$role\""
     exit 1
