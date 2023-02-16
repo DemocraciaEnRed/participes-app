@@ -44,7 +44,7 @@ class MiscController extends Controller
 
 			$request->validate($rules);
 			Artisan::call('migrate:fresh');
-			Artisan::call("db:seed", ['--class' => "SettingTableSeeder"]);
+			Artisan::call("db:seed", ['--class' => "SettingsTableSeeder"]);
 			Artisan::call("db:seed", ['--class' => "FaqTableSeeder"]);
 			Artisan::call("db:seed", ['--class' => "RoleTableSeeder"]);
 			$admin = new User();
@@ -60,7 +60,7 @@ class MiscController extends Controller
 			if(boolval($request->input('demo'))){
 				Artisan::call("db:seed", ['--class' => "DemoSeeder"]);
 			}
-			return redirect()->route('home')->with('success','Aplicacion instalada!');
+			return redirect()->route('home')->with('success','Aplicación instalada!');
 		}
 		return redirect()->route('home');
 	}    

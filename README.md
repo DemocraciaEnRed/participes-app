@@ -1,15 +1,84 @@
 # Participes
 
-> In development.
+Plataforma digital para gobiernos e instituciones que permite la publicación de metas y compromisos, facilitando el seguimiento de avances y la transparencia activa.
 
-## Start developing
+![image](https://user-images.githubusercontent.com/8771166/215751657-244b7d63-0345-4432-900d-d7843795e3e5.png)
+
+## Changelog
+
+### (2023-02-03)
+* No new version. Just a small fix in the README.md file.
+* Added DEPLOY.md file with instructions to deploy the project in a LAMP server.
+
+### v2.3 (2023-02-01)
+
+* There is a new migration with this version, make sure to run it. You can do this by running `php artisan migrate` in the root directory of the project. In production you should run `php artisan migrate --force` to avoid any errors.
+* As always, we recommend you to make a backup of your database before running the migrations.
+* Fixed some bugs with the admin panel for maps (nothing critical)
+* New "homepage" admin panel. Now you have in one place all the customizations you can do to the homepage. Inside we included a few ones:
+  * You can show/hide the latest published reports
+  * You can show/hide the graph of reports published in the last 15 days
+  * You can "move" the latest published reports after the "latest objectives updated"
+  * You can show/hide the categories selector.
+  * Moved the "subtitle" of the homepage to the admin panel
+* New "SEO & Analytics" admin panel. Nothing new, but all the cusotmizations you can do to the SEO and Analytics are now in one place.
+* Fixed "Limpiar cache" button in the admin panel. Now it works as expected.
+* Fixed some "boolean" casts in the Settings model.
+* New component "Category selector" which is a carrousel component of the categories of the system. When you click in a category, it takes you to the catalog of objectives.
+* Some changes in some views:
+  * In the objective view, if the following attributes are empty, they wont be shown: "Miembros del equipo", "Organizciones", "Metas"
+  * In the goal view, if the following attributes are empty, they wont be shown: "Hitos"
+* Some secondary fixes (Demo data had a bug when creating generic organizations)
+
+
+### v2.2 (2023-02-01)
+
+* No migrations in this version
+* Major update in mapbox GL JS from 1.11.1 to 2.4.1, with this update we are able to use the new mapbox styles and the new mapbox studio.
+* Updated mapbox-gl-draw plugin from 1.0.9 to 1.4.0.
+* NOTE: You should use the Style URL mapbox://styles/mapbox/light-v11 instead of the old style url mapbox://styles/mapbox/light-v10
+* Fixed some maps not getting the Mapbox API Key
+
+### v2.1 (2023-02-01)
+
+* There is a new migration with this version, make sure to run it. You can do this by running `php artisan migrate` in the root directory of the project. In production you should run `php artisan migrate --force` to avoid any errors.
+* As always, we recommend you to make a backup of your database before running the migrations.
+* Added Map & Georeference admin to the admin panel. Now instead of setting the map and georeference in the .env file, you can do it in the admin panel.
+* The env vars `MAPBOX_API_KEY` & `MAPBOX_MAP_STYLE` are no longer required in the .env file. If you are planning to update to this version, make sure that after the update you set the api key and map style in the admin panel.
+* You can also hide the map from the homepage
+* If maps & georeference are disabled, the map will not be shown in the homepage and reports wont have a map. The report panel also wont show the "Map" option in the menu.
+
+#### v2.0 (2023-01-18)
+
+* New migrations are being added for the new Laravel version. If you installed Participes before 2023, you should run the new migrations. You can do this by running `php artisan migrate` in the root directory of the project. In production you should run `php artisan migrate --force` to avoid any errors.
+* As always, we recommend you to make a backup of your database before running the migrations.
+* Participes has been updated to Laravel 8. It requires PHP 7.4 or higher.
+* The env vars `ANALYTICS_PROVIDER`, `ANALYTICS_PROVIDER`, `ANALYTICS_TRACKING_ID` are no longer required in the .env file. From now on you can use the admin panel to set up Google Analytics 4 by inserting the tracking ID.
+* Removed fzaninotto/faker dependency for the sake of Laravel 8. Faker 
+
+
+## Deployment instructions 
+
+Please check out [DEPLOY.md](DEPLOY.md) file
+
+---
+
+## Development
 
 First, make sure you have instaled:
 
-- PHP +7.2
+- PHP +7.4
 - Imagemagick
 - MySQL
 - Node + NPM (For local development and building)
+
+You can use phpbrew to install PHP and composer to install the dependencies.
+```
+phpbrew install 7.4 +default +mysql
+phpbrew use 7.4
+phpbrew ext install gd
+phpbrew ext install imagick
+```
 
 Clone the Repo.
 
@@ -53,8 +122,6 @@ QUEUE_CONNECTION=sync
 
 NOCAPTCHA_SECRET=
 NOCAPTCHA_SITEKEY=
-ANALYTICS_PROVIDER=GoogleAnalytics
-ANALYTICS_TRACKING_ID=your-tracking-id
 
 MAPBOX_API_KEY=
 MAPBOX_MAP_STYLE=mapbox://styles/mapbox/light-v10

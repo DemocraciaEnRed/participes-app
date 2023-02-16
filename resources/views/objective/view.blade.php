@@ -42,6 +42,7 @@
 							</div>
 						</div>
 					<p>{!! nl2br(e($objective->content)) !!}</p>
+					@if(!$objective->goals->isEmpty())
 					<hr>
 					<div class="my-3">
 						<div class="clearfix is-clickable" data-toggle="collapse" data-target="#collapseGoalStatus">
@@ -64,6 +65,7 @@
 							@endforelse
 						</div>
 					</div>
+					@endif
 					@if(!$objective->organizations->isEmpty())
 					<hr>
 					<div class="clearfix is-clickable" data-toggle="collapse" data-target="#collapseOrganizations">
@@ -75,7 +77,7 @@
 						</objective-organizations-carrousel>
 					</div>
 					@endif
-					@if(!empty($objective->members))
+					@if(!$objective->members->isEmpty())
 					<hr>
 					<div class="clearfix is-clickable" data-toggle="collapse" data-target="#collapseMembers">
 						<h5 class="is-700 h5 text-body my-2 float-left">Miembros del equipo</h5>
@@ -93,6 +95,7 @@
 							</div>
 					</div>
 					@endif
+					@if(!$objective->files->isEmpty())
 					<hr>
 					<div class="clearfix is-clickable" data-toggle="collapse" data-target="#collapseFiles">
 						<h5 class="is-700 h5 text-body my-2 float-left">Archivos</h5>
@@ -118,6 +121,7 @@
 							<p class="my-2 text-muted">No hay archivos adjuntos al objetivo</p>
 							@endforelse
 					</div>
+					@endif
 					<hr>
 					<h5 class="is-700 mt-2 mb-4">Reportes</h5>
 					<report-list fetch-url="{{route('apiService.objectives.reports',['objectiveId'=> $objective->id, 'size' => 3, 'with' =>'report_goal,report_latest_comments,report_actions', 'detailed' => true,  'order_by'=>'date,DESC'])}}" login-url="{{route('login')}}">

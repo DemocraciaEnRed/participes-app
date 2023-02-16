@@ -8,7 +8,7 @@
 <div class="container">
   <div class="py-5">
   <h3 class="is-700 mb-3">Catálogo de reportes</h3>
-  <search-reports fetch-url="{{route('apiService.reports')}}" querystring="">
+  <search-reports fetch-url="{{route('apiService.reports')}}" querystring="" map-enabled="{{app_setting('app_map_enabled')}}">
     @include('partials.loading')
   </search-reports>
   </div>

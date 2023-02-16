@@ -1,24 +1,25 @@
 <?php
 
+namespace Database\Seeders;
+
 use Carbon\Carbon;
 use App\User;
 use App\Role;
 use App\File;
 use App\ImageFile;
 use App\Category;
+use App\Community;
 use App\Organization;
 use App\Objective;
-use App\Community;
-use App\Report;
 use App\Goal;
+use App\Report;
 use App\Milestone;
-use App\Setting;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
-class DefaultDemoSeeder extends Seeder
+class DemoSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -27,8 +28,8 @@ class DefaultDemoSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker\Factory::create('es_AR');
-
+        $faker = \Faker\Factory::create('es_AR');
+        
         $category = new Category();
         $category->title = 'Educacion';
         $category->icon = 'fas fa-book';

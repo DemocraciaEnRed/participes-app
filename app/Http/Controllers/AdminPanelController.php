@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Cache;
 use Storage;
 use Image;
 use Log;
 use Excel;
 use Notification;
+use Debugbar;
 use App\Category;
 use App\Organization;
 use App\Role;
@@ -738,13 +740,36 @@ class AdminPanelController extends Controller
         $request->validate($rules);
 
         $setting = Setting::where('name', $request->input('name'))->first();
+        if($setting->type == 'bool' || $setting->type == 'boolean') {
+            // to string
+            $setting->value = $request->boolean('value');
+        } else {
+            $setting->value = $request->input('value'); 
+        }
         $setting->name = $request->input('name');
         $setting->type = $request->input('type');
-        $setting->value = $request->input('value');
         $setting->cached = $request->boolean('cached');
         $setting->save();
-        return redirect()->route('admin.settings')->with('success','Configuración guardada');
+        return redirect()->back()->with('success','Configuración guardada');
+    }
 
+    public function viewEditMapSettings(Request $request)
+    {
+        $settings = Setting::all()->keyBy('name');
+        
+        return view('admin.settings.map.edit',['settings' => $settings]);
+    }
+    public function viewEditHomepageSettings(Request $request)
+    {
+        $settings = Setting::all()->keyBy('name');
+        
+        return view('admin.settings.homepage.edit',['settings' => $settings]);
+    }
+    public function viewEditSeoSettings(Request $request)
+    {
+        $settings = Setting::all()->keyBy('name');
+        
+        return view('admin.settings.seo.edit',['settings' => $settings]);
     }
 
     public function formEditMapSetting(Request $request)
@@ -769,7 +794,10 @@ class AdminPanelController extends Controller
         $settingLong->save();
         $settingZoom->save();
         
-        return redirect()->route('admin.settings')->with('success','Configuración guardada');
+        // return redirect()->route('admin.settings')->with('success','Configuración guardada');
+        // Redirect::back()->with('message','Operation Successful !');
+        return redirect()->back()->with('success','Configuración guardada');
+
     }
     
     public function formEditFileSetting(Request $request)
@@ -806,7 +834,7 @@ class AdminPanelController extends Controller
         foreach ($settings as $setting) {
             Cache::put($setting->name, $setting->casted_value);
         }
-        return view('admin.events.delete',['event' => $event]);
+        return redirect()->back()->with('success','Cache reiniciada');
     }
 
 }

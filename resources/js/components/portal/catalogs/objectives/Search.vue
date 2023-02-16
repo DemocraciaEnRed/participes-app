@@ -32,7 +32,7 @@
 import debounce from "lodash/debounce";
 import ObjectiveCard from './ObjectiveCard'
 export default {
-  props: ['fetchUrl','categories','querystring'],
+  props: ['fetchUrl','categories','forceCategory'],
   components: {
     ObjectiveCard
   },
@@ -52,6 +52,14 @@ export default {
     }
   },
   created: function(){
+    // check if the forceCategory (which is a number) is a number
+    if (typeof this.forceCategory === 'number') {
+      // check if the forceCategory is in the categories array of object
+      if (this.categories.find(category => category.id === this.forceCategory)) {
+        // if the forceCategory is in the categories array of object, then set the categorySelected to the forceCategory
+        this.categorySelected = this.forceCategory
+      }
+    }
     this.fetchObjectives()
   },
   methods: {

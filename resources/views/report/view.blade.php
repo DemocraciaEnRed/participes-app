@@ -3,11 +3,11 @@
 @endsection
 
 @section('stylesheets')
-<link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' />
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
 @endsection
 
 @section('headscripts')
-<script src='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js'></script>
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
 @endsection
 
 @extends('layouts.app')
@@ -60,7 +60,9 @@
   @include('report.data')
   @include('report.files')
   @include('report.album')
-  @include('report.map')
+  @if(app_setting('app_map_enabled'))
+    @include('report.map')
+  @endif
   @include('report.comments')
   @include('report.communities')
 </div>
