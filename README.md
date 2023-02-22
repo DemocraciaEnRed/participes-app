@@ -6,6 +6,9 @@ Plataforma digital para gobiernos e instituciones que permite la publicación de
 
 ## Changelog
 
+### v2.3.1 (2023-02-03)
+* Fixed a bug in "Objetivos" view.
+
 ### (2023-02-03)
 * No new version. Just a small fix in the README.md file.
 * Added DEPLOY.md file with instructions to deploy the project in a LAMP server.
