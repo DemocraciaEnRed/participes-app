@@ -6,6 +6,10 @@ Plataforma digital para gobiernos e instituciones que permite la publicación de
 
 ## Changelog
 
+### v2.3.1 (2023-03-16)
+* Fixed paginator not using Bootstrap 5 classes.
+* Now the tags of a objective, if the list is empty, it wont show the "Tags" title neither a "No hay tags" message.
+
 ### v2.3.1 (2023-02-03)
 * Fixed a bug in "Objetivos" view.
 

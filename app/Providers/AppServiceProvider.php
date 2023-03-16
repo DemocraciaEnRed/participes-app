@@ -18,6 +18,7 @@ use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -54,6 +55,8 @@ class AppServiceProvider extends ServiceProvider
         Goal::observe(GoalObserver::class);
         Report::observe(ReportObserver::class);
         Setting::observe(SettingObserver::class);
+        
+        Paginator::useBootstrap();
         
         //
         Blade::if('hasRole', function ($roles) {
