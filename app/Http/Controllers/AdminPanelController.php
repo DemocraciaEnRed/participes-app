@@ -335,11 +335,6 @@ class AdminPanelController extends Controller
     }
 
     public function formDeleteFaq(Request $request, $faqId){
-        $rules = [
-            'password' =>  ['required', new MatchOldPassword],
-        ];
-
-        $request->validate($rules);
 
         $faq = Faq::findOrFail($faqId);
         $faq->delete();
