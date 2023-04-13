@@ -6,6 +6,12 @@ Plataforma digital para gobiernos e instituciones que permite la publicación de
 
 ## Changelog
 
+### v2.3.3 (2023-04-13)
+
+* Fixed delete a FAQ question, it was not working (never fully implemented!)
+* Now the Report form doesn't show the "milestones" tab when there are no milestones in the goal!
+* Small visual tweak
+
 ### v2.3.2 (2023-03-16)
 * Fixed paginator not using Bootstrap 5 classes.
 * Now the tags of a objective, if the list is empty, it wont show the "Tags" title neither a "No hay tags" message.
