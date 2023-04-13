@@ -8,7 +8,7 @@
 			<li class="nav-item">
 				<a class="nav-link text-primary is-clickable" @click="type = 'progress'" :class="type == 'progress' && 'active font-weight-bold'"><i class="fas fa-fast-forward"></i>&nbsp;&nbsp;Avance</a>
 			</li>
-			<li class="nav-item">
+			<li class="nav-item" v-if="milestones && milestones.length > 0">
 				<a class="nav-link text-primary is-clickable" @click="type = 'milestone'" :class="type == 'milestone' && 'active font-weight-bold'"><i class="fas fa-medal"></i>&nbsp;&nbsp;Hito</a>
 			</li>
 		</ul>
@@ -112,7 +112,7 @@
 						<i class="fas fa-info-circle fa-fw"></i>&nbsp;<b>¡Atencion!</b> Esta por sobrepasar el 100% de la meta. Esté seguro que es lo que desea.
 					</div>
 			</section>
-			<section v-if="type == 'milestone'">
+			<section v-if="type == 'milestone' && milestones && milestones.length > 0">
 				<div class="form-group">
 					<label>¿En que fecha se alcanzó el hito?</label>
 						<input name="milestone_date" type="date" class="form-control" :value="today" />
