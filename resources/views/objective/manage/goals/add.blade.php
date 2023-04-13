@@ -53,7 +53,7 @@
       </div>
       <div class="col">
         <div class="form-group">
-          <label><b>Frecuencia de monitoreo</b><small class="text-info">Opcional</small></label>
+          <label><b>Frecuencia de monitoreo</b> <small class="text-info">Opcional</small></label>
           <input type="text" class="form-control" name="indicator_frequency" placeholder="Ej: Semanal, mensual, semestral, anual, etc">
           <small class="form-text text-muted">Espacio temporal en el que vamos a medir nuestro indicador : Semanal, mensual, semestral, anual, etc.</small>
         </div>
