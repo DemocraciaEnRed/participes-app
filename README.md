@@ -25,7 +25,7 @@ Plataforma digital para gobiernos e instituciones que permite la publicación de
 
 ### v2.3 (2023-02-01)
 
-* There is a new migration with this version, make sure to run it. You can do this by running `php artisan migrate` in the root directory of the project. In production you should run `php artisan migrate --force` to avoid any errors.
+* There is a new migration with this version, make sure to run it. You can do this by running `php7.4 artisan migrate` in the root directory of the project. In production you should run `php7.4 artisan migrate --force` to avoid any errors.
 * As always, we recommend you to make a backup of your database before running the migrations.
 * Fixed some bugs with the admin panel for maps (nothing critical)
 * New "homepage" admin panel. Now you have in one place all the customizations you can do to the homepage. Inside we included a few ones:
@@ -54,7 +54,7 @@ Plataforma digital para gobiernos e instituciones que permite la publicación de
 
 ### v2.1 (2023-02-01)
 
-* There is a new migration with this version, make sure to run it. You can do this by running `php artisan migrate` in the root directory of the project. In production you should run `php artisan migrate --force` to avoid any errors.
+* There is a new migration with this version, make sure to run it. You can do this by running `php7.4 artisan migrate` in the root directory of the project. In production you should run `php7.4 artisan migrate --force` to avoid any errors.
 * As always, we recommend you to make a backup of your database before running the migrations.
 * Added Map & Georeference admin to the admin panel. Now instead of setting the map and georeference in the .env file, you can do it in the admin panel.
 * The env vars `MAPBOX_API_KEY` & `MAPBOX_MAP_STYLE` are no longer required in the .env file. If you are planning to update to this version, make sure that after the update you set the api key and map style in the admin panel.
@@ -63,7 +63,7 @@ Plataforma digital para gobiernos e instituciones que permite la publicación de
 
 #### v2.0 (2023-01-18)
 
-* New migrations are being added for the new Laravel version. If you installed Participes before 2023, you should run the new migrations. You can do this by running `php artisan migrate` in the root directory of the project. In production you should run `php artisan migrate --force` to avoid any errors.
+* New migrations are being added for the new Laravel version. If you installed Participes before 2023, you should run the new migrations. You can do this by running `php7.4 artisan migrate` in the root directory of the project. In production you should run `php7.4 artisan migrate --force` to avoid any errors.
 * As always, we recommend you to make a backup of your database before running the migrations.
 * Participes has been updated to Laravel 8. It requires PHP 7.4 or higher.
 * The env vars `ANALYTICS_PROVIDER`, `ANALYTICS_PROVIDER`, `ANALYTICS_TRACKING_ID` are no longer required in the .env file. From now on you can use the admin panel to set up Google Analytics 4 by inserting the tracking ID.
@@ -92,13 +92,88 @@ nvm use
 node -v
 ```
 
-You can use phpbrew to install PHP and composer to install the dependencies.
+If you are on Ubuntu and using multiple PHP versions, install PHP 7.4 and required extensions with apt.
+
+If `php7.4` packages are not available in your Ubuntu version, enable the common PPA first:
 ```
-phpbrew install 7.4 +default +mysql
-phpbrew use 7.4
-phpbrew ext install gd
-phpbrew ext install imagick
+sudo apt update
+sudo apt install -y software-properties-common ca-certificates lsb-release apt-transport-https
+sudo add-apt-repository ppa:ondrej/php
+sudo apt update
 ```
+
+Then install PHP 7.4 + extensions used by this project:
+```
+sudo apt install -y \
+  php7.4 php7.4-cli php7.4-common php7.4-mysql php7.4-gd php7.4-imagick \
+  php7.4-xml php7.4-mbstring php7.4-curl php7.4-zip php7.4-bcmath
+
+php7.4 -v
+php7.4 -m | grep -E 'gd|imagick|mbstring|pdo_mysql|xml|curl|zip|bcmath'
+```
+
+Use composer with PHP 7.4 explicitly:
+```
+php7.4 $(which composer) --version
+```
+
+### VS Code workspace-only PHP alias (optional)
+
+If your machine has multiple PHP versions and you want `php` to mean `php7.4` only in this repository (without changing your global shell), add this workspace configuration:
+
+1. Create `.vscode/settings.json`:
+```
+{
+  "terminal.integrated.env.linux": {
+    "PATH": "${workspaceFolder}/.vscode/bin:${env:PATH}"
+  }
+}
+```
+
+2. Create `.vscode/bin/php`:
+```
+#!/usr/bin/env bash
+exec php7.4 "$@"
+```
+
+3. Make it executable:
+```
+chmod +x .vscode/bin/php
+```
+
+4. Close and open a new VS Code integrated terminal, then verify:
+```
+command -v php
+php -v
+```
+
+This affects only VS Code terminals in this workspace.
+
+### Troubleshooting (PHP 7.4 setup)
+
+If `php` is still not PHP 7.4 in VS Code terminal:
+```
+command -v php
+echo "$PATH"
+```
+Then reopen the terminal tab (or all VS Code terminals) to reload workspace environment vars.
+
+If `.vscode/bin/php: Permission denied`:
+```
+chmod +x .vscode/bin/php
+```
+
+If `php7.4: command not found`:
+- Install PHP 7.4 packages (and PPA if needed) using the commands above.
+- Verify with `php7.4 -v`.
+
+If Composer still uses another PHP version:
+```
+php7.4 $(which composer) install
+php7.4 $(which composer) update
+```
+
+If your shell outside VS Code still uses another PHP version, that is expected. The alias above is workspace-scoped for VS Code only.
 
 Clone the Repo.
 
@@ -118,7 +193,7 @@ So Look and configure the following env variables (others vars, dont worry)
 
 APP_NAME=Partícipes
 APP_ENV=local
-APP_KEY= # Run php artisan key:generate and use the output!
+APP_KEY= # Run php7.4 artisan key:generate and use the output!
 APP_DEBUG=true
 APP_URL=http://localhost
 
@@ -152,8 +227,8 @@ Now create a new MySQL database. You can create a `participes` mysql database, i
 Now run the first migration. Its the init DB.
 
 ```
-php artisan migration
-php artisan db:seed
+php7.4 artisan migration
+php7.4 artisan db:seed
 ```
 
 Your tables should've been created with demo data.
@@ -236,7 +311,7 @@ REDIS_QUEUE=mailer,default
 Now in another terminal, run the following in the root directory:
 
 ```
-$ php artisan queue:work redis --queue=mailer,default
+$ php7.4 artisan queue:work redis --queue=mailer,default
 ```
 
 Here, one process will work both queues at the same time.
@@ -244,11 +319,11 @@ If you prefer to have two different processes for each job queue, you can open t
 
 ```
 // Terminal 1
-$ php artisan queue:work redis --queue=mailer
+$ php7.4 artisan queue:work redis --queue=mailer
 ```
 ```
 // Terminal 2
-$ php artisan queue:work redis --queue=default
+$ php7.4 artisan queue:work redis --queue=default
 ```
 
 ## Files - Storage Link
@@ -256,13 +331,13 @@ $ php artisan queue:work redis --queue=default
 Run the following command
 
 ```
-php artisan storage:link
+php7.4 artisan storage:link
 ```
 
-## Run PHP Server
+## Run php7.4 Server
 
 ```
-php artisan server:run
+php7.4 artisan server:run
 ```
 
 
