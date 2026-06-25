@@ -230,7 +230,7 @@
   }
   .category{
     display: block;
-    padding: 10px 0 5px;
+    padding: 5px 0 2.5px;
     color: $dark;
     font-weight: 600;
     font-family: $headings-font-family;
@@ -239,7 +239,7 @@
     color: $primary;
   }
   .menu-link {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     a.item-link {
       display: block;
       margin-bottom: 0;
@@ -250,7 +250,7 @@
         color: $primary;
         border-left: 2px solid $primary;
       }
-      padding: 2px 5px 2px 15px;
+      padding: 1px 5px 1px 10px;
       font-size: 0.80rem;
       &.is-active {
         border-left: 2px solid $primary;
@@ -258,7 +258,7 @@
       }
     }
   }
-} 
+}
 
 .report-card-carrousel{
   min-height: 200px;

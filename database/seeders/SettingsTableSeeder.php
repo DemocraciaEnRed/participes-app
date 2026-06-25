@@ -102,13 +102,13 @@ class SettingsTableSeeder extends Seeder
         // migration 2023_01_26_192207_add_mapbox_variables
         $setting = new Setting();
         $setting->name = 'app_map_enabled';
-        $setting->value = 'true';
+        $setting->value = 'false';
         $setting->type = 'boolean';
         $setting->cached = true;
         $setting->save();
         $setting = new Setting();
         $setting->name = 'app_homepage_show_map';
-        $setting->value = 'true';
+        $setting->value = 'false';
         $setting->type = 'boolean';
         $setting->cached = true;
         $setting->save();

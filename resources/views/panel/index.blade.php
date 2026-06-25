@@ -17,7 +17,7 @@ $saluditos = [
   'Todos los problemas tienen solución, si los monitoreamos...',
   '¡Que la inspiración te acompañe!',
   '¡Esperamos tus aportes!',
-  '¡Qué bueno encontrarte por acá!',
+  '¡Qué bueno volver a verte por acá!',
   '¡Que tengas buen dia!'
 ];
 $saluditosIndex = array_rand($saluditos);
@@ -28,11 +28,11 @@ $saluditosIndex = array_rand($saluditos);
 @section('panelContent')
 
 <section>
-  <div class="d-flex bg-white justify-content-center">
+  <div class="d-flex bg-white justify-content-start">
     <div class="mr-4 animate__animated animate__bounceIn">
       @include('utils.avatar',['avatar' => Auth::user()->avatar, 'size' => 120])
     </div>
-    <div class="align-self-center animate__animated animate__bounceIn  animate__delay-1s text-center">
+    <div class="align-self-center animate__animated animate__bounceIn animate__delay-1s text-left">
       <h1 class="">
         ¡Hola, {{Auth::user()->name}}!</h1>
       @if($countUnreadNotifications > 0)
@@ -57,11 +57,11 @@ $saluditosIndex = array_rand($saluditos);
   <p class="">Hacé <a href="{{ route('panel.notifications.unread') }}">click aquí <i class="fas fa-arrow-right"></i></a></p>
 
   @else
- 
+
   <h5 class="is-700"><i class="far fa-bell"></i>&nbsp;Mis notificaciones</h5>
   <p>Leelas haciendo <a href="{{ route('panel.notifications') }}">click aquí <i
         class="fas fa-arrow-right"></i></a></p>
- 
+
   @endif
 </section>
 
