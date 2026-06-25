@@ -118,11 +118,11 @@ return [
     | will not be safe. Please do this before deploying an application!
     |
     */
-    
+
     'key' => env('APP_KEY'),
-    
+
     'cipher' => 'AES-256-CBC',
-    
+
     /*
     |--------------------------------------------------------------------------
     | Custom Options
@@ -138,7 +138,7 @@ return [
     | Then you might try to enable `DB_SPECIFIED_KEY_FIX=true` and try again
     | If that doesnt work.. Maybe you might need to enable InnoDB ROW_FORMAT=DYNAMIC in MariaDB..
     | Some useful resources:
-    | 
+    |
     | - https://webomnizz.com/how-to-fix-laravel-specified-key-was-too-long-error/
     | - https://github.com/laravel/framework/issues/17508
     | - https://mariadb.com/kb/en/innodb-dynamic-row-format/
@@ -148,7 +148,7 @@ return [
     /*
     | If the server is running behind a proxy ssl and the server delivers the app in http, you can use this to force all content
     | to be delivered in https. Usefulf to avoid mixed content warnings.
-    */ 
+    */
     'force_https' => env('FORCE_HTTPS', false),
 
     /*
@@ -204,10 +204,6 @@ return [
         App\Providers\RouteServiceProvider::class,
 
 
-        /*
-         * Custom Providers
-         */
-        Barryvdh\Debugbar\ServiceProvider::class,
     ],
 
     /*
@@ -235,7 +231,6 @@ return [
         'Cookie' => Illuminate\Support\Facades\Cookie::class,
         'Crypt' => Illuminate\Support\Facades\Crypt::class,
         'DB' => Illuminate\Support\Facades\DB::class,
-        'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
         'Eloquent' => Illuminate\Database\Eloquent\Model::class,
         'Event' => Illuminate\Support\Facades\Event::class,
         'File' => Illuminate\Support\Facades\File::class,
