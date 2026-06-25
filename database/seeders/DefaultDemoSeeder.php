@@ -15,6 +15,7 @@ use App\Report;
 use App\Goal;
 use App\Milestone;
 use App\Setting;
+use Faker\Factory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -29,7 +30,7 @@ class DefaultDemoSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker\Factory::create('es_AR');
+        $faker = Factory::create('es_AR');
 
         $category = new Category();
         $category->title = 'Educacion';
@@ -71,7 +72,7 @@ class DefaultDemoSeeder extends Seeder
 
         $usrRole = Role::where('name', 'user')->first();
         $users = array();
-        for ($i=0; $i < 50; $i++) { 
+        for ($i=0; $i < 50; $i++) {
             $user = new User();
             $user->name = $faker->firstName;
             $user->surname = "Usuario${i}";
@@ -85,7 +86,7 @@ class DefaultDemoSeeder extends Seeder
             $users[] = $user->id;
         }
         $organizations = array();
-        for ($i=0; $i < 25; $i++) { 
+        for ($i=0; $i < 25; $i++) {
             $picture = new ImageFile();
             $picture->name = 'default-organization.png';
             $picture->size = '100';
@@ -99,7 +100,7 @@ class DefaultDemoSeeder extends Seeder
             $organizations[] = $organization->id;
         }
 
-        for ($i=0; $i <= 20; $i++) { 
+        for ($i=0; $i <= 20; $i++) {
             $objective = new Objective();
             $category = Category::findorfail($faker->randomElement([1,2,3,4]));
             $objective->title = $faker->sentence;
@@ -119,14 +120,14 @@ class DefaultDemoSeeder extends Seeder
             $objective->communities()->save($community);
 
             $theTeam = $faker->randomElements($users,6);
-            for ($y=0; $y < 6; $y++) { 
+            for ($y=0; $y < 6; $y++) {
                 $objective->members()->attach($theTeam[$y], ['role' => $faker->randomElement(['manager','reporter'])]);
             }
-            
+
             $objective->subscribers()->attach($faker->randomElements($users,4));
 
 
-            for ($y=0; $y < 7; $y++) { 
+            for ($y=0; $y < 7; $y++) {
                 $goal = new Goal();
                 $goal->title = $faker->sentence;
                 $goal->status = 'ongoing';
@@ -139,7 +140,7 @@ class DefaultDemoSeeder extends Seeder
                 $goal->objective()->associate($objective);
                 $goal->save();
                 $theMilestones = array();
-                for ($z=0; $z < 5; $z++) { 
+                for ($z=0; $z < 5; $z++) {
                     $milestone = new Milestone();
                     $milestone->order = ($z+1);
                     $milestone->title = $faker->sentence;
