@@ -227,7 +227,7 @@ Now create a new MySQL database. You can create a `participes` mysql database, i
 Now run the first migration. Its the init DB.
 
 ```
-php7.4 artisan migration
+php7.4 artisan migrate
 php7.4 artisan db:seed
 ```
 
@@ -337,7 +337,7 @@ php7.4 artisan storage:link
 ## Run php7.4 Server
 
 ```
-php7.4 artisan server:run
+php7.4 artisan serve
 ```
 
 
