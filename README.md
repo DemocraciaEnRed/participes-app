@@ -83,7 +83,14 @@ First, make sure you have instaled:
 - PHP +7.4
 - Imagemagick
 - MySQL
-- Node + NPM (For local development and building)
+- Node 18.19.0 + NPM (For local development and building)
+
+Use `nvm` to match the project Node version:
+```
+nvm install 18.19.0
+nvm use
+node -v
+```
 
 You can use phpbrew to install PHP and composer to install the dependencies.
 ```
@@ -98,7 +105,7 @@ Clone the Repo.
 Open a terminal in the root of the project:
 
 ```
-$ composer install
+$ php7.4 $(which composer) install
 ```
 
 With the `$ composer install` a `.env` file should've been created. 
