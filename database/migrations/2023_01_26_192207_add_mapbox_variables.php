@@ -19,15 +19,15 @@ class AddMapboxVariables extends Migration
 
          // if settings table is not empty, then check if app_google_analytics_4_id exists
          if ($settingsTableIsNotEmpty) {
- 
+
              // Check if app_map_enabled exists
              $enableMapDoesntExists = DB::table('settings')->where('name', 'app_map_enabled')->count() == 0;
- 
+
              // If app_map_enabled doesn't exists, then create it
              if ($enableMapDoesntExists) {
                  $setting = new Setting();
                  $setting->name = 'app_map_enabled';
-                 $setting->value = true;
+                 $setting->value = false;
                  $setting->type = 'boolean';
                  $setting->cached = true;
                  $setting->save();
@@ -35,12 +35,12 @@ class AddMapboxVariables extends Migration
 
              // Check if app_homepage_show_map exists
              $homepageShowMapDoesntExists = DB::table('settings')->where('name', 'app_homepage_show_map')->count() == 0;
- 
+
              // If app_homepage_show_map doesn't exists, then create it
              if ($homepageShowMapDoesntExists) {
                  $setting = new Setting();
                  $setting->name = 'app_homepage_show_map';
-                 $setting->value = true;
+                 $setting->value = false;
                  $setting->type = 'boolean';
                  $setting->cached = true;
                  $setting->save();
@@ -48,7 +48,7 @@ class AddMapboxVariables extends Migration
 
              // Check if app_mapbox_api_key exists
              $mapboxApiKeyDoesntExists = DB::table('settings')->where('name', 'app_mapbox_api_key')->count() == 0;
- 
+
              // If app_mapbox_api_key doesn't exists, then create it
              if ($mapboxApiKeyDoesntExists) {
                  $setting = new Setting();
@@ -61,7 +61,7 @@ class AddMapboxVariables extends Migration
 
              // Check if app_mapbox_style exists
              $mapboxStyleDoesntExists = DB::table('settings')->where('name', 'app_mapbox_style')->count() == 0;
- 
+
              // If app_mapbox_style doesn't exists, then create it
              if ($mapboxStyleDoesntExists) {
                  $setting = new Setting();
@@ -81,7 +81,7 @@ class AddMapboxVariables extends Migration
      */
     public function down()
     {
-        
+
         // check if app_map_enabled exists
         $enableMapExists = DB::table('settings')->where('name', 'app_map_enabled')->count() > 0;
         // if app_map_enabled exists, then delete it
@@ -109,6 +109,6 @@ class AddMapboxVariables extends Migration
         if ($mapboxStyleExists) {
             DB::table('settings')->where('name', 'app_mapbox_style')->delete();
         }
-        
+
     }
 }
