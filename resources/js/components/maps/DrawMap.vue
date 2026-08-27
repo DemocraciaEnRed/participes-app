@@ -11,7 +11,7 @@
     <input type="hidden" name="map_lat" v-model.number="newLat">
     <input type="hidden" name="map_long" v-model.number="newLong">
     <br>
-    <button type="button" @click="submitNewPosition" class="btn btn-primary"><i class="fas fa-save"></i>&nbsp;Guardar</button>
+    <button type="button" @click="submitNewPosition" class="btn btn-primary"><i class="fas fa-floppy-disk"></i>&nbsp;Guardar</button>
     <button type="button" v-if="initCollection != null" @click="cleanMap" class="btn btn-light"><i class="fas fa-trash"></i>&nbsp;Eliminar mapa</button>
     <button ref="submit" style="display:none;">Submit</button>
   </section>

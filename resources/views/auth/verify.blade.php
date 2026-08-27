@@ -14,7 +14,7 @@
 			<h3 class="is-600">{{ __('Verify Your Email Address') }}</h3>
 			@if (session('resent'))
 			<div class="alert alert-info mt-4" role="alert">
-				<i class="fas fa-info-circle"></i>&nbsp;{{ __('A fresh verification link has been sent to your email address.') }}
+				<i class="fas fa-circle-info"></i>&nbsp;{{ __('A fresh verification link has been sent to your email address.') }}
 			</div>
 			@else
 			<p>{{ __('Before proceeding, please check your email for a verification link.') }}<br>{{ __('If you did not receive the email') }}...</p>

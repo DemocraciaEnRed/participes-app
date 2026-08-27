@@ -2,11 +2,11 @@
   <div class="section" v-if="!isLoading">
       <objective-card class="my-3" v-for="objective in objectives" :key="`objective${objective.id}`" :objective="objective"></objective-card>
       <section class="p-5 text-center" v-if="objectives.length == 0">
-        <i class="fas fa-info-circle"></i>&nbsp; No hay objetivos cargados en la plataforma
+        <i class="fas fa-circle-info"></i>&nbsp; No hay objetivos cargados en la plataforma
       </section>
   </div>
   <section class="p-5 text-center" v-else>
-    <i class="fas fa-sync fa-spin"></i> Cargando...
+    <i class="fas fa-arrows-rotate fa-spin"></i> Cargando...
   </section>
 </template>
 

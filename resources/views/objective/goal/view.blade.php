@@ -24,7 +24,7 @@
 				<div class="card-body p-3">
 					<div class="d-flex align-items-center mb-3">
 						<div class="mr-3 category-icon-container">
-							<i class="far fa-2x fa-fw fa-dot-circle text-{{$goal->status}}"></i>
+							<i class="far fa-2x fa-fw fa-circle-dot text-{{$goal->status}}"></i>
 						</div>
 						<div class="w-100">
 							<span class="text-{{$goal->status}}">Meta {{$goal->status_label}}</span>
@@ -86,7 +86,7 @@
 								<span class="text-muted">Hito #{{$milestone->order}} - </span><span class="is-700">{{$milestone->title}}</span><br/>
 								<span class="text-smallest text-muted"> 
 								 	@if(is_null($milestone->completed))
-                  <i class="text-danger fas fa-times fa-fw"></i>
+                  <i class="text-danger fas fa-xmark fa-fw"></i>
                   No completado
                   @else
                   <i class="text-success fas fa-check"></i>

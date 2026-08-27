@@ -14,7 +14,7 @@
 <h3 class="is-700">Mapas y Georeferencia</h3>
 
   <div class="alert alert-dark">
-    <i class="fas fa-info-circle"></i> Mapas y georeferencias utiliza mapbox-gl-js/v2.9.1 
+    <i class="fas fa-circle-info"></i> Mapas y georeferencias utiliza mapbox-gl-js/v2.9.1 
   </div>
 
  <p class="lead">Los siguientes son campos para habilitar y configurar mapas y georeferencias en la plataforma</p>

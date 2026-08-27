@@ -27,7 +27,7 @@
       </div>
       <div class="col-4 col-lg-2 text-center my-2 my-lg-0">
         <h6 class="font-weight-bold">Mapa</h6>
-        <span class="h6"><i class="fas fa-map-marked-alt fa-fw"></i> {{!is_null($report->map_lat) ? 'Si' : 'No'}}</span>
+        <span class="h6"><i class="fas fa-map-location-dot fa-fw"></i> {{!is_null($report->map_lat) ? 'Si' : 'No'}}</span>
       </div>
       <div class="col-6 col-lg-2 text-center my-2 my-lg-0">
         <h6 class="font-weight-bold">Fotos</h6>

@@ -15,8 +15,8 @@
           <h5 class="m-0" style="color: {{$category->color}}">{{$category->title}}</h5>
         </div>
         <div class="text-right">
-          <a href="{{ route('admin.categories.edit', ['categoryId' => $category->id]) }}" class="btn btn-link btn-sm"><i class="fas fa-pencil-alt fa-fw"></i>Editar</a>
-          <a href="{{ route('admin.categories.delete', ['categoryId' => $category->id]) }}" class="btn btn-link btn-sm"><i class="fas fa-trash-alt fa-fw"></i>Eliminar</a>
+          <a href="{{ route('admin.categories.edit', ['categoryId' => $category->id]) }}" class="btn btn-link btn-sm"><i class="fas fa-pencil fa-fw"></i>Editar</a>
+          <a href="{{ route('admin.categories.delete', ['categoryId' => $category->id]) }}" class="btn btn-link btn-sm"><i class="fas fa-trash-can fa-fw"></i>Eliminar</a>
         </div>
     </div>
   </div>

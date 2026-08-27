@@ -18,7 +18,7 @@
         <div class="report-card-carrousel card shadow-sm bg-primary">
             <div class="card-body d-flex align-items-end flex-column text-white">
                 <h5 class="is-600 m-0">¡Hace clic para ver todos los reportes!</h5>
-                <p class="mt-auto h2 mb-1"><a href="/reportes" class="text-white"><i class="fas fa-arrow-alt-circle-right"></i></a></p>
+                <p class="mt-auto h2 mb-1"><a href="/reportes" class="text-white"><i class="fas fa-circle-right"></i></a></p>
             </div>
         </div>
       </swiper-slide>
@@ -27,11 +27,11 @@
       <div class="is-clickable" @click="nextSlide"><i class="fas fa-chevron-right fa-2x text-primary pl-3"></i></div>
     </div>
     <section class="p-5 text-center" v-else>
-      <i class="fas fa-info-circle"></i>&nbsp; No hay reportes cargados en la plataforma
+      <i class="fas fa-circle-info"></i>&nbsp; No hay reportes cargados en la plataforma
     </section>
   </div>
   <section class="p-5 text-center" v-else>
-    <i class="fas fa-sync fa-spin"></i> Cargando...
+    <i class="fas fa-arrows-rotate fa-spin"></i> Cargando...
   </section>
 </template>
 

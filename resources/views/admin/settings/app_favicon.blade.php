@@ -6,7 +6,7 @@
       <div class="form-group">
         <label><b>Logo App - Favicon</b></label>
          <p class="text-muted text-smaller">
-          <i class="fas fa-exclamation-triangle"></i> <b>Importante!</b> Debe ser de dimensiones 1:1 (cuadrado), PNG y fondo transparente. Como maximo recomendamos hasta 250x250px.
+          <i class="fas fa-triangle-exclamation"></i> <b>Importante!</b> Debe ser de dimensiones 1:1 (cuadrado), PNG y fondo transparente. Como maximo recomendamos hasta 250x250px.
         </p>
         <input type="hidden"  name="name" value="app_favicon" >
         <input type="hidden"  name="type" value="string" >

@@ -22,7 +22,7 @@
           </div>
         </div>
         <div class="text-right">
-          <a href="{{ route('admin.organizations.edit', ['organizationId' => $organization->id]) }}" class="btn btn-link btn-sm"><i class="fas fa-pencil-alt fa-fw"></i>Editar</a>
+          <a href="{{ route('admin.organizations.edit', ['organizationId' => $organization->id]) }}" class="btn btn-link btn-sm"><i class="fas fa-pencil fa-fw"></i>Editar</a>
           <a href="{{ route('admin.organizations.delete', ['organizationId' => $organization->id]) }}" class="btn btn-link btn-sm"><i class="fas fa-trash fa-fw"></i>Eliminar</a>
         </div>
     </div>

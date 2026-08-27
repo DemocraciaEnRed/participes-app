@@ -29,7 +29,7 @@
   @forelse($event->photos as $photo)
   <div class="d-inline-block mr-2 my-1">
     <a href="{{asset($photo->path)}}" target="_blank"><img src="{{asset($photo->thumbnail_path)}}" height="80" class="img rounded mb-1 align-top" alt=""></a> 
-    <a class="is-clickable text-danger" onclick="event.preventDefault();document.getElementById('delete-photo-{{$photo->id}}').submit();"><i class="fas fa-times fa-lg fa-fw"></i></a>
+    <a class="is-clickable text-danger" onclick="event.preventDefault();document.getElementById('delete-photo-{{$photo->id}}').submit();"><i class="fas fa-xmark fa-lg fa-fw"></i></a>
     <form id="delete-photo-{{$photo->id}}" action="{{route('admin.events.pictures.delete',['eventId' => $event->id, 'pictureId' => $photo->id]) }}" method="POST" style="display: none;">
         @method('DELETE')
         @csrf
@@ -39,7 +39,7 @@
   <p class="text-muted">No hay fotos cargadas en el evento</p>
   @endforelse
   <hr>
-  <h5 class="is-700 has-text-danger"><i class="fas fa-edit"></i> Editar información</h5>
+  <h5 class="is-700 has-text-danger"><i class="fas fa-pen-to-square"></i> Editar información</h5>
   <form method="POST" action="{{ route('admin.events.edit.form',['eventId' => $event->id]) }}" >
     @method('PUT')
     @csrf

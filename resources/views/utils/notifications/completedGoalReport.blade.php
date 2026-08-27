@@ -1,4 +1,4 @@
-<h5 class="mb-2 is-700"><i class="fas fa-medal fa-fw"></i><i class="far fa-laugh-beam fa-fw"></i> ¡Una meta llegó a su 100%!</h5>
+<h5 class="mb-2 is-700"><i class="fas fa-medal fa-fw"></i><i class="far fa-face-laugh-beam fa-fw"></i> ¡Una meta llegó a su 100%!</h5>
 <p class="my-1 text-smaller">¡Estamos celebrando porque la meta <b>"{{$notification->data['goal']['title']}}"</b> llegó a su 100%! Podes leer el nuevo reporte de {{$notification->data['report']['label']}} <b>"{{$notification->data['report']['title']}}"</b> haciendo <a href="{{route('reports.index', ['reportId' => $notification->data['report']['id']])}}" >click aquí</a></p>
 <p class="my-1 text-smallest text-muted">
 Notificado el @datetime($notification->created_at) - <a

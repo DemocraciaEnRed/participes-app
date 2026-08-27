@@ -25,8 +25,8 @@ $currentRoute = Route::currentRouteName();
 <li><a href="{{ route('objectives.manage.index', ['objectiveId' => $objective->id]) }}" class="text-smaller text-dark"><i class="fas fa-arrow-left"></i>&nbsp;Volver al objetivo</a></li>
 </ul>
 <hr>
-<a href="{{ route('objectives.manage.goals.reports.index', ['objectiveId' => $objective->id, 'goalId' => $goal->id, 'reportId' => $report->id]) }}" class="category {{ $currentRoute == 'objective.manage.goals.reports.index'  ? 'is-active' : null }}"><i class="fas fa-tachometer-alt fa-fw"></i>&nbsp;Inicio</a>
-<h6 class="category"><i class="fas fa-cog fa-fw"></i>&nbsp;Administrar</h6>
+<a href="{{ route('objectives.manage.goals.reports.index', ['objectiveId' => $objective->id, 'goalId' => $goal->id, 'reportId' => $report->id]) }}" class="category {{ $currentRoute == 'objective.manage.goals.reports.index'  ? 'is-active' : null }}"><i class="fas fa-gauge-high fa-fw"></i>&nbsp;Inicio</a>
+<h6 class="category"><i class="fas fa-gear fa-fw"></i>&nbsp;Administrar</h6>
 <div class="menu-link">
 <a href="{{ route('objectives.manage.goals.reports.edit', ['objectiveId' => $objective->id, 'goalId' => $goal->id, 'reportId' => $report->id]) }}" class="item-link {{ $currentRoute == 'objectives.manage.goals.reports.edit'  ? 'is-active' : null }}">Editar reporte</a>
 <a href="{{ route('objectives.manage.goals.reports.configuration', ['objectiveId' => $objective->id, 'goalId' => $goal->id, 'reportId' => $report->id]) }}" class="item-link {{ $currentRoute == 'objectives.manage.goals.reports.configuration'  ? 'is-active' : null }}">Configuración</a>

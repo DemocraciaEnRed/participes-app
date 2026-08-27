@@ -23,7 +23,7 @@
             @keydown.esc="hideLinkMenu"
           />
           <a class="menububble__button" @click="setLinkUrl(commands.link, null)">
-            <i class="fas fa-times text-white"></i>
+            <i class="fas fa-xmark text-white"></i>
           </a>
         </form>
 

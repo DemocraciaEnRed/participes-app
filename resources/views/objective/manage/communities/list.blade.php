@@ -12,7 +12,7 @@
         <a href="{{$community->url}}" target="_blank" class="py-1 px-3 rounded d-inline-block" style="border: 2px solid {{$community->color}}; color: {{$community->color}}"><i class="{{$community->icon}}"></i>&nbsp;{{$community->label}}</a>
       </div>
       <div class="text-right">
-        <a href="#" onclick="event.preventDefault();document.getElementById('delete-community-{{$community->id}}').submit();" class="btn btn-link btn-sm"><i class="fas fa-trash-alt fa-fw"></i>Eliminar</a>
+        <a href="#" onclick="event.preventDefault();document.getElementById('delete-community-{{$community->id}}').submit();" class="btn btn-link btn-sm"><i class="fas fa-trash-can fa-fw"></i>Eliminar</a>
         <form id="delete-community-{{$community->id}}" action="{{ route('objectives.manage.communities.remove.form',['objectiveId' => $objective->id, 'communityId' => $community->id]) }}" method="POST" style="display: none;">
             @method('DELETE')
             @csrf
@@ -23,7 +23,7 @@
   @empty
   <div class="card shadow-sm my-3">
     <div class="card-body text-center">
-      <i class="far fa-surprise"></i>&nbsp;¡No hay comunidades del objetivo!
+      <i class="far fa-face-surprise"></i>&nbsp;¡No hay comunidades del objetivo!
     </div>
   </div>
   @endforelse

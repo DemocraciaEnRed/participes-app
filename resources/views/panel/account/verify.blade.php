@@ -10,7 +10,7 @@
 </div>
 @else
 <div class="alert alert-dark my-4">
-  <i class="fas fa-exclamation-triangle"></i>&nbsp;Su cuenta no se encuentra verificada
+  <i class="fas fa-triangle-exclamation"></i>&nbsp;Su cuenta no se encuentra verificada
 </div>
 <p>Es importante que verifique su correo electronico <b>{{Auth::user()->email}}</b> para que pueda:</p>
     <ul>

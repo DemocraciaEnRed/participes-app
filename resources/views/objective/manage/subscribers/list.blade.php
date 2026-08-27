@@ -31,7 +31,7 @@
   @empty
     <div class="card shadow-sm my-3">
       <div class="card-body text-center">
-        <i class="far fa-surprise"></i>&nbsp;¡No hay suscriptores del objetivo!
+        <i class="far fa-face-surprise"></i>&nbsp;¡No hay suscriptores del objetivo!
       </div>
     </div>
   @endforelse

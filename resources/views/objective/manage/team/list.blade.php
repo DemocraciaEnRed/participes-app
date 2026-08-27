@@ -26,7 +26,7 @@
             @csrf
             @method('DELETE')
         <button type="submit" form="remove{{$member->id}}" class="btn btn-link btn-sm">
-          <i class="fas fa-times"></i> Quitar
+          <i class="fas fa-xmark"></i> Quitar
         </button>
           </form>
         </div>
@@ -37,7 +37,7 @@
   @else
   <div class="card shadow-sm my-3">
       <div class="card-body text-center">
-        <i class="far fa-surprise"></i>&nbsp;¡No se encontraron miembros del equipo!
+        <i class="far fa-face-surprise"></i>&nbsp;¡No se encontraron miembros del equipo!
       </div>
     </div>
   @endif

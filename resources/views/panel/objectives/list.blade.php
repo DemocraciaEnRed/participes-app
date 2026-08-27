@@ -7,7 +7,7 @@
   <p class="lead">Estos son los objetivos de los cuales formas parte del equipo.</p>
   @if(!Auth::user()->hasVerifiedEmail())
   <div class="alert alert-warning">
-    <h5 class="is-700"><i class="fas fa-exclamation-triangle"></i>&nbsp;¡Debe verificar su cuenta para poder ingresar a los paneles de administracion de los objetivos!</h5>
+    <h5 class="is-700"><i class="fas fa-triangle-exclamation"></i>&nbsp;¡Debe verificar su cuenta para poder ingresar a los paneles de administracion de los objetivos!</h5>
     <span>Aún no has verificado tu cuenta. Para hacerlo, ingresar en tu <a href="/panel">panel de control<i class="fas fa-arrow-right fa-fw"></i></a></span>
   </div>
   @endif
@@ -34,7 +34,7 @@
   @else
   <div class="card mb-3 shadow-sm">
     <div class="card-body text-center">
-      <h6 class="card-title mb-2"><i class="far fa-surprise"></i>&nbsp;No forma parte de ningun objetivo</h6>
+      <h6 class="card-title mb-2"><i class="far fa-face-surprise"></i>&nbsp;No forma parte de ningun objetivo</h6>
       <p class="text-smaller mb-0">¿Quiere participar activamente? Únase a algun objetivo!</p>
     </div>
   </div>

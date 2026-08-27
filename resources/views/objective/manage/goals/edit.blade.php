@@ -16,7 +16,7 @@
   @endif
   @if($goal->has('reports'))
   <div class="alert alert-warning">
-    <h6 class="is-700"><i class="fas fa-exclamation-triangle"></i> Importante</h6>
+    <h6 class="is-700"><i class="fas fa-triangle-exclamation"></i> Importante</h6>
     El objetivo cuenta con reportes. Si alguno de los campos compromete alguna información con respecto a los reportes, recuerde hacer las ediciones correspondientes en los mismos.
   </div>
   @endif
@@ -88,7 +88,7 @@
       </div>
       @else
       <div class="alert alert-warning">
-        <i class="fas fa-exclamation-triangle"></i>&nbsp;El objetivo se encuentra <i class="fas fa-eye-slash"></i> oculto, no se enviarán notificaciones a los usuarios.
+        <i class="fas fa-triangle-exclamation"></i>&nbsp;El objetivo se encuentra <i class="fas fa-eye-slash"></i> oculto, no se enviarán notificaciones a los usuarios.
       </div>
       @endif
       <small class="form-text text-muted">Se le enviará una notificación por sistema, de que la meta ha sido editada invitandolos a verla.</small>

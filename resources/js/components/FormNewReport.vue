@@ -6,7 +6,7 @@
 				<a class="nav-link text-primary is-clickable" @click="type = 'post'" :class="type == 'post' && 'active font-weight-bold'"><i class="fas fa-bullhorn"></i>&nbsp;&nbsp;Novedad</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link text-primary is-clickable" @click="type = 'progress'" :class="type == 'progress' && 'active font-weight-bold'"><i class="fas fa-fast-forward"></i>&nbsp;&nbsp;Avance</a>
+				<a class="nav-link text-primary is-clickable" @click="type = 'progress'" :class="type == 'progress' && 'active font-weight-bold'"><i class="fas fa-forward-fast"></i>&nbsp;&nbsp;Avance</a>
 			</li>
 			<li class="nav-item" v-if="milestones && milestones.length > 0">
 				<a class="nav-link text-primary is-clickable" @click="type = 'milestone'" :class="type == 'milestone' && 'active font-weight-bold'"><i class="fas fa-medal"></i>&nbsp;&nbsp;Hito</a>
@@ -18,7 +18,7 @@
 			<div class="alert alert-light d-flex">
 				<div class="mr-3">
 					<i v-show="type == 'post'" class="mt-1 animate__animated animate__rubberBand fas fa-bullhorn fa-2x fa-fw"></i>
-					<i v-show="type == 'progress'" class="mt-1 animate__animated animate__rubberBand fas fa-fast-forward fa-2x fa-fw"></i>
+					<i v-show="type == 'progress'" class="mt-1 animate__animated animate__rubberBand fas fa-forward-fast fa-2x fa-fw"></i>
 					<i v-show="type == 'milestone'" class="mt-1 animate__animated animate__rubberBand fas fa-medal fa-2x fa-fw"></i>
 				</div>
 				<div>
@@ -106,10 +106,10 @@
 						</div>
 					</div>
 					<div class="alert alert-warning" v-if="rangeInput <= 0">
-						<i class="fas fa-exclamation-triangle fa-fw"></i>&nbsp;¡No puede crear un reporte de avance y que el avance sea 0 o negativo!
+						<i class="fas fa-triangle-exclamation fa-fw"></i>&nbsp;¡No puede crear un reporte de avance y que el avance sea 0 o negativo!
 					</div>
 					<div class="alert alert-info" v-if="over100">
-						<i class="fas fa-info-circle fa-fw"></i>&nbsp;<b>¡Atencion!</b> Esta por sobrepasar el 100% de la meta. Esté seguro que es lo que desea.
+						<i class="fas fa-circle-info fa-fw"></i>&nbsp;<b>¡Atencion!</b> Esta por sobrepasar el 100% de la meta. Esté seguro que es lo que desea.
 					</div>
 			</section>
 			<section v-if="type == 'milestone' && milestones && milestones.length > 0">
@@ -145,7 +145,7 @@
 							<label class="custom-control-label is-clickable" for="notify">Notificar a los suscriptores</label>
 						</div>
 						<div class="alert alert-warning" v-else>
-							<i class="fas fa-exclamation-triangle"></i>&nbsp;El objetivo se encuentra <i class="fas fa-eye-slash"></i> oculto, no se enviarán notificaciones a los usuarios.
+							<i class="fas fa-triangle-exclamation"></i>&nbsp;El objetivo se encuentra <i class="fas fa-eye-slash"></i> oculto, no se enviarán notificaciones a los usuarios.
 						</div>
 						<small class="form-text text-muted">Se le enviará una notificación por email (si lo tienen habilitado) y por sistema, de que hay un nuevo reporte.</small>
 					</div>

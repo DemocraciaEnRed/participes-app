@@ -38,9 +38,9 @@
    @isManager($objective->id)
   <hr>
   <div class="pl-3">
-    <a href="{{route('objectives.manage.index',['objectiveId'=> $objective->id])}}" class="btn btn-link btn-sm"><i class="fas fa-external-link-alt"></i> Panel objetivo</a>
+    <a href="{{route('objectives.manage.index',['objectiveId'=> $objective->id])}}" class="btn btn-link btn-sm"><i class="fas fa-up-right-from-square"></i> Panel objetivo</a>
     @if($currentRoute == 'goals.index')
-    <a href="{{route('objectives.manage.goals.index',['objectiveId'=> $objective->id, 'goalId' => $goal->id])}}" class="btn btn-link btn-sm"><i class="fas fa-external-link-alt"></i> Panel meta</a>
+    <a href="{{route('objectives.manage.goals.index',['objectiveId'=> $objective->id, 'goalId' => $goal->id])}}" class="btn btn-link btn-sm"><i class="fas fa-up-right-from-square"></i> Panel meta</a>
     @endif
   </div>
   @endisManager
@@ -48,7 +48,7 @@
   <ul class="list-unstyled objective-goals-list">
     <li class="list-item py-2 pl-4 pr-3 {{ $currentRoute == 'objectives.index' ? 'active' : null}} "><a href="{{route('objectives.index',['objectiveId' => $objective->id])}}">Vista general del objetivo</a></li>
     @forelse ($objective->goals as $goalAux)
-    <li class="list-item py-2 pl-4 pr-3 {{ $currentRoute == 'goals.index' && $currentRouteGoalId == $goalAux->id ? 'active' : null }}"><i class="far fa-dot-circle fa-fw text-{{$goalAux->status}}"></i>&nbsp;<a href="{{route('goals.index',['goalId' => $goalAux->id])}}">{{$goalAux->title}}</a></li>
+    <li class="list-item py-2 pl-4 pr-3 {{ $currentRoute == 'goals.index' && $currentRouteGoalId == $goalAux->id ? 'active' : null }}"><i class="far fa-circle-dot fa-fw text-{{$goalAux->status}}"></i>&nbsp;<a href="{{route('goals.index',['goalId' => $goalAux->id])}}">{{$goalAux->title}}</a></li>
     @empty
     <li class="list-item py-2 pl-4 pr-3 text-muted">No hay metas</li>
     @endforelse

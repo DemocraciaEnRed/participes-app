@@ -16,7 +16,7 @@
   <div class="card my-3 shadow-sm">
     <div class="card-body d-flex justify-content-between align-items-center">
       <div class="mr-3 category-icon-container text-center">
-        <i class="far fa-2x fa-fw fa-dot-circle text-{{$goal->status}}"></i>
+        <i class="far fa-2x fa-fw fa-circle-dot text-{{$goal->status}}"></i>
         <span class="text-{{$goal->status}} rounded-circle is-700 text-smallest ">{{$goal->progress_percentage}}%</span>
       </div>
       <div class="w-100">
@@ -30,7 +30,7 @@
   @empty
   <div class="card shadow-sm my-3">
     <div class="card-body text-center">
-      <i class="far fa-surprise"></i>&nbsp;¡No hay metas del objetivo!
+      <i class="far fa-face-surprise"></i>&nbsp;¡No hay metas del objetivo!
     </div>
   </div>
   @endforelse

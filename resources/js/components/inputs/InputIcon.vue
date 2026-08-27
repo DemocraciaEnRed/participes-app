@@ -7,7 +7,7 @@
       </div>
       <input type="text" class="form-control" :name="name" readonly :value="selected">
       <div class="input-group-append">
-        <button class="btn btn-outline-secondary" @click.prevent="toggleShowIconSearch" ><i :class="`fas ${showIconSearch ? 'fa-angle-double-up' : 'fa-angle-double-down'} fa-fw`"></i></button>
+        <button class="btn btn-outline-secondary" @click.prevent="toggleShowIconSearch" ><i :class="`fas ${showIconSearch ? 'fa-angles-up' : 'fa-angles-down'} fa-fw`"></i></button>
       </div>
     </div>
     <div v-if="showIconSearch" class="card p-2 mt-2">

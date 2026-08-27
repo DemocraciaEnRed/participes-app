@@ -16,7 +16,7 @@
 					@if ($event->objectives->count() > 0)	
 					<p class="text-info"><i class="fas fa-bullseye"></i>&nbsp;{{$event->objectives->count()}} objetivos estan relacionados con este evento</p>
 					@endif
-					<h6 class="text-dark mb-2 is-700"><i class="fas fa-calendar-alt"></i>&nbsp;{{$event->moment}}</h6>
+					<h6 class="text-dark mb-2 is-700"><i class="fas fa-calendar-days"></i>&nbsp;{{$event->moment}}</h6>
 					</div>
 				</div>
 					<a href="{{route('events.index',['eventId' => $event->id])}}" class="btn btn-light">Más información <i class="fas fa-arrow-right"></i></a>
@@ -51,7 +51,7 @@
 					@if ($event->objectives->count() > 0)	
 					<p class="text-info"><i class="fas fa-bullseye"></i>&nbsp;{{$event->objectives->count()}} objetivos estan relacionados con este evento</p>
 					@endif
-					<h6 class="text-dark mb-2 is-700"><i class="fas fa-calendar-alt"></i>&nbsp;{{$event->moment}}</h6>
+					<h6 class="text-dark mb-2 is-700"><i class="fas fa-calendar-days"></i>&nbsp;{{$event->moment}}</h6>
 					</div>
 				</div>
 					<a href="{{route('events.index',['eventId' => $event->id])}}" class="btn btn-light">Más información <i class="fas fa-arrow-right"></i></a>
@@ -62,7 +62,7 @@
 	@endif
 	@empty
 	<div class="pt-5">
-		<p class="text-center mb-1"><i class="far fa-surprise fa-2x"></i></p>
+		<p class="text-center mb-1"><i class="far fa-face-surprise fa-2x"></i></p>
 		<p class="text-center">Aún no se han celebrado eventos en el pasado</p>
 	</div>
 	@endforelse

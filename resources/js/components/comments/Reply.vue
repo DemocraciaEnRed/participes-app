@@ -2,7 +2,7 @@
     <div class="media pl-3 mb-3 pr-3" style="margin-left: 80px;">
       <img :src="reply.user.avatar ? reply.user.avatar.thumbnail_path : '/img/default-avatar.png'" alt="" class="align-self-start mr-3 rounded-circle" style="width: 32px">
       <div class="media-body">
-        <p class="text-smaller mb-0"><b>{{`${reply.user.name} ${reply.user.surname}`}}</b><span v-if="reply.author_member_objective" class="text-info">&nbsp;&nbsp;&nbsp;<i class="fas fa-shield-alt"></i> Equipo</span><span v-if="reply.user.organization"><br><span class="text-primary text-smallest"><i class="fas fa-house-user"></i> {{reply.user.organization}}</span></span></p>
+        <p class="text-smaller mb-0"><b>{{`${reply.user.name} ${reply.user.surname}`}}</b><span v-if="reply.author_member_objective" class="text-info">&nbsp;&nbsp;&nbsp;<i class="fas fa-shield-halved"></i> Equipo</span><span v-if="reply.user.organization"><br><span class="text-primary text-smallest"><i class="fas fa-house-user"></i> {{reply.user.organization}}</span></span></p>
         <div class="animate__animated animate__flash mb-2" v-if="showConfirmDelete">
           <p class="mb-2 text-smaller">¿Esta seguro que quiere eliminar el comentario?</p>
           <button class="btn btn-outline-danger btn-sm" @click="deleteReply"><i class="fas fa-trash"></i>&nbsp;Eliminar</button>
@@ -16,13 +16,13 @@
           <div class="form-group mb-2">
             <textarea v-model="commentText" rows="2" class="form-control text-smaller" placeholder="Deje aquí su comentario..." :disabled="isLoading"></textarea>
           </div>
-          <button class="btn btn-outline-primary text-smallest btn-sm" @click="submitEdit" v-if="!isLoading && !sent"><i class="fas fa-pencil-alt"></i>&nbsp;Guardar</button>
-          <p class="text-smaller mb-0 animate__animated animate__flash animate__infinite text-primary" v-if="isLoading && !sent"><i class="fas fa-spin fa-sync"></i>&nbsp;Editando...</p>
+          <button class="btn btn-outline-primary text-smallest btn-sm" @click="submitEdit" v-if="!isLoading && !sent"><i class="fas fa-pencil"></i>&nbsp;Guardar</button>
+          <p class="text-smaller mb-0 animate__animated animate__flash animate__infinite text-primary" v-if="isLoading && !sent"><i class="fas fa-spin fa-arrows-rotate"></i>&nbsp;Editando...</p>
         </div>
       </div>
       <div class="ml-2" v-if="reply.delete_url || reply.edit_url">
-        <p class="text-center text-muted my-1" v-if="reply.edit_url"><a class="is-clickable link-light" @click="toggleShowEditForm"><i class="fas fa-pencil-alt fa-fw"></i></a></p>
-        <p class="text-center text-muted mb-1" v-if="reply.delete_url"><a class="is-clickable link-light" @click="toggleConfirmDelete"><i class="fas fa-times fa-fw"></i></a></p>
+        <p class="text-center text-muted my-1" v-if="reply.edit_url"><a class="is-clickable link-light" @click="toggleShowEditForm"><i class="fas fa-pencil fa-fw"></i></a></p>
+        <p class="text-center text-muted mb-1" v-if="reply.delete_url"><a class="is-clickable link-light" @click="toggleConfirmDelete"><i class="fas fa-xmark fa-fw"></i></a></p>
       </div>
     </div>
 </template>

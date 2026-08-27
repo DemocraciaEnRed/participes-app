@@ -15,7 +15,7 @@
   </div>
   @endif
   <div class="alert alert-warning">
-    <h6 class="is-700"><i class="fas fa-exclamation-triangle"></i> Importante</h6>
+    <h6 class="is-700"><i class="fas fa-triangle-exclamation"></i> Importante</h6>
     El objetivo es un objetivo de avance. Si usted modifica las cantidades, considere que puede afectar la cronologia de otros reportes, y los datos de la misma meta. De ser asi, considere modificar la meta y otros reportes para mantener consistencia en la información.
   </div>
   <ul class="nav nav-tabs justify-content-center mb-3">
@@ -23,7 +23,7 @@
       <a class="nav-link {{$report->type == 'post' ? 'font-primary active font-weight-bold' : 'text-muted'}}" ><i class="fas fa-bullhorn"></i>&nbsp;&nbsp;Novedad</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link {{$report->type == 'progress' ? 'font-primary active font-weight-bold' : 'text-muted'}}" ><i class="fas fa-fast-forward"></i>&nbsp;&nbsp;Avance</a>
+      <a class="nav-link {{$report->type == 'progress' ? 'font-primary active font-weight-bold' : 'text-muted'}}" ><i class="fas fa-forward-fast"></i>&nbsp;&nbsp;Avance</a>
     </li>
     <li class="nav-item">
       <a class="nav-link {{$report->type == 'milestone' ? 'font-primary active font-weight-bold' : 'text-muted'}}" ><i class="fas fa-medal"></i>&nbsp;&nbsp;Hito</a>
@@ -101,8 +101,8 @@
     @endif
     @if($report->type == 'progress')
     <div class="alert alert-warning">
-      <h6 class="is-700"><i class="fas fa-exclamation-triangle"></i> Importante</h6>
-      Corrobore que, si cuenta con reportes de <i class="fas fa-fast-forward"></i> <b>avance</b> previos, y modifica el "Progreso de la meta antes del reporte" debe hacer las modificaciones pertinentes sobre reportes previos de avance, y sobre el valor de la meta en si. 
+      <h6 class="is-700"><i class="fas fa-triangle-exclamation"></i> Importante</h6>
+      Corrobore que, si cuenta con reportes de <i class="fas fa-forward-fast"></i> <b>avance</b> previos, y modifica el "Progreso de la meta antes del reporte" debe hacer las modificaciones pertinentes sobre reportes previos de avance, y sobre el valor de la meta en si. 
     </div>
     <div class="form-row">
       <div class="col">
@@ -134,7 +134,7 @@
       </div>
       @else
       <div class="alert alert-warning">
-        <i class="fas fa-exclamation-triangle"></i>&nbsp;El objetivo se encuentra <i class="fas fa-eye-slash"></i> oculto, no se enviarán notificaciones a los usuarios.
+        <i class="fas fa-triangle-exclamation"></i>&nbsp;El objetivo se encuentra <i class="fas fa-eye-slash"></i> oculto, no se enviarán notificaciones a los usuarios.
       </div>
       @endif
       <small class="form-text text-muted">Se le enviará una notificación por sistema, de que el reporte ha sido editado invitandolos a verlo.</small>

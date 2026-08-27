@@ -25,10 +25,10 @@
           <a href="{{ route('reports') }}" class="nav-link"><i class="far fa-fw fa-copy"></i> Reportes</a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('events.upcoming') }}" class="nav-link"><i class="far fa-fw fa-calendar-alt"></i> Eventos</a>
+          <a href="{{ route('events.upcoming') }}" class="nav-link"><i class="far fa-fw fa-calendar-days"></i> Eventos</a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('about.general') }}" class="nav-link"><i class="fas fa-fw fa-question-circle"></i> ¿Cómo funciona?</a>
+          <a href="{{ route('about.general') }}" class="nav-link"><i class="fas fa-fw fa-circle-question"></i> ¿Cómo funciona?</a>
         </li>
       </ul>
 
@@ -37,7 +37,7 @@
         <!-- Authentication Links -->
         @guest
         <li class="nav-item">
-         <a class="nav-link" href="{{ route('login') }}"><i class="fas fa-sign-in-alt"></i>&nbsp;{{ __('Login') }}</a>
+         <a class="nav-link" href="{{ route('login') }}"><i class="fas fa-right-to-bracket"></i>&nbsp;{{ __('Login') }}</a>
         </li>
         @if (Route::has('register'))
         <li class="nav-item">
@@ -60,15 +60,15 @@
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             @hasRole('admin')
             <a class="dropdown-item" href="{{ route('admin.index') }}">
-              <i class="fas fa-cog"></i>&nbsp;Administración
+              <i class="fas fa-gear"></i>&nbsp;Administración
             </a>
             @endhasRole
             <a class="dropdown-item" href="{{ route('panel.index') }}">
-              <i class="fas fa-columns"></i>&nbsp;Mi panel
+              <i class="fas fa-table-columns"></i>&nbsp;Mi panel
             </a>
             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-              <i class="fas fa-sign-out-alt"></i>&nbsp;{{ __('Logout') }}
+              <i class="fas fa-right-from-bracket"></i>&nbsp;{{ __('Logout') }}
             </a>
 
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

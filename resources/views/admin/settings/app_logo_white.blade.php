@@ -6,7 +6,7 @@
       <div class="form-group">
         <label><b>Logo App - Blanco</b></label>
         <p class="text-muted text-smaller">
-          <i class="fas fa-exclamation-triangle"></i> <b>Importante!</b> Se aceptan SVG o PNG. De ser SVG, recomendamos que la dimensiones del archivo tenga una relacion 2:1 o 3:1 (Ancho mas largo que el alto). De ser un archivo PNG, recomendamos con fondo transparente y tambien dimensiones de relacion 2:1 o 3:1 (Ancho mas largo que el alto)
+          <i class="fas fa-triangle-exclamation"></i> <b>Importante!</b> Se aceptan SVG o PNG. De ser SVG, recomendamos que la dimensiones del archivo tenga una relacion 2:1 o 3:1 (Ancho mas largo que el alto). De ser un archivo PNG, recomendamos con fondo transparente y tambien dimensiones de relacion 2:1 o 3:1 (Ancho mas largo que el alto)
         </p>
         <input type="hidden"  name="name" value="app_logo_white" >
         <input type="hidden"  name="type" value="string" >

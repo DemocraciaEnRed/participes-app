@@ -3,7 +3,7 @@
 @section('panelContent')
   <div class="d-flex align-items-start mb-3">
     <div class="mr-3 category-icon-container text-center">
-      <i class="far fa-2x fa-fw fa-dot-circle text-{{$goal->status}}"></i>
+      <i class="far fa-2x fa-fw fa-circle-dot text-{{$goal->status}}"></i>
       <span class="text-{{$goal->status}} rounded-circle is-700 text-smallest ">{{$goal->progress_percentage}}%</span>
     </div>
     <div class="w-100">
@@ -17,7 +17,7 @@
     <div class="card-body py-4 row justify-content-between">
       <div class="col-6 text-center">
         <h6 class="font-weight-bold">Reportes</h6>
-        <span class="h6"><i class="far fa-file-alt fa-fw"></i> {{$goal->reports()->count()}}</span>
+        <span class="h6"><i class="far fa-file-lines fa-fw"></i> {{$goal->reports()->count()}}</span>
       </div>
       <div class="col-6 text-center">
         <h6 class="font-weight-bold">Hitos</h6>
@@ -36,7 +36,7 @@
     </div>
     <div class="col md-6">
          <h5 class="font-weight-bold">Estado</h6>
-          <p class="text-{{$goal->status}}"><i class="far fa-fw fa-dot-circle text-{{$goal->status}}"></i>{{$goal->status_label}}</p>
+          <p class="text-{{$goal->status}}"><i class="far fa-fw fa-circle-dot text-{{$goal->status}}"></i>{{$goal->status_label}}</p>
     </div>
   </div>
   <div class="row">
@@ -68,7 +68,7 @@
   @if($goal->milestones->isEmpty())
   <div class="card border-secondary my-2">
     <div class="card-body">
-      <h6><b><i class="fas fa-info-circle"></i>&nbsp;La meta no cuenta con hitos</b></h6>
+      <h6><b><i class="fas fa-circle-info"></i>&nbsp;La meta no cuenta con hitos</b></h6>
       <span class="text-muted">Puede crearlos haciendo <a href="{{ route('objectives.manage.goals.milestones.add', ['objectiveId' => $objective->id,'goalId' => $goal->id]) }}">click aquí <i class="fas fa-arrow-right"></i></a></span>
     </div>
   </div>
@@ -76,7 +76,7 @@
   @if($goal->reports->isEmpty())
   <div class="card border-secondary my-2">
     <div class="card-body">
-      <h6><b><i class="fas fa-info-circle"></i>&nbsp;La meta no cuenta con reportes</b></h6>
+      <h6><b><i class="fas fa-circle-info"></i>&nbsp;La meta no cuenta con reportes</b></h6>
       <span class="text-muted">Puede crearlos haciendo <a href="{{ route('objectives.manage.goals.reports.add', ['objectiveId' => $objective->id,'goalId' => $goal->id]) }}">click aquí <i class="fas fa-arrow-right"></i></a></span>
     </div>
   </div>

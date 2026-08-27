@@ -1,4 +1,4 @@
-<h5 class="mb-2 is-700"><i class="{{$notification->data['report']['icon']}} fa-fw"></i><i class="fas fa-pencil-alt fa-fw"></i> Reporte editado</h5>
+<h5 class="mb-2 is-700"><i class="{{$notification->data['report']['icon']}} fa-fw"></i><i class="fas fa-pencil fa-fw"></i> Reporte editado</h5>
 <p class="my-1 text-smaller">Han editado el reporte de {{$notification->data['report']['label']}} <b>"{{$notification->data['report']['title']}}"</b>. Podes leerlo haciendo <a href="{{route('reports.index', ['reportId' => $notification->data['report']['id']])}}" >click aquí</a></p>
 <p class="my-1 text-smallest text-muted">
 Notificado el @datetime($notification->created_at) - <a

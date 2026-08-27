@@ -17,7 +17,7 @@
       <div class="col-md-6 my-2">
         <div class="d-flex align-items-center">
           <div class="mr-3 category-icon-container text-center">
-            <i class="far fa-2x fa-fw fa-dot-circle text-{{$goal->status}}"></i>
+            <i class="far fa-2x fa-fw fa-circle-dot text-{{$goal->status}}"></i>
             <span class="text-{{$goal->status}} rounded-circle is-700 text-smallest ">{{$goal->progress_percentage}}%</span>
           </div>
           <div class="w-100">

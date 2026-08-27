@@ -10,7 +10,7 @@
     </div>
       <div class="text-center">
         <button @click="fetchMore" v-if="canFetchMore" :disabled="isLoading" class="btn btn-outline-dark">
-          <span v-if="isLoading"><i class="fas fa-sync fa-spin"></i>&nbsp;Cargando</span>
+          <span v-if="isLoading"><i class="fas fa-arrows-rotate fa-spin"></i>&nbsp;Cargando</span>
           <span v-else>Cargar mas reportes</span>
         </button>
       </div>

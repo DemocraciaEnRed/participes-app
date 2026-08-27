@@ -5,8 +5,8 @@
     </div>
     <div class="ml-2 pt-2 text-center">
       <a class="is-clickable text-info" @click="markNotification" v-if="!read && !loading && !ok && !error"><i class="fas fa-check fa-lg"></i></a>
-      <i class="text-light fas fa-spin fa-sync fa-lg" v-else-if="!read && loading && !ok && !error"></i>
-      <i class="text-light far fa-frown-open fa-lg" v-else-if="!read && !loading && error"></i>
+      <i class="text-light fas fa-spin fa-arrows-rotate fa-lg" v-else-if="!read && loading && !ok && !error"></i>
+      <i class="text-light far fa-face-frown-open fa-lg" v-else-if="!read && !loading && error"></i>
       <i class="text-light far fa-envelope-open fa-lg" v-else-if="read && !loading && !error"></i>
       <span v-if="ok" class="text-success text-smallest"><br>Ok</span>
       <span v-if="error" class="text-danger text-smallest"><br>Error</span>

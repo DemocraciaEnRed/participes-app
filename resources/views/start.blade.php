@@ -12,12 +12,12 @@
   @yield('metatags')
 
   <!-- Styles -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" />
   @yield('stylesheets')
   @yield('headscripts')
 
   <!-- Scripts -->
   @vite(['resources/js/app.js'])
-  <script src="https://kit.fontawesome.com/8da8f66b21.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -39,12 +39,12 @@
         <div class="row">
           <div class="col-md-6">
             <div class="alert alert-warning mb-3">
-              <h4><i class="fas fa-info-circle"></i>&nbsp;Si la aplicación fue iniciada, va a limpiar toda la base de
+              <h4><i class="fas fa-circle-info"></i>&nbsp;Si la aplicación fue iniciada, va a limpiar toda la base de
                 datos</h4>
               <p class="mb-0">Puede comenzar una demo haciendo clic en <b>Con DEMO</b> </p>
             </div>
             <div class="alert alert-light mb-3">
-              <h4><i class="fas fa-info-circle"></i>&nbsp;Acerca de la demo</h4>
+              <h4><i class="fas fa-circle-info"></i>&nbsp;Acerca de la demo</h4>
               <p class="">Puede comenzar una demo haciendo clic en <b>Con DEMO</b>. La misma cuenta con:</p>
               <ul class="mb-0">
                 <li>5 categorías</li>
@@ -63,7 +63,7 @@
           <div class="col-md-6">
             <form action="{{route('start.form')}}" method="POST">
               @csrf
-              <h3><i class="fas fa-info-circle"></i>&nbsp;Usuario administrador</h3>
+              <h3><i class="fas fa-circle-info"></i>&nbsp;Usuario administrador</h3>
               <br>
               <div class="form-group row">
                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>

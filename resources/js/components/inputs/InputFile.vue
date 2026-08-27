@@ -15,7 +15,7 @@
   <div class="form-group" v-if="theFiles.length">
     <p v-for="(file,i) in theFiles" class="d-flex justify-content-between mb-1" :key="`file${i}`">
       <span><i class="far fa-file text-primary fa-lg"></i> {{file.name}}&nbsp;&nbsp;<span class="text-smallest text-muted">{{formatBytes(file.size,2)}}</span></span>
-      <a @click="deyeet(file.id)" class="text-danger is-clickable"><i class="fas fa-times"></i></a>
+      <a @click="deyeet(file.id)" class="text-danger is-clickable"><i class="fas fa-xmark"></i></a>
       </p>
       <p class="text-smaller mb-1" v-if="isMultiple">Cantidad de archivos: {{theFiles.length}} - Tamaño total: {{formatBytes(totalSize,2)}}</p>
   </div>

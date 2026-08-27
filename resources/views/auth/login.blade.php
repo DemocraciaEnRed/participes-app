@@ -69,12 +69,12 @@
 						<div class="form-group row mb-0">
 							<div class="col-md-8 offset-md-4">
 								<button type="submit" class="btn btn-primary">
-									<i class="fas fa-sign-in-alt"></i>&nbsp;{{ __('Login') }}
+									<i class="fas fa-right-to-bracket"></i>&nbsp;{{ __('Login') }}
 								</button>
 
 								@if (Route::has('password.request'))
 								<a class="btn btn-outline-white btn-sm" href="{{ route('password.request') }}">
-									<i class="fas fa-question-circle"></i>&nbsp;{{ __('Forgot Your Password?') }}
+									<i class="fas fa-circle-question"></i>&nbsp;{{ __('Forgot Your Password?') }}
 								</a>
 								@endif
 							</div>

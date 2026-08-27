@@ -3,7 +3,7 @@
   @csrf
   <div class="form-group">
   <div class="alert alert-dark">
-    <i class="fas fa-info-circle"></i> Es requerido tener una cuenta en Google y una propiedad de Google Analytics 4 poder utilizar la funcionalidad de analytics.
+    <i class="fas fa-circle-info"></i> Es requerido tener una cuenta en Google y una propiedad de Google Analytics 4 poder utilizar la funcionalidad de analytics.
   </div>
 
     <label><b>Google Analytics 4 - Tag ID</b></label>

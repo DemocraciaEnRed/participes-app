@@ -7,7 +7,7 @@
         <label><b>Social Share - Imagen</b></label>
         <p class="text-muted text-smaller">Esta es la imagen que generalmente se mostrará como preview al compartir el link de la web en redes sociales</p>
         <div class="alert alert-light">
-          <i class="fas fa-exclamation-triangle"></i> <b>Importante!</b><br>
+          <i class="fas fa-triangle-exclamation"></i> <b>Importante!</b><br>
           La imagen debe ser de dimensiones 800x565 pixeles, no transparente. Recomendamos JPEG o PNG (Elija en base al tamaño de archivo mas chico. Recomendamos: Fotografia, usar JPG. Graficos planos, usar PNG)
         </div>
         <input type="hidden"  name="name" value="app_social_image" >

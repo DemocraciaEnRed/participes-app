@@ -6,7 +6,7 @@ const globals = {
           return 'fa-bullhorn'
           break;
         case 'progress':
-          return 'fa-fast-forward'
+          return 'fa-forward-fast'
           break;
         case 'milestone':
           return 'fa-medal'
@@ -14,7 +14,7 @@ const globals = {
         default:
           return 'fa-file'
       }
-      return 'fa-question-circle'
+      return 'fa-circle-question'
     },
      shortString: function(text, limit) {
       if (text.length > limit) {

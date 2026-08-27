@@ -15,7 +15,7 @@
     <objective-card class="my-3" v-for="objective in objectives" :key="`objective${objective.id}`" :objective="objective"></objective-card>
     <div class="card shadow-sm" v-if="objectives.length == 0">
       <div class="card-body p-5 text-center">
-            <h6 class="card-title mb-2"><i class="far fa-surprise"></i>&nbsp;¡No se encontraron objetivos con esos criterios de busqueda!</h6>
+            <h6 class="card-title mb-2"><i class="far fa-face-surprise"></i>&nbsp;¡No se encontraron objetivos con esos criterios de busqueda!</h6>
             <p class="text-smaller mb-0">Intente de nuevo o cambie los criterios de busqueda</p>
       </div>
     </div>

@@ -123,7 +123,7 @@
 									<i class="fas fa-paper-plane"></i>&nbsp;{{ __('Register') }}
 								</button>
 								<a href="{{route('home')}}" class="btn btn-outline-white btn-sm">
-									<i class="fas fa-home"></i> Volver al inicio
+									<i class="fas fa-house"></i> Volver al inicio
 								</a>
 							</div>
 						</div>

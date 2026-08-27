@@ -12,12 +12,12 @@
   @yield('metatags')
 
   <!-- Styles -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" />
   @yield('stylesheets')
   @yield('headscripts')
 
   <!-- Scripts -->
   @vite(['resources/js/app.js'])
-  <script src="https://kit.fontawesome.com/8da8f66b21.js" crossorigin="anonymous"></script>
 </head>
 
 <body>

@@ -20,7 +20,7 @@
           <span class="text-smaller text-muted">Sección: {{ $faq->section_label }} / Orden: {{ $faq->order}}</span>
         </div>
         <div class="text-right">
-          <a href="{{ route('admin.faqs.edit', ['faqId' => $faq->id]) }}" class="btn btn-link btn-sm"><i class="fas fa-pencil-alt fa-fw"></i>Editar</a>
+          <a href="{{ route('admin.faqs.edit', ['faqId' => $faq->id]) }}" class="btn btn-link btn-sm"><i class="fas fa-pencil fa-fw"></i>Editar</a>
           <a href="{{ route('admin.faqs.delete', ['faqId' => $faq->id]) }}" class="btn btn-link btn-sm"><i class="fas fa-trash fa-fw"></i>Eliminar</a>
         </div>
     </div>

@@ -7,7 +7,7 @@
       @map-load="mapLoaded"
     />
     <div class="alert alert-dark my-3" v-if="currentMarkers.length == 0 && !isLoading">
-      <i class="fas fa-info-circle"></i>&nbsp; No hay reportes geolocalizados
+      <i class="fas fa-circle-info"></i>&nbsp; No hay reportes geolocalizados
     </div>
     <paginator class="mt-3" v-if="paginatorData.meta && paginatorData.meta.last_page > 1 && paginated" :paginatorData="paginatorData" @updateData="updateData" />
   </section>

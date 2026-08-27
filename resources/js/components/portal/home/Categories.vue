@@ -20,7 +20,7 @@
         <div class="is-clickable" @click="nextSlide"><i class="fas fa-chevron-right fa-2x text-primary pl-3"></i></div>
       </div>
       <section class="p-5 text-center" v-else>
-        <i class="fas fa-info-circle"></i>&nbsp; No hay categorias cargadas en la plataforma
+        <i class="fas fa-circle-info"></i>&nbsp; No hay categorias cargadas en la plataforma
       </section>
     </div>
 </template>

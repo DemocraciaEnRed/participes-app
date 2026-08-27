@@ -24,7 +24,7 @@
           </div>
         </div>
           <div class="ml-2">
-            <a :href="objective.url" class="text-primary"><i class="fas fa-2x fa-fw fa-arrow-alt-circle-right"></i></a>
+            <a :href="objective.url" class="text-primary"><i class="fas fa-2x fa-fw fa-circle-right"></i></a>
           </div>
       </div>
     </div>

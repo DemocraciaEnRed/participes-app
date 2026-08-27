@@ -9,7 +9,7 @@
     <input type="hidden" name="map_long" v-model.number="newLong">
     <input type="hidden" name="map_zoom" v-model.number="newZoom">
     <br>
-    <button @click="submitNewPosition" class="btn btn-primary"><i class="fas fa-save"></i>&nbsp;Guardar</button>
+    <button @click="submitNewPosition" class="btn btn-primary"><i class="fas fa-floppy-disk"></i>&nbsp;Guardar</button>
     <button ref="submit" style="display:none;">Submit</button>
   </section>
 </template>

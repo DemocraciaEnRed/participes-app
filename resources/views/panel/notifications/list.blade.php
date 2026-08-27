@@ -22,7 +22,7 @@
     <div class="card-body d-flex justify-content-between">
       <div>
       <h5>¿Eliminar todas las notificaciones?</h5>
-      <p class="mb-0"><i class="fas fa-info-circle"></i>&nbsp;Si desea, puede eliminar todas las notificaciones pendientes y leidas.</p>
+      <p class="mb-0"><i class="fas fa-circle-info"></i>&nbsp;Si desea, puede eliminar todas las notificaciones pendientes y leidas.</p>
       </div>
       <div class="ml-2 pt-2 text-center">
         <a class="is-clickable text-info" onclick="event.preventDefault();document.getElementById('checkAll').submit();"><i class="fas fa-trash fa-lg"></i></a>

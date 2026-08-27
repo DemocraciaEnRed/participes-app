@@ -4,7 +4,7 @@
       <div class="media-body">
         <p class="text-smaller mb-1"><b>{{`${user.name} ${user.surname}`}}</b></p>
         <div class="alert alert-warning" v-if="user.email_verified_at == null">
-          <h5 class="is-700"><i class="fas fa-exclamation-triangle"></i>&nbsp;¡Debe verificar su cuenta para poder comentar!</h5>
+          <h5 class="is-700"><i class="fas fa-triangle-exclamation"></i>&nbsp;¡Debe verificar su cuenta para poder comentar!</h5>
           <span>Aún no has verificado tu cuenta. Para hacerlo, ingresar en tu <a href="/panel">panel de control<i class="fas fa-arrow-right fa-fw"></i></a></span>
         </div>
         <div v-else>
@@ -12,7 +12,7 @@
             <textarea v-model="comment" rows="2" class="form-control text-smaller" placeholder="Deje aquí su comentario..." :disabled="isLoading"></textarea>
           </div>
           <button class="btn btn-outline-primary text-smallest btn-sm" @click="submit" v-if="!isLoading && !sent && this.comment"><i class="fas fa-paper-plane"></i>&nbsp;Enviar</button>
-          <p class="text-smaller mb-0 animate__animated animate__flash animate__infinite text-primary" v-if="isLoading && !sent"><i class="fas fa-spin fa-sync"></i>&nbsp;Enviando comentario...</p>
+          <p class="text-smaller mb-0 animate__animated animate__flash animate__infinite text-primary" v-if="isLoading && !sent"><i class="fas fa-spin fa-arrows-rotate"></i>&nbsp;Enviando comentario...</p>
         </div>
     </div>
   </div>

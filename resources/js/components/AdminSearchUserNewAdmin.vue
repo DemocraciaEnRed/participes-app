@@ -7,11 +7,11 @@
       <small class="form-text text-muted">{{status}}</small>
     </div>
     <div class="alert alert-light my-3" v-if="isLoading">
-      <i class="fas fa-sync fa-spin"></i>&nbsp;Cargando...
+      <i class="fas fa-arrows-rotate fa-spin"></i>&nbsp;Cargando...
     </div>
     <div class="card shadow-sm" v-if="users.length == 0">
       <div class="card-body text-center">
-        <i class="far fa-surprise"></i>&nbsp;¡No se encontraron miembros del equipo!
+        <i class="far fa-face-surprise"></i>&nbsp;¡No se encontraron miembros del equipo!
       </div>
     </div>
     <div class="card my-3 shadow-sm" v-for="user in users" :key="user.id">

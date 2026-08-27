@@ -45,7 +45,7 @@
       <text-editor name="content" format="html" content="{{$faq->content}}"></text-editor>
     </div>
     <div class="text-right">
-    <button type="submit" class="btn btn-primary"><i class="fas fa-edit"></i> Editar</button>
+    <button type="submit" class="btn btn-primary"><i class="fas fa-pen-to-square"></i> Editar</button>
     </div>
   </form>
 </section>

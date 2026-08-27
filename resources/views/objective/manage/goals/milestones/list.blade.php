@@ -12,7 +12,7 @@
     	<span class="text-muted text-smaller">Hito #{{$milestone->order}}</span><br><span class="is-700">{{$milestone->title}}</span><br/>
       <span class="text-muted text-smaller"> 
         @if(is_null($milestone->completed))
-        <i class="text-danger fas fa-times fa-fw"></i>
+        <i class="text-danger fas fa-xmark fa-fw"></i>
         No completado
         @else
         <i class="text-success fas fa-check"></i>
@@ -22,8 +22,8 @@
       </span>
     </div>
      <div class="text-right">
-        <a href="{{ route('objectives.manage.goals.milestones.edit',['objectiveId' => $objective->id, 'goalId' => $goal->id, 'milestoneId' => $milestone->id]) }}" class="btn btn-link btn-sm"><i class="fas fa-pencil-alt fa-fw"></i>Editar</a>
-        <a href="{{ route('objectives.manage.goals.milestones.delete',['objectiveId' => $objective->id, 'goalId' => $goal->id, 'milestoneId' => $milestone->id]) }}" class="btn btn-link btn-sm"><i class="fas fa-trash-alt fa-fw"></i>Eliminar</a>
+        <a href="{{ route('objectives.manage.goals.milestones.edit',['objectiveId' => $objective->id, 'goalId' => $goal->id, 'milestoneId' => $milestone->id]) }}" class="btn btn-link btn-sm"><i class="fas fa-pencil fa-fw"></i>Editar</a>
+        <a href="{{ route('objectives.manage.goals.milestones.delete',['objectiveId' => $objective->id, 'goalId' => $goal->id, 'milestoneId' => $milestone->id]) }}" class="btn btn-link btn-sm"><i class="fas fa-trash-can fa-fw"></i>Eliminar</a>
       </div>
     </div>
   </div>

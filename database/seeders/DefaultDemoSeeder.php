@@ -39,7 +39,7 @@ class DefaultDemoSeeder extends Seeder
         $category->save();
         $category = new Category();
         $category->title = 'Seguridad';
-        $category->icon = 'fas fa-shield-alt';
+        $category->icon = 'fas fa-shield-halved';
         $category->color = '#30689c';
         $category->save();
         $category = new Category();

@@ -13,7 +13,7 @@ $currentRoute = Route::currentRouteName();
 </ul>
 @endhasRole
 <hr>
-<a href="{{route('objectives.manage.index', ['objectiveId' => $objective->id]) }}" class="category {{ $currentRoute == 'objectives.manage.index'  ? 'is-active' : null }}"><i class="fas fa-tachometer-alt fa-fw"></i>&nbsp;Inicio</a>
+<a href="{{route('objectives.manage.index', ['objectiveId' => $objective->id]) }}" class="category {{ $currentRoute == 'objectives.manage.index'  ? 'is-active' : null }}"><i class="fas fa-gauge-high fa-fw"></i>&nbsp;Inicio</a>
 <h6 class="category"><i class="fas fa-medal fa-fw"></i>&nbsp;Metas del objetivo</h6>
 <div class="menu-link">
 @isManager($objective->id)
@@ -42,7 +42,7 @@ $currentRoute = Route::currentRouteName();
 </div>
 
 @isManager($objective->id)
-<h6 class="category"><i class="fas fa-cog fa-fw"></i>&nbsp;Administrar</h6>
+<h6 class="category"><i class="fas fa-gear fa-fw"></i>&nbsp;Administrar</h6>
 <div class="menu-link">
 <a href="{{route('objectives.manage.edit', ['objectiveId' => $objective->id]) }}" class="item-link {{ $currentRoute == 'objectives.manage.edit'  ? 'is-active' : null }}">Editar objetivo</a>
 <a href="{{route('objectives.manage.cover', ['objectiveId' => $objective->id]) }}" class="item-link {{ $currentRoute == 'objectives.manage.cover'  ? 'is-active' : null }}">Imagen de portada</a>

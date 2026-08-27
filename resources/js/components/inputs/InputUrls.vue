@@ -26,7 +26,7 @@
     <div class="url-list mt-3 mb-3">
     <span class="url badge badge-primary" v-for="(url,label,i) in urlList" :key="`url${i}`">
       <span><i class="fas fa-link"></i>&nbsp;<a :href="url" class="text-white" target="_blank">{{label}}</a></span>
-      <a @click="removeUrl(label)"><i class="fas fa-times"></i></a> 
+      <a @click="removeUrl(label)"><i class="fas fa-xmark"></i></a> 
     </span>
     </div>
   </section>

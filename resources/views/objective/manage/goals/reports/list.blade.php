@@ -30,7 +30,7 @@
         <h6 class="text-secondary m-0"><i class="fas fa-bullhorn fa-lg"></i></h6>
         <p class="text-secondary text-smaller m-0">Novedad</p>
         @elseif($report->type == "progress")
-        <h6 class="text-secondary m-0"><i class="fas fa-fast-forward fa-lg"></i></h6>
+        <h6 class="text-secondary m-0"><i class="fas fa-forward-fast fa-lg"></i></h6>
         <p class="text-secondary text-smaller m-0">Avance</p>
         @elseif($report->type == "milestone")
         <h6 class="text-secondary m-0"><i class="fas fa-medal fa-lg"></i></h6>

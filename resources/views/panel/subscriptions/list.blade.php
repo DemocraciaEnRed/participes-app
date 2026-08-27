@@ -21,7 +21,7 @@
             <p class="text-muted text-smaller mb-0">Suscripto el @datetime($objective->pivot->created_at)</p>
           </div>
           <div class="ml-3 text-center">
-            <a onclick="event.preventDefault();document.getElementById('unsub{{$objective->id}}').submit();" class="text-dark is-clickable"><i class="fas fa-times fa-circle fa-2x"></i></a>
+            <a onclick="event.preventDefault();document.getElementById('unsub{{$objective->id}}').submit();" class="text-dark is-clickable"><i class="fas fa-xmark fa-circle fa-2x"></i></a>
             <span class="text-smallest">Desuscribirse</span>
             <form id="unsub{{$objective->id}}" action="{{route('panel.subscriptions.unsubscribe.form',['objectiveId' => $objective->id]) }}" method="POST" style="display: none;">
               @csrf
@@ -33,7 +33,7 @@
   @else
     <div class="card mb-3 shadow-sm">
       <div class="card-body text-center">
-        <h6 class="card-title mb-2"><i class="far fa-surprise"></i>&nbsp;No estás suscripto a ningun objetivo</h6>
+        <h6 class="card-title mb-2"><i class="far fa-face-surprise"></i>&nbsp;No estás suscripto a ningun objetivo</h6>
         <p class="text-smaller mb-0">¡Suscribite a tus objetivos favoritos y recibi notificaciones!</p>
       </div>
     </div>

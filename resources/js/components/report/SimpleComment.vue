@@ -5,7 +5,7 @@
       <div class="media-body">
         <div class="p-3 bg-ultralight rounded">
 
-        <p class="text-smaller mb-0"><i class="fas fa-shield-alt fa-fw"></i><b>{{`${comment.user.name} ${comment.user.surname}`}}</b></p>
+        <p class="text-smaller mb-0"><i class="fas fa-shield-halved fa-fw"></i><b>{{`${comment.user.name} ${comment.user.surname}`}}</b></p>
         <div v-show="!showConfirmDelete">
           <p class="text-smallest m-0">{{comment.content}}</p>
           <p class="text-smallest m-0 text-muted text-italicsbpo">{{comment.created_at}} - {{comment.replies_count}} Respuestas</p>

@@ -2,7 +2,7 @@
   $currentRoute = Route::currentRouteName();
 @endphp
 
-  <a href="{{route('home')}}" class="category"><i class="fas fa-home fa-fw"></i>&nbsp;Volver al inicio</a>
+  <a href="{{route('home')}}" class="category"><i class="fas fa-house fa-fw"></i>&nbsp;Volver al inicio</a>
   <a href="{{route('about.general')}}" class="category {{ $currentRoute == 'about.general' ? 'text-primary' : null }}"><i class="fas fa-eye fa-fw"></i>&nbsp;Acerca de</a>
   @if($currentRoute == 'about.general')
     @if(array_key_exists('general',$faqs))
@@ -31,7 +31,7 @@
     @endif
   @else
   @endif
-  <a href="{{route('about.legal')}}" class="category {{ $currentRoute == 'about.legal' ? 'text-primary' : null }}"><i class="fas fa-shield-alt fa-fw"></i>&nbsp;Información legal</a>
+  <a href="{{route('about.legal')}}" class="category {{ $currentRoute == 'about.legal' ? 'text-primary' : null }}"><i class="fas fa-shield-halved fa-fw"></i>&nbsp;Información legal</a>
   @if($currentRoute == 'about.legal')
     @if(array_key_exists('legal',$faqs))
       <scrollactive class="menu-link" active-class="is-active">

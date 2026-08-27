@@ -31,7 +31,7 @@
         </span>
         @hasRole('admin')
         <div class="mt-3">
-          <a href="{{route('admin.events.edit',['eventId'=> $event->id])}}" class="btn btn-secondary"><i class="fas fa-edit"></i> Editar</a>
+          <a href="{{route('admin.events.edit',['eventId'=> $event->id])}}" class="btn btn-secondary"><i class="fas fa-pen-to-square"></i> Editar</a>
         </div>
         @endhasRole
       </div>

@@ -30,28 +30,28 @@
       <div v-if="myCroppa && !myCroppa.hasImage() && !hasDataUrl" class="animate__animated animate__flash">
         <h5 class="font-weight-bold">1. Elija una foto</h5>
         <p>Debe ser una imagen JPG/JPEG, hasta un limite de 8 MB.</p>
-        <button class="btn btn-light" @click="myCroppa.chooseFile()"><i class="fas fa-search"></i>&nbsp;Cargar imagen</button>
+        <button class="btn btn-light" @click="myCroppa.chooseFile()"><i class="fas fa-magnifying-glass"></i>&nbsp;Cargar imagen</button>
       </div>
       <div v-if="myCroppa && myCroppa.hasImage() && !hasDataUrl" class="animate__animated animate__flash">
         <h5 class="font-weight-bold">2. ¡Acomode su avatar!</h5>
         <p>Acomode la foto, puede hacer zoom y centrarlo.</p>
-        <p>Cuando este conforme haga clic en <i class="fas fa-cut"></i>&nbsp;<b>Listo</b> o puede <i class="fas fa-trash"></i>&nbsp;<b>Descartar</b> la imagen y volver a comenzar.</p>
-        <button class="btn btn-primary" @click="cropImage"><i class="fas fa-cut"></i>&nbsp;¡Listo!</button>
+        <p>Cuando este conforme haga clic en <i class="fas fa-scissors"></i>&nbsp;<b>Listo</b> o puede <i class="fas fa-trash"></i>&nbsp;<b>Descartar</b> la imagen y volver a comenzar.</p>
+        <button class="btn btn-primary" @click="cropImage"><i class="fas fa-scissors"></i>&nbsp;¡Listo!</button>
         <button class="btn btn-light" @click="myCroppa.remove()"><i class="fas fa-trash"></i>&nbsp;Descartar</button>
       </div>
       <div v-if="myCroppa && myCroppa.hasImage() && hasDataUrl" class="animate__animated animate__flash">
         <h6 class="font-weight-bold">3. ¡Ua-lá! ¿Que tal?</h6>
         <p>Si le gusta su nuevo avatar, haga clic en <i class="fas fa-upload"></i>&nbsp;<b>Subir avatar</b></p>
-        <p>O puede volver a <i class="fas fa-cut"></i>&nbsp;<b>Cortar</b> la imagen o <i class="fas fa-trash"></i>&nbsp;<b>Descartar</b> y volver a comenzar</p>
+        <p>O puede volver a <i class="fas fa-scissors"></i>&nbsp;<b>Cortar</b> la imagen o <i class="fas fa-trash"></i>&nbsp;<b>Descartar</b> y volver a comenzar</p>
         <button class="btn btn-primary" @click="submit"><i class="fas fa-upload"></i>&nbsp;Subir avatar</button>
-        <button class="btn btn-light" @click="dataUrl = null"><i class="fas fa-cut"></i>&nbsp;Cortar</button>
+        <button class="btn btn-light" @click="dataUrl = null"><i class="fas fa-scissors"></i>&nbsp;Cortar</button>
         <button class="btn btn-light" @click="restartAll"><i class="fas fa-trash"></i>&nbsp;Descartar</button>
       </div>
       <br>
     </div>
     <div class="col" v-if="isLoading && !(success || error)">
       <div class="alert alert-light">
-          <strong><i class="fas fa-sync fa-spin"></i>&nbsp;Cargando avatar...</strong>
+          <strong><i class="fas fa-arrows-rotate fa-spin"></i>&nbsp;Cargando avatar...</strong>
       </div>
 
     </div>
@@ -60,7 +60,7 @@
           <strong><i class="fas fa-check"></i>&nbsp;{{ success }}</strong>
       </div>
       <div class="alert alert-danger" v-if="error">
-          <strong><i class="fas fa-times"></i>&nbsp;{{ error }}</strong>
+          <strong><i class="fas fa-xmark"></i>&nbsp;{{ error }}</strong>
       </div>
     </div>
   </div>

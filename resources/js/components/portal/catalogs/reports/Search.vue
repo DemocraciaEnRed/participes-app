@@ -11,7 +11,7 @@
         <i :class="`${type.icon} text-primary`"></i>&nbsp;{{type.title}}
         </div>
       <div class="d-inline-block bg-white py-2 px-4 my-1 border rounded shadow-sm mr-2 is-clickable" v-if="mapEnabled" :class="{'mappeable-active': mappableReports == true}" @click="mappableReports = !mappableReports">
-        <i class="fas fa-map-marked-alt text-primary"></i>&nbsp;Mapeable
+        <i class="fas fa-map-location-dot text-primary"></i>&nbsp;Mapeable
       </div>
     </section>
     <!-- <section class="my-2">
@@ -19,14 +19,14 @@
         <i class="fas fa-star"></i>&nbsp;Cualquier estado
         </div>
       <div class="d-inline-block bg-white py-2 px-4 my-1 border rounded shadow-sm mr-2 is-clickable" :class="{'status-active': statusSelected == status.id}" v-for="status in statuses" :key="`type-${status.id}`" @click="changeStatus(status.id)">
-        <i class="far fa-dot-circle" :style="`color: ${status.color}`"></i>&nbsp;{{status.title}}
+        <i class="far fa-circle-dot" :style="`color: ${status.color}`"></i>&nbsp;{{status.title}}
         </div>
     </section> -->
     <hr>
     <report-card class="my-3" v-for="report in reports" :key="`report${report.id}`" :report="report"></report-card>
     <div class="card shadow-sm" v-if="reports.length == 0">
       <div class="card-body p-5 text-center">
-            <h6 class="card-title mb-2"><i class="far fa-surprise"></i>&nbsp;¡No se encontraron reportes con esos criterios de busqueda!</h6>
+            <h6 class="card-title mb-2"><i class="far fa-face-surprise"></i>&nbsp;¡No se encontraron reportes con esos criterios de busqueda!</h6>
             <p class="text-smaller mb-0">Intente de nuevo o cambie los criterios de busqueda</p>
       </div>
     </div>
@@ -71,7 +71,7 @@ export default {
         {
           id: 'progress',
           title: 'Avance',
-          icon: 'fas fa-fast-forward'
+          icon: 'fas fa-forward-fast'
         },
         {
           id: 'milestone',

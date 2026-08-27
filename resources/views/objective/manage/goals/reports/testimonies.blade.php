@@ -32,7 +32,7 @@
   @empty
     <div class="card shadow-sm my-3">
       <div class="card-body text-center">
-        <i class="far fa-surprise"></i>&nbsp;¡No hay feedbacks del reporte!
+        <i class="far fa-face-surprise"></i>&nbsp;¡No hay feedbacks del reporte!
       </div>
     </div>
   @endforelse

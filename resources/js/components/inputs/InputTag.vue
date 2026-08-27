@@ -6,7 +6,7 @@
     <div class="tag-list mt-3 mb-3">
     <span class="tag badge badge-primary" v-for="(tag,i) in tagList" :key="`tag${i}`">
       <span>{{tag}}</span>
-      <a @click="removeTag(i)"><i class="fas fa-times"></i></a> 
+      <a @click="removeTag(i)"><i class="fas fa-xmark"></i></a> 
     </span>
     </div>
   </section>

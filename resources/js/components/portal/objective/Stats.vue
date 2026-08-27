@@ -22,18 +22,18 @@
       <div class="col-lg-4 text-center">
         <div class="row mb-2">
           <div class="col-6">
-            <span class="h4 is-600"><i class="far fa-dot-circle fa-fw text-reached"></i>&nbsp;{{goalsReached}}</span><br><span class="text-smaller">Alcanzadas</span>
+            <span class="h4 is-600"><i class="far fa-circle-dot fa-fw text-reached"></i>&nbsp;{{goalsReached}}</span><br><span class="text-smaller">Alcanzadas</span>
             </div>
           <div class="col-6">
-            <span class="h4 is-600"><i class="far fa-dot-circle fa-fw text-ongoing"></i>&nbsp;{{goalsOngoing}}</span><br><span class="text-smaller">En progreso</span>
+            <span class="h4 is-600"><i class="far fa-circle-dot fa-fw text-ongoing"></i>&nbsp;{{goalsOngoing}}</span><br><span class="text-smaller">En progreso</span>
             </div>
         </div>
         <div class="row">
           <div class="col-6">
-            <span class="h4 is-600"><i class="far fa-dot-circle fa-fw text-delayed"></i>&nbsp;{{goalsDelayed}}</span><br><span class="text-smaller">No cumplidas</span>
+            <span class="h4 is-600"><i class="far fa-circle-dot fa-fw text-delayed"></i>&nbsp;{{goalsDelayed}}</span><br><span class="text-smaller">No cumplidas</span>
             </div>
           <div class="col-6">
-            <span class="h4 is-600"><i class="far fa-dot-circle fa-fw text-inactive"></i>&nbsp;{{goalsInactive}}</span><br><span class="text-smaller">Inactivas</span>
+            <span class="h4 is-600"><i class="far fa-circle-dot fa-fw text-inactive"></i>&nbsp;{{goalsInactive}}</span><br><span class="text-smaller">Inactivas</span>
             </div>
           </div>
         </div>

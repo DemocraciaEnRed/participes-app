@@ -19,7 +19,7 @@
  @forelse($report->photos as $photo)
   <div class="d-inline-block mr-2 my-1">
     <a href="{{asset($photo->path)}}" target="_blank"><img src="{{asset($photo->thumbnail_path)}}" height="80" class="img rounded mb-1 align-top" alt=""></a> 
-    <a class="is-clickable text-danger" onclick="event.preventDefault();document.getElementById('delete-photo-{{$photo->id}}').submit();"><i class="fas fa-times fa-lg fa-fw"></i></a>
+    <a class="is-clickable text-danger" onclick="event.preventDefault();document.getElementById('delete-photo-{{$photo->id}}').submit();"><i class="fas fa-xmark fa-lg fa-fw"></i></a>
     <form id="delete-photo-{{$photo->id}}" action="{{route('objectives.manage.goals.reports.album.delete.form',['objectiveId' => $objective->id, 'goalId' => $goal->id, 'reportId' => $report->id, 'pictureId' => $photo->id]) }}" method="POST" style="display: none;">
         @method('DELETE')
         @csrf
