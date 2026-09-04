@@ -6,6 +6,7 @@ use DB;
 use App\ActionLog;
 use Illuminate\Support\Facades\Auth;
 use Monolog\Logger;
+use Monolog\LogRecord;
 use Monolog\Handler\AbstractProcessingHandler;
 
 class MySQLLoggingHandler extends AbstractProcessingHandler{/**
@@ -17,11 +18,11 @@ class MySQLLoggingHandler extends AbstractProcessingHandler{/**
 
         // $this->table = 'action_logs';
         parent::__construct($level, $bubble);
-    }    
-    
-    protected function write(array $record):void
+    }
+
+    protected function write(LogRecord $record):void
     {
-                
+
        $data = array(
            'message'       => $record['message'],
            'context'       => json_encode($record['context']),
@@ -31,11 +32,11 @@ class MySQLLoggingHandler extends AbstractProcessingHandler{/**
            'record_datetime' => $record['datetime']->format('Y-m-d H:i:s'),
            'extra'         => json_encode($record['extra']),
            'formatted'     => $record['formatted'],
-           'created_at'    => date("Y-m-d H:i:s"),        
+           'created_at'    => date("Y-m-d H:i:s"),
        );
        $log = new ActionLog();
        $log->fill($data);
-       $log->save();       
-    //    DB::connection()->table($this->table)->insert($data);     
+       $log->save();
+    //    DB::connection()->table($this->table)->insert($data);
     }
 }
